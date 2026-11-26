@@ -41,7 +41,7 @@ class Settings:
     max_body_bytes: int = 16 * 1024
     max_turns_per_session: int = 20        # user messages per conversation
     history_turns: int = 12                # last N user turns are sent to the model
-    max_tokens: int = 450                  # per LLM call (brief answers; raise it for reasoning models that think inline)
+    max_tokens: int = 700                  # per LLM call (brief answers; raise it for reasoning models that think inline)
     answer_style: str = "brief"            # "brief" (cards show documents / how to apply) or "full"
     max_steps: int = 6                     # LLM calls per user message
     max_concurrent_runs: int = 8           # turns in flight at once (each holds a worker thread and an LLM call)
@@ -68,7 +68,7 @@ class Settings:
             trusted_proxy_hops=max(1, _int("TRUSTED_PROXY_HOPS", 1)),
             max_turns_per_session=_int("MAX_TURNS_PER_SESSION", 20),
             history_turns=_int("HISTORY_TURNS", 12),
-            max_tokens=_int("MAX_TOKENS", 450),
+            max_tokens=_int("MAX_TOKENS", 700),
             answer_style=_style(os.environ.get("ANSWER_STYLE", "brief")),
             max_steps=_int("MAX_STEPS", 6),
             max_concurrent_runs=_int("MAX_CONCURRENT_RUNS", 8),

@@ -1,7 +1,7 @@
 """Compare latency, time-to-first-token, LLM round trips, tokens and quality across models.
 
-    python -m evals.bench_latency --models nvidia/nemotron-3.5-super-vl-120b-a12b,meta/llama-3.3-70b-instruct,meta/llama-3.1-8b-instruct
-    python -m evals.bench_latency --models meta/llama-3.3-70b-instruct --only en_widow,hinglish,ta_ --repeat 3
+    python -m evals.bench_latency --models nvidia/nemotron-3.5-super-vl-120b-a12b,nvidia/nemotron-3-super-120b-a12b,nvidia/nemotron-3-nano-30b-a3b
+    python -m evals.bench_latency --models nvidia/nemotron-3-super-120b-a12b --only en_widow,hinglish,ta_ --repeat 3
     python -m evals.bench_latency --models a,b --style full --no-stream
 
 All models are called through the provider configured by LLM_BASE_URL / LLM_API_KEY (or NVIDIA_API_KEY).

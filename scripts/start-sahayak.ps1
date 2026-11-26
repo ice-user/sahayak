@@ -1,7 +1,7 @@
 # One-click local launcher for Sahayak (Windows PowerShell 5.1+).
 #   Full app (backend + NVIDIA + frontend):  double-click "Start Sahayak.bat"
 #   Frontend demo only (no backend/AI):      double-click "Start Demo.bat"
-# Options: -Demo  -Model "meta/llama-3.3-70b-instruct"  -EnvFile "C:\path\to\.env"
+# Options: -Demo  -Model "nvidia/nemotron-3-super-120b-a12b"  -EnvFile "C:\path\to\.env"
 param(
     [switch]$Demo,
     [string]$Model = "",
@@ -71,8 +71,8 @@ if ($Demo) {
     Say "Checking the NVIDIA model can call tools..."
     & $venvPy -m sahayak.check_llm
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "Configured model didn't work for tool calling; trying meta/llama-3.3-70b-instruct" -ForegroundColor Yellow
-        $env:LLM_MODEL = "meta/llama-3.3-70b-instruct"
+        Write-Host "Configured model didn't work for tool calling; trying nvidia/nemotron-3-super-120b-a12b" -ForegroundColor Yellow
+        $env:LLM_MODEL = "nvidia/nemotron-3-super-120b-a12b"
         & $venvPy -m sahayak.check_llm
         if ($LASTEXITCODE -ne 0) { Fail "No working NVIDIA model for tool calling. See the messages above." }
     }

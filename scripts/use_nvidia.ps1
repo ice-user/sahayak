@@ -3,7 +3,7 @@
 #
 # Usage (note the leading dot, so the variables stay in your session):
 #   . .\scripts\use_nvidia.ps1
-#   . .\scripts\use_nvidia.ps1 -Model "meta/llama-3.3-70b-instruct"
+#   . .\scripts\use_nvidia.ps1 -Model "nvidia/nemotron-3-super-120b-a12b"
 #   . .\scripts\use_nvidia.ps1 -EnvFile "C:\path\to\other\.env"
 param(
     [string]$EnvFile = (Join-Path $PSScriptRoot "..\..\source-trail\backend\.env"),
@@ -24,6 +24,6 @@ if (-not $env:NVIDIA_API_KEY) { Write-Error "No NVIDIA_API_KEY in $EnvFile"; ret
 Remove-Item env:LLM_BASE_URL, env:LLM_API_KEY -ErrorAction SilentlyContinue
 if ($Model) { $env:LLM_MODEL = $Model } else { Remove-Item env:LLM_MODEL -ErrorAction SilentlyContinue }
 
-$chosen = if ($Model) { $Model } elseif ($env:NVIDIA_MODEL) { $env:NVIDIA_MODEL } else { "meta/llama-3.3-70b-instruct" }
+$chosen = if ($Model) { $Model } elseif ($env:NVIDIA_MODEL) { $env:NVIDIA_MODEL } else { "nvidia/nemotron-3-super-120b-a12b" }
 Write-Host "NVIDIA key loaded (not shown). Model: $chosen"
 Write-Host "Next: python -m sahayak.check_llm"

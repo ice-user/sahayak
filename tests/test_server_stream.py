@@ -73,7 +73,7 @@ def test_auth_failure_is_not_retried_and_does_not_leak():
 def test_production_agent_is_brief_and_streams_by_default(monkeypatch):
     monkeypatch.delenv("LLM_STREAM", raising=False)
     agent = make_agent(FakeLLM([]), TB, Settings())
-    assert agent.answer_style == "brief" and agent.max_tokens == 450 and agent.stream is True
+    assert agent.answer_style == "brief" and agent.max_tokens == 700 and agent.stream is True
     assert "120 words" in agent.messages[0]["content"]
 
 

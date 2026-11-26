@@ -26,6 +26,7 @@ import unicodedata
 from dataclasses import dataclass
 from typing import Any, Callable
 
+from .llm_options import model_extra_body
 from . import topics
 from .llm import TurnCancelled
 
@@ -216,9 +217,13 @@ def classify(client: Any, model: str, message: str, last_assistant: str | None,
 
     def call() -> None:
         try:
-            resp = client.chat.completions.create(
+            kwargs: dict[str, Any] = dict(
                 model=model, messages=build_classifier_messages(message, last_assistant), temperature=0,
                 max_tokens=80, timeout=timeout_s)
+            extra = model_extra_body(model)
+            if extra:
+                kwargs["extra_body"] = extra
+            resp = client.chat.completions.create(**kwargs)
             box["raw"] = resp.choices[0].message.content or ""
         except BaseException as exc:  # noqa: BLE001 - classified below, never propagated
             box["error"] = exc
@@ -231,7 +236,10 @@ def classify(client: Any, model: str, message: str, last_assistant: str | None,
         log.warning("topic classifier timed out after %.1fs; allowing", timeout_s)
         return TopicResult("on_topic", "classifier", "classifier timed out", latency, "timeout")
     if "error" in box:
-        log.warning("topic classifier failed (%s); allowing", type(box["error"]).__name__)
+        status = getattr(box["error"], "status_code", None)
+        log.warning("topic classifier failed (%s%s); allowing%s", type(box["error"]).__name__,
+                    f" {status}" if status else "",
+                    " - model retired or wrong name? set TOPIC_GUARD_MODEL" if status in (404, 410) else "")
         return TopicResult("on_topic", "classifier", f"classifier error: {type(box['error']).__name__}", latency,
                            "error")
     parsed = parse_verdict(box.get("raw", ""))

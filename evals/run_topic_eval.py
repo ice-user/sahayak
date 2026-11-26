@@ -3,8 +3,8 @@
 Usage:
     python -m evals.run_topic_eval --layer rules             # deterministic layer only: no network, no key
     python -m evals.run_topic_eval --layer full              # rules + real LLM classifier (NVIDIA_API_KEY or LLM_*)
-    python -m evals.run_topic_eval --layer full --topic-model meta/llama-3.1-8b-instruct --workers 4
-    python -m evals.run_topic_eval --layer full --agent-sample 12 --model meta/llama-3.3-70b-instruct
+    python -m evals.run_topic_eval --layer full --topic-model nvidia/nemotron-3-nano-30b-a3b --workers 4
+    python -m evals.run_topic_eval --layer full --agent-sample 12 --model nvidia/nemotron-3-super-120b-a12b
     python -m evals.run_topic_eval --layer rules --only hi,ta
 
 Each case has a label (on_topic / off_topic / greeting / jailbreak), a kind (plain / borderline / followup / about /

@@ -84,7 +84,7 @@ def test_default_style_is_full_and_brief_sets_max_tokens():
     assert "max_tokens" not in client.sent[0] and "120 words" not in client.sent[0]["messages"][0]["content"]
     agent, client = make([text_msg("hi")], answer_style="brief")
     agent.chat("hello")
-    assert client.sent[0]["max_tokens"] == BRIEF_MAX_TOKENS == 450
+    assert client.sent[0]["max_tokens"] == BRIEF_MAX_TOKENS == 700
     assert "120 words" in client.sent[0]["messages"][0]["content"]
     agent, client = make([text_msg("hi")], answer_style="brief", max_tokens=300)
     agent.chat("hello")

@@ -125,14 +125,14 @@ def test_streamed_body_without_content_length_is_capped(toolbox):
 def test_production_agent_caps_tokens_steps_and_history(toolbox):
     client = FakeClient([text_msg("a")])
     s = Settings()
-    assert (s.max_tokens, s.max_steps, s.max_turns_per_session, s.max_body_bytes) == (450, 6, 20, 16 * 1024)
+    assert (s.max_tokens, s.max_steps, s.max_turns_per_session, s.max_body_bytes) == (700, 6, 20, 16 * 1024)
     assert s.answer_style == "brief"
     agent = make_agent(client, toolbox, s)
-    assert agent.max_tokens == 450 and agent.answer_style == "brief" and agent.max_steps == 6 and agent.max_history_turns == s.history_turns
+    assert agent.max_tokens == 700 and agent.answer_style == "brief" and agent.max_steps == 6 and agent.max_history_turns == s.history_turns
     app = create_app(toolbox=toolbox, settings=s, llm_client=client)
     with TestClient(app) as tc:
         assert chat(tc, "hello").status_code == 200
-    assert client.sent[0]["max_tokens"] == 450
+    assert client.sent[0]["max_tokens"] == 700
 
 
 # ---- item 11: abandoned runs, release ordering, concurrency cap

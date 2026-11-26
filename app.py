@@ -12,7 +12,7 @@ from sahayak.tools import Toolbox
 st.set_page_config(page_title="Sahayak: find government schemes", page_icon="🪔", layout="centered")
 
 PROVIDERS = {
-    "NVIDIA": ("https://integrate.api.nvidia.com/v1", os.environ.get("NVIDIA_MODEL", "meta/llama-3.3-70b-instruct")),
+    "NVIDIA": ("https://integrate.api.nvidia.com/v1", os.environ.get("NVIDIA_MODEL", "nvidia/nemotron-3-super-120b-a12b")),
     "Gemini": ("https://generativelanguage.googleapis.com/v1beta/openai/", "gemini-2.5-flash"),
     "Groq": ("https://api.groq.com/openai/v1", "llama-3.3-70b-versatile"),
     "OpenAI": ("", "gpt-4o-mini"),

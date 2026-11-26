@@ -2,7 +2,7 @@
 # Double-click "Run Evals.bat" (in the project folder). Takes roughly 20-40 minutes.
 param(
     [string]$Models = "",              # comma-separated; default: your configured model + two Llama models
-    [string]$GuardModel = "meta/llama-3.1-8b-instruct",
+    [string]$GuardModel = "nvidia/nemotron-3-nano-30b-a3b",
     [int]$Repeat = 2,
     [string]$EnvFile = ""
 )
@@ -27,7 +27,7 @@ Remove-Item env:LLM_BASE_URL, env:LLM_API_KEY, env:LLM_MODEL -ErrorAction Silent
 if (-not $Models) {
     $list = @()
     if ($env:NVIDIA_MODEL) { $list += $env:NVIDIA_MODEL }
-    $list += "meta/llama-3.3-70b-instruct", "meta/llama-3.1-8b-instruct"
+    $list += "nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"   # Llama 3.x models were retired on NVIDIA (HTTP 410)
     $Models = ($list | Select-Object -Unique) -join ","
 }
 $out = "$root\evals\results"
@@ -40,7 +40,8 @@ function Step($title, [string[]]$pyArgs) {
     Write-Host $line -ForegroundColor Cyan
     Add-Content -Path $log -Value $line -Encoding UTF8
     $t0 = Get-Date
-    & $py @pyArgs 2>&1 | ForEach-Object { "$_" } | Tee-Object -FilePath $log -Append
+    # Add-Content keeps the log UTF-8 (Tee-Object -Append writes UTF-16 on Windows PowerShell 5.1)
+    & $py @pyArgs 2>&1 | ForEach-Object { $s = "$_"; Write-Host $s; Add-Content -Path $log -Value $s -Encoding UTF8 }
     $secs = [int]((Get-Date) - $t0).TotalSeconds
     Add-Content -Path $log -Value "(exit $LASTEXITCODE, ${secs}s)" -Encoding UTF8
 }

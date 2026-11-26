@@ -29,6 +29,9 @@ class TurnCancelled(Exception):
     """The consumer went away (closed tab, newer message): abort the turn; the agent rolls its history back."""
 
 
+_NO_STREAM_MODELS: set = set()  # models whose provider rejected streaming in this process
+
+
 def _status_of(exc: BaseException) -> int | None:
     status = getattr(exc, "status_code", None)
     if status is None:
@@ -232,7 +235,8 @@ def complete(client: Any, kwargs: dict, *, stream: bool, on_text: Callable[[str]
     - error after tokens were already handed to `on_text`: raised as is (a retry would duplicate the text)
     - 401/403/404 and other 4xx are never retried
     """
-    use_stream = stream and on_text is not None
+    model_key = kwargs.get("model")
+    use_stream = stream and on_text is not None and model_key not in _NO_STREAM_MODELS
     fell_back = False
     retries = 0
     emitted = [False]
@@ -263,8 +267,12 @@ def complete(client: Any, kwargs: dict, *, stream: bool, on_text: Callable[[str]
                 # streaming is switched off for the rest of this call; a non-transient failure (typically "stream not
                 # supported") costs no retry, since it is a fallback rather than a repeat, except for auth failures
                 use_stream, fell_back = False, True
-                if not transient and _status_of(exc) not in (401, 403, 404):
-                    log.warning("streaming failed (%s); falling back to non-streaming", type(exc).__name__)
+                status = _status_of(exc)
+                if not transient and status not in (401, 403, 404, 410):
+                    # remember it: later calls to this model skip the doomed streaming attempt (saves a round trip)
+                    _NO_STREAM_MODELS.add(model_key)
+                    log.warning("streaming failed (%s %s: %s); using non-streaming for model %s from now on",
+                                type(exc).__name__, status, str(exc)[:160], model_key)
                     continue
             if not transient or retries >= len(delays):
                 raise

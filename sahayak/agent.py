@@ -26,6 +26,7 @@ from .privacy import mask_pii
 from .topic_guard import (MODES, TopicBlocked, TopicGate, classify, env_topic_mode,
                           env_topic_timeout, greeting_lang_hint, rules_check)
 from .topics import reply_text, scope_prompt_section
+from .llm_options import env_extra_body, model_extra_body  # noqa: F401 (env_extra_body re-exported)
 from .tools import TOOL_SCHEMAS, Toolbox
 
 log = logging.getLogger("sahayak.agent")
@@ -61,7 +62,7 @@ STYLE_RULES = {
               "user asks."),
 }
 ANSWER_STYLES = tuple(STYLE_RULES)
-BRIEF_MAX_TOKENS = 450
+BRIEF_MAX_TOKENS = 700  # room for a short answer even if a model spends a few tokens on preamble
 
 
 def build_system_prompt(style: str = "full", prefix: str = "", scope: bool = False) -> str:
@@ -117,7 +118,7 @@ class Trace:
 
 
 NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
-NVIDIA_DEFAULT_MODEL = "meta/llama-3.3-70b-instruct"
+NVIDIA_DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b"
 
 
 def resolve_config() -> tuple[str | None, str, str]:
@@ -158,22 +159,6 @@ def clean_answer(text: str) -> str:
 def env_stream_enabled() -> bool:
     """Streaming is on unless LLM_STREAM=0 (also "false"/"off"/"no")."""
     return os.environ.get("LLM_STREAM", "1").strip().lower() not in ("0", "false", "off", "no")
-
-
-def env_extra_body() -> dict | None:
-    """LLM_EXTRA_BODY: a JSON object passed to chat.completions.create(extra_body=...). Invalid values are ignored
-    with a warning (a typo must not take the service down)."""
-    raw = os.environ.get("LLM_EXTRA_BODY", "").strip()
-    if not raw:
-        return None
-    try:
-        value = json.loads(raw)
-    except json.JSONDecodeError:
-        value = None
-    if not isinstance(value, dict):
-        log.warning("LLM_EXTRA_BODY is not a JSON object; ignoring it")
-        return None
-    return value
 
 
 def default_trace_dir() -> str | None:
@@ -261,7 +246,7 @@ class Agent:
         self.max_tokens = max_tokens or (BRIEF_MAX_TOKENS if answer_style == "brief" else None)
         self.max_history_turns = max_history_turns
         self.stream = env_stream_enabled() if stream is None else stream
-        self.extra_body = env_extra_body() if extra_body is None else (extra_body or None)
+        self.extra_body = model_extra_body(self.model) if extra_body is None else (extra_body or None)
         self.retry_delays = retry_delays
         self.verdicts: dict[str, str] = {}
         self.source_hosts: set[str] = set()

@@ -1,7 +1,7 @@
 """Check that the configured LLM is reachable AND supports tool calling.
 
     python -m sahayak.check_llm
-    python -m sahayak.check_llm --model meta/llama-3.3-70b-instruct
+    python -m sahayak.check_llm --model nvidia/nemotron-3-super-120b-a12b
 
 Tool calling is essential for the agent; not every hosted model supports it.
 """
@@ -12,10 +12,11 @@ import sys
 import time
 
 from .agent import make_client, resolve_config
+from .llm_options import model_extra_body
 from .tools import TOOL_SCHEMAS
 
 # Models on NVIDIA's API that are worth trying if the default fails (check build.nvidia.com for current ones)
-NVIDIA_FALLBACKS = ["meta/llama-3.3-70b-instruct", "qwen/qwen2.5-coder-32b-instruct", "mistralai/mistral-small-24b-instruct"]
+NVIDIA_FALLBACKS = ["nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"]  # verify names on build.nvidia.com
 
 
 def main() -> int:
@@ -33,12 +34,16 @@ def main() -> int:
     client = make_client()
     t0 = time.time()
     try:
+        extra = model_extra_body(model)
         resp = client.chat.completions.create(
-            model=model, temperature=0, tools=TOOL_SCHEMAS,
+            model=model, temperature=0, tools=TOOL_SCHEMAS, **({"extra_body": extra} if extra else {}),
             messages=[{"role": "system", "content": "Use the tools to answer."},
                       {"role": "user", "content": "Check eligibility for a 75 year old."}])
     except Exception as e:
         print(f"\nFAILED: {type(e).__name__}: {e}")
+        if getattr(e, "status_code", None) in (404, 410):
+            print("This model is retired or the name is wrong (HTTP 404/410). Pick a current model on build.nvidia.com,")
+            print("e.g. nvidia/nemotron-3-super-120b-a12b or nvidia/nemotron-3-nano-30b-a3b (check the exact names there).")
         if "nvidia" in (base_url or ""):
             print("Try another model, e.g.:  python -m sahayak.check_llm --model " + NVIDIA_FALLBACKS[0])
         return 1

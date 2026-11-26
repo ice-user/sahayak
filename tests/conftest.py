@@ -12,3 +12,15 @@ for _name in ("LLM_EXTRA_BODY", "LLM_SYSTEM_PREFIX"):
 os.environ["TOPIC_GUARD"] = "off"
 for _name in ("TOPIC_GUARD_MODEL", "TOPIC_GUARD_TIMEOUT_S"):
     os.environ.pop(_name, None)
+
+
+import pytest as _pytest
+
+
+@_pytest.fixture(autouse=True)
+def _reset_stream_memory():
+    """sahayak.llm remembers models that rejected streaming; isolate that between tests."""
+    from sahayak import llm as _llm
+    _llm._NO_STREAM_MODELS.clear()
+    yield
+    _llm._NO_STREAM_MODELS.clear()

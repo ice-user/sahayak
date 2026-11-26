@@ -3,7 +3,7 @@
 Usage (after setting LLM_BASE_URL / LLM_API_KEY / LLM_MODEL, or NVIDIA_API_KEY):
     python -m evals.run_agent_evals                    # all cases, "brief" answers like the web app
     python -m evals.run_agent_evals --only hi          # cases whose id contains "hi" (comma-separate for several)
-    python -m evals.run_agent_evals --style full --no-stream --model meta/llama-3.3-70b-instruct
+    python -m evals.run_agent_evals --style full --no-stream --model nvidia/nemotron-3-super-120b-a12b
 
 Quality metrics per case:
   used_tool        called the expected tool (usually check_eligibility)

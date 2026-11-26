@@ -84,7 +84,7 @@ streamlit run app.py                         # NVIDIA is preselected; key comes 
 ```
 
 If `check_llm` says the model didn't call a tool, try another one:
-`. .\scripts\use_nvidia.ps1 -Model "meta/llama-3.3-70b-instruct"`
+`. .\scripts\use_nvidia.ps1 -Model "nvidia/nemotron-3-super-120b-a12b"`
 
 ## Quick start with other providers (Windows PowerShell)
 
@@ -110,7 +110,7 @@ Other providers:
 
 | Provider | LLM_BASE_URL | LLM_MODEL (example) |
 |---|---|---|
-| NVIDIA | `https://integrate.api.nvidia.com/v1` | `meta/llama-3.3-70b-instruct` (or just set `NVIDIA_API_KEY`) |
+| NVIDIA | `https://integrate.api.nvidia.com/v1` | `nvidia/nemotron-3-super-120b-a12b` (or just set `NVIDIA_API_KEY`) |
 | Groq | `https://api.groq.com/openai/v1` | `llama-3.3-70b-versatile` |
 | OpenAI | *(leave unset)* | `gpt-4o-mini` |
 | Ollama (local, free) | `http://localhost:11434/v1` | `qwen2.5:7b` (set `LLM_API_KEY=ollama`) |
@@ -154,7 +154,7 @@ docs/API.md                the contract between web/ and server/
 What costs time: every LLM round trip resends the whole context, and a long answer takes long to generate. Sahayak therefore (all covered by tests with fake clients; real-world effect is yours to measure):
 
 - **Fewer round trips.** The prompt tells the model to call `check_eligibility` first for any question with personal facts (it checks every scheme at once), and `check_eligibility`'s `eligible` items now carry `documents` and `how_to_apply`, so `get_scheme_details` is not needed for them. Target: 2 LLM calls per typical turn (one tool call, one answer). Identical tool calls are served from a per-conversation cache. `done.llm_calls` and the trace (`trace.llm_calls`) show what each turn took.
-- **Short answers in the web app.** `answer_style="brief"` (server default, `ANSWER_STYLE=full` to undo): about 120 words, `max_tokens` 450, documents and how-to-apply left to the cards. CLI and `Agent()` default to `"full"`.
+- **Short answers in the web app.** `answer_style="brief"` (server default, `ANSWER_STYLE=full` to undo): about 120 words, `max_tokens` 700, documents and how-to-apply left to the cards. CLI and `Agent()` default to `"full"`.
 - **Streaming.** The final answer is streamed as `token` events (`<think>` blocks are stripped); the guarded `answer` event always follows and replaces the tokens. If the provider rejects streaming, the call is repeated without it.
 - **Retries.** 429/500/502/503/504, timeouts, connection errors and "temporarily unavailable" messages are retried twice (about 1 s, 3 s). 400/401/403/404 are not.
 - **Reply script.** Each turn the user's language is detected and a hint is added to the system prompt (for example Hinglish must be written in Latin letters, not Devanagari).
@@ -165,7 +165,7 @@ Environment variables:
 |---|---|---|
 | `LLM_STREAM` | on | `0` disables streaming |
 | `ANSWER_STYLE` | `brief` (server) | `brief` or `full` |
-| `MAX_TOKENS` | `450` (server) | max tokens per LLM call; raise it for models that think inline |
+| `MAX_TOKENS` | `700` (server) | max tokens per LLM call; raise it for models that think inline |
 | `LLM_EXTRA_BODY` | unset | JSON object passed as `extra_body` to `chat.completions.create` |
 | `LLM_SYSTEM_PREFIX` | unset | text prepended to the system prompt |
 
@@ -175,15 +175,21 @@ Environment variables:
 
 ```powershell
 # one model, all 10 agent cases (brief answers, streaming on); prints latency, TTFT, LLM calls, tokens, quality
-python -m evals.run_agent_evals --model meta/llama-3.3-70b-instruct
+python -m evals.run_agent_evals --model nvidia/nemotron-3-super-120b-a12b
 
 # compare models: p50/p90 latency, p50 time-to-first-token, mean LLM calls and tokens, pass rate; saves evals/results/bench-*.json
-python -m evals.bench_latency --models nvidia/nemotron-3.5-super-vl-120b-a12b,meta/llama-3.3-70b-instruct,meta/llama-3.1-8b-instruct --repeat 3
-python -m evals.bench_latency --models meta/llama-3.3-70b-instruct --only en_widow,hinglish,ta_ --repeat 5
+python -m evals.bench_latency --models nvidia/nemotron-3.5-super-vl-120b-a12b,nvidia/nemotron-3-super-120b-a12b,nvidia/nemotron-3-nano-30b-a3b --repeat 3
+python -m evals.bench_latency --models nvidia/nemotron-3-super-120b-a12b --only en_widow,hinglish,ta_ --repeat 5
 $env:LLM_STREAM="0"; python -m evals.bench_latency --models <model> --no-stream     # baseline without streaming
 ```
 
-Suggested NVIDIA models to compare: the configured Nemotron model, `meta/llama-3.3-70b-instruct` and a small fast one such as `meta/llama-3.1-8b-instruct`. **These names must be checked on build.nvidia.com** (names, tool-calling support and availability change; a wrong name appears as errors in the table). A small model may be fast but miss eligibility facts or the reply script: read the pass rate and the saved answers before choosing. Provider failures (503 etc.) are counted as `errors` and excluded from latency and quality numbers; each failed case is retried once first. Run a few repeats: single runs on a shared API vary a lot.
+Suggested NVIDIA models to compare: the configured Nemotron model, `nvidia/nemotron-3-super-120b-a12b` and a small fast one such as `nvidia/nemotron-3-nano-30b-a3b`. **These names must be checked on build.nvidia.com** (names, tool-calling support and availability change; a wrong name appears as errors in the table). A small model may be fast but miss eligibility facts or the reply script: read the pass rate and the saved answers before choosing. Provider failures (503 etc.) are counted as `errors` and excluded from latency and quality numbers; each failed case is retried once first. Run a few repeats: single runs on a shared API vary a lot.
+
+### First real eval run (NVIDIA, 2026-11-27): what we learned
+- Latency fell from ~53 s to **~16-22 s p50** per answer (first token ~7 s) after cutting round trips (2-3 LLM calls per turn, down from 3-6).
+- Nemotron 3.x models **think by default**: with a short answer budget the thinking used it up, so 40% of answers came back empty or cut off. Sahayak now turns thinking off for Nemotron models automatically (`chat_template_kwargs.enable_thinking=false`; set `LLM_THINKING=1` to keep it). Re-run the evals to measure the effect.
+- `meta/llama-3.x` models are **retired on NVIDIA (HTTP 410)**; defaults now use Nemotron models (check current names on build.nvidia.com).
+- Search: multilingual embeddings found the right scheme first for **88% of non-English queries vs 12% for keywords** (hybrid 90% overall).
 
 ## Staying on topic
 
@@ -200,7 +206,7 @@ How the parallel classifier meets streaming and history: while the verdict is pe
 | Variable | Default | Effect |
 |---|---|---|
 | `TOPIC_GUARD` | `classifier` | `off` (nothing), `prompt` (rules + scope in the system prompt, no extra call), `classifier` (all three layers) |
-| `TOPIC_GUARD_MODEL` | the main model | classifier model. A small fast model such as `meta/llama-3.1-8b-instruct` on NVIDIA is the intended choice (**check the name on build.nvidia.com**); the same provider and key are used |
+| `TOPIC_GUARD_MODEL` | the main model | classifier model. A small fast model such as `nvidia/nemotron-3-nano-30b-a3b` on NVIDIA is the intended choice (**check the name on build.nvidia.com**); the same provider and key are used |
 | `TOPIC_GUARD_TIMEOUT_S` | `4` | classifier timeout; past it the message is allowed |
 
 `Agent()` reads the same variables (`topic_guard=`, `topic_model=`, `topic_client=`, `topic_timeout_s=` override them). The trace has a `topic_guard` step (`verdict`, `layer`, `latency_s`, `overlapped`, `main_wait_s`, `fail_open`) and the SSE `done` event carries `"topic"` (see `docs/API.md`). Greetings, redirects and blocked turns are not kept in the conversation history.
@@ -210,9 +216,9 @@ How the parallel classifier meets streaming and history: while the verdict is pe
 ```powershell
 python -m evals.run_topic_eval --layer rules --list-misses     # no network: the deterministic layer
 $env:NVIDIA_API_KEY="nvapi-..."
-$env:TOPIC_GUARD_MODEL="meta/llama-3.1-8b-instruct"            # verify the model name first
+$env:TOPIC_GUARD_MODEL="nvidia/nemotron-3-nano-30b-a3b"            # verify the model name first
 python -m evals.run_topic_eval --layer full --list-misses       # rules + real classifier, per-language report
-python -m evals.run_topic_eval --layer full --agent-sample 12 --model meta/llama-3.3-70b-instruct   # + overlap with real main turns
+python -m evals.run_topic_eval --layer full --agent-sample 12 --model nvidia/nemotron-3-super-120b-a12b   # + overlap with real main turns
 ```
 
 `evals/topic_cases.json` has 205 hand-written cases (en / hi / Hinglish / ta, about 51 each): 117 on-topic (49 conversational follow-ups that carry the assistant's preceding question, 28 borderline in-scope such as "how do I get an income certificate?", "when will my PM-KISAN money come?"), 60 off-topic (including borderline: bank FD, medicine for knee pain, whom to vote for, resume, suing an employer, and mid-conversation off-topic requests), 12 greetings and 16 jailbreaks. Rules-layer result on it (deterministic, reproducible): on-topic false positives **0 / 117 (0.0%)**, follow-up false positives **0 / 49**, jailbreak recall 12 / 16 (75%; the misses are paraphrases and a message that also mentions "schemes", which the rules deliberately leave to the classifier or the prompt), greeting fast path 12 / 12, off-topic recall 0% by design (the rules never block plain off-topic text), 79% of on-topic messages decided without a classifier call. The cases were written together with the rules, so treat these as optimistic; the full-stack off-topic recall and false-positive numbers need a run with a real model and are not measured in this repository yet. Results are saved to `evals/results/topic-*.json`.
