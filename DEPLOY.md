@@ -79,7 +79,7 @@ By hand: open the Vercel URL, tap a sample question, and you should get an answe
 
 ## Updating and rolling back
 
-- **Update**: `git push` to `main`. Render (`autoDeploy: true`) and Vercel both redeploy automatically. The backend and web app are deployed separately.
+- **Update**: `git push` to `main`. Render (`autoDeployTrigger: commit`) and Vercel both redeploy automatically. The backend and web app are deployed separately.
 - **Roll back the backend**: Render -> service -> **Events**/**Deploys** -> pick an earlier successful deploy -> **Rollback** (if offered on your plan) or revert the commit in git and push. Env var changes: edit in the Environment tab, then redeploy.
 - **Roll back the frontend**: Vercel -> Deployments -> an earlier deployment -> **...** -> **Promote to Production** (instant).
 - **Emergency stop** (e.g. credits draining): Render -> service -> **Suspend**, or delete the `NVIDIA_API_KEY` variable (chat then answers "AI provider is not configured"; the scheme browser keeps working), or revoke the key on build.nvidia.com.

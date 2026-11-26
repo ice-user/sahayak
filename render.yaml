@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
 # Render Blueprint for the Sahayak API (free tier, Docker). Deploy: Render dashboard -> New -> Blueprint -> pick this repo.
 # Render prompts for every `sync: false` value on first creation; leave the optional ones empty (the app treats empty as unset).
 # Schema reference: https://render.com/docs/blueprint-spec  (fields below are the documented basics:
@@ -9,9 +10,9 @@ services:
     plan: free                     # sleeps after ~15 min idle; first request afterwards takes ~50 s
     dockerfilePath: ./Dockerfile
     dockerContext: .
-    # region: oregon               # UNVERIFIED default region; uncomment and pick the one closest to your users
+    region: singapore              # closest Render region to India (default would be oregon, USA)
     healthCheckPath: /api/health
-    autoDeploy: true               # redeploy on every push to the connected branch; set false for manual deploys
+    autoDeployTrigger: commit      # redeploy on every push; 'checksPass' waits for CI; 'off' = manual (replaces deprecated autoDeploy)
     envVars:
       # --- secrets / per-deployment values: you enter these in the Render dashboard ---
       - key: NVIDIA_API_KEY        # from build.nvidia.com. Alternative provider: add LLM_BASE_URL + LLM_API_KEY + LLM_MODEL in the dashboard instead.
