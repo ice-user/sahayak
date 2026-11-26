@@ -1,0 +1,3 @@
+fastapi>=0.115     # tested with 0.165.0
+uvicorn>=0.30      # tested with 0.54.0
+# tests also need httpx>=0.27 (FastAPI TestClient); tested with 0.28.1

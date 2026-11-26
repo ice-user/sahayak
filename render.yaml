@@ -1,0 +1,48 @@
+# Render Blueprint for the Sahayak API (free tier, Docker). Deploy: Render dashboard -> New -> Blueprint -> pick this repo.
+# Render prompts for every `sync: false` value on first creation; leave the optional ones empty (the app treats empty as unset).
+# Schema reference: https://render.com/docs/blueprint-spec  (fields below are the documented basics:
+# type, name, runtime, plan, dockerfilePath, healthCheckPath, envVars[].key/value/sync).
+services:
+  - type: web
+    name: sahayak-api
+    runtime: docker
+    plan: free                     # sleeps after ~15 min idle; first request afterwards takes ~50 s
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    # region: oregon               # UNVERIFIED default region; uncomment and pick the one closest to your users
+    healthCheckPath: /api/health
+    autoDeploy: true               # redeploy on every push to the connected branch; set false for manual deploys
+    envVars:
+      # --- secrets / per-deployment values: you enter these in the Render dashboard ---
+      - key: NVIDIA_API_KEY        # from build.nvidia.com. Alternative provider: add LLM_BASE_URL + LLM_API_KEY + LLM_MODEL in the dashboard instead.
+        sync: false
+      - key: ALLOWED_ORIGINS       # comma-separated frontend origins, no trailing slash: https://your-app.vercel.app
+        sync: false
+      - key: LLM_MODEL             # optional; empty = the built-in NVIDIA default
+        sync: false
+      - key: TOPIC_GUARD_MODEL     # optional smaller/faster model for the off-topic classifier; empty = same as LLM_MODEL
+        sync: false
+
+      # --- fixed settings ---
+      - key: ENV                   # production: startup fails if ALLOWED_ORIGINS is unset; /docs is off
+        value: production
+      - key: SAHAYAK_SEARCH        # bm25 keeps memory ~90 MB; "hybrid" needs the INSTALL_HYBRID=1 build arg and ~1 GB RAM (not free tier)
+        value: bm25
+      - key: TRUST_PROXY           # Render is a reverse proxy: take the client IP from X-Forwarded-For
+        value: "1"
+      - key: TRUSTED_PROXY_HOPS    # proxies in front of the app
+        value: "1"
+      - key: RATE_LIMIT_PER_10MIN  # per client IP
+        value: "20"
+      - key: GLOBAL_CHAT_PER_MIN   # all clients together: caps your LLM spend
+        value: "30"
+      - key: MAX_CONCURRENT_RUNS   # answers in flight at once
+        value: "6"
+      - key: ANSWER_STYLE
+        value: brief
+      - key: LLM_STREAM
+        value: "1"
+      - key: TOPIC_GUARD           # off | prompt | classifier
+        value: classifier
+      - key: LOG_LEVEL
+        value: INFO

@@ -1,0 +1,438 @@
+[
+ {
+  "id": "widow_62_bpl",
+  "note": "Example from the project pitch",
+  "profile": {
+   "age": 62,
+   "gender": "female",
+   "marital_status": "widowed",
+   "bpl": true,
+   "state": "Tamil Nadu",
+   "has_bank_account": true
+  },
+  "expect": {
+   "eligible": [
+    "ignoaps",
+    "ignwps",
+    "pmsby"
+   ],
+   "not_eligible": [
+    "apy",
+    "pmjjby",
+    "pmjay_senior"
+   ]
+  }
+ },
+ {
+  "id": "widow_35_bpl",
+  "profile": {
+   "age": 35,
+   "gender": "female",
+   "marital_status": "widowed",
+   "bpl": true
+  },
+  "expect": {
+   "not_eligible": [
+    "ignwps",
+    "ignoaps"
+   ]
+  }
+ },
+ {
+  "id": "widow_non_bpl",
+  "profile": {
+   "age": 55,
+   "gender": "female",
+   "marital_status": "widowed",
+   "bpl": false
+  },
+  "expect": {
+   "not_eligible": [
+    "ignwps"
+   ]
+  }
+ },
+ {
+  "id": "senior_75_rich",
+  "note": "70+ health cover ignores income",
+  "profile": {
+   "age": 75,
+   "bpl": false,
+   "annual_income": 2500000
+  },
+  "expect": {
+   "eligible": [
+    "pmjay_senior"
+   ],
+   "not_eligible": [
+    "ignoaps"
+   ]
+  }
+ },
+ {
+  "id": "senior_69",
+  "profile": {
+   "age": 69
+  },
+  "expect": {
+   "not_eligible": [
+    "pmjay_senior"
+   ]
+  },
+  "note": "Under 70 is not eligible for the 70+ card, but the caveat points to regular PM-JAY",
+  "expect_not_eligible_caveats": {
+   "pmjay_senior": "regular PM-JAY"
+  }
+ },
+ {
+  "id": "young_worker_no_tax",
+  "profile": {
+   "age": 28,
+   "has_bank_account": true,
+   "ever_income_tax_payer": false
+  },
+  "expect": {
+   "eligible": [
+    "apy",
+    "pmjjby",
+    "pmsby"
+   ]
+  }
+ },
+ {
+  "id": "young_worker_taxpayer",
+  "profile": {
+   "age": 28,
+   "has_bank_account": true,
+   "ever_income_tax_payer": true
+  },
+  "expect": {
+   "eligible": [
+    "pmjjby",
+    "pmsby"
+   ],
+   "not_eligible": [
+    "apy"
+   ]
+  }
+ },
+ {
+  "id": "age_41_apy_cutoff",
+  "profile": {
+   "age": 41,
+   "has_bank_account": true,
+   "ever_income_tax_payer": false
+  },
+  "expect": {
+   "eligible": [
+    "pmjjby"
+   ],
+   "not_eligible": [
+    "apy"
+   ]
+  }
+ },
+ {
+  "id": "age_missing_bank_unknown",
+  "profile": {
+   "age": 30
+  },
+  "expect": {
+   "need_info": [
+    "apy",
+    "pmjjby",
+    "pmsby"
+   ]
+  }
+ },
+ {
+  "id": "small_farmer",
+  "profile": {
+   "owns_cultivable_land": true,
+   "is_govt_employee": false,
+   "monthly_pension": 0,
+   "income_tax_payer_last_year": false
+  },
+  "expect": {
+   "eligible": [
+    "pm_kisan"
+   ]
+  }
+ },
+ {
+  "id": "farmer_retired_pension_12k",
+  "profile": {
+   "owns_cultivable_land": true,
+   "is_govt_employee": false,
+   "monthly_pension": 12000,
+   "income_tax_payer_last_year": false
+  },
+  "expect": {
+   "not_eligible": [
+    "pm_kisan"
+   ]
+  }
+ },
+ {
+  "id": "farmer_partial_info",
+  "profile": {
+   "owns_cultivable_land": true
+  },
+  "expect": {
+   "need_info": [
+    "pm_kisan"
+   ]
+  }
+ },
+ {
+  "id": "ujjwala_eligible",
+  "profile": {
+   "age": 30,
+   "gender": "female",
+   "household_has_lpg": false,
+   "bpl": true
+  },
+  "expect": {
+   "eligible": [
+    "pmuy"
+   ]
+  }
+ },
+ {
+  "id": "ujjwala_has_lpg",
+  "profile": {
+   "age": 30,
+   "gender": "female",
+   "household_has_lpg": true,
+   "bpl": true
+  },
+  "expect": {
+   "not_eligible": [
+    "pmuy"
+   ]
+  }
+ },
+ {
+  "id": "ujjwala_male",
+  "profile": {
+   "age": 30,
+   "gender": "male",
+   "household_has_lpg": false,
+   "bpl": true
+  },
+  "expect": {
+   "not_eligible": [
+    "pmuy"
+   ]
+  }
+ },
+ {
+  "id": "daughter_6",
+  "profile": {
+   "children": [
+    {
+     "age": 6,
+     "gender": "female"
+    }
+   ]
+  },
+  "expect": {
+   "eligible": [
+    "ssy"
+   ]
+  }
+ },
+ {
+  "id": "daughter_12_son_4",
+  "profile": {
+   "children": [
+    {
+     "age": 12,
+     "gender": "female"
+    },
+    {
+     "age": 4,
+     "gender": "male"
+    }
+   ]
+  },
+  "expect": {
+   "not_eligible": [
+    "ssy"
+   ]
+  }
+ },
+ {
+  "id": "child_gender_unknown",
+  "profile": {
+   "children": [
+    {
+     "age": 3
+    }
+   ]
+  },
+  "expect": {
+   "need_info": [
+    "ssy"
+   ]
+  }
+ },
+ {
+  "id": "no_children",
+  "profile": {
+   "children": []
+  },
+  "expect": {
+   "not_eligible": [
+    "ssy"
+   ]
+  }
+ },
+ {
+  "id": "pregnant_private_job",
+  "profile": {
+   "gender": "female",
+   "pregnant_or_lactating": true,
+   "in_regular_govt_employment": false
+  },
+  "expect": {
+   "eligible": [
+    "pmmvy"
+   ]
+  }
+ },
+ {
+  "id": "pregnant_govt_job",
+  "profile": {
+   "gender": "female",
+   "pregnant_or_lactating": true,
+   "in_regular_govt_employment": true
+  },
+  "expect": {
+   "not_eligible": [
+    "pmmvy"
+   ]
+  }
+ },
+ {
+  "id": "widow_85_bpl",
+  "note": "IGNWPS ends at 79; IGNOAPS covers 80+",
+  "profile": {
+   "age": 85,
+   "gender": "female",
+   "marital_status": "widowed",
+   "bpl": true
+  },
+  "expect": {
+   "eligible": [
+    "ignoaps",
+    "pmjay_senior"
+   ],
+   "not_eligible": [
+    "ignwps"
+   ]
+  }
+ },
+ {
+  "id": "ujjwala_non_bpl_still_eligible",
+  "note": "SC/ST, PMAY-G, AAY households qualify without a BPL card, so bpl=false must not block; the caveat asks to confirm the poor-household category",
+  "profile": {
+   "age": 30,
+   "gender": "female",
+   "household_has_lpg": false,
+   "bpl": false
+  },
+  "expect": {
+   "eligible": [
+    "pmuy"
+   ]
+  }
+ },
+ {
+  "id": "ujjwala_bpl_unknown_still_eligible",
+  "profile": {
+   "age": 30,
+   "gender": "female",
+   "household_has_lpg": false
+  },
+  "expect": {
+   "eligible": [
+    "pmuy"
+   ]
+  }
+ },
+ {
+  "id": "ujjwala_caveat_mentions_deprived_categories",
+  "profile": {
+   "age": 30,
+   "gender": "female",
+   "household_has_lpg": false,
+   "bpl": false
+  },
+  "expect": {
+   "eligible": [
+    "pmuy"
+   ]
+  },
+  "expect_eligible_caveats": {
+   "pmuy": "SC/ST"
+  }
+ },
+ {
+  "id": "paid_tax_years_ago_not_last_year",
+  "note": "APY excludes anyone who ever paid income tax; PM-KISAN only last year's payers",
+  "profile": {
+   "age": 30,
+   "has_bank_account": true,
+   "ever_income_tax_payer": true,
+   "income_tax_payer_last_year": false,
+   "owns_cultivable_land": true,
+   "is_govt_employee": false,
+   "monthly_pension": 0
+  },
+  "expect": {
+   "not_eligible": [
+    "apy"
+   ],
+   "eligible": [
+    "pm_kisan",
+    "pmjjby",
+    "pmsby"
+   ]
+  }
+ },
+ {
+  "id": "paid_tax_last_year_implies_ever",
+  "profile": {
+   "age": 30,
+   "has_bank_account": true,
+   "income_tax_payer_last_year": true,
+   "owns_cultivable_land": true,
+   "is_govt_employee": false,
+   "monthly_pension": 0
+  },
+  "expect": {
+   "not_eligible": [
+    "apy",
+    "pm_kisan"
+   ]
+  }
+ },
+ {
+  "id": "never_paid_tax_unlocks_both",
+  "profile": {
+   "age": 30,
+   "has_bank_account": true,
+   "ever_income_tax_payer": false,
+   "owns_cultivable_land": true,
+   "is_govt_employee": false,
+   "monthly_pension": 0
+  },
+  "expect": {
+   "eligible": [
+    "apy",
+    "pm_kisan"
+   ]
+  }
+ }
+]

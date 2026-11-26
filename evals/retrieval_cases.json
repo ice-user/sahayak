@@ -1,0 +1,22 @@
+[
+  {"q": "widow pension", "expect": "ignwps"},
+  {"q": "money every month for my old father", "expect": "ignoaps"},
+  {"q": "free treatment in hospital for grandparents", "expect": "pmjay_senior"},
+  {"q": "savings account for my daughter's education", "expect": "ssy"},
+  {"q": "cooking gas cylinder connection", "expect": "pmuy"},
+  {"q": "support for small farmers", "expect": "pm_kisan"},
+  {"q": "cover if I die in an accident", "expect": "pmsby"},
+  {"q": "life insurance cheap premium", "expect": "pmjjby"},
+  {"q": "monthly pension after I retire, I work in unorganised sector", "expect": "apy"},
+  {"q": "cash help during pregnancy", "expect": "pmmvy"},
+  {"q": "PMJJBY", "expect": "pmjjby"},
+  {"q": "Ayushman card", "expect": "pmjay_senior"},
+  {"q": "विधवा पेंशन", "expect": "ignwps", "lang": "hi"},
+  {"q": "बेटी के लिए बचत योजना", "expect": "ssy", "lang": "hi"},
+  {"q": "बुजुर्गों के लिए मुफ्त इलाज", "expect": "pmjay_senior", "lang": "hi"},
+  {"q": "गर्भवती महिला को पैसे", "expect": "pmmvy", "lang": "hi"},
+  {"q": "கிசான் விவசாயி உதவி", "expect": "pm_kisan", "lang": "ta"},
+  {"q": "முதியோர் ஓய்வூதியம்", "expect": "ignoaps", "lang": "ta"},
+  {"q": "budhape ki pension", "expect": "ignoaps", "lang": "hinglish"},
+  {"q": "gas connection free mein chahiye", "expect": "pmuy", "lang": "hinglish"}
+]

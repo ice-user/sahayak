@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@import "@fontsource/mukta/400.css";
+@import "@fontsource/mukta/500.css";
+@import "@fontsource/mukta/600.css";
+@import "@fontsource/mukta/700.css";
+@import "@fontsource/mukta/800.css";
+@import "@fontsource/mukta-malar/400.css";
+@import "@fontsource/mukta-malar/600.css";
+@import "@fontsource/mukta-malar/700.css";
+@import "@fontsource/mukta-malar/800.css";
+
+@theme {
+  --font-sans: "Mukta", "Mukta Malar", "Noto Sans Devanagari", "Noto Sans Tamil", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-paper: #fbf6ec;
+  --color-paper-2: #f5ecd9;
+  --color-card: #fffdf8;
+  --color-ink: #1d2150;
+  --color-ink-soft: #4b4f78;
+  --color-line: #e6dcc6;
+  --color-marigold: #f2a900;
+  --color-marigold-soft: #fde7a9;
+  --color-saffron: #a85a00;
+  --color-leaf: #1b7a4b;
+  --color-leaf-deep: #145c38;
+  --color-leaf-soft: #e3f3e9;
+  --color-amber-soft: #fff1cf;
+  --color-amber-ink: #7a4a00;
+  --color-brick: #a3382a;
+  --color-brick-soft: #fbe9e5;
+
+  --radius-card: 1.125rem;
+  --shadow-card: 0 1px 0 rgba(29, 33, 80, 0.04), 0 8px 24px -12px rgba(29, 33, 80, 0.18);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  font-size: 17px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Indic scripts need more vertical room for matras and conjuncts. */
+html[data-lang="hi"] body,
+html[data-lang="ta"] body {
+  line-height: 1.8;
+}
+html[data-lang="ta"] body {
+  line-height: 1.85;
+}
+
+/* Heading tone: tight for Latin, relaxed for Indic. */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+html[data-lang="hi"] .display,
+html[data-lang="ta"] .display {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--color-marigold-soft);
+}
+
+/* Kolam-style dot grid: quiet texture behind the hero only. */
+.dots {
+  background-image: radial-gradient(rgba(29, 33, 80, 0.13) 1.2px, transparent 1.4px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+}
+
+/* Ticket card: perforated tear-off line with notches. */
+.ticket-tear {
+  position: relative;
+  border-top: 2px dashed var(--color-line);
+}
+.ticket-tear::before,
+.ticket-tear::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+}
+.ticket-tear::before {
+  left: -11px;
+  clip-path: inset(0 0 0 50%);
+}
+.ticket-tear::after {
+  right: -11px;
+  clip-path: inset(0 50% 0 0);
+}
+
+/* Markdown inside assistant answers. */
+.md > * + * {
+  margin-top: 0.75em;
+}
+.md ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.md ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+.md li + li {
+  margin-top: 0.3em;
+}
+.md strong {
+  font-weight: 700;
+}
+.md a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-marigold);
+  text-decoration-thickness: 2px;
+}
+.md h1,
+.md h2,
+.md h3 {
+  font-weight: 700;
+  font-size: 1.05em;
+}
+
+/* One purposeful motion: the typing dots. Everything else is state-driven. */
+@keyframes lamp {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+.lamp-dot {
+  animation: lamp 1.2s ease-in-out infinite;
+}
+.lamp-dot:nth-child(2) { animation-delay: 0.15s; }
+.lamp-dot:nth-child(3) { animation-delay: 0.3s; }
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

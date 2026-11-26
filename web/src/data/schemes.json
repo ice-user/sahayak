@@ -1,0 +1,487 @@
+{
+  "_meta": {
+    "description": "Central government schemes with machine-checkable eligibility rules. Amounts are the CENTRAL share; many states add top-ups, so the agent must say state amounts can differ.",
+    "last_verified": "2026-11-26",
+    "rule_ops": "eq, ne, gte, lte, in, any_child (sub-conditions over profile.children)"
+  },
+  "schemes": [
+    {
+      "id": "ignoaps",
+      "name": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+      "ministry": "Ministry of Rural Development (NSAP)",
+      "category": "pension",
+      "tags": [
+        "old age",
+        "senior citizen",
+        "pension",
+        "BPL",
+        "elderly",
+        "vridha pension",
+        "budhapa"
+      ],
+      "summary": "Monthly pension for people aged 60+ from Below Poverty Line households.",
+      "benefits": "Central share: Rs 200/month (age 60-79), Rs 500/month (age 80+). States add their own top-up, so the actual amount varies by state.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 60,
+          "reason": "Applicant must be 60 or older"
+        },
+        {
+          "field": "bpl",
+          "op": "eq",
+          "value": true,
+          "reason": "Household must be Below Poverty Line (BPL)"
+        }
+      ],
+      "caveats": [
+        "BPL status is decided by the state's BPL list.",
+        "Cannot draw this and the widow pension at the same time."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Age proof",
+        "BPL card / ration card",
+        "Bank or post office account details",
+        "Passport-size photo"
+      ],
+      "how_to_apply": "Apply at the Gram Panchayat / municipal office or the state social welfare portal.",
+      "source_url": "https://www.myscheme.gov.in/schemes/nsap-ignoaps"
+    },
+    {
+      "id": "ignwps",
+      "name": "Indira Gandhi National Widow Pension Scheme (IGNWPS)",
+      "aliases": [
+        "Pradhan Mantri Vidhwa Pension Yojana",
+        "vidhwa pension",
+        "widow pension"
+      ],
+      "ministry": "Ministry of Rural Development (NSAP)",
+      "category": "pension",
+      "tags": [
+        "widow",
+        "vidhwa",
+        "pension",
+        "women",
+        "BPL"
+      ],
+      "summary": "Monthly pension for widows aged 40-79 from Below Poverty Line households.",
+      "benefits": "Central share: Rs 300/month. At 80+ the widow is covered under the old age pension (IGNOAPS) at Rs 500/month. States add their own top-up.",
+      "rules": [
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "reason": "Scheme is for women"
+        },
+        {
+          "field": "marital_status",
+          "op": "eq",
+          "value": "widowed",
+          "reason": "Applicant must be a widow (not remarried)"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 40,
+          "reason": "Applicant must be 40 or older"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 79,
+          "reason": "Covers ages 40-79; from 80 the old age pension (IGNOAPS) applies instead"
+        },
+        {
+          "field": "bpl",
+          "op": "eq",
+          "value": true,
+          "reason": "Household must be Below Poverty Line (BPL)"
+        }
+      ],
+      "caveats": [
+        "Eligibility ends on remarriage.",
+        "Cannot draw this and the old age pension at the same time.",
+        "Reported renamed in Oct 2026 to Pradhan Mantri Vidhwa Pension Yojana; check the current name with your state office."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Husband's death certificate",
+        "Age proof",
+        "BPL card / ration card",
+        "Bank account details",
+        "Passport-size photo"
+      ],
+      "how_to_apply": "Apply at the Gram Panchayat / municipal office or the state social welfare portal.",
+      "source_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc2025117686801.pdf"
+    },
+    {
+      "id": "apy",
+      "name": "Atal Pension Yojana (APY)",
+      "ministry": "Ministry of Finance (PFRDA)",
+      "category": "pension",
+      "tags": [
+        "pension",
+        "retirement",
+        "unorganised sector",
+        "savings",
+        "guaranteed pension"
+      ],
+      "summary": "Guaranteed pension of Rs 1,000-5,000/month from age 60, for savings account holders who join between 18 and 40.",
+      "benefits": "Fixed monthly pension of Rs 1,000-5,000 from age 60, based on contribution (Rs 42-210/month if joining at 18; Rs 291-1,454/month if joining at 40).",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Minimum joining age is 18"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 40,
+          "reason": "Maximum joining age is 40"
+        },
+        {
+          "field": "has_bank_account",
+          "op": "eq",
+          "value": true,
+          "reason": "Needs a savings bank or post office account"
+        },
+        {
+          "field": "ever_income_tax_payer",
+          "op": "eq",
+          "value": false,
+          "reason": "Since 1 Oct 2022, anyone who is or has been an income tax payer cannot join"
+        }
+      ],
+      "caveats": [
+        "Contributions continue until age 60."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Savings account",
+        "Mobile number",
+        "Nominee details"
+      ],
+      "how_to_apply": "Enrol through your bank branch, post office, or net banking.",
+      "source_url": "https://npstrust.org.in/about-apy"
+    },
+    {
+      "id": "pmjjby",
+      "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)",
+      "ministry": "Ministry of Finance",
+      "category": "insurance",
+      "tags": [
+        "life insurance",
+        "insurance",
+        "death cover",
+        "bima"
+      ],
+      "summary": "Rs 2 lakh life cover for Rs 436 a year, for account holders aged 18-50.",
+      "benefits": "Rs 2 lakh paid on death from any cause. Premium Rs 436/year, auto-debited. Renewable up to age 55.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Minimum entry age is 18"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 50,
+          "reason": "Maximum entry age is 50"
+        },
+        {
+          "field": "has_bank_account",
+          "op": "eq",
+          "value": true,
+          "reason": "Needs a bank or post office account with auto-debit"
+        }
+      ],
+      "caveats": [
+        "Only accidental death is covered in the first 45 days after enrolment."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank account",
+        "Consent / enrolment form"
+      ],
+      "how_to_apply": "Enrol at your bank branch, post office, or via net banking.",
+      "source_url": "https://www.outlookmoney.com/personal-finance/chhath-puja-2026-pmjjby-pmsby-insurance-benefits-eligibility-premium"
+    },
+    {
+      "id": "pmsby",
+      "name": "Pradhan Mantri Suraksha Bima Yojana (PMSBY)",
+      "ministry": "Ministry of Finance",
+      "category": "insurance",
+      "tags": [
+        "accident insurance",
+        "insurance",
+        "disability",
+        "bima"
+      ],
+      "summary": "Rs 2 lakh accident cover for Rs 20 a year, for account holders aged 18-70.",
+      "benefits": "Rs 2 lakh for accidental death or total disability; Rs 1 lakh for partial disability. Premium Rs 20/year, auto-debited.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Minimum age is 18"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 70,
+          "reason": "Maximum age is 70"
+        },
+        {
+          "field": "has_bank_account",
+          "op": "eq",
+          "value": true,
+          "reason": "Needs a bank or post office account with auto-debit"
+        }
+      ],
+      "caveats": [],
+      "documents": [
+        "Aadhaar card",
+        "Bank account",
+        "Consent / enrolment form"
+      ],
+      "how_to_apply": "Enrol at your bank branch, post office, or via net banking.",
+      "source_url": "https://www.outlookmoney.com/personal-finance/chhath-puja-2026-pmjjby-pmsby-insurance-benefits-eligibility-premium"
+    },
+    {
+      "id": "pmjay_senior",
+      "name": "Ayushman Bharat PM-JAY for senior citizens (Ayushman Vay Vandana Card)",
+      "ministry": "Ministry of Health and Family Welfare (NHA)",
+      "category": "health",
+      "tags": [
+        "health insurance",
+        "hospital",
+        "ayushman",
+        "senior citizen",
+        "treatment",
+        "medical"
+      ],
+      "summary": "Free hospital treatment up to Rs 5 lakh a year for everyone aged 70+, regardless of income.",
+      "benefits": "Cashless treatment up to Rs 5 lakh/year at empanelled hospitals. Families already under PM-JAY get an extra Rs 5 lakh top-up for the senior.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 70,
+          "reason": "Applicant must be 70 or older (as per Aadhaar)"
+        }
+      ],
+      "caveats": [
+        "People under 70 may still qualify for regular PM-JAY based on SECC/state criteria; this tool cannot check that, so they should check on the Ayushman portal or app.",
+        "Aadhaar e-KYC is required.",
+        "People on CGHS/ECHS/CAPF can choose either that scheme or PM-JAY."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Mobile number linked to Aadhaar"
+      ],
+      "how_to_apply": "Apply through the Ayushman app, the beneficiary.nha.gov.in portal, or an empanelled hospital.",
+      "source_url": "https://www.nha.gov.in/img/resources/English_FAQs_related_to_the_benefits_for_senior_citizens.pdf"
+    },
+    {
+      "id": "pm_kisan",
+      "name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+      "ministry": "Ministry of Agriculture and Farmers Welfare",
+      "category": "agriculture",
+      "tags": [
+        "farmer",
+        "kisan",
+        "agriculture",
+        "land",
+        "income support"
+      ],
+      "summary": "Rs 6,000 a year income support for landholding farmer families, with exclusions for higher-income groups.",
+      "benefits": "Rs 6,000/year in three instalments of Rs 2,000, paid directly to the bank account.",
+      "rules": [
+        {
+          "field": "owns_cultivable_land",
+          "op": "eq",
+          "value": true,
+          "reason": "Family must own cultivable land"
+        },
+        {
+          "field": "income_tax_payer_last_year",
+          "op": "eq",
+          "value": false,
+          "reason": "Families where someone paid income tax in the last assessment year are excluded"
+        },
+        {
+          "field": "is_govt_employee",
+          "op": "eq",
+          "value": false,
+          "reason": "Serving/retired govt employees are excluded (except MTS/Class IV/Group D)"
+        },
+        {
+          "field": "monthly_pension",
+          "op": "lte",
+          "value": 9999,
+          "reason": "Retired pensioners with monthly pension of Rs 10,000 or more are excluded"
+        }
+      ],
+      "caveats": [
+        "Also excluded: institutional landholders, current/former constitutional post holders, MPs/MLAs, and practising professionals (doctors, engineers, lawyers, CAs, architects).",
+        "e-KYC is mandatory.",
+        "Exclusion applies if ANY family member falls in an excluded category."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Land records",
+        "Bank account linked to Aadhaar"
+      ],
+      "how_to_apply": "Register on pmkisan.gov.in (Farmer Corner) or through a Common Service Centre.",
+      "source_url": "https://pmkisan.gov.in/Documents/RevisedFAQ.pdf"
+    },
+    {
+      "id": "pmuy",
+      "name": "Pradhan Mantri Ujjwala Yojana (PMUY)",
+      "ministry": "Ministry of Petroleum and Natural Gas",
+      "category": "household",
+      "tags": [
+        "LPG",
+        "gas connection",
+        "cooking gas",
+        "women",
+        "ujjwala",
+        "cylinder"
+      ],
+      "summary": "Deposit-free LPG connection for an adult woman from a poor household that has no LPG connection.",
+      "benefits": "Deposit-free LPG connection with government financial support for the connection cost.",
+      "rules": [
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "reason": "Connection is given in the name of an adult woman"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be 18 or older"
+        },
+        {
+          "field": "household_has_lpg",
+          "op": "eq",
+          "value": false,
+          "reason": "Household must not already have an LPG connection"
+        }
+      ],
+      "caveats": [
+        "The household must be poor: a BPL card holder, or an SC/ST household, PMAY-G beneficiary, AAY card holder, forest dweller or another listed deprived category (a deprivation declaration may be accepted). This tool cannot check that, so confirm with the LPG distributor."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Ration card / family proof",
+        "Bank account",
+        "KYC form"
+      ],
+      "how_to_apply": "Apply at an LPG distributor or on pmuy.gov.in.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pmuy"
+    },
+    {
+      "id": "ssy",
+      "name": "Sukanya Samriddhi Yojana (SSY)",
+      "ministry": "Ministry of Finance (Small Savings)",
+      "category": "savings",
+      "tags": [
+        "girl child",
+        "daughter",
+        "savings",
+        "education",
+        "marriage",
+        "beti"
+      ],
+      "summary": "High-interest savings account for a girl child below 10, opened by a parent or guardian.",
+      "benefits": "Government-backed savings with tax benefits; deposits Rs 250 to Rs 1.5 lakh a year for 15 years; matures at 21 years.",
+      "rules": [
+        {
+          "field": "children",
+          "op": "any_child",
+          "value": [
+            {
+              "field": "gender",
+              "op": "eq",
+              "value": "female"
+            },
+            {
+              "field": "age",
+              "op": "lte",
+              "value": 9
+            }
+          ],
+          "reason": "Needs a daughter below 10 years of age"
+        }
+      ],
+      "caveats": [
+        "Maximum two accounts per family (three for twins/triplets).",
+        "Girl must be a resident Indian."
+      ],
+      "documents": [
+        "Girl's birth certificate",
+        "Parent/guardian's Aadhaar and PAN",
+        "Address proof"
+      ],
+      "how_to_apply": "Open at a post office or authorised bank branch.",
+      "source_url": "https://www.angelone.in/knowledge-center/savings-schemes/eligibility-for-sukanya-samriddhi-yojana"
+    },
+    {
+      "id": "pmmvy",
+      "name": "Pradhan Mantri Matru Vandana Yojana (PMMVY)",
+      "ministry": "Ministry of Women and Child Development",
+      "category": "maternity",
+      "tags": [
+        "pregnancy",
+        "maternity",
+        "mother",
+        "pregnant",
+        "newborn",
+        "women"
+      ],
+      "summary": "Cash support for pregnant and lactating women: Rs 5,000 for the first child, Rs 6,000 for a second child if she is a girl.",
+      "benefits": "Rs 5,000 for the first child (two instalments); Rs 6,000 for the second child if it is a girl (one instalment after birth).",
+      "rules": [
+        {
+          "field": "gender",
+          "op": "eq",
+          "value": "female",
+          "reason": "Scheme is for pregnant/lactating women"
+        },
+        {
+          "field": "pregnant_or_lactating",
+          "op": "eq",
+          "value": true,
+          "reason": "Must be pregnant or a lactating mother"
+        },
+        {
+          "field": "in_regular_govt_employment",
+          "op": "eq",
+          "value": false,
+          "reason": "Women in regular employment with central/state govt or PSUs are excluded"
+        }
+      ],
+      "caveats": [
+        "Benefit covers only the first child, or the second child if she is a girl.",
+        "Must also belong to an eligible category (e.g. BPL card holder); this tool does not check category, so confirm at the Anganwadi centre."
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Mother and Child Protection (MCP) card",
+        "Eligibility proof (e.g. BPL card)",
+        "Bank account"
+      ],
+      "how_to_apply": "Register at an Anganwadi centre, an approved health facility, or pmmvy.wcd.gov.in.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pmmvy"
+    }
+  ]
+}
