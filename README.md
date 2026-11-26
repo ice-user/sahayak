@@ -188,7 +188,7 @@ Suggested NVIDIA models to compare: the configured Nemotron model, `nvidia/nemot
 ### First real eval run (NVIDIA, 2026-11-27): what we learned
 - Latency fell from ~53 s to **~16-22 s p50** per answer (first token ~7 s) after cutting round trips (2-3 LLM calls per turn, down from 3-6).
 - Nemotron 3.x models **think by default**: with a short answer budget the thinking used it up, so 40% of answers came back empty or cut off. Sahayak now turns thinking off for Nemotron models automatically (`chat_template_kwargs.enable_thinking=false`; set `LLM_THINKING=1` to keep it). Re-run the evals to measure the effect.
-- `meta/llama-3.x` models are **retired on NVIDIA (HTTP 410)**; defaults now use Nemotron models (check current names on build.nvidia.com).
+- `meta/llama-3.3-70b-instruct` and `meta/llama-3.1-8b-instruct` returned **HTTP 410 (Gone) for our API key** while Nemotron worked with the same key. NVIDIA's pages don't mark Llama 3.3 as deprecated, so this may be account access rather than retirement; defaults now use Nemotron models, which work.
 - Search: multilingual embeddings found the right scheme first for **88% of non-English queries vs 12% for keywords** (hybrid 90% overall).
 
 ## Staying on topic

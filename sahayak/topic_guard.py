@@ -239,7 +239,7 @@ def classify(client: Any, model: str, message: str, last_assistant: str | None,
         status = getattr(box["error"], "status_code", None)
         log.warning("topic classifier failed (%s%s); allowing%s", type(box["error"]).__name__,
                     f" {status}" if status else "",
-                    " - model retired or wrong name? set TOPIC_GUARD_MODEL" if status in (404, 410) else "")
+                    " - model unavailable to this key or wrong name? set TOPIC_GUARD_MODEL" if status in (404, 410) else "")
         return TopicResult("on_topic", "classifier", f"classifier error: {type(box['error']).__name__}", latency,
                            "error")
     parsed = parse_verdict(box.get("raw", ""))

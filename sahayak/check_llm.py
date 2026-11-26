@@ -42,7 +42,8 @@ def main() -> int:
     except Exception as e:
         print(f"\nFAILED: {type(e).__name__}: {e}")
         if getattr(e, "status_code", None) in (404, 410):
-            print("This model is retired or the name is wrong (HTTP 404/410). Pick a current model on build.nvidia.com,")
+            print("NVIDIA refused this model for your key (HTTP 404/410): the name may be wrong, the model unavailable to your")
+            print("account, or no longer hosted. Check it on build.nvidia.com, or use a model that works for you,")
             print("e.g. nvidia/nemotron-3-super-120b-a12b or nvidia/nemotron-3-nano-30b-a3b (check the exact names there).")
         if "nvidia" in (base_url or ""):
             print("Try another model, e.g.:  python -m sahayak.check_llm --model " + NVIDIA_FALLBACKS[0])

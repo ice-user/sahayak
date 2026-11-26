@@ -27,7 +27,7 @@ Remove-Item env:LLM_BASE_URL, env:LLM_API_KEY, env:LLM_MODEL -ErrorAction Silent
 if (-not $Models) {
     $list = @()
     if ($env:NVIDIA_MODEL) { $list += $env:NVIDIA_MODEL }
-    $list += "nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"   # Llama 3.x models were retired on NVIDIA (HTTP 410)
+    $list += "nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"   # Llama 3.x returned HTTP 410 for this key in our first run
     $Models = ($list | Select-Object -Unique) -join ","
 }
 $out = "$root\evals\results"
