@@ -40,3 +40,17 @@ def test_explicit_llm_provider_wins(monkeypatch):
 def test_clean_answer_strips_reasoning():
     assert clean_answer("<think>step 1\nstep 2</think>\nYou can get PM-JAY.") == "You can get PM-JAY."
     assert clean_answer(None) == ""
+
+
+def test_clean_api_key_undoes_paste_mistakes():
+    from sahayak.agent import clean_api_key
+    for raw in ["nvapi-abc", "  nvapi-abc\n", '"nvapi-abc"', "'nvapi-abc'", "NVIDIA_API_KEY=nvapi-abc", 'NVIDIA_API_KEY="nvapi-abc"\r\n']:
+        assert clean_api_key(raw) == "nvapi-abc", raw
+    assert clean_api_key(None) == "" and clean_api_key("   ") == ""
+
+
+def test_resolve_config_uses_cleaned_nvidia_key(monkeypatch):
+    for k in ("LLM_API_KEY", "LLM_BASE_URL", "LLM_MODEL", "NVIDIA_MODEL"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("NVIDIA_API_KEY", ' "nvapi-xyz"\n')
+    assert resolve_config()[1] == "nvapi-xyz"

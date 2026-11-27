@@ -121,13 +121,21 @@ NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
 NVIDIA_DEFAULT_MODEL = "nvidia/nemotron-3.5-super-vl-120b-a12b"
 
 
+def clean_api_key(raw: str | None) -> str:
+    """Undo common paste mistakes in dashboard secrets: whitespace/newlines, surrounding quotes, a `NAME=` prefix."""
+    key = (raw or "").strip()
+    if "=" in key and key.split("=", 1)[0].strip().upper().endswith("API_KEY"):
+        key = key.split("=", 1)[1].strip()
+    return key.strip("\"'").strip()
+
+
 def resolve_config() -> tuple[str | None, str, str]:
     """(base_url, api_key, model). LLM_* variables win; otherwise NVIDIA_API_KEY selects NVIDIA's API."""
     if os.environ.get("LLM_API_KEY") or os.environ.get("LLM_BASE_URL"):
-        return (os.environ.get("LLM_BASE_URL"), os.environ.get("LLM_API_KEY", "missing"),
+        return (os.environ.get("LLM_BASE_URL"), clean_api_key(os.environ.get("LLM_API_KEY")) or "missing",
                 os.environ.get("LLM_MODEL", "gemini-2.5-flash"))
-    if os.environ.get("NVIDIA_API_KEY"):
-        return (NVIDIA_BASE_URL, os.environ["NVIDIA_API_KEY"],
+    if clean_api_key(os.environ.get("NVIDIA_API_KEY")):
+        return (NVIDIA_BASE_URL, clean_api_key(os.environ["NVIDIA_API_KEY"]),
                 os.environ.get("LLM_MODEL") or os.environ.get("NVIDIA_MODEL") or NVIDIA_DEFAULT_MODEL)
     return None, "missing", os.environ.get("LLM_MODEL", "gemini-2.5-flash")
 
