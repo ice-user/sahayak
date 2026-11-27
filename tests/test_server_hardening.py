@@ -329,3 +329,10 @@ def test_deploy_files():
         assert entry in ignore
     render = (ROOT / "render.yaml").read_text(encoding="utf-8")
     assert "ENV" in render and "production" in render and "TRUSTED_PROXY_HOPS" in render
+
+
+def test_allowed_origins_ignore_trailing_slash(monkeypatch):
+    """A pasted 'https://app.vercel.app/' must still match the browser's Origin header (sent without a slash)."""
+    from server.config import Settings
+    monkeypatch.setenv("ALLOWED_ORIGINS", "https://a.vercel.app/, https://b.example.com ,/")
+    assert Settings.from_env().allowed_origins == ["https://a.vercel.app", "https://b.example.com"]

@@ -61,7 +61,7 @@ class Settings:
             raise RuntimeError("ALLOWED_ORIGINS must be set when ENV=production (comma-separated frontend origins)")
         origins = origins or "http://localhost:3000"
         return cls(
-            allowed_origins=[o.strip() for o in origins.split(",") if o.strip()],
+            allowed_origins=[o.strip().rstrip("/") for o in origins.split(",") if o.strip().rstrip("/")],  # browsers send Origin without a trailing slash
             rate_limit_per_10min=_int("RATE_LIMIT_PER_10MIN", 20),
             global_chat_per_min=_int("GLOBAL_CHAT_PER_MIN", 30),
             trust_proxy=os.environ.get("TRUST_PROXY") == "1",
