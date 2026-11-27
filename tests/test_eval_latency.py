@@ -1,5 +1,6 @@
 """Eval runner metrics (latency, TTFT, LLM calls, tokens), error-vs-fail separation, retry, and the latency benchmark."""
 import json
+from pathlib import Path
 
 import pytest
 
@@ -85,8 +86,11 @@ def test_summary_excludes_errors_from_quality_and_latency():
 
 
 def test_load_cases_filters_by_comma_separated_fragments():
-    assert len(load_cases("")) == 10
-    assert [c["id"] for c in load_cases("hinglish,ta_")] == ["ta_widow_mother", "hinglish_grandfather_health"]
+    every = json.loads((Path(__file__).resolve().parent.parent / "evals" / "agent_cases.json").read_text(encoding="utf-8"))
+    assert len(load_cases("")) == len(every) >= 10
+    got = [c["id"] for c in load_cases("hinglish,ta_")]
+    assert got == [c["id"] for c in every if "hinglish" in c["id"] or "ta_" in c["id"]]
+    assert "ta_widow_mother" in got and "hinglish_grandfather_health" in got
     assert len(load_cases("zzz")) == 0
 
 
@@ -104,7 +108,7 @@ def test_bench_prints_table_and_saves_json(tmp_path, capsys):
                     tool_msg("get_scheme_details", {"scheme_id": "ignwps"}, "c3"), text_msg(GOOD)] * 2)
     broken = FakeLLM([StatusError(404, "model not found")] * 2)
     out = tmp_path / "res" / "bench.json"
-    report = bench_latency.main(["--models", "fast-8b,slow-120b,typo-model", "--only", "en_widow", "--repeat", "2",
+    report = bench_latency.main(["--models", "fast-8b,slow-120b,typo-model", "--only", "en_widow_mother", "--repeat", "2",
                                  "--out", str(out)],
                                 make_agent_for=fake_factory_for({"fast-8b": fast, "slow-120b": slow, "typo-model": broken}))
     text = capsys.readouterr().out

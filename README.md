@@ -1,5 +1,44 @@
 # Sahayak: a multilingual agent for Indian government schemes
 
+**A chat agent that tells people which government schemes they qualify for, in Hindi, Tamil, Hinglish or English, with eligibility decided by tested Python rules instead of the LLM.**
+
+[![CI](https://github.com/<owner>/<repo>/actions/workflows/ci.yml/badge.svg)](https://github.com/<owner>/<repo>/actions/workflows/ci.yml) · Live demo: <!-- TODO: live demo URL --> *(not published yet; see [DEPLOY.md](DEPLOY.md))* · [API docs](docs/API.md) · [Research agent](research/README.md)
+
+<p align="center">
+  <img src="web/screenshots/chat-desktop-top.png" alt="Sahayak chat answering an eligibility question with scheme result cards" width="48%">
+  <img src="web/screenshots/chat-hindi-desktop-top.png" alt="The same chat in Hindi" width="48%">
+</p>
+
+### Highlights
+
+- **The LLM never decides eligibility.** A deterministic three-verdict rule engine (`eligible` / `not_eligible` / `need_info`) does; a runtime guard blocks any answer that offers a scheme the engine did not confirm. Evidence: 0 false eligibility claims in the agent eval; an empty profile is tested to never be `eligible`.
+- **Multilingual hybrid retrieval.** Multilingual embeddings fused with BM25 (Reciprocal Rank Fusion). Evidence: on non-English queries, dense hit@1 is 0.88 vs 0.12 for BM25 alone.
+- **Research pipeline with an auditor and a human.** A LangGraph pipeline extracts scheme records with a verbatim quote per rule, an independent auditor agent looks for misreadings, and nothing is merged without human approval.
+- **PII masking.** Aadhaar, PAN and phone numbers are masked before a message reaches the LLM provider.
+- **Stays on topic.** A rules layer plus an LLM classifier redirect off-topic and jailbreak messages; the rules fallback alone is measured on 205 cases (below).
+- **Production plumbing.** SSE streaming, an MCP server exposing the same tools, rate limiting, CI on every push, Docker + Render for the API, Vercel for the web app.
+
+### Results
+
+| Area | Result |
+|---|---|
+| Tests | 925 passing (pytest), plus web vitest; CI on every push |
+| Agent eval (NVIDIA Nemotron, 10 cases, 2026-11-27) | tool use 100%, recall 100%, no false eligibility claims 100%; p50 latency 3.8 s, p50 time-to-first-token 1.3 s, about 2.2 LLM calls per turn. Latency was cut from about 53 s by reducing round trips |
+| Retrieval (20 queries) | hybrid hit@1 0.90, MRR 0.94; non-English hit@1: dense 0.88 vs BM25 0.12 |
+| Topic guard, classifier down (rules fallback, 205 cases) | 0 on-topic false positives, off-topic recall 59/60, jailbreak recall 16/16 |
+| Eval suite | 46 agent cases (en 22 / hi 10 / ta 7 / Hinglish 7) checked offline against the rule engine, plus an LLM-as-judge (faithfulness / language / completeness) that runs weekly in CI. **The judge and the 46-case set have not had a live run yet**; the agent numbers above are from the earlier 10-case run |
+
+### Limitations and roadmap
+
+- The database covers 10 central schemes; it is meant to grow through the research pipeline (state schemes are not modelled yet).
+- The LoRA distillation student is planned, not built. The teacher-data pipeline exists; no model has been trained.
+- Follow-up questions currently come partly from a fallback path rather than always from the model.
+- Free-tier hosting has cold starts: the first request after idle time is slow.
+
+The full detail is below.
+
+## What it does
+
 Ask in Hindi, Tamil, Hinglish or English, for example *"My mother is 62, a widow, BPL card holder. What can she get?"*, and Sahayak:
 
 1. pulls the facts out of the question and asks follow-up questions when something is missing
@@ -29,7 +68,7 @@ Two more safety layers sit on top: a **runtime guard** (`sahayak/guard.py`) chec
    quick replies, "why"       streaming events            (NVIDIA, Gemini, Groq, Ollama)            ▲
                                                                                                     │ human-approved merges
  research/ (LangGraph): official page/PDF ─▶ extract ─▶ verify quotes ─▶ validate ─▶ auditor agent ─▶ retry ─▶ YOU review ─▶ candidate
- sahayak/datagen: dummy users ─▶ teacher agent ─▶ grader ─▶ train.jsonl ─▶ LoRA student (next)
+ sahayak/datagen: dummy users ─▶ teacher agent ─▶ grader ─▶ train.jsonl ─▶ LoRA student (planned)
 ```
 
 | Part | What it does | Docs |
@@ -38,7 +77,7 @@ Two more safety layers sit on top: a **runtime guard** (`sahayak/guard.py`) chec
 | `server/` | public API: streams tool calls, eligibility results and the answer as Server-Sent Events | `docs/API.md` |
 | `web/` | the app people use: mobile-first, four languages, result cards, "Why this answer?" | `web/README.md` |
 | `research/` | multi-agent LangGraph pipeline: an extractor turns official scheme pages into records with a verbatim quote for every rule (numbers compared exactly), an independent auditor agent hunts for misreadings, and a human approves before anything is merged | `research/README.md`, `research/GRAPH.md` |
-| `sahayak/datagen/` | dummy users and a grader that produce distillation data for the LoRA student | below |
+| `sahayak/datagen/` | dummy users and a grader that produce distillation data for the planned LoRA student | below |
 
 ## Run the full app locally
 
@@ -136,13 +175,14 @@ sahayak/datagen/           dummy users, simulated user, grader, data generation 
 sahayak/check_llm.py       checks the configured model is reachable and supports tool calling
 scripts/use_nvidia.ps1     loads the NVIDIA key from another project's .env into the current session
 evals/eligibility_cases.json  22 deterministic rule cases (run in pytest)
-evals/agent_cases.json     10 end-to-end cases in EN / HI / TA / Hinglish
+evals/agent_cases.json     46 end-to-end cases (en 22 / hi 10 / ta 7 / Hinglish 7)
+evals/judge.py             LLM-as-judge: faithfulness / language / completeness
 evals/run_agent_evals.py   scores a real model: tool use, recall, false claims, follow-ups
 evals/topic_cases.json     205 on/off-topic, follow-up, greeting and jailbreak cases (en / hi / Hinglish / ta)
 evals/run_topic_eval.py    topic guard eval: off-topic recall, on-topic false positives, classifier latency
 evals/retrieval_cases.json 20 search queries (12 English, 8 Hindi/Tamil/Hinglish)
 evals/run_retrieval_eval.py  BM25 vs embeddings vs hybrid: hit@1, hit@3, MRR
-tests/                     300+ tests: rules, search, agent, datagen, API server, research agent (fake LLM, no downloads)
+tests/                     925 tests: rules, search, agent, datagen, API server, research agent (fake LLM, no downloads)
 server/                    FastAPI streaming API (see docs/API.md); Dockerfile + render.yaml deploy it
 web/                       Next.js frontend (108 Vitest tests; mock mode for demos without a backend)
 research/                  LangGraph scheme-research agent (fetch, extract, verify evidence, validate, review, merge)
@@ -174,7 +214,7 @@ Environment variables:
 ### Measure it
 
 ```powershell
-# one model, all 10 agent cases (brief answers, streaming on); prints latency, TTFT, LLM calls, tokens, quality
+# one model, all agent cases (46; the 2026-11-27 run below used the original 10) (brief answers, streaming on); prints latency, TTFT, LLM calls, tokens, quality
 python -m evals.run_agent_evals --model nvidia/nemotron-3-super-120b-a12b
 
 # compare models: p50/p90 latency, p50 time-to-first-token, mean LLM calls and tokens, pass rate; saves evals/results/bench-*.json
@@ -186,7 +226,7 @@ $env:LLM_STREAM="0"; python -m evals.bench_latency --models <model> --no-stream 
 Suggested NVIDIA models to compare: the configured Nemotron model, `nvidia/nemotron-3-super-120b-a12b` and a small fast one such as `nvidia/nemotron-3-nano-30b-a3b`. **These names must be checked on build.nvidia.com** (names, tool-calling support and availability change; a wrong name appears as errors in the table). A small model may be fast but miss eligibility facts or the reply script: read the pass rate and the saved answers before choosing. Provider failures (503 etc.) are counted as `errors` and excluded from latency and quality numbers; each failed case is retried once first. Run a few repeats: single runs on a shared API vary a lot.
 
 ### First real eval run (NVIDIA, 2026-11-27): what we learned
-- Latency fell from ~53 s to **~16-22 s p50** per answer (first token ~7 s) after cutting round trips (2-3 LLM calls per turn, down from 3-6).
+- Latency fell from ~53 s to **~16-22 s p50** per answer (first token ~7 s) after cutting round trips (2-3 LLM calls per turn, down from 3-6). A later run with thinking off reached p50 3.8 s, first token 1.3 s, about 2.2 LLM calls per turn.
 - Nemotron 3.x models **think by default**: with a short answer budget the thinking used it up, so 40% of answers came back empty or cut off. Sahayak now turns thinking off for Nemotron models automatically (`chat_template_kwargs.enable_thinking=false`; set `LLM_THINKING=1` to keep it). Re-run the evals to measure the effect.
 - `meta/llama-3.3-70b-instruct` and `meta/llama-3.1-8b-instruct` returned **HTTP 410 (Gone) for our API key** while Nemotron worked with the same key. NVIDIA's pages don't mark Llama 3.3 as deprecated, so this may be account access rather than retirement; defaults now use Nemotron models, which work.
 - Search: multilingual embeddings found the right scheme first for **88% of non-English queries vs 12% for keywords** (hybrid 90% overall).
@@ -223,6 +263,8 @@ python -m evals.run_topic_eval --layer full --agent-sample 12 --model nvidia/nem
 
 `evals/topic_cases.json` has 205 hand-written cases (en / hi / Hinglish / ta, about 51 each): 117 on-topic (49 conversational follow-ups that carry the assistant's preceding question, 28 borderline in-scope such as "how do I get an income certificate?", "when will my PM-KISAN money come?"), 60 off-topic (including borderline: bank FD, medicine for knee pain, whom to vote for, resume, suing an employer, and mid-conversation off-topic requests), 12 greetings and 16 jailbreaks. Rules-layer result on it (deterministic, reproducible): on-topic false positives **0 / 117 (0.0%)**, follow-up false positives **0 / 49**, jailbreak recall 12 / 16 (75%; the misses are paraphrases and a message that also mentions "schemes", which the rules deliberately leave to the classifier or the prompt), greeting fast path 12 / 12, off-topic recall 0% by design (the rules never block plain off-topic text), 79% of on-topic messages decided without a classifier call. The cases were written together with the rules, so treat these as optimistic; the full-stack off-topic recall and false-positive numbers need a run with a real model and are not measured in this repository yet. Results are saved to `evals/results/topic-*.json`.
 
+Note: the rules-layer figures in the paragraph above predate the rules fallback now used when the classifier is down. With that fallback the same 205 cases give 0 on-topic false positives, off-topic recall 59/60 and jailbreak recall 16/16 (see the Results table at the top).
+
 ## Evals
 
 ```powershell
@@ -230,6 +272,13 @@ python -m evals.run_agent_evals       # needs a real LLM; saves evals/results/ru
 ```
 
 Reports `used_tool`, `recall` (expected schemes mentioned), `no_false_claim` (doesn't offer a scheme the user can't get) and `asked_followup`, with latency and tokens. Mention detection is a heuristic, so read the saved answers before trusting any single number. Run the same evals on 2–3 models and put the comparison table in this README.
+
+`evals/agent_cases.json` has 46 cases; `tests/test_agent_cases_offline.py` checks them offline against the rule engine (no LLM). Extra flags:
+
+- `--judge`: also score each answer with an LLM judge (faithfulness, language, completeness); `--judge-model <name>` picks the judge model.
+- `--min-pass-rate <x>` and `--min-faithfulness <x>`: exit non-zero below the threshold, used by the weekly CI run.
+
+The judge and the 46-case set have not had a live run yet. On Windows, `pytest.ini` sets a local `--basetemp`, so `python -m pytest -q` works without temp-directory permission errors.
 
 ### Retrieval
 
@@ -242,8 +291,10 @@ BM25 baseline on the 20 queries: hit@1 **0.65** overall but only **0.12** on the
 | Search | hit@1 (all) | hit@3 (all) | hit@1 (non-English) |
 |---|---|---|---|
 | BM25 | 0.65 | 0.70 | 0.12 |
-| Embeddings | ? | ? | ? |
-| Hybrid (RRF) | ? | ? | ? |
+| Embeddings | ? | ? | 0.88 |
+| Hybrid (RRF) | 0.90 | ? | ? |
+
+Hybrid MRR is 0.94. Cells marked `?` are not recorded here yet.
 
 ## MCP server
 
@@ -258,7 +309,7 @@ Add it to Claude desktop's `claude_desktop_config.json` (the path is in the docs
 IGNOAPS (old-age pension) · IGNWPS (widow pension) · Atal Pension Yojana · PMJJBY · PMSBY · Ayushman Bharat PM-JAY for 70+ · PM-KISAN · PM Ujjwala · Sukanya Samriddhi · PM Matru Vandana.
 Facts were checked against official or reputable sources on 2026-11-25/26; every scheme stores its `source_url`. States add their own amounts and rules, and schemes change, so re-check before relying on this.
 
-## Distillation data (for the LoRA student model)
+## Distillation data (for the planned LoRA student model)
 
 Dummy users with hidden profiles talk to the teacher agent; only conversations that pass automatic checks become training data.
 
@@ -291,4 +342,4 @@ python -m sahayak.datagen run --teacher api --workers 4                         
 3. **Next:** run evals and the research agent with a real model; fix failures; publish the comparison table
 4. Add Profile fields many schemes need (caste category, disability, student, occupation) and grow to 50+ schemes with the research agent
 5. Deploy (Vercel + Render), add tracing, then a Telegram/WhatsApp front end; get real users
-6. **Agent distillation:** generate teacher data, LoRA-fine-tune a 1.5B model on Kaggle, compare on the held-out dummy users, run it locally with OpenVINO
+6. **Agent distillation (planned, not built):** generate teacher data, LoRA-fine-tune a 1.5B model on Kaggle, compare on the held-out dummy users, run it locally with OpenVINO

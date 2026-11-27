@@ -11,6 +11,9 @@ Quality metrics per case:
   no_false_claim   none of the "expect_not_claimed" schemes is named in the answer
                    as if available (heuristic: name appears without a negation nearby)
   asked_followup   for vague questions, the answer asks a question
+Optional --judge [--judge-model M] adds an LLM-as-judge pass (evals/judge.py): deterministic checks first, then a
+strict-JSON rubric scoring faithfulness / language_match / completeness 1-5. The means appear in SUMMARY as
+judge_*_mean. --min-pass-rate / --min-faithfulness make the run exit 1 when a threshold is missed (used by CI).
 Cost metrics per case: latency_s, ttft_s (first streamed token; empty when not streaming), llm_calls, tokens.
 
 A provider/network failure is an ERROR, not a quality fail: transient ones are retried once, and rows that still
@@ -21,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Callable
@@ -117,6 +121,10 @@ def summarize(rows: list[dict]) -> dict:
     """Aggregate rows. Error rows are counted in `errors` and excluded from everything else."""
     ok = [r for r in rows if not r.get("error")]
     summary: dict = {"runs": len(rows), "errors": len(rows) - len(ok)}
+    if any("judge" in r for r in ok):
+        from evals.judge import judge_means
+        summary["judged"] = sum(1 for r in ok if "judge" in r)
+        summary.update(judge_means(ok))
     for key in QUALITY_KEYS:
         summary[key] = _mean([float(r[key]) for r in ok if key in r])
     verdicts = [passed(r) for r in ok]
@@ -127,6 +135,16 @@ def summarize(rows: list[dict]) -> dict:
         ttft_p50=percentile([r["ttft_s"] for r in ok if r.get("ttft_s") is not None], 50),
         llm_calls_mean=_mean([r["llm_calls"] for r in ok]), tokens_mean=_mean([r["tokens"] for r in ok]))
     return summary
+
+
+def threshold_failures(summary: dict, min_pass_rate: float | None, min_faithfulness: float | None) -> list[str]:
+    """Human-readable reasons the run misses its gates (a missing metric counts as a failure when a gate is set)."""
+    out = []
+    for name, value, floor in (("pass_rate", summary.get("pass_rate"), min_pass_rate),
+                               ("judge_faithfulness_mean", summary.get("judge_faithfulness_mean"), min_faithfulness)):
+        if floor is not None and (value is None or value < floor):
+            out.append(f"{name}={value} < {floor}")
+    return out
 
 
 def default_agent_factory(model: str | None, style: str, stream: bool | None, client=None) -> Callable[[], Agent]:
@@ -141,17 +159,29 @@ def main(argv: list[str] | None = None, make_agent: Callable[[], Agent] | None =
     ap.add_argument("--model", default=None, help="default: LLM_MODEL / NVIDIA_MODEL")
     ap.add_argument("--style", choices=("brief", "full"), default="brief")
     ap.add_argument("--no-stream", action="store_true", help="measure without streaming (no TTFT)")
+    ap.add_argument("--judge", action="store_true", help="LLM-as-judge scoring (faithfulness, language, completeness)")
+    ap.add_argument("--judge-model", default=None, help="default: JUDGE_MODEL, else the configured LLM model")
+    ap.add_argument("--min-pass-rate", type=float, default=None, help="exit 1 when pass_rate is below this")
+    ap.add_argument("--min-faithfulness", type=float, default=None, help="exit 1 when the faithfulness mean is below this")
     args = ap.parse_args(argv)
 
     cases = load_cases(args.only)
     make = make_agent or default_agent_factory(args.model, args.style, False if args.no_stream else None)
+    judge = None
+    if args.judge:
+        from evals.judge import Judge
+        judge = Judge(model=args.judge_model)
     rows = []
     for case in cases:
         row = run_case(case, make)
+        if judge is not None and not row.get("error"):
+            row["judge"] = judge.judge(case, row["answer"])
         rows.append(row)
         flags = {k: row[k] for k in QUALITY_KEYS if k in row}
         extra = f"ERROR {row['error']}" if row.get("error") else \
             f"{row['latency_s']}s ttft={row['ttft_s']} calls={row['llm_calls']} tokens={row['tokens']}"
+        if "judge" in row:
+            flags["judge"] = {c: (row["judge"][c] or {}).get("score") for c in ("faithfulness", "language_match", "completeness")}
         print(f"{case['id']:<32} {flags}  {extra}")
 
     summary = summarize(rows)
@@ -161,6 +191,11 @@ def main(argv: list[str] | None = None, make_agent: Callable[[], Agent] | None =
     stamp = time.strftime("%Y%m%d-%H%M%S")
     (out_dir / f"run-{stamp}.json").write_text(json.dumps({"summary": summary, "rows": rows}, ensure_ascii=False, indent=2),
                                                encoding="utf-8")
+    failures = threshold_failures(summary, args.min_pass_rate, args.min_faithfulness)
+    for msg in failures:
+        print("THRESHOLD FAILED:", msg)
+    if failures:
+        sys.exit(1)
     return summary
 
 

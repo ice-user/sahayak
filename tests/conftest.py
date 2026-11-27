@@ -24,3 +24,19 @@ def _reset_stream_memory():
     _llm._NO_STREAM_MODELS.clear()
     yield
     _llm._NO_STREAM_MODELS.clear()
+
+
+def _symlinks_supported() -> bool:
+    """Creating symlinks needs a privilege on Windows (Developer Mode or admin); Linux/macOS always can."""
+    import tempfile
+    from pathlib import Path
+    with tempfile.TemporaryDirectory() as d:
+        try:
+            (Path(d) / "link").symlink_to(Path(d))
+            return True
+        except (OSError, NotImplementedError):
+            return False
+
+
+requires_symlinks = _pytest.mark.skipif(
+    not _symlinks_supported(), reason="cannot create symlinks here (Windows without Developer Mode/admin privilege)")

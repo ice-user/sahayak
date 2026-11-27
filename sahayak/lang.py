@@ -102,6 +102,48 @@ GUARD_FALLBACK_NO_SCHEMES = {
 }
 
 
+# Fallback follow-up: the facts the rule engine still needs, asked for by name. {facts} = comma-separated labels.
+GUARD_FALLBACK_ASK = {
+    "en": "To check the official rules for you, please tell me: {facts}?",
+    "hi": "आपके लिए आधिकारिक नियम जांचने के लिए कृपया बताइए: {facts}?",
+    "hinglish": "Aapke liye official rules check karne ke liye kripya bataiye: {facts}?",
+    "ta": "உங்களுக்கான அதிகாரப்பூர்வ விதிகளைச் சரிபார்க்க, தயவுசெய்து சொல்லுங்கள்: {facts}?",
+}
+# Profile field -> label per language (a field without a label is asked for by its English label).
+FIELD_LABELS = {
+    "age": {"en": "your age", "hi": "आपकी उम्र", "hinglish": "aapki umar", "ta": "உங்கள் வயது"},
+    "gender": {"en": "your gender", "hi": "आपका लिंग", "hinglish": "aapka gender", "ta": "உங்கள் பாலினம்"},
+    "bpl": {"en": "do you have a BPL card", "hi": "क्या आपके पास बीपीएल कार्ड है", "hinglish": "kya aapke paas BPL card hai",
+            "ta": "உங்களிடம் BPL அட்டை உள்ளதா"},
+    "marital_status": {"en": "your marital status", "hi": "आपकी वैवाहिक स्थिति", "hinglish": "aapki marital status",
+                       "ta": "உங்கள் திருமண நிலை"},
+    "annual_income": {"en": "your household income per year", "hi": "परिवार की सालाना आय",
+                      "hinglish": "parivaar ki saalana income", "ta": "குடும்ப ஆண்டு வருமானம்"},
+    "ever_income_tax_payer": {"en": "have you ever paid income tax", "hi": "क्या आपने कभी इनकम टैक्स भरा है",
+                              "hinglish": "kya aapne kabhi income tax bhara hai", "ta": "நீங்கள் எப்போதாவது வருமான வரி செலுத்தியுள்ளீர்களா"},
+    "income_tax_payer_last_year": {"en": "did you pay income tax last year", "hi": "क्या आपने पिछले साल इनकम टैक्स भरा",
+                                   "hinglish": "kya aapne pichhle saal income tax bhara",
+                                   "ta": "கடந்த ஆண்டு வருமான வரி செலுத்தினீர்களா"},
+    "has_bank_account": {"en": "do you have a bank account", "hi": "क्या आपका बैंक खाता है",
+                         "hinglish": "kya aapka bank account hai", "ta": "உங்களுக்கு வங்கிக் கணக்கு உள்ளதா"},
+    "owns_cultivable_land": {"en": "do you own farm land", "hi": "क्या आपके पास खेती की ज़मीन है",
+                             "hinglish": "kya aapke paas kheti ki zameen hai", "ta": "உங்களுக்கு விவசாய நிலம் உள்ளதா"},
+    "is_govt_employee": {"en": "are you a government employee", "hi": "क्या आप सरकारी कर्मचारी हैं",
+                         "hinglish": "kya aap sarkari karmchari hain", "ta": "நீங்கள் அரசு ஊழியரா"},
+    "monthly_pension": {"en": "your monthly pension, if any", "hi": "आपकी मासिक पेंशन, अगर है",
+                        "hinglish": "aapki monthly pension, agar hai", "ta": "உங்கள் மாத ஓய்வூதியம், இருந்தால்"},
+    "household_has_lpg": {"en": "does your home have an LPG connection", "hi": "क्या घर में गैस कनेक्शन है",
+                          "hinglish": "kya ghar mein gas connection hai", "ta": "வீட்டில் எரிவாயு இணைப்பு உள்ளதா"},
+    "pregnant_or_lactating": {"en": "are you pregnant or breastfeeding", "hi": "क्या आप गर्भवती या स्तनपान कराने वाली हैं",
+                              "hinglish": "kya aap pregnant ya breastfeeding hain", "ta": "நீங்கள் கர்ப்பமாகவோ பாலூட்டுபவரோ"},
+    "in_regular_govt_employment": {"en": "are you in regular government employment", "hi": "क्या आप नियमित सरकारी नौकरी में हैं",
+                                   "hinglish": "kya aap regular sarkari naukri mein hain", "ta": "நீங்கள் நிரந்தர அரசு வேலையில் உள்ளீர்களா"},
+    "children": {"en": "your children's ages and genders", "hi": "बच्चों की उम्र और लिंग",
+                 "hinglish": "bachchon ki umar aur gender", "ta": "குழந்தைகளின் வயது மற்றும் பாலினம்"},
+}
+MAX_FALLBACK_QUESTIONS = 3
+
+
 # Added to the system prompt on every turn (the agent re-detects the language each turn). Small models drift into
 # Devanagari for Latin-script Hindi, so the script is spelled out.
 REPLY_LANGUAGE_HINTS = {

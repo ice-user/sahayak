@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from .guard import hosts_of, neutralize_urls, violations
-from .lang import (EMPTY_ANSWER_MESSAGES, GUARD_FALLBACK_NO_SCHEMES, GUARD_FALLBACK_WITH_SCHEMES,
+from .lang import (EMPTY_ANSWER_MESSAGES, FIELD_LABELS, GUARD_FALLBACK_ASK, MAX_FALLBACK_QUESTIONS, GUARD_FALLBACK_NO_SCHEMES, GUARD_FALLBACK_WITH_SCHEMES,
                    MAX_STEPS_MESSAGES, detect_session_language, reply_language_hint)
 from .llm import RETRY_DELAYS, Reply, ThinkFilter, TurnCancelled, complete  # noqa: F401 (TurnCancelled re-exported)
 from .privacy import mask_pii
@@ -249,6 +249,7 @@ class Agent:
         self.extra_body = model_extra_body(self.model) if extra_body is None else (extra_body or None)
         self.retry_delays = retry_delays
         self.verdicts: dict[str, str] = {}
+        self.missing: dict[str, list[str]] = {}  # scheme_id -> facts the latest check_eligibility still needed
         self.source_hosts: set[str] = set()
         self._turn_starts: list[int] = []
         self._tool_cache: dict[str, str] = {}
@@ -340,12 +341,13 @@ class Agent:
 
     def _chat_core(self, user_message: str, on_event: EventHandler | None, cancelled: Callable[[], bool] | None,
                    trace: Trace, listening: bool | None = None) -> tuple[str, Trace]:
-        checkpoint = (len(self.messages), dict(self.verdicts), set(self.source_hosts), list(self._turn_starts))
+        checkpoint = (len(self.messages), dict(self.verdicts), set(self.source_hosts), list(self._turn_starts),
+                      dict(self.missing))
         self._cancelled = cancelled
         try:
             return self._run_turn(user_message, on_event, trace, on_event is not None if listening is None else listening)
         except BaseException:
-            n, self.verdicts, self.source_hosts, self._turn_starts = checkpoint
+            n, self.verdicts, self.source_hosts, self._turn_starts, self.missing = checkpoint
             del self.messages[n:]
             raise
         finally:
@@ -378,6 +380,7 @@ class Agent:
             for bucket in ("eligible", "need_info", "not_eligible"):
                 for item in parsed.get(bucket) or []:
                     self.verdicts[item["scheme_id"]] = bucket
+                    self.missing[item["scheme_id"]] = list(item.get("missing_fields") or []) if bucket == "need_info" else []
 
     def _make_sink(self, emit: EventHandler, trace: Trace, t_turn: float):
         """(on_text, finish) turning raw content deltas into `token` events: <think> blocks are removed, and if the
@@ -505,9 +508,22 @@ class Agent:
         """Safe answer that lists only schemes the rule engine confirmed for this conversation."""
         names = [self.tools.schemes[s].name for s, v in self.verdicts.items()
                  if v == "eligible" and s in self.tools.schemes]
-        if names:
-            return GUARD_FALLBACK_WITH_SCHEMES[lang].format(names="; ".join(names))
-        return GUARD_FALLBACK_NO_SCHEMES[lang]
+        base = GUARD_FALLBACK_WITH_SCHEMES[lang].format(names="; ".join(names)) if names else GUARD_FALLBACK_NO_SCHEMES[lang]
+        ask = self._missing_facts_question(lang)
+        return f"{base}\n\n{ask}" if ask else base
+
+    def _missing_facts_question(self, lang: str) -> str:
+        """Question naming the facts the rule engine still needs (most-needed first, at most 3); "" if none."""
+        counts: dict[str, int] = {}
+        for sid, verdict in self.verdicts.items():
+            if verdict == "need_info":
+                for f in self.missing.get(sid, []):
+                    counts[f] = counts.get(f, 0) + 1
+        top = sorted(counts, key=lambda f: -counts[f])[:MAX_FALLBACK_QUESTIONS]  # stable: ties keep tool order
+        if not top:
+            return ""
+        labels = [FIELD_LABELS.get(f, {}).get(lang) or FIELD_LABELS.get(f, {}).get("en") or f.replace("_", " ") for f in top]
+        return GUARD_FALLBACK_ASK[lang].format(facts=", ".join(labels))
 
     def _finish(self, trace: Trace, answer: str, emit: EventHandler, ephemeral: list[dict],
                 save: bool = True, **extra) -> tuple[str, Trace]:

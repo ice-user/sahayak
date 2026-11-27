@@ -36,3 +36,4 @@ web/tsconfig.tsbuildinfo
 Thumbs.db
 .idea/
 .vscode/
+.pytest_tmp/

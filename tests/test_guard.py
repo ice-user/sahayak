@@ -273,3 +273,18 @@ def test_max_tokens_is_passed_to_the_model():
     agent, client = make([text_msg("hi")])
     agent.chat("hello")
     assert "max_tokens" not in client.sent[0]
+
+
+def test_fallback_asks_for_the_facts_the_rule_engine_is_missing():
+    """Vague message: check_eligibility returns need_info; if the model's answer is rejected by the guard, the
+    safe fallback must still ask the user for the missing facts (not just say 'tell me about yourself')."""
+    bad = "You can get PM-KISAN, it pays 6000 a year."
+    agent, _ = make([tool_msg("check_eligibility", {"profile": {}}), text_msg(bad), text_msg(bad)])
+    answer, trace = agent.chat("I am a farmer. What can I get?")
+    assert guard_steps(trace)[-1]["action"] == "fallback"
+    assert "PM-KISAN" not in answer and "?" in answer
+    assert "your age" in answer                       # age is missing for most schemes: asked first
+    hi, _ = make([tool_msg("check_eligibility", {"profile": {}}), text_msg("आप PM-KISAN के लिए पात्र हैं।"),
+                  text_msg("आप PM-KISAN के लिए पात्र हैं।")])
+    answer_hi, _ = hi.chat("मैं किसान हूँ")
+    assert "आपकी उम्र" in answer_hi and "?" in answer_hi

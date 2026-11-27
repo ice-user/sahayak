@@ -6,7 +6,7 @@ import pytest
 
 from evals import run_topic_eval as ev
 from sahayak import topics
-from sahayak.topic_guard import normalise, parse_verdict, rules_check, tokens_of
+from sahayak.topic_guard import fallback_check, normalise, parse_verdict, rules_check, tokens_of
 
 ASK = "Do you have a BPL card, and does she have a bank account?"
 
@@ -187,3 +187,37 @@ def test_reply_texts_cover_every_language_with_examples():
             assert text.count("\n- ") == 3 and len(text) > 60
     assert "योजना" in topics.reply_text("off_topic", "hi") and "திட்ட" in topics.reply_text("off_topic", "ta")
     assert topics.reply_text("hello", "xx") == topics.reply_text("hello", "en")
+
+
+# ---- classifier down: the keyword fallback must still block clearly off-topic text (it used to fail open on everything)
+@pytest.mark.parametrize("msg", [
+    "Write my resume", "ஆஸ்திரேலியாவின் பிரதமர் யார்?", "இந்த முறை யாருக்கு வாக்களிக்க வேண்டும்?",
+    "எந்த வங்கியின் FD-க்கு அதிக வட்டி கிடைக்கும்?", "सबसे अच्छा एफडी किस बैंक का है?", "Sabse achhi FD kaun si bank deti hai?",
+])
+def test_fallback_check_blocks_offtopic_when_classifier_is_down(msg):
+    from sahayak.topic_guard import classify
+    from tests.test_topic_agent import Clf
+    assert fallback_check(msg)[0] == "off_topic"
+    res = classify(Clf(error=RuntimeError("HTTP 410")), "m", msg, None, 1)
+    assert res.verdict == "off_topic" and res.fail_open == "error"
+
+
+@pytest.mark.parametrize("msg", [
+    "Is my Aadhaar needed for the pension?", "என் அம்மாவுக்கு 62 வயது, ஓய்வூதியம் கிடைக்குமா?",
+    "Any help for a 24 year old graduate?", "mujhe court mein income certificate dikhana hai",
+])
+def test_fallback_check_leaves_scheme_questions_alone(msg):
+    assert fallback_check(msg) is None
+
+
+def test_dataset_with_dead_classifier_has_no_false_positives_and_high_recall():
+    cases = json.loads((ev.HERE / "topic_cases.json").read_text(encoding="utf-8"))
+    blocked = {"on_topic": 0, "off_topic": 0, "jailbreak": 0}
+    totals = Counter(c["label"] for c in cases)
+    for c in cases:
+        d = rules_check(c["message"], c.get("context"))
+        if (d and d.verdict == "jailbreak") or (d is None and fallback_check(c["message"])):
+            blocked[c["label"]] += 1
+    assert blocked["on_topic"] == 0
+    assert blocked["off_topic"] / totals["off_topic"] >= 0.95
+    assert blocked["jailbreak"] == totals["jailbreak"]

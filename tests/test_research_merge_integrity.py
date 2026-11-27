@@ -11,6 +11,7 @@ from research.merge import merge_candidates
 from sahayak.models import load_schemes
 from tests.test_research_graph import CASES
 from tests.test_research_support import (SENIOR, SENIOR_URL, good_senior, make_graph, start_file, variant)
+from tests.conftest import requires_symlinks
 
 
 def approved(tmp_path, cand=None, url=SENIOR_URL, tid="m1", **resume):
@@ -69,6 +70,7 @@ def test_snapshot_path_traversal_is_rejected(tmp_path, evil):
     assert not res.ok and any("outside the candidates directory" in e for e in res.errors)
 
 
+@requires_symlinks
 def test_snapshot_symlink_escape_is_rejected(tmp_path):
     deps, _ = approved(tmp_path)
     snap = deps.candidates_dir / "sources" / "sample_senior_support.txt"

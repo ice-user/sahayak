@@ -158,6 +158,10 @@ OFFTOPIC_CUES = (
     "nibandh", "kavita", "chutkula", "gaana", "chunav", "dawai", "dawa ", "rashifal", "mausam",
     "ரெசியூம்", "கட்டுரை", "கவிதை", "நகைச்சுவை", "பாடல்", "திரைப்படம்", "கிரிக்கெட்", "பங்குச்சந்தை", "பிட்காயின்",
     "கோடு", "சமையல்", "வாக்கு", "தேர்தல்", "மருந்து", "ஜாதகம்", "வானிலை",
+    # more of the same, so the keyword fallback (used when the classifier is down) covers finance, email, law, politics
+    "fd", "email", "e-mail", "landlord", "sue", "court", "pehle pm", "makaan malik", "kiraya",
+    "प्रधानमंत्री", "एफडी", "ईमेल", "कोर्ट", "आईपीएल", "वोट",
+    "பிரதமர்", "வாக்களி", "ஐபிஎல்", "வீட்டுப்பாட", "மின்னஞ்சல்", "வழக்கு", "நீதிமன்ற",
 )
 
 # --- jailbreak patterns (case-insensitive, applied to the normalised message) --------------------------------------
@@ -167,6 +171,7 @@ JAILBREAK_PATTERNS = (
     r"initial|original)\b.{0,25}\b(?:instructions?|rules?|guidelines?|prompts?|restrictions?|guardrails?|"
     r"programming|directives?|training)\b",
     r"\byou(?: are|'re| r) now (?:a|an|dan|my|the|no longer|free|unrestricted|in)\b",
+    r"\byour (?:only|new|real) (?:job|task|role|purpose)\b",
     r"\bfrom now on\b.{0,25}\b(?:you|act|behave|respond|reply|answer|ignore)\b",
     r"\bpretend (?:to be|that you|you are|you're)\b",
     r"\bact as (?:a |an |if )?(?:dan|unrestricted|unfiltered|jailbroken|evil|different|another)\b",
@@ -185,16 +190,19 @@ JAILBREAK_PATTERNS = (
     r"(?:निर्देश|इंस्ट्रक्शन|नियम)\S*.{0,20}(?:भूल जा|भूल जाओ|भूल जाइए|इग्नोर|नज़रअंदाज़|नजरअंदाज|अनदेखा)",
     r"(?:भूल जा\S*|इग्नोर कर\S*|अनदेखा कर\S*|नजरअंदाज कर\S*).{0,25}(?:निर्देश|इंस्ट्रक्शन|नियम)",
     r"सिस्टम\s*(?:प्रॉम्प्ट|प्रोम्प्ट|निर्देश)",
+    r"(?:गुप्त|छिपे|सीक्रेट)\s*(?:निर्देश|इंस्ट्रक्शन|नियम)",
     r"अब से तुम|अब से आप",
     # Hinglish
     r"\b(?:instructions?|nirdesh|niyam|rules)\s+(?:ko\s+)?(?:bhool|bhul|ignore|nazarandaz)",
     r"\b(?:bhool|bhul|ignore)\s*(?:ja\w*|kar\w*)?\s+(?:apne\s+|pichhle\s+|pichle\s+|saare\s+|sabhi\s+)*"
     r"(?:instructions?|nirdesh|niyam|rules)\b",
     r"\bab se tum\b|\bab tum ho\b",
+    r"\b(?:secret|hidden|gupt|chhupe)\s+(?:rules|instructions?|nirdesh|niyam)\b",
     # Tamil
     r"(?:அறிவுறுத்தல்|கட்டளை|வழிமுறை|விதி)\S*.{0,20}(?:புறக்கணி|மற(?:ந்து|ந்திடு|ந்துவிடு)|நிராகரி)",
     r"(?:புறக்கணி|மற(?:ந்துவிடு|ந்திடு))\S*.{0,25}(?:அறிவுறுத்தல்|கட்டளை|வழிமுறை)",
     r"சிஸ்டம்\s*(?:ப்ராம்ப்ட்|பிராம்ப்ட்|ப்ரோம்ப்ட்)",
+    r"ரகசிய\s*(?:விதி|கட்டளை|அறிவுறுத்தல்|வழிமுறை)",
     r"இனிமேல் (?:நீ|நீங்கள்)",
 )
 

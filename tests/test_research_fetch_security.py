@@ -10,6 +10,7 @@ import pytest
 from research import fetch as F
 from research.fetch import FetchError, fetch, fetch_file, fetch_url
 from tests.test_research_support import SENIOR
+from tests.conftest import requires_symlinks
 
 PAGE = ("<html><body><main><h1>Sample page</h1><p>" + "The applicant must be 60 years of age or above. " * 4
         + "</p></main></body></html>").encode()
@@ -201,6 +202,7 @@ def test_plain_fetch_never_reads_local_paths():
             fetch(src)
 
 
+@requires_symlinks
 def test_fetch_file_only_inside_allowed_directories(tmp_path):
     ok = tmp_path / "ok.txt"
     ok.write_text("Applicant must be 60 years of age or above. " * 3)

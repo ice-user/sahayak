@@ -5,7 +5,9 @@ Layers, cheapest first (scope itself lives in sahayak/topics.py):
   1. rules_check()   no LLM. greeting/thanks -> canned reply; obvious jailbreak -> redirect; scheme keywords,
                      questions about Sahayak, short follow-ups in an ongoing chat -> allow. Anything else: None
                      ("unsure"). The rules layer NEVER says off_topic: a weak keyword miss must not block anyone.
-  2. classify()      small LLM call, only when the rules are unsure. Fail open: timeout / error / garbage -> on_topic.
+  2. classify()      small LLM call, only when the rules are unsure. If it cannot answer (timeout / error / garbage)
+                     the keyword fallback_check() decides: a message with an unmistakable off-topic cue (resume, joke,
+                     IPL, bitcoin, vote ...) is off_topic, everything else fails open -> on_topic.
   3. the main system prompt carries the scope too (sahayak/topics.py:scope_prompt_section).
 
 Mode (env TOPIC_GUARD): "off" | "prompt" (layers 1 and 3) | "classifier" (default, layers 1-3).
@@ -127,6 +129,29 @@ def looks_like_jailbreak(text: str) -> bool:
     return any(p.search(norm) for p in _JAILBREAK)
 
 
+def _cue_pattern(words: tuple[str, ...]) -> re.Pattern:
+    alt = "|".join(sorted((re.escape(w.strip()) for w in words), key=len, reverse=True))
+    return re.compile(rf"(?<![a-z0-9])(?:{alt})(?![a-z0-9])")
+
+
+_LATIN_CUES = _cue_pattern(tuple(w for w in topics.OFFTOPIC_CUES if w.isascii()))
+
+
+def has_offtopic_cue(text: str) -> bool:
+    norm = normalise(text)
+    return bool(_LATIN_CUES.search(norm)) or any(c in norm for c in topics.OFFTOPIC_CUES if not c.isascii())
+
+
+def fallback_check(message: str) -> tuple[str, str] | None:
+    """Used only when the classifier could not answer and the rules were unsure: (verdict, reason) for a message
+    that is clearly off-topic by vocabulary (and mentions no scheme keyword), else None (fail open)."""
+    if has_scheme_keyword(message):
+        return None
+    if has_offtopic_cue(message):
+        return "off_topic", "off-topic keyword (classifier unavailable)"
+    return None
+
+
 def _greeting_kind(toks: list[str]) -> str:
     """"hello" / "thanks" when every token is greeting vocabulary and at least one is a real greeting, else ""."""
     if not toks or len(toks) > 6:
@@ -208,6 +233,13 @@ def build_classifier_messages(message: str, last_assistant: str | None) -> list[
     return [{"role": "system", "content": topics.classifier_system_prompt()}, {"role": "user", "content": user}]
 
 
+def _fail_open(reason: str, latency: float, why: str, message: str) -> TopicResult:
+    guess = fallback_check(message)
+    if guess:
+        return TopicResult(guess[0], "classifier", guess[1], latency, why)
+    return TopicResult("on_topic", "classifier", reason, latency, why)
+
+
 def classify(client: Any, model: str, message: str, last_assistant: str | None,
              timeout_s: float = DEFAULT_TIMEOUT_S) -> TopicResult:
     """One small LLM call. Never raises and never takes longer than `timeout_s`: timeout, provider error and an
@@ -234,18 +266,17 @@ def classify(client: Any, model: str, message: str, last_assistant: str | None,
     latency = round(time.monotonic() - started, 3)
     if worker.is_alive():
         log.warning("topic classifier timed out after %.1fs; allowing", timeout_s)
-        return TopicResult("on_topic", "classifier", "classifier timed out", latency, "timeout")
+        return _fail_open("classifier timed out", latency, "timeout", message)
     if "error" in box:
         status = getattr(box["error"], "status_code", None)
         log.warning("topic classifier failed (%s%s); allowing%s", type(box["error"]).__name__,
                     f" {status}" if status else "",
                     " - model unavailable to this key or wrong name? set TOPIC_GUARD_MODEL" if status in (404, 410) else "")
-        return TopicResult("on_topic", "classifier", f"classifier error: {type(box['error']).__name__}", latency,
-                           "error")
+        return _fail_open(f"classifier error: {type(box['error']).__name__}", latency, "error", message)
     parsed = parse_verdict(box.get("raw", ""))
     if parsed is None:
         log.warning("topic classifier reply not parseable; allowing")
-        return TopicResult("on_topic", "classifier", "unparseable classifier reply", latency, "unparseable")
+        return _fail_open("unparseable classifier reply", latency, "unparseable", message)
     return TopicResult(parsed[0], "classifier", parsed[1], latency)
 
 
