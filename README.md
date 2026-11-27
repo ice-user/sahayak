@@ -1,15 +1,57 @@
-# Sahayak: a multilingual agent for Indian government schemes
+<div align="center">
+
+# Sahayak
+
+**Multilingual AI agent for Indian government schemes**
+
+सहायक
 
 **A chat agent that tells people which government schemes they qualify for, in Hindi, Tamil, Hinglish or English, with eligibility decided by tested Python rules instead of the LLM.**
 
-[![CI](https://github.com/<owner>/<repo>/actions/workflows/ci.yml/badge.svg)](https://github.com/<owner>/<repo>/actions/workflows/ci.yml) · Live demo: <!-- TODO: live demo URL --> *(not published yet; see [DEPLOY.md](DEPLOY.md))* · [API docs](docs/API.md) · [Research agent](research/README.md)
+[![CI](https://github.com/ice-user/sahayak/actions/workflows/ci.yml/badge.svg)](https://github.com/ice-user/sahayak/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square)
+![MCP](https://img.shields.io/badge/MCP-server-5A4FCF?style=flat-square)
+![Languages](https://img.shields.io/badge/languages-EN%20%7C%20HI%20%7C%20TA%20%7C%20Hinglish-E8590C?style=flat-square)
+
+<!-- TODO: live demo URL -->
+Live demo *(coming soon; see [DEPLOY.md](DEPLOY.md))* · [Architecture](#architecture) · [Results](#-results) · [Quick start](#quick-start-with-your-nvidia-key-windows-powershell) · [API docs](docs/API.md) · [Research agent](research/README.md)
 
 <p align="center">
   <img src="web/screenshots/chat-desktop-top.png" alt="Sahayak chat answering an eligibility question with scheme result cards" width="48%">
   <img src="web/screenshots/chat-hindi-desktop-top.png" alt="The same chat in Hindi" width="48%">
 </p>
 
-### Highlights
+</div>
+
+<details>
+<summary><b>More screenshots</b></summary>
+<br>
+
+| Mobile chat | "Why this answer?" trace | Scheme detail |
+|:---:|:---:|:---:|
+| <img src="web/screenshots/chat-mobile-top.png" alt="Chat on mobile" width="240"> | <img src="web/screenshots/trace-mobile.png" alt="Why this answer? trace view on mobile" width="240"> | <img src="web/screenshots/scheme-detail-mobile.png" alt="Scheme detail on mobile" width="240"> |
+
+| Schemes list | Hindi home |
+|:---:|:---:|
+| <img src="web/screenshots/schemes-desktop.png" alt="Schemes list on desktop" width="400"> | <img src="web/screenshots/home-hindi-desktop.png" alt="Hindi home page on desktop" width="400"> |
+
+</details>
+
+## Contents
+
+- [Highlights](#-highlights) · [Approach and what's novel](#-approach-and-whats-novel) · [Metrics we track](#-metrics-we-track)
+- [Results](#-results) · [Limitations and roadmap](#-limitations-and-roadmap)
+- [How a question flows](#how-a-question-flows) · [Why eligibility is decided in code](#why-eligibility-is-decided-in-code)
+- [Architecture](#architecture) · [Tech stack](#tech-stack)
+- [Run the full app locally](#run-the-full-app-locally) · [Deploy](#deploy) · [Grow the scheme database](#grow-the-scheme-database-research-agent)
+- [Quick start (NVIDIA)](#quick-start-with-your-nvidia-key-windows-powershell) · [Other providers](#quick-start-with-other-providers-windows-powershell)
+- [Layout](#layout) · [Latency](#latency) · [Staying on topic](#staying-on-topic) · [Evals](#evals) · [MCP server](#mcp-server)
+- [Schemes covered](#schemes-covered-central-share-only) · [Distillation data](#distillation-data-for-the-planned-lora-student-model)
+
+## ✨ Highlights
 
 - **The LLM never decides eligibility.** A deterministic three-verdict rule engine (`eligible` / `not_eligible` / `need_info`) does; a runtime guard blocks any answer that offers a scheme the engine did not confirm. Evidence: 0 false eligibility claims in the agent eval; an empty profile is tested to never be `eligible`.
 - **Multilingual hybrid retrieval.** Multilingual embeddings fused with BM25 (Reciprocal Rank Fusion). Evidence: on non-English queries, dense hit@1 is 0.88 vs 0.12 for BM25 alone.
@@ -18,7 +60,37 @@
 - **Stays on topic.** A rules layer plus an LLM classifier redirect off-topic and jailbreak messages; the rules fallback alone is measured on 205 cases (below).
 - **Production plumbing.** SSE streaming, an MCP server exposing the same tools, rate limiting, CI on every push, Docker + Render for the API, Vercel for the web app.
 
-### Results
+## 🧠 Approach and what's novel
+
+- **LLM as fact-collector, code as decider.** The model only extracts facts and explains results; `sahayak/rules.py` returns one of three verdicts (`eligible`, `not_eligible`, `need_info`), and a missing fact is never treated as true or false.
+- **Runtime guard.** `sahayak/guard.py` checks every final answer against the rule verdicts and blocks any scheme offered as available that the engine did not confirm: one corrective retry, then a safe fallback listing only verified schemes.
+- **Quote-grounded extraction.** In the research pipeline every rule carries a verbatim quote from the official source and numbers are compared exactly (`research/verifier.py`); an independent auditor agent hunts for misreadings and a human approves before anything is merged.
+- **PII masking before the provider.** `sahayak/privacy.py` masks Aadhaar, PAN and phone numbers before a message reaches the LLM.
+- **Multilingual hybrid retrieval.** `sahayak/hybrid.py` fuses multilingual embeddings with BM25 using Reciprocal Rank Fusion, falling back to BM25 alone.
+
+## 📏 Metrics we track
+
+| Metric | Definition | Where measured |
+|---|---|---|
+| `used_tool` (tool use) | the agent called the expected tool (usually `check_eligibility`) | `evals/run_agent_evals.py` |
+| `recall` | share of expected-eligible schemes the answer mentions | `evals/run_agent_evals.py` |
+| `no_false_claim` | none of the case's `expect_not_claimed` schemes is named as available | `evals/run_agent_evals.py` |
+| `asked_followup` | for vague questions, the answer asks a question | `evals/run_agent_evals.py` |
+| `pass_rate` | share of non-error cases where every quality check present passed (`recall` must be 1.0) | `evals/run_agent_evals.py` |
+| p50 / p90 latency | per-answer latency percentiles, errors excluded | `evals/bench_latency.py` |
+| TTFT | p50 time to first streamed token | `evals/bench_latency.py` |
+| LLM calls / tokens per turn | mean LLM round trips and tokens per turn | `evals/bench_latency.py` |
+| hit@1 / hit@3 / MRR | correct scheme ranked first / in the top 3 / mean reciprocal rank, overall and for non-English queries | `evals/run_retrieval_eval.py` |
+| on-topic FP rate | on-topic messages that were not answered (redirected or given a canned greeting); target <= 2% | `evals/run_topic_eval.py` |
+| off-topic recall | off-topic messages that were redirected | `evals/run_topic_eval.py` |
+| jailbreak recall | jailbreak messages that were redirected | `evals/run_topic_eval.py` |
+| judge faithfulness / language / completeness | LLM-as-judge scores, 1-5 each, after deterministic checks (unsupported rupee amounts, script match) that can cap them | `evals/judge.py` (run with `run_agent_evals.py --judge`) |
+
+### Research experiment (in progress)
+
+A paper-based experiment and its results will be added here.
+
+## 📊 Results
 
 | Area | Result |
 |---|---|
@@ -26,9 +98,11 @@
 | Agent eval (NVIDIA Nemotron, 10 cases, 2026-11-27) | tool use 100%, recall 100%, no false eligibility claims 100%; p50 latency 3.8 s, p50 time-to-first-token 1.3 s, about 2.2 LLM calls per turn. Latency was cut from about 53 s by reducing round trips |
 | Retrieval (20 queries) | hybrid hit@1 0.90, MRR 0.94; non-English hit@1: dense 0.88 vs BM25 0.12 |
 | Topic guard, classifier down (rules fallback, 205 cases) | 0 on-topic false positives, off-topic recall 59/60, jailbreak recall 16/16 |
-| Eval suite | 46 agent cases (en 22 / hi 10 / ta 7 / Hinglish 7) checked offline against the rule engine, plus an LLM-as-judge (faithfulness / language / completeness) that runs weekly in CI. **The judge and the 46-case set have not had a live run yet**; the agent numbers above are from the earlier 10-case run |
+| Eval suite | 46 agent cases (en 22 / hi 10 / ta 7 / Hinglish 7) checked offline against the rule engine, plus an LLM-as-judge (faithfulness / language / completeness) that runs weekly in CI |
 
-### Limitations and roadmap
+> **Honest note:** the judge and the 46-case set have not had a live run yet; the agent numbers above are from the earlier 10-case run.
+
+## 🚧 Limitations and roadmap
 
 - The database covers 10 central schemes; it is meant to grow through the research pipeline (state schemes are not modelled yet).
 - The LoRA distillation student is planned, not built. The teacher-data pipeline exists; no model has been trained.
@@ -37,14 +111,16 @@
 
 The full detail is below.
 
-## What it does
+## How a question flows
 
 Ask in Hindi, Tamil, Hinglish or English, for example *"My mother is 62, a widow, BPL card holder. What can she get?"*, and Sahayak:
 
-1. pulls the facts out of the question and asks follow-up questions when something is missing
-2. searches a scheme database
-3. **decides eligibility in plain Python rules, never with the LLM**
-4. replies in the user's language with benefits, documents, how to apply and the official source
+1. masks Aadhaar, PAN and phone numbers, and the topic guard redirects anything that is not about schemes
+2. pulls the facts out of the question and asks follow-up questions when something is missing
+3. searches a scheme database
+4. **decides eligibility in plain Python rules, never with the LLM**
+5. the runtime guard checks the final answer and blocks any scheme the rule engine did not confirm
+6. replies in the user's language with benefits, documents, how to apply and the official source
 
 ## Why eligibility is decided in code
 
@@ -62,6 +138,28 @@ Two more safety layers sit on top: a **runtime guard** (`sahayak/guard.py`) chec
 
 ## Architecture
 
+```mermaid
+flowchart LR
+    web["web (Next.js)"] -->|SSE| server["server (FastAPI: sessions, rate limit)"]
+    server --> pre["topic guard + PII masking"]
+    pre --> agent["agent loop (any OpenAI-compatible LLM)"]
+    agent --> rg["runtime guard"]
+    rg --> server
+    agent --> tools["tools: search, eligibility rules, scheme details"]
+    tools --> data[("data/schemes.json")]
+
+    subgraph research["research pipeline (LangGraph)"]
+        direction LR
+        fetch[fetch] --> extract[extract] --> verify["verify quotes"] --> validate[validate] --> auditor[auditor] --> review["human review"] --> merge[merge]
+    end
+    merge --> data
+
+    datagen["datagen: dummy users, teacher agent, grader"] -.->|planned| student["LoRA student (planned)"]
+```
+
+<details>
+<summary>Text version of the diagram</summary>
+
 ```
  web/ (Next.js)  ──SSE──▶  server/ (FastAPI)  ──▶  sahayak/ agent loop ──tools──▶ search · eligibility rules · scheme details
    chat, scheme cards,        sessions, rate limit,       any OpenAI-compatible LLM            data/schemes.json
@@ -71,6 +169,8 @@ Two more safety layers sit on top: a **runtime guard** (`sahayak/guard.py`) chec
  sahayak/datagen: dummy users ─▶ teacher agent ─▶ grader ─▶ train.jsonl ─▶ LoRA student (planned)
 ```
 
+</details>
+
 | Part | What it does | Docs |
 |---|---|---|
 | `sahayak/` | the chat agent: tool-calling loop, three tools, rule engine, search, MCP server | this file |
@@ -78,6 +178,20 @@ Two more safety layers sit on top: a **runtime guard** (`sahayak/guard.py`) chec
 | `web/` | the app people use: mobile-first, four languages, result cards, "Why this answer?" | `web/README.md` |
 | `research/` | multi-agent LangGraph pipeline: an extractor turns official scheme pages into records with a verbatim quote for every rule (numbers compared exactly), an independent auditor agent hunts for misreadings, and a human approves before anything is merged | `research/README.md`, `research/GRAPH.md` |
 | `sahayak/datagen/` | dummy users and a grader that produce distillation data for the planned LoRA student | below |
+
+## Tech stack
+
+| Layer | Tech |
+|---|---|
+| Agent | Python 3.12, `openai` SDK against any OpenAI-compatible API (NVIDIA, Gemini, Groq, Ollama), Pydantic |
+| Retrieval | BM25 + `fastembed` multilingual embeddings (ONNX, CPU), Reciprocal Rank Fusion, NumPy |
+| API | FastAPI, Uvicorn, Server-Sent Events |
+| Research agent | LangGraph (SQLite checkpoints), httpx, BeautifulSoup, pypdf, RapidFuzz, Rich |
+| Tool protocol | MCP server (`mcp`) |
+| Web | Next.js 16, React 19, TypeScript, Tailwind CSS 4, Radix UI, react-markdown |
+| Debug UI | Streamlit |
+| Tests | pytest, Vitest, Testing Library |
+| Deploy / CI | Docker, Render (API), Vercel (web), GitHub Actions |
 
 ## Run the full app locally
 
@@ -329,7 +443,7 @@ python -m sahayak.datagen run --teacher api --workers 4                         
 
 **How much data:** about 300–500 passing conversations teach the format; **1,500–3,000 is the target**; beyond about 5,000 adds little for a task this narrow. Conversations average about 8,600 characters (roughly 2.5–3k tokens), so train with `max_length` 4096.
 
-## Known limitations
+## More on limitations
 
 - Central schemes only; state schemes and state top-ups aren't modelled yet.
 - Some criteria can't be checked from a chat (e.g. whether a household is on the state BPL list, PM-JAY's SECC criteria for under-70s). These appear as caveats rather than rules.
@@ -343,3 +457,7 @@ python -m sahayak.datagen run --teacher api --workers 4                         
 4. Add Profile fields many schemes need (caste category, disability, student, occupation) and grow to 50+ schemes with the research agent
 5. Deploy (Vercel + Render), add tracing, then a Telegram/WhatsApp front end; get real users
 6. **Agent distillation (planned, not built):** generate teacher data, LoRA-fine-tune a 1.5B model on Kaggle, compare on the held-out dummy users, run it locally with OpenVINO
+
+---
+
+Built by [@ice-user](https://github.com/ice-user)
