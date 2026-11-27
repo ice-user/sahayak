@@ -141,7 +141,6 @@ FIELD_LABELS = {
     "children": {"en": "your children's ages and genders", "hi": "बच्चों की उम्र और लिंग",
                  "hinglish": "bachchon ki umar aur gender", "ta": "குழந்தைகளின் வயது மற்றும் பாலினம்"},
 }
-MAX_FALLBACK_QUESTIONS = 3
 
 
 # Added to the system prompt on every turn (the agent re-detects the language each turn). Small models drift into

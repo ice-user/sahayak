@@ -16,8 +16,7 @@
 ![MCP](https://img.shields.io/badge/MCP-server-5A4FCF?style=flat-square)
 ![Languages](https://img.shields.io/badge/languages-EN%20%7C%20HI%20%7C%20TA%20%7C%20Hinglish-E8590C?style=flat-square)
 
-<!-- TODO: live demo URL -->
-Live demo *(coming soon; see [DEPLOY.md](DEPLOY.md))* · [Architecture](#architecture) · [Results](#-results) · [Quick start](#quick-start-with-your-nvidia-key-windows-powershell) · [API docs](docs/API.md) · [Research agent](research/README.md)
+**[▶ Live demo](https://web-one-theta-z4hq0kdc3d.vercel.app)** (free tier: the first reply after idle can take ~50 s) · [Architecture](#architecture) · [Results](#-results) · [Quick start](#quick-start-with-your-nvidia-key-windows-powershell) · [API docs](docs/API.md) · [Research agent](research/README.md)
 
 <p align="center">
   <img src="web/screenshots/chat-desktop-top.png" alt="Sahayak chat answering an eligibility question with scheme result cards" width="48%">
@@ -57,6 +56,8 @@ Live demo *(coming soon; see [DEPLOY.md](DEPLOY.md))* · [Architecture](#archite
 - **Multilingual hybrid retrieval.** Multilingual embeddings fused with BM25 (Reciprocal Rank Fusion). Evidence: on non-English queries, dense hit@1 is 0.88 vs 0.12 for BM25 alone.
 - **Research pipeline with an auditor and a human.** A LangGraph pipeline extracts scheme records with a verbatim quote per rule, an independent auditor agent looks for misreadings, and nothing is merged without human approval.
 - **PII masking.** Aadhaar, PAN and phone numbers are masked before a message reaches the LLM provider.
+- **From "you qualify" to "here is what to do".** `sahayak/planner.py` + `/api/plan` turn several schemes into one plan: a merged document checklist ("any one of" groups collapsed), online vs in-person routes with the easier one recommended, office visits grouped into as few trips as possible, and personalised "be careful" warnings. Every step, document and warning carries a verbatim quote from the official page, checked by code (`research/application_check.py`).
+- **Safe with vulnerable users.** `sahayak/vulnerability.py` spots hardship (homeless, elderly alone, abuse, self-harm) in four languages. The reply acknowledges it, asks at most two questions (ranked in code by how many schemes each fact unlocks), skips irrelevant ones, and adds verified helplines (`data/help_resources.json`, each checked against an official gov.in page). A self-harm message gets a fixed reply that leads with Tele-MANAS 14416 and 112.
 - **Stays on topic.** A rules layer plus an LLM classifier redirect off-topic and jailbreak messages; the rules fallback alone is measured on 205 cases (below).
 - **Production plumbing.** SSE streaming, an MCP server exposing the same tools, rate limiting, CI on every push, Docker + Render for the API, Vercel for the web app.
 
@@ -315,6 +316,8 @@ sahayak/tools.py           the 3 agent tools + JSON schemas; tools never raise, 
 sahayak/agent.py           tool-calling loop, step limit, per-turn trace (latency, tokens, tool calls)
 sahayak/topics.py          topical scope as data + localized redirect / greeting texts + scope prompts
 sahayak/topic_guard.py     topic guard: rules layer, LLM classifier, parallel TopicGate (see "Staying on topic")
+sahayak/vulnerability.py   hardship detector (en/hi/Hinglish/ta): picks verified help lines, skips irrelevant questions, crisis reply
+data/help_resources.json   112, Elderline 14567, Tele-MANAS 14416, 181, 1098, urban shelters: each checked against an official gov.in page
 sahayak/cli.py             terminal chat
 sahayak/datagen/           dummy users, simulated user, grader, data generation runner
 sahayak/check_llm.py       checks the configured model is reachable and supports tool calling

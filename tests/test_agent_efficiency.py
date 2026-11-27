@@ -66,7 +66,7 @@ def test_prompt_says_check_first_and_not_to_use_details_for_checked_schemes():
 def test_brief_prompt_vs_full_prompt():
     brief, full = build_system_prompt("brief"), build_system_prompt("full")
     assert "120 words" in brief and "one line per eligible scheme" in brief.lower()
-    assert "at most 3 short follow-up questions" in brief and "cards" in brief and "do NOT list them" in brief
+    assert "at most 2 short follow-up questions" in brief and "cards" in brief and "do NOT list them" in brief
     assert "120 words" not in full and "key documents, how to apply" in full
 
 

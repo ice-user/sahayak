@@ -38,7 +38,10 @@ def _host(url: str) -> str:
 
 
 def host_allowed(host: str, extra_hosts: set[str] | frozenset[str] = frozenset()) -> bool:
-    return any(host == d or host.endswith("." + d) for d in (*ALLOWED_DOMAINS, *extra_hosts))
+    """Official domains, hosts the tools returned as a source_url, and the hosts of the curated help resources
+    (data/help_resources.json, each verified against an official page)."""
+    from .vulnerability import help_hosts  # late import: keeps guard importable on its own
+    return any(host == d or host.endswith("." + d) for d in (*ALLOWED_DOMAINS, *extra_hosts, *help_hosts()))
 
 
 def neutralize_urls(text: str, extra_hosts: set[str] | frozenset[str] = frozenset()) -> str:

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { SendHorizontal, Square } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/components/lang-provider";
+import { VoiceButton } from "./voice-button";
 
 interface Props {
   busy: boolean;
@@ -14,6 +15,7 @@ interface Props {
 export function Composer({ busy, onSend, onStop }: Props) {
   const { t } = useLang();
   const [value, setValue] = useState("");
+  const [voiceNote, setVoiceNote] = useState("");
   const ref = useRef<HTMLTextAreaElement>(null);
   const wasBusy = useRef(false);
 
@@ -36,6 +38,7 @@ export function Composer({ busy, onSend, onStop }: Props) {
   };
 
   return (
+    <>
     <form
       onSubmit={(e) => {
         e.preventDefault();
@@ -63,6 +66,7 @@ export function Composer({ busy, onSend, onStop }: Props) {
         }}
         className="max-h-[150px] min-h-11 flex-1 resize-none self-center bg-transparent px-3 py-2 text-[1.05rem] leading-snug text-ink outline-none focus-visible:outline-none placeholder:text-ink-soft/70 disabled:opacity-60"
       />
+      {!busy && <VoiceButton onTranscript={(txt) => { setValue(txt); setVoiceNote(""); }} onStatus={setVoiceNote} />}
       {busy ? (
         <Button type="button" variant="outline" size="icon" onClick={onStop} aria-label={t.chat.stop}>
           <Square className="!size-4 fill-current" aria-hidden="true" />
@@ -74,5 +78,7 @@ export function Composer({ busy, onSend, onStop }: Props) {
         </Button>
       )}
     </form>
+    <p role="status" className={voiceNote ? "px-3 pt-1 text-sm font-medium text-ink-soft" : "sr-only"}>{voiceNote}</p>
+    </>
   );
 }

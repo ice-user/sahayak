@@ -159,6 +159,46 @@ html[data-lang="ta"] .display {
 .lamp-dot:nth-child(2) { animation-delay: 0.15s; }
 .lamp-dot:nth-child(3) { animation-delay: 0.3s; }
 
+/* Smooth expand/collapse for Radix Collapsible (height comes from Radix). */
+@keyframes expand {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-collapsible-content-height); opacity: 1; }
+}
+@keyframes collapse {
+  from { height: var(--radix-collapsible-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+.collapsible-content[data-state="open"] { animation: expand 0.24s ease-out; }
+.collapsible-content[data-state="closed"] { animation: collapse 0.2s ease-in; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.skeleton { animation: pulse-soft 1.4s ease-in-out infinite; }
+
+/* Blinking cursor shown while an answer is still streaming. */
+@keyframes caret {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+.stream-caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  border-radius: 2px;
+  background: var(--color-marigold);
+  animation: caret 1s steps(1) infinite;
+}
+
+/* Progress ring: the stroke animates with a CSS transition (reduced-motion rule below shortens it). */
+.ring-progress {
+  transition: stroke-dashoffset 0.6s ease-out;
+}
+
 details > summary {
   list-style: none;
 }
@@ -173,4 +213,18 @@ details > summary::-webkit-details-marker {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Print / Save PDF: only the plan, in plain black on white. */
+.print-only { display: none; }
+@media print {
+  @page { margin: 14mm; }
+  html { font-size: 14px; }
+  body { background: #fff !important; color: #000 !important; }
+  header, footer, .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .print-avoid-break { break-inside: avoid; }
+  .plan-card { box-shadow: none !important; border: 1px solid #999 !important; background: #fff !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; word-break: break-all; }
+  .skeleton, .stream-caret::after { animation: none !important; }
 }

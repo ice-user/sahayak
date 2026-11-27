@@ -1,0 +1,477 @@
+{
+  "aadhaar": {
+    "name": {
+      "en": "Aadhaar card",
+      "hi": "आधार कार्ड",
+      "ta": "ஆதார் அட்டை",
+      "hinglish": "Aadhaar card"
+    },
+    "aliases": [
+      "aadhaar",
+      "aadhar",
+      "adhaar",
+      "aadhaar card",
+      "aadhar card",
+      "aadhaar number",
+      "aadhar number"
+    ],
+    "how_to_get": null
+  },
+  "ration_card": {
+    "name": {
+      "en": "Ration card",
+      "hi": "राशन कार्ड",
+      "ta": "குடும்ப அட்டை",
+      "hinglish": "Ration card"
+    },
+    "aliases": [
+      "ration card",
+      "ration-card"
+    ],
+    "how_to_get": null
+  },
+  "bpl_card": {
+    "name": {
+      "en": "BPL card",
+      "hi": "बीपीएल कार्ड",
+      "ta": "வறுமைக்கோட்டுக்கு கீழ் அட்டை",
+      "hinglish": "BPL card"
+    },
+    "aliases": [
+      "bpl card",
+      "bpl certificate",
+      "below poverty line card"
+    ],
+    "how_to_get": null
+  },
+  "income_certificate": {
+    "name": {
+      "en": "Income certificate",
+      "hi": "आय प्रमाण पत्र",
+      "ta": "வருமானச் சான்றிதழ்",
+      "hinglish": "Income certificate"
+    },
+    "aliases": [
+      "income certificate",
+      "income proof",
+      "income declaration"
+    ],
+    "how_to_get": null
+  },
+  "caste_certificate": {
+    "name": {
+      "en": "Caste certificate",
+      "hi": "जाति प्रमाण पत्र",
+      "ta": "சாதிச் சான்றிதழ்",
+      "hinglish": "Caste certificate"
+    },
+    "aliases": [
+      "caste certificate",
+      "sc/st certificate",
+      "community certificate"
+    ],
+    "how_to_get": null
+  },
+  "domicile_certificate": {
+    "name": {
+      "en": "Domicile certificate",
+      "hi": "निवास प्रमाण पत्र",
+      "ta": "இருப்பிடச் சான்றிதழ்",
+      "hinglish": "Domicile / niwas praman patra"
+    },
+    "aliases": [
+      "domicile certificate",
+      "domicile",
+      "residence certificate"
+    ],
+    "how_to_get": null
+  },
+  "residence_proof": {
+    "name": {
+      "en": "Proof of address",
+      "hi": "पते का प्रमाण",
+      "ta": "முகவரிச் சான்று",
+      "hinglish": "Address proof"
+    },
+    "aliases": [
+      "proof of address",
+      "address proof",
+      "residential proof",
+      "proof of residence",
+      "residence proof"
+    ],
+    "how_to_get": null
+  },
+  "bank_passbook": {
+    "name": {
+      "en": "Bank passbook / account details",
+      "hi": "बैंक पासबुक / खाता विवरण",
+      "ta": "வங்கி கணக்குப் புத்தகம் / விவரங்கள்",
+      "hinglish": "Bank passbook / account details"
+    },
+    "aliases": [
+      "bank passbook",
+      "passbook",
+      "bank account number",
+      "bank details",
+      "bank account details",
+      "bank account",
+      "ifsc"
+    ],
+    "how_to_get": null
+  },
+  "savings_account": {
+    "name": {
+      "en": "Savings bank account",
+      "hi": "बचत बैंक खाता",
+      "ta": "சேமிப்புக் கணக்கு",
+      "hinglish": "Savings bank account"
+    },
+    "aliases": [
+      "savings bank account",
+      "savings account",
+      "post office savings account"
+    ],
+    "how_to_get": null
+  },
+  "passport_photo": {
+    "name": {
+      "en": "Passport-size photograph",
+      "hi": "पासपोर्ट साइज़ फोटो",
+      "ta": "பாஸ்போர்ட் அளவு புகைப்படம்",
+      "hinglish": "Passport size photo"
+    },
+    "aliases": [
+      "passport size photograph",
+      "passport size photo",
+      "passport-size photograph",
+      "photograph",
+      "photo"
+    ],
+    "how_to_get": null
+  },
+  "photo_id": {
+    "name": {
+      "en": "Photo ID",
+      "hi": "फोटो पहचान पत्र",
+      "ta": "புகைப்பட அடையாள அட்டை",
+      "hinglish": "Photo ID"
+    },
+    "aliases": [
+      "valid photo id",
+      "photo id",
+      "photo identity"
+    ],
+    "how_to_get": null
+  },
+  "voter_id": {
+    "name": {
+      "en": "Voter ID (EPIC)",
+      "hi": "मतदाता पहचान पत्र",
+      "ta": "வாக்காளர் அடையாள அட்டை",
+      "hinglish": "Voter ID card"
+    },
+    "aliases": [
+      "voter card",
+      "voter id",
+      "epic",
+      "election card"
+    ],
+    "how_to_get": null
+  },
+  "electricity_bill": {
+    "name": {
+      "en": "Electricity bill",
+      "hi": "बिजली का बिल",
+      "ta": "மின்சாரக் கட்டண ரசீது",
+      "hinglish": "Bijli bill"
+    },
+    "aliases": [
+      "electricity bill"
+    ],
+    "how_to_get": null
+  },
+  "age_proof": {
+    "name": {
+      "en": "Age proof",
+      "hi": "आयु प्रमाण",
+      "ta": "வயதுச் சான்று",
+      "hinglish": "Age proof / umar ka praman"
+    },
+    "aliases": [
+      "age proof",
+      "age certificate",
+      "proof of age",
+      "proof of date of birth",
+      "date of birth"
+    ],
+    "how_to_get": {
+      "text": "If you have no birth or school certificate, your ration card or voter ID (EPIC) can be used; if you have none of these, a Medical Officer of any government hospital can issue an age certificate.",
+      "source_url": "https://www.myscheme.gov.in/schemes/ignwps"
+    }
+  },
+  "birth_certificate": {
+    "name": {
+      "en": "Birth certificate",
+      "hi": "जन्म प्रमाण पत्र",
+      "ta": "பிறப்புச் சான்றிதழ்",
+      "hinglish": "Birth certificate"
+    },
+    "aliases": [
+      "birth certificate",
+      "child birth certificate"
+    ],
+    "how_to_get": null
+  },
+  "school_certificate": {
+    "name": {
+      "en": "School certificate",
+      "hi": "स्कूल प्रमाण पत्र",
+      "ta": "பள்ளிச் சான்றிதழ்",
+      "hinglish": "School certificate"
+    },
+    "aliases": [
+      "school certificate",
+      "school leaving certificate"
+    ],
+    "how_to_get": null
+  },
+  "disability_certificate": {
+    "name": {
+      "en": "Disability certificate",
+      "hi": "दिव्यांगता प्रमाण पत्र",
+      "ta": "மாற்றுத்திறனாளி சான்றிதழ்",
+      "hinglish": "Disability certificate"
+    },
+    "aliases": [
+      "disability certificate",
+      "disability card",
+      "udid"
+    ],
+    "how_to_get": null
+  },
+  "land_records": {
+    "name": {
+      "en": "Land records",
+      "hi": "भूमि अभिलेख",
+      "ta": "நில ஆவணங்கள்",
+      "hinglish": "Zameen ke kagaz"
+    },
+    "aliases": [
+      "landholding paper",
+      "landholding papers",
+      "land holding papers",
+      "land records",
+      "land record",
+      "land ownership",
+      "khatauni",
+      "khasra"
+    ],
+    "how_to_get": null
+  },
+  "mobile_number": {
+    "name": {
+      "en": "Mobile number",
+      "hi": "मोबाइल नंबर",
+      "ta": "கைபேசி எண்",
+      "hinglish": "Mobile number"
+    },
+    "aliases": [
+      "mobile number",
+      "mobile no"
+    ],
+    "how_to_get": null
+  },
+  "death_certificate_of_spouse": {
+    "name": {
+      "en": "Husband's death certificate",
+      "hi": "पति का मृत्यु प्रमाण पत्र",
+      "ta": "கணவரின் இறப்புச் சான்றிதழ்",
+      "hinglish": "Pati ka death certificate"
+    },
+    "aliases": [
+      "death certificate of husband",
+      "death certificate",
+      "husband's death certificate"
+    ],
+    "how_to_get": null
+  },
+  "pregnancy_registration": {
+    "name": {
+      "en": "Mother and Child Protection (MCP) card / pregnancy registration",
+      "hi": "मातृ एवं शिशु सुरक्षा (MCP) कार्ड",
+      "ta": "தாய்-சேய் பாதுகாப்பு (MCP) அட்டை",
+      "hinglish": "MCP card / pregnancy registration"
+    },
+    "aliases": [
+      "mcp card",
+      "mcp/rchi card",
+      "rchi card",
+      "mother child protection card"
+    ],
+    "how_to_get": null
+  },
+  "anc_record": {
+    "name": {
+      "en": "Antenatal check-up (ANC) record",
+      "hi": "प्रसव पूर्व जाँच (ANC) रिकॉर्ड",
+      "ta": "கர்ப்பகால பரிசோதனை பதிவு",
+      "hinglish": "ANC check-up record"
+    },
+    "aliases": [
+      "anc date",
+      "anc record",
+      "lmp date",
+      "last menstrual period"
+    ],
+    "how_to_get": null
+  },
+  "immunization_record": {
+    "name": {
+      "en": "Child immunisation record",
+      "hi": "बच्चे का टीकाकरण रिकॉर्ड",
+      "ta": "குழந்தை தடுப்பூசி பதிவு",
+      "hinglish": "Bachche ka tikakaran record"
+    },
+    "aliases": [
+      "child immunization",
+      "immunization details",
+      "immunisation"
+    ],
+    "how_to_get": null
+  },
+  "mgnrega_job_card": {
+    "name": {
+      "en": "MGNREGA job card",
+      "hi": "मनरेगा जॉब कार्ड",
+      "ta": "மகாத்மா காந்தி தேசிய ஊரக வேலை உறுதி அட்டை",
+      "hinglish": "MGNREGA job card"
+    },
+    "aliases": [
+      "mgnrega job card",
+      "mgnrega",
+      "nrega job card"
+    ],
+    "how_to_get": null
+  },
+  "e_shram_card": {
+    "name": {
+      "en": "e-Shram card",
+      "hi": "ई-श्रम कार्ड",
+      "ta": "இ-ஷ்ரம் அட்டை",
+      "hinglish": "e-Shram card"
+    },
+    "aliases": [
+      "e-shram card",
+      "e shram card"
+    ],
+    "how_to_get": null
+  },
+  "kisan_samman_proof": {
+    "name": {
+      "en": "PM-KISAN beneficiary proof",
+      "hi": "पीएम-किसान लाभार्थी प्रमाण",
+      "ta": "பிஎம்-கிசான் பயனாளி சான்று",
+      "hinglish": "PM-KISAN beneficiary proof"
+    },
+    "aliases": [
+      "kisan samman nidhi"
+    ],
+    "how_to_get": null
+  },
+  "pmjay_card": {
+    "name": {
+      "en": "Ayushman Bharat (PM-JAY) card",
+      "hi": "आयुष्मान भारत (PM-JAY) कार्ड",
+      "ta": "ஆயுஷ்மான் பாரத் அட்டை",
+      "hinglish": "Ayushman Bharat card"
+    },
+    "aliases": [
+      "pradhan mantri jan aarogya yojana",
+      "pmjay",
+      "ayushman bharat"
+    ],
+    "how_to_get": null
+  },
+  "self_declaration": {
+    "name": {
+      "en": "Self-declaration",
+      "hi": "स्व-घोषणा पत्र",
+      "ta": "சுய உறுதிமொழி",
+      "hinglish": "Self declaration"
+    },
+    "aliases": [
+      "self-declaration",
+      "self declaration",
+      "14-point declaration",
+      "annexure i"
+    ],
+    "how_to_get": null
+  },
+  "application_form": {
+    "name": {
+      "en": "Filled application form",
+      "hi": "भरा हुआ आवेदन पत्र",
+      "ta": "பூர்த்தி செய்த விண்ணப்பப் படிவம்",
+      "hinglish": "Bhara hua application form"
+    },
+    "aliases": [
+      "application form",
+      "consent-cum-declaration form",
+      "consent cum declaration form"
+    ],
+    "how_to_get": null
+  },
+  "affidavit_no_other_pension": {
+    "name": {
+      "en": "Affidavit: no other pension or assistance",
+      "hi": "हलफनामा: कोई अन्य पेंशन नहीं",
+      "ta": "வேறு ஓய்வூதியம் பெறவில்லை என்ற பிரமாணப் பத்திரம்",
+      "hinglish": "Affidavit - koi aur pension nahi"
+    },
+    "aliases": [
+      "affidavit"
+    ],
+    "how_to_get": null
+  },
+  "nominee_details": {
+    "name": {
+      "en": "Nominee details",
+      "hi": "नामांकित व्यक्ति का विवरण",
+      "ta": "நியமனதாரர் விவரங்கள்",
+      "hinglish": "Nominee ki details"
+    },
+    "aliases": [
+      "nominee details",
+      "nominee"
+    ],
+    "how_to_get": null
+  },
+  "kyc_documents": {
+    "name": {
+      "en": "KYC documents",
+      "hi": "केवाईसी दस्तावेज़",
+      "ta": "கேஒய்சி ஆவணங்கள்",
+      "hinglish": "KYC documents"
+    },
+    "aliases": [
+      "kyc details",
+      "kyc documents",
+      "kyc"
+    ],
+    "how_to_get": null
+  },
+  "migrant_declaration": {
+    "name": {
+      "en": "Migrant self-declaration",
+      "hi": "प्रवासी स्व-घोषणा",
+      "ta": "புலம்பெயர்ந்தோர் சுய உறுதிமொழி",
+      "hinglish": "Migrant self declaration"
+    },
+    "aliases": [
+      "migrant applicants",
+      "migrant family"
+    ],
+    "how_to_get": null
+  }
+}

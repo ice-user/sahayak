@@ -11,6 +11,13 @@ Quality metrics per case:
   no_false_claim   none of the "expect_not_claimed" schemes is named in the answer
                    as if available (heuristic: name appears without a negation nearby)
   asked_followup   for vague questions, the answer asks a question
+Hardship cases (optional case keys; "turns" = earlier user messages sent first, "query" is the last one):
+  max_questions            questions_ok: the answer has at most this many "?"
+  no_terms                 no_forbidden: none of these regexes matches the answer (e.g. an LPG question for a homeless user)
+  expect_help              help_present: the answer points to each listed resource id of data/help_resources.json
+  expect_lead_help         leads_with_help: that resource appears in the first 220 characters
+  expect_no_tools          no_tools: no tool was called (a crisis reply must not start a scheme checklist)
+  expect_no_false_eligibility  no_false_eligibility: no scheme is offered as available unless the rule engine says eligible
 Optional --judge [--judge-model M] adds an LLM-as-judge pass (evals/judge.py): deterministic checks first, then a
 strict-JSON rubric scoring faithfulness / language_match / completeness 1-5. The means appear in SUMMARY as
 judge_*_mean. --min-pass-rate / --min-faithfulness make the run exit 1 when a threshold is missed (used by CI).
@@ -24,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import time
 from pathlib import Path
@@ -32,9 +40,13 @@ from typing import Callable
 from sahayak.agent import Agent
 from sahayak.llm import is_transient
 from sahayak.mentions import MENTIONS, claimed_available, mentioned  # noqa: F401
+from sahayak.models import Profile, load_schemes
+from sahayak.rules import check_all
+from sahayak.vulnerability import mentions_resource
 
 HERE = Path(__file__).parent
-QUALITY_KEYS = ("used_tool", "recall", "no_false_claim", "asked_followup")
+QUALITY_KEYS = ("used_tool", "recall", "no_false_claim", "asked_followup", "questions_ok", "no_forbidden", "help_present",
+                "leads_with_help", "no_tools", "no_false_eligibility")
 RETRY_PAUSE_S = 2.0
 
 
@@ -49,7 +61,28 @@ def score(case: dict, answer: str, tool_names: list[str]) -> dict:
         s["no_false_claim"] = not any(claimed_available(answer, i) for i in case["expect_not_claimed"])
     if case.get("expect_followup"):
         s["asked_followup"] = "?" in answer
+    if "max_questions" in case:
+        s["questions_ok"] = answer.count("?") + answer.count("\uff1f") <= case["max_questions"]
+    if case.get("no_terms"):
+        s["no_forbidden"] = not any(re.search(t, answer, re.I) for t in case["no_terms"])
+    if case.get("expect_help"):
+        s["help_present"] = all(mentions_resource(answer, r) for r in case["expect_help"])
+    if case.get("expect_lead_help"):
+        s["leads_with_help"] = mentions_resource(answer[:220], case["expect_lead_help"])
+    if case.get("expect_no_tools"):
+        s["no_tools"] = not tool_names
+    if case.get("expect_no_false_eligibility"):
+        s["no_false_eligibility"] = not false_eligibility_claims(case, answer)
     return s
+
+
+def false_eligibility_claims(case: dict, answer: str) -> list[str]:
+    """Schemes the answer offers as available although the rule engine does not say eligible for the case's facts
+    (a case without a profile has no confirmed scheme at all)."""
+    schemes = load_schemes()
+    results = check_all(Profile(**case["profile"]), schemes) if case.get("profile") else []
+    eligible = {r.scheme_id for r in results if r.verdict == "eligible"}
+    return [sid for sid in schemes if sid not in eligible and claimed_available(answer, sid)]
 
 
 def load_cases(only: str = "") -> list[dict]:
@@ -86,6 +119,9 @@ def run_case(case: dict, make_agent: Callable[[], Agent], retries: int = 1,
                 first_token.append(time.time() - t0)
 
         try:
+            for earlier in case.get("turns", []):  # earlier user messages of a multi-turn case
+                agent.chat(earlier)
+            t0 = time.time()
             answer, trace = agent.chat(case["query"], on_event=on_event)
         except Exception as exc:  # noqa: BLE001 - reported as an error row, never as a quality failure
             if attempts <= retries and is_transient(exc):

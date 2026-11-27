@@ -1,0 +1,2002 @@
+{
+  "pmmvy": {
+    "mode": "both",
+    "portal_url": null,
+    "office": null,
+    "helpline": "011 - 23380329",
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Visit the official website of the Ministry and click on the Citizen login tab.",
+        "where": null,
+        "mode": "online",
+        "quote": "Citizen visit the official website of the Ministry and click on the Citizen login tab."
+      },
+      {
+        "n": 2,
+        "action": "Enter mobile number and verify, then enter details like Full Name, State, District, Area, Block, Village and relationship with beneficiary, then click create account button.",
+        "where": null,
+        "mode": "online",
+        "quote": "Enter mobile number and verify. Then enter details like Full Name, State, District, Area, Block, Village and relationship with beneficiary. Then click create account button."
+      },
+      {
+        "n": 3,
+        "action": "Click on the Login tab on the main homepage of the website.",
+        "where": null,
+        "mode": "online",
+        "quote": "Once account is created. Click on Login tab on main homepage of the website."
+      },
+      {
+        "n": 4,
+        "action": "Enter User ID, Password and Captcha code, then apply for the scheme.",
+        "where": null,
+        "mode": "online",
+        "quote": "Now, enter the User ID, Password and Captcha code. Then apply for the scheme."
+      },
+      {
+        "n": 5,
+        "action": "Click on the Data Entry tab and choose Beneficiary Registration.",
+        "where": null,
+        "mode": "online",
+        "quote": "After successful login, click on the \"Data Entry\" tab and choose the option \"Beneficiary Registration\"."
+      },
+      {
+        "n": 6,
+        "action": "Enter all detailed personal details on the Beneficiary registration page.",
+        "where": null,
+        "mode": "online",
+        "quote": "Now, enter all the detailed personal details on the Beneficiary registration page."
+      },
+      {
+        "n": 7,
+        "action": "Choose First Child OR Second Child under the scheme applying for.",
+        "where": null,
+        "mode": "online",
+        "quote": "Choose suitable option under the Scheme applying for First Child OR Second Child."
+      },
+      {
+        "n": 8,
+        "action": "Click Submit Button after completing all form details.",
+        "where": null,
+        "mode": "online",
+        "quote": "Once all the form details are completed. Click Submit Button."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "online",
+        "summary": "Apply on the official website after a citizen login with your mobile number",
+        "where": null,
+        "steps": [
+          {
+            "n": 1,
+            "action": "Visit the official website of the Ministry and click on the Citizen login tab.",
+            "where": null,
+            "mode": "online",
+            "quote": "Citizen visit the official website of the Ministry and click on the Citizen login tab."
+          },
+          {
+            "n": 2,
+            "action": "Enter mobile number and verify, then enter details like Full Name, State, District, Area, Block, Village and relationship with beneficiary, then click create account button.",
+            "where": null,
+            "mode": "online",
+            "quote": "Enter mobile number and verify. Then enter details like Full Name, State, District, Area, Block, Village and relationship with beneficiary. Then click create account button."
+          },
+          {
+            "n": 3,
+            "action": "Click on the Login tab on the main homepage of the website.",
+            "where": null,
+            "mode": "online",
+            "quote": "Once account is created. Click on Login tab on main homepage of the website."
+          },
+          {
+            "n": 4,
+            "action": "Enter User ID, Password and Captcha code, then apply for the scheme.",
+            "where": null,
+            "mode": "online",
+            "quote": "Now, enter the User ID, Password and Captcha code. Then apply for the scheme."
+          },
+          {
+            "n": 5,
+            "action": "Click on the Data Entry tab and choose Beneficiary Registration.",
+            "where": null,
+            "mode": "online",
+            "quote": "After successful login, click on the \"Data Entry\" tab and choose the option \"Beneficiary Registration\"."
+          },
+          {
+            "n": 6,
+            "action": "Enter all detailed personal details on the Beneficiary registration page.",
+            "where": null,
+            "mode": "online",
+            "quote": "Now, enter all the detailed personal details on the Beneficiary registration page."
+          },
+          {
+            "n": 7,
+            "action": "Choose First Child OR Second Child under the scheme applying for.",
+            "where": null,
+            "mode": "online",
+            "quote": "Choose suitable option under the Scheme applying for First Child OR Second Child."
+          },
+          {
+            "n": 8,
+            "action": "Click Submit Button after completing all form details.",
+            "where": null,
+            "mode": "online",
+            "quote": "Once all the form details are completed. Click Submit Button."
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "doc": "aadhaar",
+        "as_written": "Aadhaar card,",
+        "mandatory": true,
+        "quote": "Aadhaar card,"
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "Aadhaar mapped bank/post office,",
+        "mandatory": true,
+        "quote": "Aadhaar mapped bank/post office,"
+      },
+      {
+        "doc": "bank_passbook",
+        "as_written": "Bank account details,",
+        "mandatory": true,
+        "quote": "Bank account details,"
+      },
+      {
+        "doc": "pregnancy_registration",
+        "as_written": "MCP/RCHI card,",
+        "mandatory": true,
+        "quote": "MCP/RCHI card,"
+      },
+      {
+        "doc": "anc_record",
+        "as_written": "LMP date,",
+        "mandatory": true,
+        "quote": "LMP date,"
+      },
+      {
+        "doc": "anc_record",
+        "as_written": "ANC date,",
+        "mandatory": true,
+        "quote": "ANC date,"
+      },
+      {
+        "doc": "birth_certificate",
+        "as_written": "Child birth certificate,",
+        "mandatory": true,
+        "quote": "Child birth certificate,"
+      },
+      {
+        "doc": "immunization_record",
+        "as_written": "Child immunization details etc.",
+        "mandatory": true,
+        "quote": "Child immunization details etc."
+      },
+      {
+        "doc": "mgnrega_job_card",
+        "as_written": "Women holding MGNREGA Job Card.",
+        "mandatory": false,
+        "quote": "Women holding MGNREGA Job Card."
+      },
+      {
+        "doc": "kisan_samman_proof",
+        "as_written": "Women farmers who are beneficiaries under Kisan Samman Nidhi.",
+        "mandatory": false,
+        "quote": "Women farmers who are beneficiaries under Kisan Samman Nidhi."
+      },
+      {
+        "doc": "e_shram_card",
+        "as_written": "Women holding e-Shram card.",
+        "mandatory": false,
+        "quote": "Women holding e-Shram card."
+      },
+      {
+        "doc": "pmjay_card",
+        "as_written": "Women Beneficiaries under Pradhan Mantri Jan Aarogya Yojana (PMJAY) under Ayushman Bharat.",
+        "mandatory": false,
+        "quote": "Women Beneficiaries under Pradhan Mantri Jan Aarogya Yojana (PMJAY) under Ayushman Bharat."
+      },
+      {
+        "doc": "ration_card",
+        "as_written": "Women holder of BPL ration Card.",
+        "mandatory": false,
+        "quote": "Women holder of BPL ration Card."
+      },
+      {
+        "doc": "ration_card",
+        "as_written": "Women Beneficiaries holding Ration card under National Food Security Act (NFSA), 2013.",
+        "mandatory": false,
+        "quote": "Women Beneficiaries holding Ration card under National Food Security Act (NFSA), 2013."
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "All the mandatory provisions like Aadhaar, Aadhaar based payment etc. will be checked at the time of registration for smooth and efficient process.",
+        "mandatory": false,
+        "quote": "All the mandatory provisions like Aadhaar, Aadhaar based payment etc. will be checked at the time of registration for smooth and efficient process."
+      },
+      {
+        "doc": "mobile_number",
+        "as_written": "Mobile number has been made mandatory for providing information regarding the status of application and disbursement of fund.",
+        "mandatory": false,
+        "quote": "Mobile number has been made mandatory for providing information regarding the status of application and disbursement of fund."
+      },
+      {
+        "doc": "income_certificate",
+        "as_written": "Women whose net family income is less than ₹ 8 Lakh per annum.",
+        "mandatory": false,
+        "quote": "Women whose net family income is less than ₹ 8 Lakh per annum."
+      },
+      {
+        "doc": "disability_certificate",
+        "as_written": "Women who are partially (40%) or fully disabled (Divyang Jan).",
+        "mandatory": false,
+        "quote": "Women who are partially (40%) or fully disabled (Divyang Jan)."
+      },
+      {
+        "doc": "caste_certificate",
+        "as_written": "SC Women.",
+        "mandatory": false,
+        "quote": "SC Women."
+      },
+      {
+        "doc": "caste_certificate",
+        "as_written": "ST Women.",
+        "mandatory": false,
+        "quote": "ST Women."
+      }
+    ],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "Women in regular employment with Central Government, State Government, PSU, or receiving similar benefits under any law are not entitled to PMMVY benefits.",
+        "quote": "All pregnant women and lactating mothers in regular employment with the Central Government or State Government or Public Sector Undertaking or those who are in receipt of similar benefits under any law for the time being in force shall not be entitled to benefits under PMMVY.",
+        "applies_if": {
+          "field": "in_regular_govt_employment",
+          "op": "eq",
+          "value": true
+        }
+      },
+      {
+        "kind": "deadline",
+        "text": "Apply within 2 years from the date of Last Menstrual Period.",
+        "quote": "Yes, the beneficiary can only apply for the scheme within 2 years from the date of beneficiary’s Last Menstrual Period subject to the eligibility conditions of the scheme.",
+        "applies_if": null
+      },
+      {
+        "kind": "benefit_stops",
+        "text": "If the child does not survive, the beneficiary is not eligible for benefits under PMMVY for further pregnancies as she has already claimed the installments.",
+        "quote": "No, in an unfortunate event that the child does not survive, the beneficiary is not eligible for benefits under PMMVY for further pregnancies as she has already claimed the installments.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "If already availing paid maternity leave from employer, you are not eligible for this scheme.",
+        "quote": "No, if you are already availing any paid maternity scheme or a paid maternity leave from your employer, then in that case you won’t be eligible for this scheme.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "LMP date from MCP Card is mandatory to claim the 1st and 2nd installment; without it only the 3rd installment can be claimed if conditions are met.",
+        "quote": "Yes. The LMP Date, as found in the Mother Child Protection (MCP) Card is mandatory to claim the 1st and 2nd installment. If LMP Date is not provided, the beneficiary is not eligible to claim the 1st and 2nd installment and can claim only the 3rd installment provided she fulfils the conditionality for availing third installment of the Scheme.",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "By when can I claim the second installment of the cash incentive?",
+        "a": "The 2nd installment can be claimed 180 days after the Last Menstrual Period (LMP) of the applicant.",
+        "quote": "The 2nd installment can be claimed 180 days after the Last Menstrual Period (LMP) of the applicant."
+      },
+      {
+        "q": "Does this scheme provide any additional coverages?",
+        "a": "Apart from the three installments to be claimed within 150 days, 180 days, and at childbirth, the scheme does not offer additional coverages.",
+        "quote": "Apart from the three installments to be claimed within 150 days, 180 days, and at childbirth, the scheme does not offer additional coverages."
+      },
+      {
+        "q": "Does the benefit under PMMVY continue in case of death?",
+        "a": "No, in an unfortunate event that the child does not survive, the beneficiary is not eligible for benefits under PMMVY for further pregnancies as she has already claimed the installments.",
+        "quote": "No, in an unfortunate event that the child does not survive, the beneficiary is not eligible for benefits under PMMVY for further pregnancies as she has already claimed the installments."
+      },
+      {
+        "q": "Will the beneficiary get the benefit in case of miscarriage or stillbirth?",
+        "a": "The beneficiary will receive the installments until the pregnancy is active; the date of miscarriage will be a factor in deciding whether the benefit will continue or not.",
+        "quote": "The beneficiary will receive the installments until the pregnancy is active. Since the benefit is paid out in three installments depending upon the pregnancy milestones, the beneficiary will receive at least two installments in case of stillbirth. The date of miscarriage will be a factor in deciding whether the benefit will continue or not."
+      },
+      {
+        "q": "I have received only the first installment under IGMSY. Can I claim the remaining installments under PMMVY?",
+        "a": "Beneficiaries who have received only the first installment under the old MBP (IGMSY) scheme can claim only third installment under the PMMVY scheme, subject to meeting the criteria of PMMVY.",
+        "quote": "Beneficiaries who have received only the first installment under the old MBP (IGMSY) scheme can claim only third installment under the PMMVY scheme, subject to meeting the criteria of PMMVY."
+      },
+      {
+        "q": "I am expecting twins, am I also eligible for this scheme?",
+        "a": "Yes, you are eligible to avail the benefits under this scheme.",
+        "quote": "Yes, you are eligible to avail the benefits under this scheme."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "online",
+        "name": "Official website of the Ministry",
+        "locator_url": null,
+        "quote": "Citizen visit the official website of the Ministry and click on the Citizen login tab."
+      },
+      {
+        "type": "anganwadi",
+        "name": "Anganwadi Centre",
+        "locator_url": null,
+        "quote": "On registration of pregnancy and at least one Antenatal checkup within six months from last menstrual period date at the Anganwadi Centre or approved Health facilities may be identified by the respective administering State/UT."
+      }
+    ],
+    "grievance": {
+      "text": "Contact the helpline number, postal address, or email address for enquiries about the scheme.",
+      "url_or_number": "011 – 23380329",
+      "quote": "Helpline Number: 011 – 23380329"
+    },
+    "source_url": "https://www.myscheme.gov.in/schemes/pmmvy",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "ignoaps": {
+    "mode": "both",
+    "portal_url": "https://web.umang.gov.in/web_new/home",
+    "office": null,
+    "helpline": null,
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+        "where": null,
+        "mode": "online",
+        "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home"
+      },
+      {
+        "n": 2,
+        "action": "Login using mobile number and OTP",
+        "where": null,
+        "mode": "online",
+        "quote": "The citizen can login using mobile number and OTP."
+      },
+      {
+        "n": 3,
+        "action": "Search for NSAP and click on Apply Online",
+        "where": null,
+        "mode": "online",
+        "quote": "Once logged In, citizen can search for NSAP. Click on “Apply Online”"
+      },
+      {
+        "n": 4,
+        "action": "Fill basic details, choose pension payment mode, upload photo and click Submit",
+        "where": null,
+        "mode": "online",
+        "quote": "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "online",
+        "summary": "Apply on the UMANG app or website with your mobile number and OTP",
+        "where": "https://web.umang.gov.in/web_new/home",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+            "where": null,
+            "mode": "online",
+            "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home"
+          },
+          {
+            "n": 2,
+            "action": "Login using mobile number and OTP",
+            "where": null,
+            "mode": "online",
+            "quote": "The citizen can login using mobile number and OTP."
+          },
+          {
+            "n": 3,
+            "action": "Search for NSAP and click on Apply Online",
+            "where": null,
+            "mode": "online",
+            "quote": "Once logged In, citizen can search for NSAP. Click on “Apply Online”"
+          },
+          {
+            "n": 4,
+            "action": "Fill basic details, choose pension payment mode, upload photo and click Submit",
+            "where": null,
+            "mode": "online",
+            "quote": "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”."
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "doc": "application_form",
+        "as_written": "Duly filled and self-attested Application Form (proforma given the annexures of the scheme guidelines).",
+        "mandatory": true,
+        "quote": "Duly filled and self-attested Application Form (proforma given the annexures of the scheme guidelines)."
+      },
+      {
+        "doc": "domicile_certificate",
+        "as_written": "Domicile Certificate",
+        "mandatory": true,
+        "quote": "Domicile Certificate"
+      },
+      {
+        "doc": "residence_proof",
+        "as_written": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "mandatory": true,
+        "quote": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "alternatives_group": "address_proof"
+      },
+      {
+        "doc": "voter_id",
+        "as_written": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "mandatory": true,
+        "quote": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "alternatives_group": "address_proof"
+      },
+      {
+        "doc": "electricity_bill",
+        "as_written": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "mandatory": true,
+        "quote": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "alternatives_group": "address_proof"
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "mandatory": true,
+        "quote": "Residential Proof (Voter card/ Electricity Bill/Aadhar Card)",
+        "alternatives_group": "address_proof"
+      },
+      {
+        "doc": "age_proof",
+        "as_written": "Age Proof (Birth Certificate issued by the School last attended or Municipal authority or SHO or through Medical Board)",
+        "mandatory": true,
+        "quote": "Age Proof (Birth Certificate issued by the School last attended or Municipal authority or SHO or through Medical Board)",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "birth_certificate",
+        "as_written": "Age Proof (Birth Certificate issued by the School last attended or Municipal authority or SHO or through Medical Board)",
+        "mandatory": true,
+        "quote": "Age Proof (Birth Certificate issued by the School last attended or Municipal authority or SHO or through Medical Board)",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "Aadhar Number",
+        "mandatory": true,
+        "quote": "Aadhar Number"
+      },
+      {
+        "doc": "bank_passbook",
+        "as_written": "Bank Passbook",
+        "mandatory": true,
+        "quote": "Bank Passbook"
+      },
+      {
+        "doc": "ration_card",
+        "as_written": "Ration Card",
+        "mandatory": true,
+        "quote": "Ration Card"
+      },
+      {
+        "doc": "affidavit_no_other_pension",
+        "as_written": "Affidavit duly attested by Judicial Magistrate/Executive Magistrate that she/he is not in receipt of any pension/ financial assistance from any other source",
+        "mandatory": true,
+        "quote": "Affidavit duly attested by Judicial Magistrate/Executive Magistrate that she/he is not in receipt of any pension/ financial assistance from any other source"
+      }
+    ],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "You must not be receiving any other pension or financial assistance from any source.",
+        "quote": "Affidavit duly attested by Judicial Magistrate/Executive Magistrate that she/he is not in receipt of any pension/ financial assistance from any other source",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "What does NSAP stand for and when was it launched?",
+        "a": "NSAP stands for National Social Assistance Programme and was launched on 15th August 1995.",
+        "quote": "NSAP stands for National Social Assistance Programme. NSAP was launched on 15th August 1995."
+      },
+      {
+        "q": "What is the pension amount under IGNOAPS and is it restricted to one person in a family?",
+        "a": "The central contribution is Rs. 200 per month per beneficiary up to 79 years and Rs.500 per month per beneficiary from 80 years onwards; all persons aged 60 years in a BPL family are eligible.",
+        "quote": "The central contribution of pension under the Indira Gandhi National Old Age Pension Scheme (IGNOAPS) is Rs. 200/- per month per beneficiary up to 79 years and Rs.500/- per month per beneficiary from 80 year onwards and the State Governments may contribute over and above to this amount. At present old age beneficiaries are getting anywhere between Rs. 200/- to Rs. 1000/- depending on the State Contribution. All the persons who are 60 years of age in a BPL family are eligible to get an old age pension."
+      },
+      {
+        "q": "Who implements NSAP?",
+        "a": "NSAP schemes are mainly implemented by Social Welfare Departments in the States, with specific departments in some states, and extends to both rural and urban areas.",
+        "quote": "The NSAP Schemes are mainly implemented by the Social Welfare Departments in the States. But NSAP is implemented by Rural Development Department in the States of Andhra Pradesh, Assam, Goa, Meghalaya and West Bengal; by the Department of Women & Child Development in Orissa and Puducherry; by the Revenue Department in Karnataka and Tamil Nadu and by the Department of Labour Employment & Training in Jharkhand. The NSAP extends to both the rural as well as urban areas"
+      },
+      {
+        "q": "What is the basic eligibility criterion under NSAP?",
+        "a": "The applicant must belong to a Below Poverty Line family according to Government of India criteria.",
+        "quote": "For getting benefits under NSAP the applicant must belong to a Below Poverty Line (BPL) family according to the criteria prescribed by the Govt. of India."
+      },
+      {
+        "q": "How are beneficiaries identified in rural areas?",
+        "a": "New beneficiaries are identified from the BPL list prepared by States/UTs as per Ministry of Rural Development guidelines for the BPL Census 2002.",
+        "quote": "As per the revised eligibility criteria, new beneficiaries will be identified from the BPL list prepared by the States/UTs as per guidelines issued by the Ministry of Rural Development (MORD) for the BPL Census 2002."
+      },
+      {
+        "q": "What is the funding pattern under NSAP?",
+        "a": "Under NSAP 100 percent Central Assistance is extended to the States/UTs to provide benefits.",
+        "quote": "Under NSAP 100 percent Central Assistance is extended to the States/UTs to provide the benefits in accordance with the norms, guidelines, and conditions laid down by the Central Government."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "online",
+        "name": "UMANG App or website https://web.umang.gov.in/web_new/home",
+        "locator_url": null,
+        "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home"
+      }
+    ],
+    "grievance": null,
+    "source_url": "https://www.myscheme.gov.in/schemes/nsap-ignoaps",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "ignwps": {
+    "mode": "both",
+    "portal_url": "https://web.umang.gov.in/web_new/home",
+    "office": null,
+    "helpline": null,
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+        "where": null,
+        "mode": "online",
+        "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home"
+      },
+      {
+        "n": 2,
+        "action": "Login using mobile number and OTP",
+        "where": null,
+        "mode": "online",
+        "quote": "The citizen can login using mobile number and OTP."
+      },
+      {
+        "n": 3,
+        "action": "Search for NSAP after logging in",
+        "where": null,
+        "mode": "online",
+        "quote": "Once logged In, citizen can search for NSAP."
+      },
+      {
+        "n": 4,
+        "action": "Click on Apply Online",
+        "where": null,
+        "mode": "online",
+        "quote": "Click on “Apply Online”"
+      },
+      {
+        "n": 5,
+        "action": "Fill basic details, choose pension payment mode, upload photo and click Submit",
+        "where": null,
+        "mode": "online",
+        "quote": "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”."
+      },
+      {
+        "n": 6,
+        "action": "Apply offline",
+        "where": null,
+        "mode": "offline",
+        "quote": "Offline"
+      }
+    ],
+    "routes": [
+      {
+        "mode": "online",
+        "summary": "Apply on the UMANG app or website with your mobile number and OTP",
+        "where": "https://web.umang.gov.in/web_new/home",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+            "where": null,
+            "mode": "online",
+            "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home"
+          },
+          {
+            "n": 2,
+            "action": "Login using mobile number and OTP",
+            "where": null,
+            "mode": "online",
+            "quote": "The citizen can login using mobile number and OTP."
+          },
+          {
+            "n": 3,
+            "action": "Search for NSAP after logging in",
+            "where": null,
+            "mode": "online",
+            "quote": "Once logged In, citizen can search for NSAP."
+          },
+          {
+            "n": 4,
+            "action": "Click on Apply Online",
+            "where": null,
+            "mode": "online",
+            "quote": "Click on “Apply Online”"
+          },
+          {
+            "n": 5,
+            "action": "Fill basic details, choose pension payment mode, upload photo and click Submit",
+            "where": null,
+            "mode": "online",
+            "quote": "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”."
+          }
+        ]
+      },
+      {
+        "mode": "offline",
+        "summary": "Apply offline",
+        "where": null,
+        "steps": [
+          {
+            "n": 6,
+            "action": "Apply offline",
+            "where": null,
+            "mode": "offline",
+            "quote": "Offline"
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "doc": "death_certificate_of_spouse",
+        "as_written": "Death Certificate of husband – With the name of the surviving wife(widow).",
+        "mandatory": true,
+        "quote": "Death Certificate of husband – With the name of the surviving wife(widow)."
+      },
+      {
+        "doc": "bpl_card",
+        "as_written": "BPL Card.",
+        "mandatory": true,
+        "quote": "BPL Card."
+      },
+      {
+        "doc": "age_proof",
+        "as_written": "Age Proof - For age, the birth certificate or school certificate may be relied on.",
+        "mandatory": true,
+        "quote": "Age Proof - For age, the birth certificate or school certificate may be relied on.",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "birth_certificate",
+        "as_written": "Age Proof - For age, the birth certificate or school certificate may be relied on.",
+        "mandatory": true,
+        "quote": "Age Proof - For age, the birth certificate or school certificate may be relied on.",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "school_certificate",
+        "as_written": "Age Proof - For age, the birth certificate or school certificate may be relied on.",
+        "mandatory": true,
+        "quote": "Age Proof - For age, the birth certificate or school certificate may be relied on.",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "ration_card",
+        "as_written": "In their absence ration card and EPIC may be considered.",
+        "mandatory": true,
+        "quote": "In their absence ration card and EPIC may be considered.",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "voter_id",
+        "as_written": "In their absence ration card and EPIC may be considered.",
+        "mandatory": true,
+        "quote": "In their absence ration card and EPIC may be considered.",
+        "alternatives_group": "age_proof"
+      },
+      {
+        "doc": "age_proof",
+        "as_written": "If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+        "mandatory": true,
+        "quote": "If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+        "alternatives_group": "age_proof"
+      }
+    ],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "Pension will be discontinued in case of remarriage of widow.",
+        "quote": "Pension will be discontinued In case of remarriage of widow",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Pension will be discontinued once the widow moves above poverty line.",
+        "quote": "Once the widow moves above poverty line",
+        "applies_if": null
+      },
+      {
+        "kind": "benefit_stops",
+        "text": "Pension will be discontinued in case of remarriage of widow.",
+        "quote": "Pension will be discontinued In case of remarriage of widow",
+        "applies_if": null
+      },
+      {
+        "kind": "benefit_stops",
+        "text": "Pension will be discontinued once the widow moves above poverty line.",
+        "quote": "Once the widow moves above poverty line",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "What are different modes of receiving Pension?",
+        "a": "One can receive pension amount in Bank Account, Post Office Account, Postal Money Order or in hand cash.",
+        "quote": "One can receive pension amount in Bank Account, Post Office Account, Postal Money Order or in hand cash."
+      },
+      {
+        "q": "Who will disburse in hand cash?",
+        "a": "In hand cash will be disbursed by Pension Disbursement Authority of respective Sub District/Municipal Area.",
+        "quote": "In hand cash will be disbursed by Pension Disbursement Authority of respective Sub District/Municipal Area."
+      },
+      {
+        "q": "What Is The Eligibility For Getting Pension Under IGNWPS?",
+        "a": "The applicant must be a widow in the age group of 40-79 years and should belong to a household living below the poverty line according to the criteria prescribed by the Govt. of India.",
+        "quote": "1. The applicant must be a widow in the age group of 40-79 years. 2. The applicant should belong to a household living below the poverty line according to the criteria prescribed by the Govt. of India"
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "online",
+        "name": "UMANG App or website https://web.umang.gov.in/web_new/home",
+        "locator_url": null,
+        "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home"
+      }
+    ],
+    "grievance": null,
+    "source_url": "https://www.myscheme.gov.in/schemes/ignwps",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "apy": {
+    "mode": "both",
+    "portal_url": "https://enps.nsdl.com/eNPS/NationalPensionSystem.html",
+    "office": null,
+    "helpline": "1800-110-069",
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Open an APY account online using your net banking facility by logging into your internet banking account and searching for APY on the dashboard.",
+        "where": null,
+        "mode": "online",
+        "quote": "One can also open an APY account online using one's Net banking facility. The applicant can login into his/her internet banking account and search for APY on dashboard."
+      },
+      {
+        "n": 2,
+        "action": "Fill basic and nominee details and give consent for auto-debit of premium from the account, then submit the form.",
+        "where": null,
+        "mode": "online",
+        "quote": "Customer has to fill basic and Nominee details. Customer has to give consent for auto debit of premium from the account and submit the form."
+      },
+      {
+        "n": 3,
+        "action": "Visit https://enps.nsdl.com/eNPS/NationalPensionSystem.html, select Atal Pension Yojana, then select APY Registration.",
+        "where": null,
+        "mode": "online",
+        "quote": "Visit website “https://enps.nsdl.com/eNPS/NationalPensionSystem.html “ and select “Atal Pension Yojana”. Select “APY Registration”"
+      },
+      {
+        "n": 4,
+        "action": "Fill basic details and complete KYC through one of three options: offline KYC by uploading Aadhaar XML file, Aadhaar OTP verification on the mobile number registered with Aadhaar, or Virtual ID.",
+        "where": null,
+        "mode": "online",
+        "quote": "Fill the basic details in the form. One can complete KYC through 3 options – Offline KYC – Where one has to upload XML file of Aadhaar Aadhaar – Where KYC is done through OTP verification on Mobile Number register with Aadhaar Virtual ID – Where Aadhaar virtual ID is created for KYC Citizen can select either one of three options."
+      },
+      {
+        "n": 5,
+        "action": "After basic details are filled, an acknowledgement number is generated; then fill personal details, choose the pension amount after 60 years, and decide the contribution frequency.",
+        "where": null,
+        "mode": "online",
+        "quote": "Once the basic details are filled, an acknowledgement number is generated. Citizen then has to fill personal details and decide the pension amount he/she wants after 60 years. The Citizen also has to decide the frequency of contribution for the scheme."
+      },
+      {
+        "n": 6,
+        "action": "Confirm personal details, fill nominee details, and after submission you will be redirected to the NSDL website for eSign.",
+        "where": null,
+        "mode": "online",
+        "quote": "Once the citizen “confirms” for personal details, he/she has to then fill nominee details. After submitting the personal and Nominee details, Citizen is redirected to NSDL website for eSign."
+      },
+      {
+        "n": 7,
+        "action": "Get Aadhaar OTP verified to complete registration successfully in APY.",
+        "where": null,
+        "mode": "online",
+        "quote": "Once Aadhaar is OTP verified, Citizen gets successfully registered in APY."
+      },
+      {
+        "n": 8,
+        "action": "Join digitally through the e-APY portal or through the web portal of banks providing such facility.",
+        "where": null,
+        "mode": "online",
+        "quote": "One can also join digitally through e-APY portal or through web portal of banks providing such facility."
+      },
+      {
+        "n": 9,
+        "action": "Visit a bank or post office to open an APY account offline, since KYC details are fetched from an active bank or post office savings account.",
+        "where": "Bank / Post Office",
+        "mode": "offline",
+        "quote": "KYC details are fetched from active Bank/Post Office Savings account."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "online",
+        "summary": "Open an APY account online through net banking or the e-APY portal",
+        "where": "https://enps.nsdl.com/eNPS/NationalPensionSystem.html",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Open an APY account online using your net banking facility by logging into your internet banking account and searching for APY on the dashboard.",
+            "where": null,
+            "mode": "online",
+            "quote": "One can also open an APY account online using one's Net banking facility. The applicant can login into his/her internet banking account and search for APY on dashboard."
+          },
+          {
+            "n": 2,
+            "action": "Fill basic and nominee details and give consent for auto-debit of premium from the account, then submit the form.",
+            "where": null,
+            "mode": "online",
+            "quote": "Customer has to fill basic and Nominee details. Customer has to give consent for auto debit of premium from the account and submit the form."
+          },
+          {
+            "n": 3,
+            "action": "Visit https://enps.nsdl.com/eNPS/NationalPensionSystem.html, select Atal Pension Yojana, then select APY Registration.",
+            "where": null,
+            "mode": "online",
+            "quote": "Visit website “https://enps.nsdl.com/eNPS/NationalPensionSystem.html “ and select “Atal Pension Yojana”. Select “APY Registration”"
+          },
+          {
+            "n": 4,
+            "action": "Fill basic details and complete KYC through one of three options: offline KYC by uploading Aadhaar XML file, Aadhaar OTP verification on the mobile number registered with Aadhaar, or Virtual ID.",
+            "where": null,
+            "mode": "online",
+            "quote": "Fill the basic details in the form. One can complete KYC through 3 options – Offline KYC – Where one has to upload XML file of Aadhaar Aadhaar – Where KYC is done through OTP verification on Mobile Number register with Aadhaar Virtual ID – Where Aadhaar virtual ID is created for KYC Citizen can select either one of three options."
+          },
+          {
+            "n": 5,
+            "action": "After basic details are filled, an acknowledgement number is generated; then fill personal details, choose the pension amount after 60 years, and decide the contribution frequency.",
+            "where": null,
+            "mode": "online",
+            "quote": "Once the basic details are filled, an acknowledgement number is generated. Citizen then has to fill personal details and decide the pension amount he/she wants after 60 years. The Citizen also has to decide the frequency of contribution for the scheme."
+          },
+          {
+            "n": 6,
+            "action": "Confirm personal details, fill nominee details, and after submission you will be redirected to the NSDL website for eSign.",
+            "where": null,
+            "mode": "online",
+            "quote": "Once the citizen “confirms” for personal details, he/she has to then fill nominee details. After submitting the personal and Nominee details, Citizen is redirected to NSDL website for eSign."
+          },
+          {
+            "n": 7,
+            "action": "Get Aadhaar OTP verified to complete registration successfully in APY.",
+            "where": null,
+            "mode": "online",
+            "quote": "Once Aadhaar is OTP verified, Citizen gets successfully registered in APY."
+          },
+          {
+            "n": 8,
+            "action": "Join digitally through the e-APY portal or through the web portal of banks providing such facility.",
+            "where": null,
+            "mode": "online",
+            "quote": "One can also join digitally through e-APY portal or through web portal of banks providing such facility."
+          }
+        ]
+      },
+      {
+        "mode": "offline",
+        "summary": "Visit your bank or post office to open an APY account",
+        "where": "Bank / Post Office",
+        "steps": [
+          {
+            "n": 9,
+            "action": "Visit a bank or post office to open an APY account offline, since KYC details are fetched from an active bank or post office savings account.",
+            "where": "Bank / Post Office",
+            "mode": "offline",
+            "quote": "KYC details are fetched from active Bank/Post Office Savings account."
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "doc": "kyc_documents",
+        "as_written": "KYC details are fetched from active Bank/Post Office Savings account.",
+        "mandatory": true,
+        "quote": "KYC details are fetched from active Bank/Post Office Savings account."
+      },
+      {
+        "doc": "savings_account",
+        "as_written": "KYC details are fetched from active Bank/Post Office Savings account.",
+        "mandatory": true,
+        "quote": "KYC details are fetched from active Bank/Post Office Savings account."
+      }
+    ],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "From 1st October 2022, any citizen who is or has been an income tax payer is not eligible to join APY.",
+        "quote": "From 1st October, 2022, any citizen who is or has been an income tax payer, shall not be eligible to join APY.",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "You cannot join APY if you are younger than 18 or older than 40 years.",
+        "quote": "The minimum age of joining APY is 18 years and maximum is 40 years.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "A savings bank account or post office savings bank account is mandatory for joining APY.",
+        "quote": "No, the savings bank account/ post office savings bank account is mandatory for joining APY.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "If you delay APY contribution beyond the due date, you will be charged overdue interest for the delayed period.",
+        "quote": "Subscriber will be charged overdue interest for the delayed period in case the APY contribution gets delayed beyond the due date.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "If you complete 40 years, you can join APY only until your 40th birthday and become ineligible from the next day.",
+        "quote": "A person can join APY till his/ her 40th birthday. For example, if person ‘X’ becomes 40 years old on 1st January 2023, then, he/she is eligible to join APY till 1st January 2023 and becomes ineligible from 2nd January 2023 to join the scheme.",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "When will I receive my pension?",
+        "a": "You will receive your pension starting at age 60 years.",
+        "quote": "Age Of Start Of Pension is 60 Years."
+      },
+      {
+        "q": "I am a Swavalamban subscriber. Can I still apply for APY?",
+        "a": "Eligible Swavalamban subscribers may be migrated to APY.",
+        "quote": "Eligible Swavalamban Subscribers may be migrated to APY."
+      },
+      {
+        "q": "Is there any provision of default nominee or blood relation?",
+        "a": "If unmarried, you can nominate any other person and must provide spouse details after marriage; if married, the spouse is the default nominee.",
+        "quote": "If the subscriber is unmarried they can nominate any other person as nominee and they have to provide spouse details after marriage. If married, the spouse will be the default nominee."
+      },
+      {
+        "q": "What will happen if the contribution gets delayed?",
+        "a": "You will be charged overdue interest for the delayed period if contribution is delayed beyond the due date.",
+        "quote": "Subscriber will be charged overdue interest for the delayed period in case the APY contribution gets delayed beyond the due date."
+      },
+      {
+        "q": "How will I know the status of my contribution?",
+        "a": "You will receive SMS alerts on your registered mobile number about PRAN activation, balance, and contribution credits, and a physical statement once in a financial year.",
+        "quote": "The periodical information to the subscribers regarding activation of PRAN, balance in the account, contribution credits etc. will be intimated to APY subscribers by way of SMS alerts on the registered mobile number or can be accessed through mobile/APY app launched by NSDL. The subscriber will also be receiving physical statement of account once in a financial year at their registered address."
+      },
+      {
+        "q": "Whether Aadhaar Number is compulsory for joining the scheme?",
+        "a": "No, Aadhaar is not mandatory as of now for joining the scheme.",
+        "quote": "It is not mandatory as of now."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "online",
+        "name": "Net banking facility",
+        "locator_url": null,
+        "quote": "One can also open an APY account online using one's Net banking facility."
+      },
+      {
+        "type": "online",
+        "name": "eNPS website",
+        "locator_url": null,
+        "quote": "Visit website “https://enps.nsdl.com/eNPS/NationalPensionSystem.html “ and select “Atal Pension Yojana”."
+      },
+      {
+        "type": "online",
+        "name": "e-APY portal",
+        "locator_url": null,
+        "quote": "One can also join digitally through e-APY portal or through web portal of banks providing such facility."
+      },
+      {
+        "type": "bank",
+        "name": "Bank",
+        "locator_url": null,
+        "quote": "KYC details are fetched from active Bank/Post Office Savings account."
+      },
+      {
+        "type": "post_office",
+        "name": "Post Office",
+        "locator_url": null,
+        "quote": "KYC details are fetched from active Bank/Post Office Savings account."
+      }
+    ],
+    "grievance": {
+      "text": "A subscriber can raise grievance anytime free of cost from anywhere by visiting www.npscra.nsdl.co.in, selecting NPS-Lite or through CGMS; a token number is allotted and status can be checked under “Check the status of Grievance / Enquiry already registered”.",
+      "url_or_number": "www.npscra.nsdl.co.in",
+      "quote": "A subscriber can raise grievance anytime free of cost from anywhere by visiting: www.npscra.nsdl.co.in >>Home >> select: NPS-Lite or through CGMS Subscriber raising the grievance will be allotted a token number against the grievance raised. Subscriber may check the status of the grievance under “Check the status of Grievance / Enquiry already registered”."
+    },
+    "source_url": "https://www.myscheme.gov.in/schemes/apy",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "pmjjby": {
+    "mode": "both",
+    "portal_url": "https://www.jansuraksha.gov.in",
+    "office": null,
+    "helpline": null,
+    "fees": "₹ 436/- per annum per subscriber",
+    "steps": [
+      {
+        "n": 1,
+        "action": "Download and take print of the “CONSENT-CUM-DECLARATION FORM” from the link below.",
+        "where": null,
+        "mode": "online",
+        "quote": "Step 01: Download and take print of the “CONSENT-CUM-DECLARATION FORM” given in the link below: https://www.jansuraksha.gov.in/Files/PMJJBY/English/ApplicationForm.pdf#zoom=250"
+      },
+      {
+        "n": 2,
+        "action": "Fill and sign the application form, attach self-attested copies of required documents, and submit to the authorised official of Bank / Post Office.",
+        "where": "Bank / Post Office",
+        "mode": "offline",
+        "quote": "Step 02: Duly fill and sign the application form, attach the self-attested copies of the required documents, and submit the case to the authorised official of Bank / Post Office. The official will return you the “ACKNOWLEDGEMENT SLIP CUM CERTIFICATE OF INSURANCE”."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "offline",
+        "summary": "Fill the consent form and submit it at your bank or post office",
+        "where": "Bank / Post Office",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Download and take print of the “CONSENT-CUM-DECLARATION FORM” from the link below.",
+            "where": null,
+            "mode": "online",
+            "quote": "Step 01: Download and take print of the “CONSENT-CUM-DECLARATION FORM” given in the link below: https://www.jansuraksha.gov.in/Files/PMJJBY/English/ApplicationForm.pdf#zoom=250"
+          },
+          {
+            "n": 2,
+            "action": "Fill and sign the application form, attach self-attested copies of required documents, and submit to the authorised official of Bank / Post Office.",
+            "where": "Bank / Post Office",
+            "mode": "offline",
+            "quote": "Step 02: Duly fill and sign the application form, attach the self-attested copies of the required documents, and submit the case to the authorised official of Bank / Post Office. The official will return you the “ACKNOWLEDGEMENT SLIP CUM CERTIFICATE OF INSURANCE”."
+          }
+        ]
+      }
+    ],
+    "documents": [],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "For first-time subscribers enrolling on or after 1st June 2016, death due to any cause other than accident during the first 30 days from enrolment is not covered; accidental death is covered from day one.",
+        "quote": "For subscribers enrolling for the first time on or after 1st June 2016, insurance benefit shall not be available for death (due to any cause other than accident) occurring during the first 30 days from the date of enrolment into the scheme. Death due to accidental causes will be covered from day one of insurance coverage.",
+        "applies_if": null
+      },
+      {
+        "kind": "one_per_family",
+        "text": "An individual with multiple bank accounts in one or different banks is eligible to join through one savings bank account only.",
+        "quote": "In case of multiple bank accounts held by an individual in one or different banks, the person would be eligible to join the scheme through one saving bank account only.",
+        "applies_if": null
+      },
+      {
+        "kind": "renewal",
+        "text": "The cover is valid for one year from 1st June to 31st May on payment of annual premium and is renewable from year to year.",
+        "quote": "Coverage under PMJJBY is valid for one year from 1st June to 31st May on payment of annual premium.",
+        "applies_if": null
+      },
+      {
+        "kind": "deadline",
+        "text": "Delayed enrolment for prospective cover is possible with reduced premium depending on the month of enrolment: June–August ₹436, September–November ₹342, December–February ₹228, March–May ₹114.",
+        "quote": "Delayed enrolment for prospective cover is possible on payment of premium as described below – a) For enrolment in June, July and August – Full Annual Premium of Rs.436/- is payable. b) For enrolment in September, October, and November –premium of Rs. 342/- is payable c) For enrolment in December, January and February –premium of Rs. 228/- is payable. d) For enrolment in March, April and May –premium of Rs. 114/- is payable.",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Applicants must be between 18 and 50 years of age and hold an individual bank or post office account.",
+        "quote": "The age of the applicant must be between 18 to 50 Years. The applicant must hold an individual bank / post office account.",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "How do I pay the premium for PMJJBY?",
+        "a": "The premium will be deducted from the account holder’s bank / Post office account through ‘auto debit’ facility.",
+        "quote": "The premium will be deducted from the account holder’s bank / Post office account through ‘auto debit’ facility."
+      },
+      {
+        "q": "What is the validity of the insurance cover in PMJJBY?",
+        "a": "Coverage under PMJJBY is valid for one year from 1st June to 31st May on payment of annual premium.",
+        "quote": "Coverage under PMJJBY is valid for one year from 1st June to 31st May on payment of annual premium."
+      },
+      {
+        "q": "Is delayed enrolment for prospective cover possible under this scheme?",
+        "a": "Yes. Delayed enrolment for prospective cover is possible on payment of premium: June–August ₹436, September–November ₹342, December–February ₹228, March–May ₹114.",
+        "quote": "Delayed enrolment for prospective cover is possible on payment of premium as described below – a) For enrolment in June, July and August – Full Annual Premium of Rs.436/- is payable. b) For enrolment in September, October, and November –premium of Rs. 342/- is payable c) For enrolment in December, January and February –premium of Rs. 228/- is payable. d) For enrolment in March, April and May –premium of Rs. 114/- is payable."
+      },
+      {
+        "q": "If I decide to exit the scheme, is there any possibility that I can rejoin at a later point of time?",
+        "a": "Yes. One can enroll again under the same conditions of eligibility stipulated in the Scheme.",
+        "quote": "Yes. One can enroll again under the same conditions of eligibility stipulated in the Scheme."
+      },
+      {
+        "q": "Who will offer / administer the scheme?",
+        "a": "The scheme would be offered / administered through Insurance companies willing to offer the product with necessary approvals on similar terms, in collaboration with participating Banks.",
+        "quote": "The scheme would be offered / administered through Insurance companies willing to offer the product with necessary approvals on similar terms, in collaboration with participating Banks. Participating banks will be free to engage any such insurance company for implementing the scheme for their subscribers."
+      },
+      {
+        "q": "What is the minimum eligibility to subscribe to PMJJBY?",
+        "a": "All savings bank account holders in the age 18 to 50 years in participating banks will be entitled to join; an individual with multiple bank accounts is eligible through one savings bank account only.",
+        "quote": "All savings bank account holders in the age 18 to 50 years in participating banks will be entitled to join. In case of multiple bank accounts held by an individual in one or different banks, the person would be eligible to join the scheme through one saving bank account only."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "bank",
+        "name": "Participating bank",
+        "locator_url": null,
+        "quote": "The scheme is offered by banks/post offices and administered through life insurance companies."
+      },
+      {
+        "type": "post_office",
+        "name": "Post office",
+        "locator_url": null,
+        "quote": "The scheme is offered by banks/post offices and administered through life insurance companies."
+      }
+    ],
+    "grievance": null,
+    "source_url": "https://www.myscheme.gov.in/schemes/pmjjby",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "pmsby": {
+    "mode": "both",
+    "portal_url": "https://jansuraksha.gov.in/Forms-PMSBY.aspx",
+    "office": null,
+    "helpline": "1800-180-1111 / 1800-110-001",
+    "fees": "Rs.20/- per annum per member",
+    "steps": [
+      {
+        "n": 1,
+        "action": "Visit the bank branch where you have a savings account or download the PMSBY form from the official site.",
+        "where": "bank branch where you have a savings account",
+        "mode": "offline",
+        "quote": "Step 01: In order to enrol in PMSBY offline, one can visit the bank branch where one has a savings account or the candidate can visit the official site: https://jansuraksha.gov.in/Forms-PMSBY.aspx to download the form."
+      },
+      {
+        "n": 2,
+        "action": "Fill in all details in the application form and submit it to the bank along with the required documents.",
+        "where": "bank",
+        "mode": "offline",
+        "quote": "Step 02: After downloading the application form , candidate can fill in all the details and submit them to the bank along with the required documents."
+      },
+      {
+        "n": 3,
+        "action": "Collect the Acknowledgement Slip Cum Certificate of Insurance after successful submission.",
+        "where": "bank",
+        "mode": "offline",
+        "quote": "Step 03: Once it is successfully submitted , subscriber will get an Acknowledgement Slip Cum Certificate of Insurance."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "offline",
+        "summary": "Visit your bank branch and submit the PMSBY form",
+        "where": "bank branch where you have a savings account",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Visit the bank branch where you have a savings account or download the PMSBY form from the official site.",
+            "where": "bank branch where you have a savings account",
+            "mode": "offline",
+            "quote": "Step 01: In order to enrol in PMSBY offline, one can visit the bank branch where one has a savings account or the candidate can visit the official site: https://jansuraksha.gov.in/Forms-PMSBY.aspx to download the form."
+          },
+          {
+            "n": 2,
+            "action": "Fill in all details in the application form and submit it to the bank along with the required documents.",
+            "where": "bank",
+            "mode": "offline",
+            "quote": "Step 02: After downloading the application form , candidate can fill in all the details and submit them to the bank along with the required documents."
+          },
+          {
+            "n": 3,
+            "action": "Collect the Acknowledgement Slip Cum Certificate of Insurance after successful submission.",
+            "where": "bank",
+            "mode": "offline",
+            "quote": "Step 03: Once it is successfully submitted , subscriber will get an Acknowledgement Slip Cum Certificate of Insurance."
+          }
+        ]
+      }
+    ],
+    "documents": [],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "Accident cover terminates on attaining age 70 years (age nearer birthday).",
+        "quote": "On attaining age 70 years (age nearer birth day).",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Accident cover terminates on closure of the bank account or insufficiency of balance to keep the insurance in force.",
+        "quote": "Closure of account with the Bank or insufficiency of balance to keep the insurance in force.",
+        "applies_if": null
+      },
+      {
+        "kind": "one_per_family",
+        "text": "If covered through more than one account, insurance cover is restricted to Rs. 2 lakh.",
+        "quote": "In case a member is covered under PMSBY through more than one account and premium is received by insurance company inadvertently, insurance cover will be restricted to Rs. 2 lakh.",
+        "applies_if": null
+      },
+      {
+        "kind": "one_per_family",
+        "text": "An individual can join PMSBY through only one bank/post office account.",
+        "quote": "No. In case of multiple bank accounts held by an individual in one or different banks, the person would be eligible to join the scheme through one bank/post office account only.",
+        "applies_if": null
+      },
+      {
+        "kind": "benefit_stops",
+        "text": "No benefit will be payable for partial disability without irrecoverable loss of sight of one eye or loss of use of one hand or foot.",
+        "quote": "No benefit will be payable.",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Death due to suicide is not covered.",
+        "quote": "While death due to suicide is not covered, that from murder is covered",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "Who can claim insurance benefit in case of death of the bank account holder who gave the enrolment form?",
+        "a": "Claim can be filed by the nominee/appointee as per the enrolment form or by the legal heir/s if no nomination was made.",
+        "quote": "In case of death of the Account holder who enrolled in the scheme, claim can be filed by the nominee/appointee as per the enrolment form or by the legal heir/s in case there is no nomination made by the subscriber bank account holder."
+      },
+      {
+        "q": "What is the mode of payment of the claim amount?",
+        "a": "Disability claim is credited to the insured account holder's bank account; death claims are remitted to the nominee/legal heir(s)' bank account.",
+        "quote": "Disability Claim will be credited in the bank account of the insured bank account holder. Death claims will be remitted to the bank account of the nominee / legal heir(s)."
+      },
+      {
+        "q": "Is it necessary to report accidents to police and obtain FIR for claiming benefits under the policy?",
+        "a": "Yes for road, rail, vehicular accidents, drowning, death involving crime; for snake bite or fall from tree, cause should be supported by immediate hospital record.",
+        "quote": "In case of incidents like Road, Rail and similar vehicular accidents, drowning, death involving any crime etc., the accident should be reported to police. In case of incidents like snake bite, fall from tree etc., the cause should be supported by immediate hospital record."
+      },
+      {
+        "q": "Can an account holder get claim from more than one bank where he has enrolled and premium has been debited?",
+        "a": "No, the insured/nominee shall be eligible for one claim only.",
+        "quote": "No. The insured/ Nominee shall be eligible for one claim only."
+      },
+      {
+        "q": "Can an individual join PMSBY from multiple bank accounts?",
+        "a": "No, the person would be eligible to join through one bank/post office account only.",
+        "quote": "No. In case of multiple bank accounts held by an individual in one or different banks, the person would be eligible to join the scheme through one bank/post office account only."
+      },
+      {
+        "q": "What is the minimum and maximum age limit for entry into this scheme?",
+        "a": "Individuals aged between 18 years (completed) and 70 years (age nearer birthday) are eligible.",
+        "quote": "Individuals aged between 18 years (completed) and 70 years (age nearer birthday) are eligible for this scheme."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "bank",
+        "name": "bank branch where you have a savings account",
+        "locator_url": null,
+        "quote": "In order to enrol in PMSBY offline, one can visit the bank branch where one has a savings account"
+      },
+      {
+        "type": "online",
+        "name": "https://jansuraksha.gov.in/Forms-PMSBY.aspx",
+        "locator_url": null,
+        "quote": "the candidate can visit the official site: https://jansuraksha.gov.in/Forms-PMSBY.aspx to download the form."
+      }
+    ],
+    "grievance": {
+      "text": "Call the National Toll Free Number or check state-wise tollfree numbers.",
+      "url_or_number": "1800-180-1111 / 1800-110-001",
+      "quote": "National Toll Free Number - 1800-180-1111 / 1800-110-001"
+    },
+    "source_url": "https://www.myscheme.gov.in/schemes/pmsby",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "pm_kisan": {
+    "mode": "both",
+    "portal_url": null,
+    "office": null,
+    "helpline": null,
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Keep Aadhaar Card, landholding paper and savings bank account ready as prerequisites for enrollment.",
+        "where": null,
+        "mode": "online",
+        "quote": "Step 1: The following are the prerequisites for the enrollment process: Aadhaar Card Landholding paper Savings bank account"
+      },
+      {
+        "n": 2,
+        "action": "Visit a CSC where the VLE fills in farmer registration details such as State, district, subdistrict block, village, Aadhaar number, name, category, bank detail, Land Registration ID and date of birth as printed on Aadhaar card.",
+        "where": "CSC",
+        "mode": "offline",
+        "quote": "Step 2: The VLE will fill in the complete details of farmer registration details like State, district, subdistrict block, and village, key in the Aadhaar number, Name of the beneficiary, category, Bank detail, Land Registration ID, and Date of birth as printed on Aadhaar card for authentication.."
+      },
+      {
+        "n": 3,
+        "action": "Provide land details such as Survey/Kahta No., Khasra no. and area of land as mentioned in land holding papers.",
+        "where": "CSC",
+        "mode": "offline",
+        "quote": "Step 3: The VLE will fill in the Land details like Survey/ Kahta No., Khasra no., and area of land as mentioned in land holding papers."
+      },
+      {
+        "n": 4,
+        "action": "Upload supporting documents like land, Aadhaar and bank passbook.",
+        "where": "CSC",
+        "mode": "offline",
+        "quote": "Step 4: Upload the supporting documents like Land, Aadhar, and Bank passbook."
+      },
+      {
+        "n": 5,
+        "action": "Accept the self-declaration and save the application form.",
+        "where": "CSC",
+        "mode": "offline",
+        "quote": "Step 5: Self-declaration accept and save the application form."
+      },
+      {
+        "n": 6,
+        "action": "Make payment through CSC ID after saving the application form.",
+        "where": "CSC",
+        "mode": "offline",
+        "quote": "Step 6: After saving the application form make payment through CSC ID."
+      },
+      {
+        "n": 7,
+        "action": "Check beneficiary status through the Aadhaar number.",
+        "where": null,
+        "mode": "online",
+        "quote": "Step 7: Check the Beneficiary status through the Aadhaar number."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "offline",
+        "summary": "Visit a CSC where the VLE fills in your registration",
+        "where": "CSC",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Keep Aadhaar Card, landholding paper and savings bank account ready as prerequisites for enrollment.",
+            "where": null,
+            "mode": "online",
+            "quote": "Step 1: The following are the prerequisites for the enrollment process: Aadhaar Card Landholding paper Savings bank account"
+          },
+          {
+            "n": 2,
+            "action": "Visit a CSC where the VLE fills in farmer registration details such as State, district, subdistrict block, village, Aadhaar number, name, category, bank detail, Land Registration ID and date of birth as printed on Aadhaar card.",
+            "where": "CSC",
+            "mode": "offline",
+            "quote": "Step 2: The VLE will fill in the complete details of farmer registration details like State, district, subdistrict block, and village, key in the Aadhaar number, Name of the beneficiary, category, Bank detail, Land Registration ID, and Date of birth as printed on Aadhaar card for authentication.."
+          },
+          {
+            "n": 3,
+            "action": "Provide land details such as Survey/Kahta No., Khasra no. and area of land as mentioned in land holding papers.",
+            "where": "CSC",
+            "mode": "offline",
+            "quote": "Step 3: The VLE will fill in the Land details like Survey/ Kahta No., Khasra no., and area of land as mentioned in land holding papers."
+          },
+          {
+            "n": 4,
+            "action": "Upload supporting documents like land, Aadhaar and bank passbook.",
+            "where": "CSC",
+            "mode": "offline",
+            "quote": "Step 4: Upload the supporting documents like Land, Aadhar, and Bank passbook."
+          },
+          {
+            "n": 5,
+            "action": "Accept the self-declaration and save the application form.",
+            "where": "CSC",
+            "mode": "offline",
+            "quote": "Step 5: Self-declaration accept and save the application form."
+          },
+          {
+            "n": 6,
+            "action": "Make payment through CSC ID after saving the application form.",
+            "where": "CSC",
+            "mode": "offline",
+            "quote": "Step 6: After saving the application form make payment through CSC ID."
+          },
+          {
+            "n": 7,
+            "action": "Check beneficiary status through the Aadhaar number.",
+            "where": null,
+            "mode": "online",
+            "quote": "Step 7: Check the Beneficiary status through the Aadhaar number."
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "doc": "aadhaar",
+        "as_written": "Aadhaar Card",
+        "mandatory": true,
+        "quote": "Aadhaar Card"
+      },
+      {
+        "doc": "land_records",
+        "as_written": "Landholding papers",
+        "mandatory": true,
+        "quote": "Landholding papers"
+      },
+      {
+        "doc": "savings_account",
+        "as_written": "Savings Bank Account.",
+        "mandatory": true,
+        "quote": "Savings Bank Account."
+      }
+    ],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "Institutional land holders are not eligible.",
+        "quote": "All Institutional Land holders.",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Farmer families with a member who is a former or present holder of constitutional posts are not eligible.",
+        "quote": "Former and present holders of constitutional posts",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Farmer families with a member who is a former or present Minister, MP, MLA, MLC, Mayor or District Panchayat Chairperson are not eligible.",
+        "quote": "Former and present Ministers/ State Ministers and former/present Members of LokSabha/ RajyaSabha/ State Legislative Assemblies/ State Legislative Councils,former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats.",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Serving or retired Central/State government employees, PSE employees, autonomous institution employees and regular local body employees (excluding MTS/Class IV/Group D) are not eligible.",
+        "quote": "All serving or retired officers and employees of Central/ State Government Ministries /Offices/Departments and its field units Central or State PSEs and Attached offices /Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff /Class IV/Group D employees)",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Superannuated or retired pensioners with monthly pension of Rs. 10,000 or more (excluding MTS/Class IV/Group D) are not eligible.",
+        "quote": "All superannuated/retired pensioners whose monthly pension is Rs.10,000/-or more (Excluding Multi Tasking Staff / Class IV/Group D employees) of above category",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Persons who paid income tax in the last assessment year are not eligible.",
+        "quote": "All Persons who paid Income Tax in last assessment year",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "Registered professionals such as doctors, engineers, lawyers, chartered accountants and architects carrying out practice are not eligible.",
+        "quote": "Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices.",
+        "applies_if": null
+      },
+      {
+        "kind": "repayment",
+        "text": "If the beneficiary gives incorrect declaration, the transferred financial benefit shall be recovered and other penal actions may be taken as per law.",
+        "quote": "In case of incorrect declaration, the beneficiary shall be liable for recovery of transferred financial benefit and other penal actions as per law.",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "Is the scheme only for small and marginal farmers?",
+        "a": "No, it is for all farmer families irrespective of the size of their landholdings.",
+        "quote": "No. The Scheme for all farmer families irrespective of the size of their landholdings"
+      },
+      {
+        "q": "What is the financial benefit under PM-KISAN?",
+        "a": "Rs. 6000 per annum per family in three equal installments of Rs. 2000 each, every four months.",
+        "quote": "Under the PM-KISAN scheme, all landholding farmers' families shall be provided the financial benefit of Rs.6000 per annum per family payable in three equal installments of Rs.2000 each, every four months."
+      },
+      {
+        "q": "Who identifies eligible farmers for payment?",
+        "a": "The State/UT Governments are entirely responsible for identifying eligible farmers' families.",
+        "quote": "The responsibility of identifying the eligible farmers' families for benefit under the scheme is entirely of the State/UT Governments"
+      },
+      {
+        "q": "Are professionals eligible for PM-KISAN?",
+        "a": "No, professionals are not eligible for the scheme.",
+        "quote": "No, You are not eligible for the scheme."
+      },
+      {
+        "q": "Are Members of Parliament or State Legislatures eligible?",
+        "a": "No, they are not eligible for the scheme.",
+        "quote": "No, You are not eligible for the scheme"
+      },
+      {
+        "q": "Is a farmer eligible if a family member is an income tax payer?",
+        "a": "No, if any member of the family is an income tax payee in the last assessment year, they are not eligible.",
+        "quote": "No. if any member of the family is income tax payee in last assessment year is not eligible."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "csc",
+        "name": "CSC",
+        "locator_url": "https://findmycsc.nic.in/",
+        "quote": "Online - Via CSCs"
+      }
+    ],
+    "grievance": null,
+    "source_url": "https://www.myscheme.gov.in/schemes/pm-kisan",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "pmuy": {
+    "mode": "both",
+    "portal_url": null,
+    "office": null,
+    "helpline": null,
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Apply the application form through the online official website.",
+        "where": null,
+        "mode": "online",
+        "quote": "Apply the application form through online official website."
+      },
+      {
+        "n": 2,
+        "action": "Select the oil company name such as Indane, Bharatgas or HP Gas.",
+        "where": null,
+        "mode": "online",
+        "quote": "Select the oil company name example Indane / Bharatgas / HP Gas"
+      },
+      {
+        "n": 3,
+        "action": "Select Type of Connection as Ujjwala 2.0 New Connection.",
+        "where": null,
+        "mode": "online",
+        "quote": "Select Type of Connection like Ujjwala 2.0 New Connection"
+      },
+      {
+        "n": 4,
+        "action": "Choose State, District and Name of Distributor.",
+        "where": null,
+        "mode": "online",
+        "quote": "Choose State, District and Name of Distributor."
+      },
+      {
+        "n": 5,
+        "action": "Enter Mobile Number, Captcha and OTP.",
+        "where": null,
+        "mode": "online",
+        "quote": "Enter Mobile Number, Captcha and OTP."
+      },
+      {
+        "n": 6,
+        "action": "Select Migrant Family status as YES or NO.",
+        "where": null,
+        "mode": "online",
+        "quote": "Select Migrant Family status in YES or NO"
+      },
+      {
+        "n": 7,
+        "action": "If Migrant Family is NO, fill Annexure 1; if YES, fill Ration Card.",
+        "where": null,
+        "mode": "online",
+        "quote": "For family Identifier in NO fill Annexure 1 For family Identifier in Yes fill Ration Card"
+      },
+      {
+        "n": 8,
+        "action": "Select Category and fill all Family Details, Personal details, address details, bank details, Choose Cylinder Types, Select rural or urban and select declaration and submit.",
+        "where": null,
+        "mode": "online",
+        "quote": "Select Category. Fill all Family Details, Personal details, address details, bank details, Choose Cylinder Types, Select rural or urban and select declaration and submit."
+      },
+      {
+        "n": 9,
+        "action": "Generate Reference number and visit Gas agency.",
+        "where": "Gas agency",
+        "mode": "offline",
+        "quote": "Generate Reference number and visit Gas agency."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "online",
+        "summary": "Apply on the official website: choose your oil company and distributor",
+        "where": null,
+        "steps": [
+          {
+            "n": 1,
+            "action": "Apply the application form through the online official website.",
+            "where": null,
+            "mode": "online",
+            "quote": "Apply the application form through online official website."
+          },
+          {
+            "n": 2,
+            "action": "Select the oil company name such as Indane, Bharatgas or HP Gas.",
+            "where": null,
+            "mode": "online",
+            "quote": "Select the oil company name example Indane / Bharatgas / HP Gas"
+          },
+          {
+            "n": 3,
+            "action": "Select Type of Connection as Ujjwala 2.0 New Connection.",
+            "where": null,
+            "mode": "online",
+            "quote": "Select Type of Connection like Ujjwala 2.0 New Connection"
+          },
+          {
+            "n": 4,
+            "action": "Choose State, District and Name of Distributor.",
+            "where": null,
+            "mode": "online",
+            "quote": "Choose State, District and Name of Distributor."
+          },
+          {
+            "n": 5,
+            "action": "Enter Mobile Number, Captcha and OTP.",
+            "where": null,
+            "mode": "online",
+            "quote": "Enter Mobile Number, Captcha and OTP."
+          },
+          {
+            "n": 6,
+            "action": "Select Migrant Family status as YES or NO.",
+            "where": null,
+            "mode": "online",
+            "quote": "Select Migrant Family status in YES or NO"
+          },
+          {
+            "n": 7,
+            "action": "If Migrant Family is NO, fill Annexure 1; if YES, fill Ration Card.",
+            "where": null,
+            "mode": "online",
+            "quote": "For family Identifier in NO fill Annexure 1 For family Identifier in Yes fill Ration Card"
+          },
+          {
+            "n": 8,
+            "action": "Select Category and fill all Family Details, Personal details, address details, bank details, Choose Cylinder Types, Select rural or urban and select declaration and submit.",
+            "where": null,
+            "mode": "online",
+            "quote": "Select Category. Fill all Family Details, Personal details, address details, bank details, Choose Cylinder Types, Select rural or urban and select declaration and submit."
+          }
+        ]
+      },
+      {
+        "mode": "offline",
+        "summary": "Visit the gas agency with your reference number",
+        "where": "Gas agency",
+        "steps": [
+          {
+            "n": 9,
+            "action": "Generate Reference number and visit Gas agency.",
+            "where": "Gas agency",
+            "mode": "offline",
+            "quote": "Generate Reference number and visit Gas agency."
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "doc": "photo_id",
+        "as_written": "Valid Photo ID",
+        "mandatory": true,
+        "quote": "Valid Photo ID"
+      },
+      {
+        "doc": "ration_card",
+        "as_written": "Ration Card issued by the State from which application is being made/ other State Govt. document certifying family composition/ Self-Declaration as per Annexure I (for migrant applicants)",
+        "mandatory": true,
+        "quote": "Ration Card issued by the State from which application is being made/ other State Govt. document certifying family composition/ Self-Declaration as per Annexure I (for migrant applicants)",
+        "alternatives_group": "family_proof"
+      },
+      {
+        "doc": "self_declaration",
+        "as_written": "Ration Card issued by the State from which application is being made/ other State Govt. document certifying family composition/ Self-Declaration as per Annexure I (for migrant applicants)",
+        "mandatory": true,
+        "quote": "Ration Card issued by the State from which application is being made/ other State Govt. document certifying family composition/ Self-Declaration as per Annexure I (for migrant applicants)",
+        "alternatives_group": "family_proof"
+      },
+      {
+        "doc": "migrant_declaration",
+        "as_written": "Ration Card issued by the State from which application is being made/ other State Govt. document certifying family composition/ Self-Declaration as per Annexure I (for migrant applicants)",
+        "mandatory": true,
+        "quote": "Ration Card issued by the State from which application is being made/ other State Govt. document certifying family composition/ Self-Declaration as per Annexure I (for migrant applicants)",
+        "alternatives_group": "family_proof"
+      },
+      {
+        "doc": "residence_proof",
+        "as_written": "Proof of Address - Aadhaar will be taken as Proof of Identity and Proof of Address if the connection is required in the same address.",
+        "mandatory": true,
+        "quote": "Proof of Address - Aadhaar will be taken as Proof of Identity and Proof of Address if the connection is required in the same address."
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "Proof of Address - Aadhaar will be taken as Proof of Identity and Proof of Address if the connection is required in the same address.",
+        "mandatory": true,
+        "quote": "Proof of Address - Aadhaar will be taken as Proof of Identity and Proof of Address if the connection is required in the same address."
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "In that case only Aadhaar is sufficient.",
+        "mandatory": true,
+        "quote": "In that case only Aadhaar is sufficient."
+      },
+      {
+        "doc": "bank_passbook",
+        "as_written": "Bank Account Number and IFSC.",
+        "mandatory": true,
+        "quote": "Bank Account Number and IFSC."
+      },
+      {
+        "doc": "aadhaar",
+        "as_written": "Aadhaar (not mandatory for Assam and Meghalaya)",
+        "mandatory": true,
+        "quote": "Aadhaar (not mandatory for Assam and Meghalaya)"
+      },
+      {
+        "doc": "passport_photo",
+        "as_written": "Passport size photograph",
+        "mandatory": true,
+        "quote": "Passport size photograph"
+      }
+    ],
+    "watch_outs": [
+      {
+        "kind": "exclusion",
+        "text": "A male member from a household cannot apply for the scheme.",
+        "quote": "Male Member from a household cannot apply for the scheme.",
+        "applies_if": null
+      },
+      {
+        "kind": "exclusion",
+        "text": "A household with no adult woman is not eligible for PMUY.",
+        "quote": "No, you are not eligible for the scheme.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "The bank account must be in the name of the applicant; a husband's bank account number cannot be used.",
+        "quote": "No, There should be a bank account in the name of the applicant.",
+        "applies_if": null
+      },
+      {
+        "kind": "other",
+        "text": "Priority is given to states with lower LPG coverage compared to the national average as on 1st Jan 2016.",
+        "quote": "Priority would be given to the states which have lower LPG coverage (Compared to the national average) as on 1st Jan 2016.",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "My family has a PMUY connection at home in the name of my mother-in-law and she moves with me and my family to the city where we work. Can a new PMUY connection be taken in the name of mother-in-law?",
+        "a": "Yes, the connection can be transferred and the facility of change of address will be made available soon.",
+        "quote": "Yes, the connection can be transferred and the facility of change of address will be made available soon."
+      },
+      {
+        "q": "I am a male from BPL Household, Can I apply for the scheme?",
+        "a": "No, This scheme is only for Women from BPL / Poor Households.",
+        "quote": "No, This scheme is only for Women from BPL / Poor Households."
+      },
+      {
+        "q": "I belong to poor household there is no adult women in my Household, is my household eligible for PMUY?",
+        "a": "No, you are not eligible for the scheme.",
+        "quote": "No, you are not eligible for the scheme."
+      },
+      {
+        "q": "I am Adult women belong to ST cast, Am I eligible to PMUY scheme?",
+        "a": "Yes, you are eligible for the scheme.",
+        "quote": "Yes, you are eligible for the scheme."
+      },
+      {
+        "q": "I am Adult women belong to Forest Dweller. Am I eligible to PMUY scheme?",
+        "a": "Yes, you are eligible for the scheme.",
+        "quote": "Yes, you are eligible for the scheme."
+      },
+      {
+        "q": "If my D.O.B is not mention at ration card then how can prove that I am adult women?",
+        "a": "You can use Aadhaar Card to validate your age.",
+        "quote": "You can use Aadhaar Card to validate your age."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "online",
+        "name": "online official website",
+        "locator_url": null,
+        "quote": "Apply the application form through online official website."
+      }
+    ],
+    "grievance": null,
+    "source_url": "https://www.myscheme.gov.in/schemes/pmuy",
+    "verified_at": "2026-11-28",
+    "source_official": true
+  },
+  "ssy": {
+    "mode": "offline",
+    "portal_url": null,
+    "office": null,
+    "helpline": null,
+    "fees": null,
+    "steps": [
+      {
+        "n": 1,
+        "action": "Confirm the girl child is below 10 years old on the date the account is opened.",
+        "where": null,
+        "mode": "offline",
+        "quote": "The girl child must be below 10 years of age on the date the account is opened."
+      },
+      {
+        "n": 2,
+        "action": "Ensure the girl child is a resident Indian citizen at the time of opening and remains so until maturity or closure.",
+        "where": null,
+        "mode": "offline",
+        "quote": "The beneficiary must be a resident Indian citizen at the time of opening the account and must continue to meet the applicable residential requirement until maturity or closure."
+      },
+      {
+        "n": 3,
+        "action": "Submit the girl's birth certificate and the required guardian documents at a post office or authorised bank.",
+        "where": "post office or authorised bank",
+        "mode": "offline",
+        "quote": "The girl's birth certificate is required as part of the account-opening documentation, along with the required guardian documents."
+      },
+      {
+        "n": 4,
+        "action": "Deposit a minimum initial amount of ₹250 to open the account.",
+        "where": "post office or authorised bank",
+        "mode": "offline",
+        "quote": "The account can be opened with a minimum initial deposit of ₹250."
+      },
+      {
+        "n": 5,
+        "action": "Deposit at least ₹250 in each financial year to keep the account active.",
+        "where": null,
+        "mode": "offline",
+        "quote": "A minimum deposit of ₹250 is required in each financial year to keep the account active under the scheme rules."
+      }
+    ],
+    "routes": [
+      {
+        "mode": "offline",
+        "summary": "Open the account with the girl's birth certificate and a minimum deposit",
+        "where": "post office or authorised bank",
+        "steps": [
+          {
+            "n": 1,
+            "action": "Confirm the girl child is below 10 years old on the date the account is opened.",
+            "where": null,
+            "mode": "offline",
+            "quote": "The girl child must be below 10 years of age on the date the account is opened."
+          },
+          {
+            "n": 2,
+            "action": "Ensure the girl child is a resident Indian citizen at the time of opening and remains so until maturity or closure.",
+            "where": null,
+            "mode": "offline",
+            "quote": "The beneficiary must be a resident Indian citizen at the time of opening the account and must continue to meet the applicable residential requirement until maturity or closure."
+          },
+          {
+            "n": 3,
+            "action": "Submit the girl's birth certificate and the required guardian documents at a post office or authorised bank.",
+            "where": "post office or authorised bank",
+            "mode": "offline",
+            "quote": "The girl's birth certificate is required as part of the account-opening documentation, along with the required guardian documents."
+          },
+          {
+            "n": 4,
+            "action": "Deposit a minimum initial amount of ₹250 to open the account.",
+            "where": "post office or authorised bank",
+            "mode": "offline",
+            "quote": "The account can be opened with a minimum initial deposit of ₹250."
+          },
+          {
+            "n": 5,
+            "action": "Deposit at least ₹250 in each financial year to keep the account active.",
+            "where": null,
+            "mode": "offline",
+            "quote": "A minimum deposit of ₹250 is required in each financial year to keep the account active under the scheme rules."
+          }
+        ]
+      }
+    ],
+    "documents": [],
+    "watch_outs": [
+      {
+        "kind": "one_per_family",
+        "text": "A family can normally open accounts for a maximum of two girl children.",
+        "quote": "A maximum of two girl children in one family can have Sukanya Samriddhi accounts.",
+        "applies_if": null
+      },
+      {
+        "kind": "benefit_stops",
+        "text": "If the girl ceases to be a resident Indian citizen, the account is deemed closed from the date of status change and stops earning interest immediately.",
+        "quote": "if the beneficiary girl child ceases to be a resident Indian citizen or changes her citizenship, the account is deemed closed from the exact date of status change, and it stops earning interest immediately.",
+        "applies_if": null
+      },
+      {
+        "kind": "renewal",
+        "text": "Deposit at least ₹250 every financial year to keep the account active.",
+        "quote": "A minimum deposit of ₹250 is required in each financial year to keep the account active under the scheme rules.",
+        "applies_if": null
+      },
+      {
+        "kind": "repayment",
+        "text": "If the minimum ₹250 annual deposit is missed, the account goes into default and can be regularised before maturity by paying a penalty of ₹50 for each default year plus clearing the accumulated minimum dues of ₹250 per missed year.",
+        "quote": "If you fail to deposit the minimum ₹250 within a financial year, the account goes into default. You can regularise it anytime before maturity by paying a minor penalty of ₹50 for each default year, alongside clearing the accumulated minimum dues of ₹250 per missed year.",
+        "applies_if": null
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the maximum age for opening a Sukanya Samriddhi account?",
+        "a": "The girl child must not have attained the age of 10 years on the date the account is opened.",
+        "quote": "The girl child must not have attained the age of 10 years on the date the account is opened."
+      },
+      {
+        "q": "Can a father open a Sukanya Samriddhi account?",
+        "a": "A father can open the account as a natural guardian, provided the girl child meets the eligibility conditions.",
+        "quote": "A father can open the account as a natural guardian, provided the girl child meets the eligibility conditions."
+      },
+      {
+        "q": "Can a mother open an SSY account?",
+        "a": "A mother can also open the account as a natural guardian of an eligible girl child.",
+        "quote": "A mother can also open the account as a natural guardian of an eligible girl child."
+      },
+      {
+        "q": "Can a legal guardian open the account?",
+        "a": "The rules allow a natural or legal guardian to open a Sukanya Samriddhi account in the name of an eligible girl child.",
+        "quote": "The rules allow a natural or legal guardian to open a Sukanya Samriddhi account in the name of an eligible girl child."
+      },
+      {
+        "q": "Can an account be opened for a boy child?",
+        "a": "Sukanya Samriddhi Yojana is specifically designed for eligible girl children.",
+        "quote": "Sukanya Samriddhi Yojana is specifically designed for eligible girl children."
+      },
+      {
+        "q": "How many Sukanya Samriddhi accounts can one girl have?",
+        "a": "Only one account can be opened in the name of a girl child under the scheme.",
+        "quote": "Only one account can be opened in the name of a girl child under the scheme. Opening multiple accounts for the same girl is not permitted."
+      }
+    ],
+    "enrol_points": [
+      {
+        "type": "post_office",
+        "name": "post office",
+        "locator_url": null,
+        "quote": "Before visiting a post office or authorised bank, it is useful to check the latest document requirements so that the application is not delayed."
+      },
+      {
+        "type": "bank",
+        "name": "authorised bank",
+        "locator_url": null,
+        "quote": "Before visiting a post office or authorised bank, it is useful to check the latest document requirements so that the application is not delayed."
+      }
+    ],
+    "grievance": null,
+    "source_url": "https://www.angelone.in/knowledge-center/savings-schemes/eligibility-for-sukanya-samriddhi-yojana",
+    "verified_at": "2026-11-28",
+    "source_official": false
+  }
+}

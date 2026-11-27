@@ -1,0 +1,72 @@
+{
+  "_comment": "Curated urgent-help resources. Each entry was checked against its official page with curl on 2026-11-28 (see verified_note). Add an entry only after fetching its official source_url and finding the number/URL there. Languages are recorded only when the source states them.",
+  "resources": [
+    {
+      "id": "emergency_112",
+      "name": "112 India (national emergency number)",
+      "number": "112",
+      "url": null,
+      "who_for": "Anyone in immediate danger or an emergency: police, fire, ambulance",
+      "languages": "not stated on the source page",
+      "source_url": "https://www.mha.gov.in/",
+      "verified_on": "2026-11-28",
+      "verified_note": "Ministry of Home Affairs home page carries the official 'Dial 112' banner. 112.gov.in itself failed TLS verification from curl, so it is not used as a source."
+    },
+    {
+      "id": "elderline_14567",
+      "name": "Elderline (National Helpline for Senior Citizens)",
+      "number": "14567",
+      "url": null,
+      "who_for": "Senior citizens: information, guidance, help with abuse, neglect or being left without support",
+      "languages": "not stated on the source page",
+      "source_url": "https://www.dosje.gov.in/",
+      "verified_on": "2026-11-28",
+      "verified_note": "Department of Social Justice and Empowerment (Ministry of Social Justice and Empowerment) home page lists 'Elderline - National Helpline for Senior Citizens' with tel:14567."
+    },
+    {
+      "id": "tele_manas_14416",
+      "name": "Tele-MANAS (national mental health helpline)",
+      "number": "14416",
+      "alt_number": "1-800-891-4416",
+      "url": null,
+      "who_for": "Anyone in emotional distress, with thoughts of self-harm, or needing mental health support; free",
+      "languages": "multiple regional languages across states and UTs",
+      "source_url": "https://telemanas.mohfw.gov.in/",
+      "verified_on": "2026-11-28",
+      "verified_note": "Tele MANAS site (Ministry of Health and Family Welfare): 'toll-free, 24x7 mental health support', 'Callers dial Tele MANAS toll-free number 14416', services in multiple regional languages."
+    },
+    {
+      "id": "women_helpline_181",
+      "name": "Women Helpline 181",
+      "number": "181",
+      "url": null,
+      "who_for": "Women facing violence, abuse or in distress",
+      "languages": "not stated on the source page",
+      "source_url": "https://wcd.gov.in/",
+      "verified_on": "2026-11-28",
+      "verified_note": "Ministry of Women and Child Development home page header lists 'Women Helpline Toll free No. - 181'."
+    },
+    {
+      "id": "child_helpline_1098",
+      "name": "Child Helpline 1098",
+      "number": "1098",
+      "url": null,
+      "who_for": "Children in need of care or protection, or anyone reporting a child in distress",
+      "languages": "not stated on the source page",
+      "source_url": "https://wcd.gov.in/",
+      "verified_on": "2026-11-28",
+      "verified_note": "Ministry of Women and Child Development home page header lists 'Child Helpline Toll free No. - 1098'."
+    },
+    {
+      "id": "urban_shelter_suh",
+      "name": "Shelter for Urban Homeless (DAY-NULM, Ministry of Housing and Urban Affairs)",
+      "number": null,
+      "url": "https://nulm.gov.in/CommonReport/SUH_Rept_Get_Shelters_ByCategoryTypeStateWise.aspx",
+      "who_for": "People without a home in towns and cities: a state-wise list of shelters; shelter staff are meant to help homeless people get ID proof, ration/BPL cards, pensions and bank accounts",
+      "languages": "not stated on the source page",
+      "source_url": "https://nulm.gov.in/PDF/NULM_Mission/NULM-SUH-Guidelines.pdf",
+      "verified_on": "2026-11-28",
+      "verified_note": "nulm.gov.in (DAY-NULM, MoHUA) lists the shelter reports; the official SUH guidelines say shelters provide entitlements convergence: 'Identity Proof & Postal Address', 'Old age, widows and disability pensions', 'BPL cards, PDS ration cards', 'Bank ... Jan Dhan Yojana Accounts'."
+    }
+  ]
+}

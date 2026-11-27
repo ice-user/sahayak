@@ -10,10 +10,14 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
+from typing import Literal
+
 from pydantic import BaseModel, Field, field_validator
 
+from sahayak import planner
 from sahayak.agent import Agent, default_trace_dir, make_client, resolve_config
 from sahayak.lang import upgrade_language
+from sahayak.models import Profile
 from sahayak.tools import Toolbox
 
 from .chat import NOT_CONFIGURED, error_event, event_stream, sse
@@ -45,6 +49,19 @@ class ChatRequest(BaseModel):
 
 class ResetRequest(BaseModel):
     session_id: str
+
+
+class PlanRequest(BaseModel):
+    scheme_ids: list[str] = Field(..., min_length=1, max_length=10)
+    profile: Profile | None = None
+    lang: Literal["en", "hi", "ta", "hinglish"] = "en"
+
+    @field_validator("scheme_ids")
+    @classmethod
+    def _ids_short(cls, v: list[str]) -> list[str]:
+        if any(not 1 <= len(i) <= 64 for i in v):
+            raise ValueError("each scheme id must be 1-64 characters")
+        return v
 
 
 def client_ip(request: Request, settings: Settings | bool) -> str:
@@ -246,6 +263,23 @@ def create_app(agent_factory: Callable[[Toolbox], Agent] | None = None, toolbox:
         if scheme is None:
             raise HTTPException(404, "Unknown scheme")
         return {**public[scheme_id], "rules": scheme.rules}
+
+    plan_limiter = RateLimiter(max(60, settings.rate_limit_per_10min * 5))  # separate from chat: no LLM cost
+
+    @app.post("/api/plan", response_model=None)
+    async def make_plan(body: PlanRequest, request: Request) -> JSONResponse | dict:
+        retry_after = plan_limiter.check(client_ip(request, settings))
+        if retry_after is not None:
+            return JSONResponse({"detail": "Too many requests. Please wait a few minutes and try again."},
+                                status_code=429, headers={"Retry-After": str(int(retry_after))})
+        return planner.build_plan(body.scheme_ids, body.profile, body.lang, schemes=toolbox.schemes)
+
+    @app.get("/api/schemes/{scheme_id}/apply")
+    async def get_apply(scheme_id: str) -> dict:
+        rec = planner.get_application(scheme_id)
+        if rec is None:
+            raise HTTPException(404, "No application data for this scheme")
+        return rec
 
     @app.post("/api/session/reset")
     async def reset(body: ResetRequest) -> dict:

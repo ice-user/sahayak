@@ -32,6 +32,8 @@ Active when `NEXT_PUBLIC_MOCK=1`, or in `npm run dev` when `NEXT_PUBLIC_API_URL`
 - Eligibility is computed by a TypeScript port of the Python rule engine, and a tiny keyword extractor reads age, widow, BPL etc. in en/hi/hinglish/ta, so follow-up chips ("Yes, we have a BPL card") change the next result.
 - Failure cases (each fails once, the retry succeeds): include `mock:error` (stream `error` event, `llm_error`), `mock:ratelimit` (HTTP 429 + `Retry-After`), `mock:busy` (HTTP 409), `mock:toolarge` (HTTP 413) or `mock:overloaded` (HTTP 503 + `Retry-After`) in a message. Two more simulate session problems: `mock:expire` makes the mock forget the conversation (the next reply shows the "conversation was restarted" notice) and `mock:sessionlimit` sends the per-session message cap `error` event (offers "Start new conversation").
 
+- `/plan?s=id1,id2` (the "Make my plan" button in chat) uses `mockPlan` in `src/lib/mock/mock-plan.ts`: checklist, steps, watch-outs, where-to-go trips, built from the bundled scheme data. Ticked documents are kept in `localStorage` per plan.
+
 ## Real backend
 
 ```bash

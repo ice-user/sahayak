@@ -3,6 +3,7 @@ import "./globals.css";
 import { LangProvider } from "@/components/lang-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { MotionProvider } from "@/components/motion-provider";
 import { WakeUp } from "@/components/wake-up";
 import { DICTS } from "@/lib/i18n";
 
@@ -38,11 +39,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-dvh flex-col">
         <WakeUp />
         <LangProvider>
+          <MotionProvider>
           <Header />
           <main id="main" className="flex-1">
             {children}
           </main>
           <Footer />
+          </MotionProvider>
         </LangProvider>
       </body>
     </html>

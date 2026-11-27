@@ -1,6 +1,8 @@
 "use client";
 
 import { AlertCircle, CircleSlash, History, RotateCcw, RotateCw } from "lucide-react";
+import * as m from "motion/react-m";
+import { FadeUp } from "@/components/fade-up";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/components/lang-provider";
 import { Markdown } from "@/components/markdown";
@@ -13,12 +15,12 @@ import { Trace } from "./trace";
 export function UserBubble({ message }: { message: UserMessage }) {
   const { t } = useLang();
   return (
-    <div className="flex justify-end">
+    <FadeUp className="flex justify-end">
       <p className="max-w-[88%] whitespace-pre-wrap break-words rounded-2xl rounded-br-md bg-ink px-4 py-3 text-[1.02rem] text-paper">
         <span className="sr-only">{t.chat.youSaid}: </span>
         {message.text}
       </p>
-    </div>
+    </FadeUp>
   );
 }
 
@@ -26,14 +28,19 @@ function StatusLine({ message }: { message: AssistantMessage }) {
   const { t } = useLang();
   const label = t.chat.status[message.activity ?? "thinking"];
   return (
-    <div className="flex items-center gap-3 py-1 text-ink-soft" role="status">
+    <m.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="inline-flex items-center gap-3 rounded-full border border-line bg-card px-4 py-2 text-ink-soft shadow-card"
+      role="status"
+    >
       <span className="flex gap-1" aria-hidden="true">
         <span className="lamp-dot size-2 rounded-full bg-marigold" />
         <span className="lamp-dot size-2 rounded-full bg-marigold" />
         <span className="lamp-dot size-2 rounded-full bg-marigold" />
       </span>
       <span className="font-medium">{label}</span>
-    </div>
+    </m.div>
   );
 }
 
@@ -111,10 +118,10 @@ export function AssistantBlock({ message, index, isLast, busy, onSuggest, onRetr
   return (
     <div className="space-y-4" aria-busy={message.streaming}>
       {message.text && (
-        <div className="rounded-2xl rounded-bl-md border border-line bg-card px-4 py-3.5 text-[1.02rem] shadow-card sm:px-5">
+        <FadeUp className={`rounded-2xl rounded-bl-md border border-line bg-card px-4 py-3.5 text-[1.02rem] shadow-card sm:px-5${showStatus ? " stream-caret" : ""}`}>
           <span className="sr-only">{t.chat.assistantSaid}: </span>
           <Markdown>{message.text}</Markdown>
-        </div>
+        </FadeUp>
       )}
       {showStatus && <StatusLine message={message} />}
       {message.eligibility && <SchemeResults result={message.eligibility} index={index} profile={profile} userText={userText} />}
@@ -125,7 +132,7 @@ export function AssistantBlock({ message, index, isLast, busy, onSuggest, onRetr
               key={s}
               type="button"
               onClick={() => onSuggest(s)}
-              className="min-h-11 rounded-full border-2 border-marigold bg-marigold-soft/60 px-4 text-base font-semibold text-ink transition-colors hover:bg-marigold-soft"
+              className="min-h-11 rounded-full border-2 border-marigold bg-marigold-soft/60 px-4 text-base font-semibold text-ink transition-[background-color,transform] hover:bg-marigold-soft motion-safe:active:scale-95"
             >
               {s}
             </button>

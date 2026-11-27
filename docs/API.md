@@ -52,6 +52,46 @@ An unknown or expired `session_id` (server restart, 30 min idle expiry, eviction
 ## GET /api/schemes/{id}
 `200` one scheme as above plus `"rules": [{"field","op","value","reason"}]` (shown as "who can get it"); `404 {"detail": "Unknown scheme"}`
 
+## POST /api/plan
+Deterministic application plan for a set of schemes (no LLM). Request:
+`{"scheme_ids": ["pm_kisan", "pmuy"], "profile": {"income_tax_payer_last_year": true}, "lang": "hi"}`
+`scheme_ids` 1-10 ids (each 1-64 chars); `profile` optional (same model as the eligibility profile, unknown keys rejected); `lang` one of `en|hi|ta|hinglish` (default `en`). Validation errors are `400 {"detail"}`; own per-IP limit (max(60, 5x `RATE_LIMIT_PER_10MIN`) per 10 min) gives `429` with `Retry-After`.
+
+`200`:
+```json
+{
+  "lang": "hi",
+  "checklist": [{"doc": "aadhaar", "name": "आधार कार्ड", "needed_for": ["pm_kisan", "pmuy"], "mandatory": true,
+                 "how_to_get": {"text": "Apply at an Aadhaar enrolment centre.", "source_url": "https://uidai.gov.in"}, "have": null}],
+  "schemes": [{"scheme_id": "ignwps", "scheme_name": "...", "source_url": "https://www.myscheme.gov.in/schemes/ignwps", "source_official": true,
+               "recommended_mode": "offline",
+               "routes": [{"mode": "online", "summary": "Apply on the UMANG app or website with your mobile number and OTP", "where": "https://web.umang.gov.in/web_new/home",
+                           "recommended": false, "steps": [{"n": 1, "action": "...", "where": null, "mode": "online", "source_url": "..."}]},
+                          {"mode": "offline", "summary": "Apply offline", "where": null, "recommended": true, "steps": [{"n": 6, "action": "Apply offline", "where": null, "mode": "offline", "source_url": "..."}]}]}],
+  "steps": [{"scheme_id": "pm_kisan", "scheme_name": "Pradhan Mantri Kisan Samman Nidhi", "scheme_ids": ["pm_kisan"], "scheme_names": ["Pradhan Mantri Kisan Samman Nidhi"], "source_urls": ["https://pmkisan.gov.in/guidelines"], "n": 1, "action": "Register as a new farmer",
+             "where": "pmkisan.gov.in", "mode": "online", "source_url": "https://pmkisan.gov.in/guidelines",
+             "group_kind": "online", "group": "https://pmkisan.gov.in"}],
+  "watch_outs": [{"scheme_id": "pm_kisan", "scheme_name": "...", "scheme_ids": ["pm_kisan"], "scheme_names": ["..."], "kind": "eligibility", "text": "Income tax payers are excluded",
+                  "quote": "...", "personal": true, "source_url": "..."}],
+  "where_to_go": [{"scheme_id": "pm_kisan", "scheme_name": "...", "enrol_points": [{"type": "Common Service Centre", "name": "Nearest CSC", "locator_url": null, "quote": "..."}],
+                   "grievance": {"text": "...", "url_or_number": "...", "quote": "..."}, "helpline": "155261", "portal_url": "https://pmkisan.gov.in", "office": "Block agriculture office"}],
+  "enrol_groups": [{"type": "Common Service Centre", "scheme_ids": ["pm_kisan", "pmuy"], "points": [{"name": "Nearest CSC", "locator_url": null, "scheme_ids": ["pm_kisan", "pmuy"]}]}],
+  "summary": {"schemes": 2, "documents": 4, "mandatory_documents": 3, "steps": 4, "prepare_steps": 0, "online_steps": 2, "offline_steps": 2, "trips": 1,
+              "all_route_steps": 4, "offices": ["Block agriculture office"], "portals": ["https://pmkisan.gov.in"], "unofficial_sources": [], "watch_outs": 3, "personal_watch_outs": 1,
+              "missing_application_data": [], "unknown_schemes": [], "data_available": true},
+  "sources": ["https://pmkisan.gov.in/guidelines", "https://pmuy.gov.in"]
+}
+```
+- `checklist`: one entry per unique document, mandatory first, then by number of schemes needing it. Documents whose source line offers a choice ("any one of", "or", "/", "either", "in their absence") carry `alternatives_group` in the data and are collapsed into one group entry `{"doc_group": "address_proof", "label": "Any one address proof", "options": [<document entries>], "needed_for": [...], "mandatory": true}` (no `doc` key; groups merge across schemes by id; the generic "proof of address"/"age proof" document is the label, not an option). A group is satisfied when one option is ticked, and counts as one row in `summary.documents` / `mandatory_documents`. Group ids: `id_proof`, `address_proof`, `age_proof`, `family_proof`; `label` is localised. `name` falls back from `lang` to `en` to the text as written. `have` is always `null` (the client tracks it).
+- `schemes`: one card per scheme with its alternative `routes` (at most one `online`, one `offline`; they are alternatives, not a sequence). `summary` is one plain sentence, `where` the portal (online) or the office, `steps` the micro-steps. Exactly one route has `recommended: true`: offline when the profile suggests limited digital access (`age` >= 60, or `homeless` / `vulnerable` flags or `has_mobile: false` when the client sends them), otherwise online when an online route exists. `source_official` is false when the scheme data comes from a non-government site; the UI then says to verify at the post office or bank.
+- `steps` (legacy, flat): only generic `prepare` steps plus the steps of each scheme's recommended route. Order is `prepare` (generic "keep your documents ready" style steps, once), then online steps (grouped by portal), then offline steps (grouped by office). Near-identical steps across schemes (same `where`/`mode`, normalised text equal or similarity >= 0.85) are merged into one step carrying `scheme_ids`, `scheme_names` and `source_urls` (distinct); `scheme_id`, `scheme_name`, `source_url` stay as the first scheme's for compatibility. `group_kind` is `prepare|online|offline`. `trips` = number of distinct offices of the recommended offline routes (case and whitespace insensitive); `all_route_steps` counts the micro-steps of every route.
+- `watch_outs`: near-identical items (same `kind`, normalised text similarity >= 0.9) are merged within and across schemes, listing every scheme in `scheme_ids` / `scheme_names` (`scheme_id` is the first). `personal` true = applies to this user (listed first), `null` = unknown or no condition (never hidden), false = does not apply (last).
+- `enrol_groups`: enrolment points merged across schemes by `type`, largest group first (one trip covers several schemes). `grievance`, `enrol_points` are `null` / `[]` when the record lacks them.
+- Unknown scheme ids go to `summary.unknown_schemes`; known schemes without application data go to `missing_application_data`. If `data/applications.json` is absent the response is a `200` empty plan with `data_available: false` (never a 500).
+
+## GET /api/schemes/{id}/apply
+`200` the raw application record: `{"mode","portal_url","office","helpline","fees","steps":[{"n","action","where","mode","quote"}],"routes":[{"mode","summary","where","steps":[...]}],"source_official":bool,"documents":[{"doc","as_written","mandatory","quote","alternatives_group"?}],"watch_outs":[{"kind","text","quote","applies_if"}],"enrol_points":[...],"grievance":null,"faq":[{"q","a","quote"}],"source_url","verified_at"}`; `404 {"detail": "No application data for this scheme"}` when there is none.
+
 ## POST /api/session/reset
 Request `{"session_id": "abc123"}` → `200 {"ok": true}`
 

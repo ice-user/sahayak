@@ -1,6 +1,8 @@
 import { API_URL, MOCK } from "./config";
 import { readChatEvents } from "./sse";
-import type { ChatEvent, Scheme, UiErrorCode } from "./types";
+import type { ChatEvent, LangCode, Scheme, UiErrorCode } from "./types";
+import { parsePlan, type PlanResponse } from "./plan";
+import { mockPlan } from "./mock/mock-plan";
 import { mockChatResponse, mockGetScheme, mockListSchemes, mockResetSession } from "./mock/mock-backend";
 
 export class ApiError extends Error {
@@ -123,4 +125,46 @@ export async function resetSession(sessionId: string): Promise<void> {
   } catch {
     /* ignore */
   }
+}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** POST /api/plan: documents, steps, warnings and where to go for the chosen schemes. */
+export async function fetchPlan(
+  schemeIds: string[],
+  profile: Record<string, unknown> | undefined,
+  lang: LangCode,
+  signal?: AbortSignal,
+): Promise<PlanResponse> {
+  if (MOCK) {
+    await sleep(700);
+    if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
+    return mockPlan(schemeIds);
+  }
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}/api/plan`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(profile && Object.keys(profile).length ? { scheme_ids: schemeIds, profile, lang } : { scheme_ids: schemeIds, lang }),
+      signal,
+    });
+  } catch (e) {
+    if (e instanceof DOMException && e.name === "AbortError") throw e;
+    throw new ApiError("Network error", "network");
+  }
+  if (!res.ok) throw await errorFromResponse(res);
+  const plan = parsePlan(await res.json());
+  if (!plan) throw new ApiError("Unexpected plan response", "internal");
+  return plan;
+}
+
+/** GET /api/schemes/{id}/apply: the raw apply record for one scheme. */
+export async function fetchApplyRecord(id: string): Promise<unknown> {
+  if (MOCK) {
+    const s = mockGetScheme(id);
+    if (!s) throw new ApiError("Unknown scheme", "bad_request", 404);
+    return s;
+  }
+  return getJson<unknown>(`/api/schemes/${encodeURIComponent(id)}/apply`);
 }

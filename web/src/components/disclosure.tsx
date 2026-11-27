@@ -29,7 +29,9 @@ export function Disclosure({ title, icon, children, defaultOpen = false, classNa
         <span className="flex-1">{title}</span>
         <ChevronDown className={cn("size-5 shrink-0 transition-transform", open && "rotate-180")} aria-hidden="true" />
       </CollapsibleTrigger>
-      <CollapsibleContent className="pb-2 pt-1">{children}</CollapsibleContent>
+      <CollapsibleContent className="collapsible-content overflow-hidden">
+        <div className="pb-2 pt-1">{children}</div>
+      </CollapsibleContent>
     </Collapsible>
   );
 }

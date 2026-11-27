@@ -16,6 +16,49 @@ log = logging.getLogger("sahayak.tools")
 
 MAX_TOP_K = 10
 MAX_SCHEME_IDS = 25
+MAX_ASK = 2  # follow-up questions per turn
+
+# Tie-break for rank_missing_fields: facts that are easy to answer and open the most schemes come first.
+FIELD_PRIORITY = ("age", "gender", "state", "marital_status", "bpl", "annual_income", "has_bank_account", "monthly_pension",
+                  "ever_income_tax_payer", "income_tax_payer_last_year", "owns_cultivable_land", "children",
+                  "pregnant_or_lactating", "is_govt_employee", "in_regular_govt_employment", "household_has_lpg")
+
+
+def rank_missing_fields(need_info: list[dict], exclude=(), limit: int = MAX_ASK) -> list[str]:
+    """The facts to ask for first, chosen in code so the model need not guess.
+
+    `need_info` is check_eligibility's need_info list (items with "missing_fields"). A fact is ranked by how many
+    need_info schemes it would settle:
+      1. schemes for which it is the only missing fact (answering it gives a final eligible / not_eligible verdict),
+      2. then schemes that list it as missing at all,
+      3. then FIELD_PRIORITY, then the name (so the order is fully deterministic).
+    Facts in `exclude` (questions that make no sense for this person, e.g. an LPG connection for a homeless user) are
+    ignored, as if they were not missing."""
+    skip = set(exclude)
+    total: dict[str, int] = {}
+    sole: dict[str, int] = {}
+    for item in need_info or []:
+        fields = [f for f in dict.fromkeys(item.get("missing_fields") or []) if f not in skip]
+        for f in fields:
+            total[f] = total.get(f, 0) + 1
+        if len(fields) == 1:
+            sole[fields[0]] = sole.get(fields[0], 0) + 1
+    order = {f: i for i, f in enumerate(FIELD_PRIORITY)}
+    ranked = sorted(total, key=lambda f: (-sole.get(f, 0), -total[f], order.get(f, len(order)), f))
+    return ranked[:limit]
+
+
+def annotate_questions(result: dict, exclude=()) -> dict:
+    """Add "ask_first" (at most MAX_ASK facts, see rank_missing_fields) and, when facts were excluded, "do_not_ask"
+    to a check_eligibility result that has need_info. Returns a new dict; schemes and verdicts are untouched."""
+    need = result.get("need_info") if isinstance(result, dict) else None
+    if not need:
+        return result
+    out = {k: v for k, v in result.items() if k not in ("ask_first", "do_not_ask")}
+    out["ask_first"] = rank_missing_fields(need, exclude)
+    if exclude:
+        out["do_not_ask"] = sorted(set(exclude))
+    return out
 
 _PROFILE_PROPS = {
     "age": {"type": "integer", "minimum": 0, "maximum": 120},
@@ -69,7 +112,7 @@ TOOL_SCHEMAS = [
         "description": ("Decide eligibility using the official rules. This is the ONLY way to decide eligibility. "
                         "Pass only facts the user actually stated; leave unknown fields out. "
                         "Omit scheme_ids to check every scheme at once. Eligible items include benefits, documents, "
-                        "how_to_apply and source_url."),
+                        "how_to_apply and source_url. When facts are missing, ask_first lists the at most 2 facts to ask the user for first."),
         "parameters": {"type": "object", "properties": {
             "profile": {"type": "object", "properties": _PROFILE_PROPS, "additionalProperties": False},
             "scheme_ids": {"type": "array", "items": {"type": "string"}, "maxItems": MAX_SCHEME_IDS},
@@ -128,14 +171,14 @@ class Toolbox:
         eligible = [{**r, "documents": list(self.schemes[r["scheme_id"]].documents),
                      "how_to_apply": self.schemes[r["scheme_id"]].how_to_apply}
                     for r in results if r["verdict"] == "eligible"]
-        return {
+        return annotate_questions({
             "eligible": eligible,
             "need_info": [{"scheme_id": r["scheme_id"], "scheme_name": r["scheme_name"], "missing_fields": r["missing_fields"]}
                           for r in results if r["verdict"] == "need_info"],
             "not_eligible": [{"scheme_id": r["scheme_id"], "scheme_name": r["scheme_name"],
                               "reasons": r["failed_reasons"], "caveats": r["caveats"]}
                              for r in results if r["verdict"] == "not_eligible"],
-        }
+        })
 
     def call(self, name: str, arguments: str | dict) -> str:
         """Run a tool by name. Always returns a JSON string, never raises.

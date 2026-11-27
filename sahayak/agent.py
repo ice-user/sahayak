@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from .guard import hosts_of, neutralize_urls, violations
-from .lang import (EMPTY_ANSWER_MESSAGES, FIELD_LABELS, GUARD_FALLBACK_ASK, MAX_FALLBACK_QUESTIONS, GUARD_FALLBACK_NO_SCHEMES, GUARD_FALLBACK_WITH_SCHEMES,
+from .lang import (EMPTY_ANSWER_MESSAGES, FIELD_LABELS, GUARD_FALLBACK_ASK, GUARD_FALLBACK_NO_SCHEMES, GUARD_FALLBACK_WITH_SCHEMES,
                    MAX_STEPS_MESSAGES, detect_session_language, reply_language_hint)
 from .llm import RETRY_DELAYS, Reply, ThinkFilter, TurnCancelled, complete  # noqa: F401 (TurnCancelled re-exported)
 from .privacy import mask_pii
@@ -27,7 +27,9 @@ from .topic_guard import (MODES, TopicBlocked, TopicGate, classify, env_topic_mo
                           env_topic_timeout, greeting_lang_hint, rules_check)
 from .topics import reply_text, scope_prompt_section
 from .llm_options import env_extra_body, model_extra_body  # noqa: F401 (env_extra_body re-exported)
-from .tools import TOOL_SCHEMAS, Toolbox
+from .tools import MAX_ASK, TOOL_SCHEMAS, Toolbox, annotate_questions, rank_missing_fields
+from .vulnerability import (SELF_HARM, crisis_reply, detect, detect_all, irrelevant_fields, select_resources,
+                            mentions_resource, situation_note, fallback_prefix)
 
 log = logging.getLogger("sahayak.agent")
 
@@ -41,8 +43,8 @@ TOOL_GUIDANCE = """How to use the tools (every extra tool call makes the user wa
 
 RULES = """Rules you must follow:
 1. Never decide eligibility yourself. Always call check_eligibility, and only say someone is eligible if the tool returned that scheme under "eligible".
-2. Only pass facts the user actually stated. Never guess age, income, BPL status or anything else.
-3. If the tool returns "need_info", ask short, simple questions for the missing facts (at most 3 at a time), starting with the facts that matter for the schemes most relevant to what the user asked. Ask at most 2 rounds of questions; after that, give your answer with what you know. If schemes are already "eligible", tell the user about them even while asking about others. Some schemes belong to one state: if "state" is among the missing facts, ask which state or union territory the user lives in, and pass it as the official name ("Uttar Pradesh", not "UP").
+2. Only pass facts the user actually stated. Never guess age, income, BPL status or anything else. If the user gives only a bound ("over 63", "around 60"), that is not an age: ask for the exact age instead of passing the bound.
+3. If the tool returns "need_info", ask for the missing facts: at most 2 short, simple questions per reply, taken from the tool's "ask_first" list (the facts that settle the most schemes), in that order, and no other questions; each is one plain sentence with no add-on such as \"If yes, how much?\". Never ask about a field listed in "do_not_ask". A scheme under "need_info" is not a refusal: never say the user does not qualify for it, say you cannot tell yet. Ask at most 2 rounds of questions; after that, give your answer with what you know. If schemes are already "eligible", tell the user about them even while asking about others. Some schemes belong to one state: if "state" is among the missing facts, ask which state or union territory the user lives in, and pass it as the official name ("Uttar Pradesh", not "UP").
 4. {style_rule}
 5. Mention caveats the tool returns, and that state governments often add to the central amount, so the final amount can differ.
 6. Reply in the same language and script the user wrote in (Hindi, Tamil, Hinglish, English, ...). Keep scheme names in English in brackets.
@@ -50,6 +52,7 @@ RULES = """Rules you must follow:
 8. For a scheme under "not_eligible", say plainly that the user does not qualify. Then read that scheme's "caveats": if one says the person may still qualify another way, mention it briefly and say it must be checked with the official body. Example: "You don't qualify for the 70+ card, but you may still be covered by regular PM-JAY, so check on the Ayushman app." Never present a not_eligible scheme as available.
 9. Aadhaar, PAN and phone numbers are removed from user messages for privacy and appear as "[number removed]". Never ask for them; you do not need them.
 10. Every answer is machine-checked: describing a scheme as available when check_eligibility did not return it under "eligible" will be rejected. Use only links that came from the tools (source_url) or official gov.in sites.
+11. If the user shares hardship (homelessness, no food, no income, abuse, illness, disability, bereavement, a crisis), start with ONE short, warm sentence acknowledging it, in their language: plain and human, no platitudes. Then be useful right away. A "[Situation note]" may follow this prompt with verified help lines and what not to ask; use only the numbers and links it gives, exactly as written. Do not ask questions that make no sense for the person's situation (for example a household or LPG connection for someone with no home).
 """
 
 STYLE_RULES = {
@@ -57,7 +60,7 @@ STYLE_RULES = {
              "the tool."),
     "brief": ("Keep the whole reply under about 120 words, with no headings and no introduction. Write one line per "
               "eligible scheme: the scheme name (in English) and what they get, in a few words. Mention key caveats "
-              "in a few words. If facts are missing, end with at most 3 short follow-up questions. The app shows "
+              "in a few words. If facts are missing, end with at most 2 short follow-up questions. The app shows "
               "documents, how to apply and links to the user automatically as cards, so do NOT list them unless the "
               "user asks."),
 }
@@ -262,6 +265,10 @@ class Agent:
         self._turn_starts: list[int] = []
         self._tool_cache: dict[str, str] = {}
         self._lang_hint = ""
+        self._signals = detect("")
+        self._resources: list[dict] = []
+        self._help_hint = ""  # per-turn "[Situation note]" from sahayak/vulnerability.py
+        self._skip_fields: frozenset[str] = frozenset()  # questions irrelevant for this user (e.g. LPG when homeless)
         self._cancelled: Callable[[], bool] | None = None
         self._before_answer: Callable[[], None] | None = None
 
@@ -278,9 +285,11 @@ class Agent:
         with a canned localized text and leave the history untouched. With mode "classifier" and unsure rules, a
         small classifier runs in parallel with this turn: events are held back until it says on_topic, and an
         off_topic verdict replaces the whole turn by the redirect (`on_event` may then be called from another thread)."""
+        safe = mask_pii(user_message)
+        if SELF_HARM in detect(safe):  # before the topic guard: a person in crisis is never "off topic"
+            return self._crisis_turn(safe, on_event)
         if self.topic_mode == "off":
             return self._chat_core(user_message, on_event, cancelled, Trace())
-        safe = mask_pii(user_message)
         last = self._last_assistant_text()
         decision = rules_check(safe, last)
         if decision is not None and decision.verdict in ("greeting", "jailbreak"):
@@ -292,6 +301,23 @@ class Agent:
                   reason=decision.reason if decision else "unsure; the system prompt scope rules apply",
                   latency_s=0.0)
         return self._chat_core(user_message, on_event, cancelled, trace)
+
+    def _crisis_turn(self, safe: str, on_event: EventHandler | None) -> tuple[str, Trace]:
+        """Self-harm mentioned: answer with the verified helplines (Tele-MANAS, then 112) and nothing else. No LLM call, no
+        scheme checklist; the turn stays in the history so the conversation can continue afterwards."""
+        lang = detect_session_language(self.messages + [{"role": "user", "content": safe}])
+        text = crisis_reply(lang)
+        trace = Trace()
+        trace.add("user", content=safe)
+        trace.add("vulnerability", signals=sorted(detect(safe).flags), resources=["tele_manas_14416", "emergency_112"])
+        self._turn_starts.append(len(self.messages))
+        self.messages.append({"role": "user", "content": safe})
+        self.messages.append({"role": "assistant", "content": text})
+        trace.add("answer", content=text, llm_calls=0, stopped="crisis")
+        self._save(trace)
+        if on_event is not None:
+            on_event("answer", {"content": text})
+        return text, trace
 
     def _last_assistant_text(self) -> str | None:
         for m in reversed(self.messages):
@@ -366,6 +392,8 @@ class Agent:
         system = self.messages[0]
         if self._lang_hint:
             system = {**system, "content": f"{system['content'].rstrip()}\n\n{self._lang_hint}"}
+        if self._help_hint:
+            system = {**system, "content": f"{system['content'].rstrip()}\n\n{self._help_hint}"}
         if self.max_history_turns and len(self._turn_starts) > self.max_history_turns:
             return [system] + self.messages[self._turn_starts[-self.max_history_turns]:]
         return [system] + self.messages[1:]
@@ -373,10 +401,15 @@ class Agent:
     def _call_tool(self, name: str, arguments: str) -> tuple[str, bool]:
         """(result JSON, from_cache). Identical tool name + arguments return the cached result; errors are not cached."""
         parsed = _parse_json(arguments, None)
-        key = f"{name}:{json.dumps(parsed, sort_keys=True, ensure_ascii=False)}" if isinstance(parsed, dict) else None
+        skip = self._skip_fields if name == "check_eligibility" else frozenset()
+        key = f"{name}:{json.dumps(parsed, sort_keys=True, ensure_ascii=False)}|{sorted(skip)}" if isinstance(parsed, dict) else None
         if key is not None and key in self._tool_cache:
             return self._tool_cache[key], True
         result = self.tools.call(name, arguments)
+        if skip and result.startswith("{"):  # re-rank the questions without the ones that make no sense for this user
+            data = _parse_json(result, None)
+            if isinstance(data, dict) and "error" not in data:
+                result = json.dumps(annotate_questions(data, skip), ensure_ascii=False)
         if key is not None and "error" not in (_parse_json(result, {}) if result.startswith("{") else {}):
             self._tool_cache[key] = result
         return result, False
@@ -451,6 +484,14 @@ class Agent:
         trace.add("user", content=safe_message)
         lang = detect_session_language(self.messages)
         self._lang_hint = reply_language_hint(lang)
+        signals = detect_all(m["content"] for m in self.messages
+                             if m.get("role") == "user" and isinstance(m.get("content"), str))
+        resources = select_resources(signals)
+        self._skip_fields = irrelevant_fields(signals)
+        self._help_hint = situation_note(signals, resources, self._skip_fields)
+        self._signals, self._resources = signals, resources
+        if signals:
+            trace.add("vulnerability", signals=sorted(signals.flags), resources=[r["id"] for r in resources])
         guard_retries, empty_retries = 1, 1
         stream_tokens = bool(self.stream and listening)  # no listener, no point streaming
         ephemeral: list[dict] = []  # corrective notes and rejected answers: sent once, never kept in history
@@ -491,6 +532,7 @@ class Agent:
                     if cleaned != answer:
                         trace.add("guard", action="urls_removed")
                         answer = cleaned
+                answer = self._with_help(answer, lang, trace)
                 return self._finish(trace, answer, emit, ephemeral)
 
             self.messages.append({
@@ -512,22 +554,30 @@ class Agent:
 
         return self._finish(trace, MAX_STEPS_MESSAGES[lang], emit, ephemeral, save=False, stopped="max_steps")
 
+    def _with_help(self, answer: str, lang: str, trace: Trace) -> str:
+        """Append the verified help lines the model left out, so a detected hardship never ends without them."""
+        missing = [r for r in self._resources if not mentions_resource(answer, r["id"])]
+        if not missing:
+            return answer
+        trace.add("help_appended", resources=[r["id"] for r in missing])
+        return f"{answer}\n\n{fallback_prefix(detect(''), missing, lang)}"
+
     def _fallback(self, lang: str) -> str:
         """Safe answer that lists only schemes the rule engine confirmed for this conversation."""
         names = [self.tools.schemes[s].name for s, v in self.verdicts.items()
                  if v == "eligible" and s in self.tools.schemes]
         base = GUARD_FALLBACK_WITH_SCHEMES[lang].format(names="; ".join(names)) if names else GUARD_FALLBACK_NO_SCHEMES[lang]
         ask = self._missing_facts_question(lang)
-        return f"{base}\n\n{ask}" if ask else base
+        text = f"{base}\n\n{ask}" if ask else base
+        lead = fallback_prefix(self._signals, self._resources, lang)  # keep the acknowledgement and help lines
+        return f"{lead}\n\n{text}" if lead else text
 
     def _missing_facts_question(self, lang: str) -> str:
-        """Question naming the facts the rule engine still needs (most-needed first, at most 3); "" if none."""
-        counts: dict[str, int] = {}
-        for sid, verdict in self.verdicts.items():
-            if verdict == "need_info":
-                for f in self.missing.get(sid, []):
-                    counts[f] = counts.get(f, 0) + 1
-        top = sorted(counts, key=lambda f: -counts[f])[:MAX_FALLBACK_QUESTIONS]  # stable: ties keep tool order
+        """Question naming the facts the rule engine still needs (at most MAX_ASK, ranked by how many schemes each
+        settles; facts irrelevant for this user are skipped); "" if none."""
+        need = [{"scheme_id": sid, "missing_fields": self.missing.get(sid, [])}
+                for sid, verdict in self.verdicts.items() if verdict == "need_info"]
+        top = rank_missing_fields(need, self._skip_fields, MAX_ASK)
         if not top:
             return ""
         labels = [FIELD_LABELS.get(f, {}).get(lang) or FIELD_LABELS.get(f, {}).get("en") or f.replace("_", " ") for f in top]

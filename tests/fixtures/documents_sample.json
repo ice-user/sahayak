@@ -1,0 +1,6 @@
+{
+  "aadhaar": {"name": {"en": "Aadhaar card", "hi": "आधार कार्ड", "ta": "ஆதார் அட்டை", "hinglish": "Aadhaar card"}, "aliases": ["UID"],
+              "how_to_get": {"text": "Apply at an Aadhaar enrolment centre.", "source_url": "https://uidai.gov.in"}},
+  "land_record": {"name": {"en": "Land record (Khatauni)", "hi": "भूमि रिकॉर्ड"}, "aliases": [], "how_to_get": null},
+  "bpl_card": {"name": {"en": "BPL card"}, "aliases": [], "how_to_get": null}
+}

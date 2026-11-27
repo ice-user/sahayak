@@ -1,0 +1,48 @@
+{
+  "pm_kisan": {
+    "mode": "online", "portal_url": "https://pmkisan.gov.in", "office": "Block agriculture office", "helpline": "155261", "fees": "free",
+    "steps": [
+      {"n": 2, "action": "Upload land record", "where": "pmkisan.gov.in", "mode": "online", "quote": "q"},
+      {"n": 1, "action": "Register as a new farmer", "where": "pmkisan.gov.in", "mode": "online", "quote": "q"},
+      {"n": 3, "action": "Get details verified by the patwari", "where": "Block agriculture office", "mode": "offline", "quote": "q"}
+    ],
+    "documents": [
+      {"doc": "aadhaar", "as_written": "Aadhaar card", "mandatory": true, "quote": "q"},
+      {"doc": "land_record", "as_written": "Land records", "mandatory": true, "quote": "q"},
+      {"doc": "bank_passbook", "as_written": "Bank passbook", "mandatory": false, "quote": "q"}
+    ],
+    "watch_outs": [
+      {"kind": "eligibility", "text": "Income tax payers are excluded", "quote": "q",
+       "applies_if": {"field": "income_tax_payer_last_year", "op": "eq", "value": true}},
+      {"kind": "process", "text": "Aadhaar must be linked to the bank account", "quote": "q", "applies_if": null}
+    ],
+    "enrol_points": [
+      {"type": "Common Service Centre", "name": "Nearest CSC", "locator_url": "https://locator.csccloud.in", "quote": "q"}
+    ],
+    "grievance": {"text": "Write to the PM-KISAN helpdesk", "url_or_number": "pmkisan-ict@gov.in", "quote": "q"},
+    "faq": [], "source_url": "https://pmkisan.gov.in/guidelines", "verified_at": "2026-11-27"
+  },
+  "pmuy": {
+    "mode": "offline", "portal_url": null, "office": "Block agriculture office", "helpline": "1906", "fees": null,
+    "steps": [{"n": 1, "action": "Submit KYC form to the LPG distributor", "where": "Block agriculture office", "mode": "offline", "quote": "q"}],
+    "documents": [
+      {"doc": "aadhaar", "as_written": "Aadhaar", "mandatory": false, "quote": "q"},
+      {"doc": "bpl_card", "as_written": "BPL ration card", "mandatory": true, "quote": "q"}
+    ],
+    "watch_outs": [
+      {"kind": "eligibility", "text": "Only one connection per household", "quote": "q",
+       "applies_if": {"field": "household_has_lpg", "op": "eq", "value": true}}
+    ],
+    "enrol_points": [
+      {"type": "Common Service Centre", "name": "Nearest CSC", "locator_url": null, "quote": "q"},
+      {"type": "LPG distributor", "name": "Any OMC distributor", "locator_url": null, "quote": "q"}
+    ],
+    "faq": [], "source_url": "https://pmuy.gov.in", "verified_at": "2026-11-27"
+  },
+  "ssy": {
+    "mode": "offline", "portal_url": null, "office": "Post office", "helpline": null, "fees": "Rs 250 minimum",
+    "steps": [{"n": 1, "action": "Open the account at a post office", "where": "Post office", "mode": "offline", "quote": "q"}],
+    "documents": [{"doc": "birth_certificate", "as_written": "Birth certificate", "mandatory": true, "quote": "q"}],
+    "watch_outs": [], "faq": [], "source_url": "https://www.indiapost.gov.in", "verified_at": "2026-11-27"
+  }
+}

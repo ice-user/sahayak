@@ -1,8 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BadgeCheck, CircleHelp, FileText, Info, ListChecks, XCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, CircleHelp, ClipboardList, FileText, Info, ListChecks, XCircle } from "lucide-react";
+import { FadeUp } from "@/components/fade-up";
+import { Skeleton } from "@/components/ui/skeleton";
+import { VerdictChip } from "@/components/verdict-chip";
+import { buttonVariants } from "@/components/ui/button";
+import { planHref, savePlanProfile } from "@/lib/plan";
+import { cn } from "@/lib/utils";
 import { Disclosure } from "@/components/disclosure";
 import { useLang } from "@/components/lang-provider";
 import { splitNeedInfo, type Profile } from "@/lib/need-info";
@@ -30,16 +35,13 @@ export function ExternalLink({ href, children }: { href: string; children: React
   );
 }
 
-function EligibleCard({ item, scheme }: { item: EligibleItem; scheme?: Scheme }) {
+function EligibleCard({ item, scheme, index = 0 }: { item: EligibleItem; scheme?: Scheme; index?: number }) {
   const { t } = useLang();
   const caveats = item.caveats?.length ? item.caveats : (scheme?.caveats ?? []);
   return (
-    <article className="overflow-hidden rounded-card border border-line border-l-[7px] border-l-leaf bg-card shadow-card">
+    <FadeUp as="article" index={index} className="overflow-hidden rounded-card border border-line border-l-[7px] border-l-leaf bg-card shadow-card">
       <div className="space-y-3 p-4 sm:p-5">
-        <Badge tone="leaf">
-          <BadgeCheck className="size-4" aria-hidden="true" />
-          {t.cards.qualifies}
-        </Badge>
+        <VerdictChip kind="eligible" />
         <h3 className="display text-[1.3rem] leading-snug sm:text-2xl">{item.scheme_name}</h3>
         <div className="rounded-xl bg-leaf-soft p-3">
           <p className="text-sm font-semibold text-leaf-deep">{t.cards.benefit}</p>
@@ -79,7 +81,11 @@ function EligibleCard({ item, scheme }: { item: EligibleItem; scheme?: Scheme })
             )}
           </>
         ) : (
-          <p className="py-2 text-sm text-ink-soft">{t.cards.detailsLoading}</p>
+          <div role="status" className="space-y-2 py-3">
+            <span className="sr-only">{t.cards.detailsLoading}</span>
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-4 w-1/2" />
+          </div>
         )}
         <div className="flex flex-wrap items-center gap-x-5 border-t border-line/70">
           {safeHttpUrl(item.source_url) && <ExternalLink href={item.source_url}>{t.cards.officialSource}</ExternalLink>}
@@ -88,14 +94,15 @@ function EligibleCard({ item, scheme }: { item: EligibleItem; scheme?: Scheme })
           </Link>
         </div>
       </div>
-    </article>
+    </FadeUp>
   );
 }
 
-function NeedInfoCard({ item }: { item: NeedInfoItem }) {
+function NeedInfoCard({ item, index = 0 }: { item: NeedInfoItem; index?: number }) {
   const { t } = useLang();
   return (
-    <li className="rounded-xl border border-marigold/40 bg-amber-soft p-3.5">
+    <FadeUp as="li" index={index} className="rounded-xl border border-marigold/40 bg-amber-soft p-3.5">
+      <VerdictChip kind="needInfo" className="mb-2" />
       <p className="flex items-start gap-2 font-semibold text-ink">
         <CircleHelp className="mt-1 size-4 shrink-0 text-amber-ink" aria-hidden="true" />
         {item.scheme_name}
@@ -108,7 +115,7 @@ function NeedInfoCard({ item }: { item: NeedInfoItem }) {
           </span>
         ))}
       </p>
-    </li>
+    </FadeUp>
   );
 }
 
@@ -123,6 +130,7 @@ function NotEligibleList({ items, index }: { items: NotEligibleItem[]; index: In
       <ul className="space-y-3 pb-2">
         {items.map((n) => (
           <li key={n.scheme_id}>
+            <VerdictChip kind="notEligible" className="mb-1" />
             <p className="font-semibold">{n.scheme_name ?? index?.get(n.scheme_id)?.name ?? n.scheme_id}</p>
             <ul className="list-disc pl-5 text-[0.95rem] text-ink-soft">
               {n.reasons.map((r) => (
@@ -149,8 +157,8 @@ function NotEligibleList({ items, index }: { items: NotEligibleItem[]; index: In
 function NeedInfoList({ items }: { items: NeedInfoItem[] }) {
   return (
     <ul className="space-y-2">
-      {items.map((n) => (
-        <NeedInfoCard key={n.scheme_id} item={n} />
+      {items.map((n, i) => (
+        <NeedInfoCard key={n.scheme_id} item={n} index={i} />
       ))}
     </ul>
   );
@@ -170,13 +178,14 @@ export function SchemeResults({ result, index, profile = {}, userText = "" }: Re
   const { eligible, need_info, not_eligible } = result;
   const { primary, other } = splitNeedInfo(need_info, profile, userText);
   if (!eligible.length && !need_info.length && !not_eligible.length) return null;
+  const planIds = [...eligible.map((e) => e.scheme_id), ...primary.map((n) => n.scheme_id)];
   return (
     <div className="space-y-4">
       {eligible.length > 0 && (
         <section aria-label={t.cards.eligibleHeading(eligible.length)} className="space-y-3">
           <h3 className="text-lg font-bold text-leaf-deep">{t.cards.eligibleHeading(eligible.length)}</h3>
-          {eligible.map((e) => (
-            <EligibleCard key={e.scheme_id} item={e} scheme={index?.get(e.scheme_id)} />
+          {eligible.map((e, i) => (
+            <EligibleCard key={e.scheme_id} item={e} scheme={index?.get(e.scheme_id)} index={i} />
           ))}
           {lang !== "en" && <p className="text-sm text-ink-soft">{t.cards.englishNote}</p>}
         </section>
@@ -200,6 +209,18 @@ export function SchemeResults({ result, index, profile = {}, userText = "" }: Re
         </Disclosure>
       )}
       {not_eligible.length > 0 && <NotEligibleList items={not_eligible} index={index} />}
+      {planIds.length > 0 && (
+        <FadeUp index={eligible.length + 1} className="rounded-card border-2 border-ink/15 bg-card p-4 shadow-card">
+          <p className="mb-3 flex items-start gap-2 text-[0.98rem] text-ink-soft">
+            <ClipboardList className="mt-1 size-5 shrink-0 text-saffron" aria-hidden="true" />
+            {t.plan.makeHint}
+          </p>
+          <Link href={planHref(planIds)} onClick={() => savePlanProfile(profile)} className={cn(buttonVariants({ variant: "primary" }), "w-full sm:w-auto")}>
+            <ClipboardList aria-hidden="true" />
+            {t.plan.make}
+          </Link>
+        </FadeUp>
+      )}
     </div>
   );
 }
