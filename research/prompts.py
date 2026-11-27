@@ -21,6 +21,8 @@ _EXAMPLE_OUT = {
     "name_evidence": "Sample Girl Child Scholarship",
     "ministry": "Department of Example Education",
     "category": "education",
+    "level": "central",
+    "level_evidence": "Department of Example Education",
     "summary": "Yearly scholarship for girl students aged 6 to 14 from low-income families.",
     "benefits": "Rs 5,000 per year for girl students.",
     "benefits_evidence": ["Rs 5,000 per year for girl students"],
@@ -59,7 +61,7 @@ ABSOLUTE RULES
 {describe_fields()}
 4. Allowed ops: eq, ne, gte, lte, in, any_child. gte/lte only for integer fields. "in" takes a list. Values must have the field's type: booleans are JSON true/false, ages and rupee amounts are integers (write Rs 2,00,000 as 200000), enums must be one of the listed strings. A range "18 to 40 years" is TWO rules (gte 18 and lte 40). Annual income limits use annual_income in rupees per year (convert lakh: 2.5 lakh = 250000; monthly figures x12).
 5. Any criterion that cannot be expressed with those fields (caste/category, occupation, land size, disability, state-specific lists, documents held, enrolment elsewhere, ...) must NOT become a rule. Put it in "unmapped_criteria" with its evidence. Missing a rule is acceptable; inventing one is not. A rule with the wrong value is worse than a missing rule.
-6. Do not add a rule for state unless the scheme is explicitly limited to one state/UT (then use field state, op eq, with the state's name as written in the document).
+6. "level" is required: "central" if any resident of India can use the scheme (run by a Union ministry, open to every state), or "state" if a state/UT government or department runs it or it is limited to named states/UTs (a state's own pension, scholarship, subsidy, board or corporation, "Government of Kerala", etc.). "level_evidence" is a verbatim quote showing who runs it or which state it covers (for a central scheme, the ministry line is enough). A "state" scheme MUST have a rule on field state: op eq for one state, or op in for a list, with values spelled EXACTLY as the canonical names in rule 3 (for example write "Uttar Pradesh" even if the document says "U.P.", and "Odisha" for "Orissa"); its "evidence" must be a quote that names that state. A "central" scheme must NOT have a state rule. If a state scheme is further limited to one district, city or area, that part goes to unmapped_criteria.
 7. "id" is a short snake_case slug (lowercase letters/digits/underscores), e.g. pm_kisan. "category" is one of: pension, insurance, health, agriculture, housing, education, employment, women, child, food, finance, skill, other.
 8. "reason" is a short plain-English sentence a citizen can understand, saying why they fail this rule.
 9. Leave "source_url" as an empty string; the pipeline fills it in.

@@ -1,0 +1,153 @@
+Source URL: https://www.myscheme.gov.in/schemes/sdesdm
+
+Back
+Details
+Benefits
+Eligibility
+Application Process
+Documents Required
+Frequently Asked Questions
+Sources And References
+Feedback
+Check Eligibility
+Ministry of Electronics and Information Technology
+Scheme for ‘Skill Development in ESDM for Digital India’
+CertificationGraduatesITIPolytechnicStudentsTrainingUnder Graduates
+Details
+The scheme "Skill Development in ESDM for Digital India" has been implemented by the Ministry of Electronics and Information Technology, Government of India. It aims to provide skill development training to 3,28,000 candidates in the Electronics System Design and Manufacturing (ESDM) sector. Through this scheme, financial assistance for training (75% for General category and 100% for Scheduled Caste, Scheduled Tribe, and Economically Weaker Section candidates) and 100% reimbursement of certification fees are provided to students, unemployed youth, and school dropouts. The scheme is implemented by Key Implementing Agencies, including National Institute of Electronics and Information Technology, Electronics Sector Skills Council of India, and Telecom Sector Skill Council.
+Objectives:
+To provide financial assistance for skill development in the ESDM sector across all States and Union Territories.
+To facilitate skill development of students and unemployed youth through National Skills Qualifications Framework-compliant courses from Level 1 to Level 5.
+To increase the availability of skilled manpower for the electronics industry to support the Digital India initiative.
+ 
+
+Benefits
+1. Financial Assistance for Course Fee:
+General Category:
+75% of course fee reimbursed by MeitY after certification and placement.
+Remaining 25% payable by the candidate (may be shared/borne by the Training Partner).
+Reserved Category (SC/ST/EWS):
+100% of the course fee reimbursed by MeitY.
+2. Course Fee Structure (Upper Ceiling):
+Level Manufacturing Courses (₹) Service Courses (₹) Max Hours
+L1-L2 9,780/- 8,380/- 200hrs
+L3 14,670/- 12,570/- 300hrs
+L4 17,115/- 14,665/- 350hrs
+L5 19,560/- 16,760/- 400hrs
+Base Cost:
+₹41.90/hour (Service Sector)
+₹48.90/hour (Manufacturing Sector)
+3. Registration-cum-Certification Fee (RCCF)
+Range: ₹762/- to ₹1,905/- (depending on level)
+Paid upfront by the candidate
+Refund (one time only) after successful certification:
+General: 75% reimbursed
+Reserved: 100% reimbursed
+4. Reimbursement Structure
+80% on successful certification
+20% on successful placement
+5. Placement-Linked Benefit
+Minimum 70% placement required for full reimbursement
+Placement tracking is mandatory for 3 months
+ 
+
+Eligibility
+The applicant should be studying in Class 9 or Class 10 onwards; or the applicant should be a school dropout from 8th pass onwards; or the applicant should be an ITI certificate holder, a diploma holder, an undergraduate, a graduate, or registered in employment exchanges.
+The applicant should be eligible to enrol in any of the 5 NSQF levels (Level 1 to Level 5), subject to meeting the minimum eligibility criteria of the respective course.
+The applicant should have a valid Aadhaar Number, or an Aadhaar Enrolment ID (EID) may also be considered.
+The applicant should provide consent for Aadhaar authentication or the e-KYC process.
+The applicant should not have been a beneficiary of any Government of India-aided skilling course in the ESDM field, sponsored by the Central or State Government.
+The applicant should submit an undertaking declaring non-availment of any such scheme at the time of enrolment.
+The applicant should have attained a minimum age of 17 years at the time of registration/enrolment.
+The applicant should be willing to get employed or self-employed and submit an undertaking to this effect at the time of enrolment.
+The applicant should undergo training for the prescribed duration and appear for an assessment conducted by the respective Key Implementing Agency (KIA).
+The applicant should maintain at least 70% attendance to be eligible to appear for the assessment.
+The applicant can avail the benefit under the scheme only once; however, for manufacturing job roles, the applicant may be allowed to undergo two courses at successive NSQF levels.
+Reservation / Preference:
+60% seats: General Category
+40% seats: Reserved Categories
+SC: 15%
+ST: 7.5%
+EWS: 17.5%
+EWS Criteria:
+The applicant’s family income should not exceed ₹2,00,000/- annually.
+ 
+
+Application Process
+Online
+Registration:
+Step 1: Visit the official ESDM Skill Development portal: https://esdm-skill.deity.gov.in. 
+Step 2: Identify the nearest affiliated Training Partner (TP) through the portal or authorised sources.
+Step 3: Approach the Training Partner for counselling and selection of the appropriate NSQF course.
+Step 4: Submit required documents and eligibility details to the Training Partner.
+Step 5: Provide Aadhaar Number or Aadhaar Enrolment ID and complete Aadhaar authentication / e-KYC (with consent).
+Step 6: Fill the application/enrolment form at the Training Partner centre or through the portal.
+Step 7: Pay the Registration-cum-Certification Fee (RCCF) to the Training Partner.
+Step 8: Submit required undertakings:
+Undertaking for the non-availability of a similar Government scheme
+Undertaking for willingness for employment/self-employment
+Step 9:The Training Partner verifies eligibility and completes enrolment of the applicant.
+After Registration:
+Step 1: The applicant undergoes training for the prescribed duration as per the selected NSQF course.
+Step 2: The applicant maintains the required attendance (minimum 70%) during training.
+Step 3: The applicant appears for assessment conducted by the respective Key Implementing Agency (KIA).
+Step 4: Upon successful assessment, the applicant receives certification.
+Step 5: The Training Partner facilitates placement or supports self-employment opportunities.
+Step 6: Placement of the candidate is tracked for a minimum period of 3 months.
+Step 7: Financial reimbursement is processed:
+First instalment after certification
+Second instalment after successful placement
+ 
+
+Documents Required
+Aadhaar Card / Aadhaar Enrolment ID
+Identity Proof (Any One): Voter ID Card / PAN Card / Passport / Driving License / NPR Card
+Two Identity Proofs (Only For Candidates From Assam And Meghalaya)
+EWS Certificate (If Applicable)
+Educational Qualification Certificates (As Per Eligibility Criteria)
+Undertaking For Non-Availing Benefit Under Similar Government Scheme
+Undertaking For Willingness For Employment / Self-Employment
+Bank Account Details
+Passport Size Photograph
+ 
+
+Frequently Asked Questions
+
+What is the objective of the Scheme?
+
+Who can apply for this scheme?
+
+What is the minimum age required to apply?
+
+Is Aadhaar mandatory for enrolment?
+
+What kind of training is provided under the scheme?
+
+Is there any fee for the training?
+
+Will the fee be refunded?
+
+Is placement guaranteed under the scheme?
+
+Can a candidate apply more than once?
+
+Are there any attendance requirements?
+
+Is there any reservation under the scheme?
+
+What is the income limit for EWS category?
+
+How is the financial assistance disbursed?
+
+Where can a candidate apply for the scheme?
+
+Sources And References
+
+Guidelines
+
+Was this helpful?
+News and Updates
+
+No new news and updates available
+
+Share

@@ -42,7 +42,7 @@ TOOL_GUIDANCE = """How to use the tools (every extra tool call makes the user wa
 RULES = """Rules you must follow:
 1. Never decide eligibility yourself. Always call check_eligibility, and only say someone is eligible if the tool returned that scheme under "eligible".
 2. Only pass facts the user actually stated. Never guess age, income, BPL status or anything else.
-3. If the tool returns "need_info", ask short, simple questions for the missing facts (at most 3 at a time), starting with the facts that matter for the schemes most relevant to what the user asked. Ask at most 2 rounds of questions; after that, give your answer with what you know. If schemes are already "eligible", tell the user about them even while asking about others.
+3. If the tool returns "need_info", ask short, simple questions for the missing facts (at most 3 at a time), starting with the facts that matter for the schemes most relevant to what the user asked. Ask at most 2 rounds of questions; after that, give your answer with what you know. If schemes are already "eligible", tell the user about them even while asking about others. Some schemes belong to one state: if "state" is among the missing facts, ask which state or union territory the user lives in, and pass it as the official name ("Uttar Pradesh", not "UP").
 4. {style_rule}
 5. Mention caveats the tool returns, and that state governments often add to the central amount, so the final amount can differ.
 6. Reply in the same language and script the user wrote in (Hindi, Tamil, Hinglish, English, ...). Keep scheme names in English in brackets.
@@ -118,7 +118,7 @@ class Trace:
 
 
 NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
-NVIDIA_DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b"
+NVIDIA_DEFAULT_MODEL = "nvidia/nemotron-3.5-super-vl-120b-a12b"
 
 
 def resolve_config() -> tuple[str | None, str, str]:

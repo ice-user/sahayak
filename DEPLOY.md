@@ -31,11 +31,11 @@ Private repos work with both Render and Vercel (you authorize their GitHub apps 
    |---|---|
    | `NVIDIA_API_KEY` | your `nvapi-...` key |
    | `ALLOWED_ORIGINS` | not known yet: type `https://placeholder.vercel.app` for now, you fix it in step 4 |
-   | `LLM_MODEL`, `TOPIC_GUARD_MODEL` | leave empty (defaults: `nvidia/nemotron-3-super-120b-a12b`; the guard uses the same model) |
+   | `LLM_MODEL`, `TOPIC_GUARD_MODEL` | leave empty (defaults: `nvidia/nemotron-3.5-super-vl-120b-a12b`; the guard uses the same model) |
 
 3. Click **Apply** / **Deploy**. The first build takes a few minutes (Docker image + Python packages).
 4. When it says **Live**, open `https://<your-service>.onrender.com/api/health`. You should see `{"ok":true,"schemes":10}`. That URL (without `/api/health`) is your **backend URL**.
-5. Check **Logs**: you should see a line `LLM provider configured: ... model=nvidia/nemotron-3-super-120b-a12b`. If you see `NO LLM PROVIDER CONFIGURED`, the key is missing (Environment tab -> add `NVIDIA_API_KEY` -> redeploy).
+5. Check **Logs**: you should see a line `LLM provider configured: ... model=nvidia/nemotron-3.5-super-vl-120b-a12b`. If you see `NO LLM PROVIDER CONFIGURED`, the key is missing (Environment tab -> add `NVIDIA_API_KEY` -> redeploy).
 
 ## 3. Frontend on Vercel
 

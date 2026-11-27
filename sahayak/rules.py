@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from .models import Profile, Scheme
+from .states import normalise_state
 
 PASS, FAIL, UNKNOWN = "pass", "fail", "unknown"
 
@@ -50,6 +51,13 @@ def eval_condition(data: dict, cond: dict) -> tuple[str, list[str]]:
                 saw_unknown = True
         return (UNKNOWN, [f"{field_name}.age/gender"]) if saw_unknown else (FAIL, [])
 
+    if field_name == "state":
+        # compare canonical names; a state we cannot recognise is unknown, never a match or a mismatch
+        actual = normalise_state(actual)
+        if op == "in":
+            expected = [normalise_state(x) or x for x in expected]
+        else:
+            expected = normalise_state(expected) or expected
     if actual is None:
         return UNKNOWN, [field_name]
     return (PASS if _compare(actual, op, expected) else FAIL), []

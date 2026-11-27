@@ -37,3 +37,9 @@ Thumbs.db
 .idea/
 .vscode/
 .pytest_tmp/
+
+# Fine-tuning artefacts
+models/
+.hf_cache/
+hf_cache/
+data/finetune/eval/

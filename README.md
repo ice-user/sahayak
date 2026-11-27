@@ -86,9 +86,40 @@ Live demo *(coming soon; see [DEPLOY.md](DEPLOY.md))* · [Architecture](#archite
 | jailbreak recall | jailbreak messages that were redirected | `evals/run_topic_eval.py` |
 | judge faithfulness / language / completeness | LLM-as-judge scores, 1-5 each, after deterministic checks (unsupported rupee amounts, script match) that can cap them | `evals/judge.py` (run with `run_agent_evals.py --judge`) |
 
-### Research experiment (in progress)
+### Research experiment: distilling the 120B extractor into a small LoRA model
 
-A paper-based experiment and its results will be added here.
+**Question:** can a small open model, fine-tuned on a big model's labels, turn scheme eligibility text into rules as well as the big model, cheaply and offline?
+
+**Setup**
+- **Data:**
+  - Scraped **5,137** myscheme.gov.in schemes (`scripts/collect_myscheme.py`) and rendered 736 of them.
+  - Split their eligibility sections into **5,163 bullets** (`research/bullets.py`).
+  - Labelled every bullet with **Nemotron 120B** (`scripts/build_finetune.py`) and kept the 93.6% of labels that pass the deterministic checker (`research/bullet_check.py`).
+  - The train/val/test split is **by scheme** (3,731 / 433 / 518), so no test scheme is seen in training.
+- **Gold test set:**
+  - Every test label was re-reviewed (`data/finetune/GOLD.md`). The teacher's labels needed fixing in 8.9% of bullets, mostly made-up state rules and missed conditions.
+  - The review was LLM-assisted, with a 30-item human spot-check sample.
+- **Training:** LoRA (r=16) on **Qwen3-0.6B** and **Qwen3-1.7B**, 2 epochs, on Kaggle's free 2×T4, with both models trained in parallel (`kaggle/`, `scripts/finetune_qwen.py`).
+- **Serving:** the LoRA was merged into the base model, quantised to 8-bit (q8_0) and run in **Ollama on a laptop CPU** (Intel Core Ultra 5, no NVIDIA GPU).
+
+**Results** on 60 gold test bullets (same sample for every model; `scripts/eval_extractors.py`):
+
+| Model | Size | Rule F1 | Exact match | Safety errors¹ | Made-up rules | p50 latency / bullet | Cost |
+|---|---|---|---|---|---|---|---|
+| Nemotron (teacher, API) | 120B | 74.1% | 88.3% | 0 | 6 | 0.65 s | API tokens (1,315 / bullet) |
+| qwen3:4b, few-shot, no fine-tune | 4B | 20.3% | 35.0% | 2 | 40 | 8.5 s | free |
+| Qwen3-0.6B, no fine-tune | 0.6B | 4.3% | 5.0% | 6 | 118 | 21.7 s | free |
+| **Qwen3-0.6B + LoRA**, q8 (Ollama) | 0.6B | 69.2% | 86.7% | **0** | 6 | **3.25 s** | free |
+| **Qwen3-1.7B + LoRA**, q8 (Ollama) | 1.7B | **76.9%** | **90.0%** | **0** | **5** | 4.3 s | free |
+
+¹ A rule on the right field with the wrong bound or value, e.g. a wrong age or income limit.
+
+**Findings**
+- **Fine-tuning matters more than size.** LoRA took Qwen3-0.6B from 4% to 69% F1 and from 118 made-up rules to 6. The fine-tuned 0.6B beats an untrained model about 7× its size.
+- **The 1.7B student matched the 120B teacher** at 1/70th of the size (F1 76.9 vs 74.1, exact match 90.0 vs 88.3) with zero safety errors. Treat this as "on par" rather than "better": n=60, and the gold labels started from the teacher's own labels, which favours the teacher.
+- **8-bit quantisation cost no accuracy and made inference about 3× faster** (10.2 s → 3.25 s per bullet for the 0.6B). 4-bit was barely faster and lost accuracy (1.7B: −10 F1), so q8 is the sweet spot.
+- **Throughput:** 4 parallel requests raise the 0.6B on CPU from 18.5 to **62 bullets/min**, with 58 of 60 outputs identical. At that rate the whole 5,163-bullet corpus converts in about 1.5 h, offline and free.
+- **Limitations:** a small, LLM-assisted gold set; the training labels are silver (teacher plus code checks); the student is evaluated per bullet, not end to end through the agent.
 
 ## 📊 Results
 
@@ -105,7 +136,7 @@ A paper-based experiment and its results will be added here.
 ## 🚧 Limitations and roadmap
 
 - The database covers 10 central schemes; it is meant to grow through the research pipeline (state schemes are not modelled yet).
-- The LoRA distillation student is planned, not built. The teacher-data pipeline exists; no model has been trained.
+- The **extractor** student is built (see Research experiment). Distilling the **chat agent** itself into a small model is still planned: the teacher-data pipeline exists, but no agent model has been trained.
 - Follow-up questions currently come partly from a fallback path rather than always from the model.
 - Free-tier hosting has cold starts: the first request after idle time is slow.
 

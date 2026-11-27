@@ -17,6 +17,8 @@ from pydantic import ValidationError
 from sahayak.models import Profile, Scheme
 from sahayak.rules import check_scheme
 
+from sahayak.states import STATES, normalise_state
+
 from .evidence import numbers_in, value_in_evidence
 from .fields import CHILD_FIELDS, OPS, PROFILE_FIELDS, FieldSpec
 from .schema import ExtractedScheme, to_scheme_dict
@@ -53,6 +55,12 @@ def _value_ok(spec: FieldSpec, v: Any) -> str | None:
         return None
     if spec.kind == "enum":
         return None if v in spec.choices else f"must be one of {list(spec.choices)}, got {v!r}"
+    if spec.kind == "state":
+        if isinstance(v, str) and v in STATES:
+            return None
+        hint = normalise_state(v)
+        return (f"must be spelled exactly as a canonical state/UT name; use {hint!r}" if hint
+                else f"is not a recognised Indian state/UT name, got {v!r} (allowed: {list(STATES)})")
     if spec.kind == "str":
         return None if isinstance(v, str) and v.strip() else f"must be a non-empty string, got {v!r}"
     return "unsupported field kind"
@@ -84,6 +92,9 @@ def check_condition(cond: dict, specs: dict[str, FieldSpec], where: str, *, top:
         return errs
     if op == "any_child":
         return [f"{where}: op 'any_child' is only valid on field 'children'"]
+    if spec.kind == "state" and op == "ne":
+        return [f"{where}: state only supports eq or in (a scheme limited to some states); express exclusions as "
+                "an unmapped criterion"]
     if op in ("gte", "lte"):
         if spec.kind != "int":
             return [f"{where}: op {op} needs a numeric field, but {f} is {spec.kind}"]
@@ -169,6 +180,8 @@ def _satisfying_value(spec: FieldSpec, rs: list[dict]) -> Any:
         return (not next(iter(ne))) if ne else True
     if spec.kind == "enum":
         return next((c for c in spec.choices if c not in ne), None)
+    if spec.kind == "state":
+        return next((s for s in STATES if s not in ne), None)
     return next((s for s in ("Karnataka", "Kerala", "Bihar") if s not in ne), "Zz")
 
 
@@ -267,6 +280,8 @@ def _other_value(spec: FieldSpec, v):
     if spec.kind == "int":
         alt = v + 1
         return None if alt > _bounds(spec)[1] else alt
+    if spec.kind == "state":
+        return next((s for s in STATES if s != v), None)
     return "Other-State"
 
 
@@ -281,6 +296,8 @@ def _outside(spec: FieldSpec, allowed: list):
         return next((c for c in spec.choices if c not in allowed), None)
     if spec.kind == "int":
         return max(allowed) + 1 if max(allowed) + 1 <= _bounds(spec)[1] else None
+    if spec.kind == "state":
+        return next((s for s in STATES if s not in allowed), None)
     return "Zz-Not-Listed"
 
 
@@ -328,6 +345,53 @@ def rule_value_problems(c: ExtractedScheme) -> list[str]:
     return errs
 
 
+def _state_rules(c: ExtractedScheme) -> list:
+    return [x for x in c.rules if x.field == "state" and x.op in ("eq", "in")]
+
+
+def level_problems(c: ExtractedScheme) -> list[str]:
+    """BLOCKING: a state-run scheme must be gated by a state rule (otherwise the agent would offer a Kerala-only
+    scheme to a resident of Uttar Pradesh), a central scheme must not be, and each state in a rule must be
+    named in that rule's own quote."""
+    errs: list[str] = []
+    st = _state_rules(c)
+    if c.level is None:
+        errs.append("level is missing: set \"level\" to \"central\" (open to residents of every state) or "
+                    "\"state\" (run by or limited to one or more states/UTs), with level_evidence")
+    elif c.level == "state":
+        if not st:
+            errs.append("level is 'state' but there is no rule on field 'state': add {field: state, op: eq|in, "
+                        "value: <canonical state name(s)>} with a quote naming the state, otherwise residents of "
+                        "other states would be told they qualify")
+        if not c.level_evidence.strip():
+            errs.append("level is 'state' but level_evidence is empty: quote the text showing which state runs "
+                        "or covers the scheme")
+    elif st:
+        errs.append("level is 'central' but a state rule exists: set level to 'state', or remove the state rule "
+                    "if the scheme is open to every state")
+    for i, rule in enumerate(c.rules):
+        if rule.field != "state" or rule.op not in ("eq", "in"):
+            continue
+        vals = rule.value if isinstance(rule.value, list) else [rule.value]
+        low = rule.evidence.casefold().replace("&", "and")
+        for v in vals:
+            if isinstance(v, str) and v in STATES and not _state_named(v, low):
+                errs.append(f"rules[{i}]: state {v!r} is not named in its own evidence quote; quote the sentence "
+                            f"that names the state: \"{rule.evidence[:120]}\"")
+    return errs
+
+
+def _state_named(state: str, low_quote: str) -> bool:
+    names = {state.casefold().replace("&", "and")}
+    names |= {k for k, v in _state_aliases().items() if v == state}
+    return any(n in low_quote for n in names)
+
+
+def _state_aliases() -> dict[str, str]:
+    from sahayak.states import _RAW_ALIASES
+    return {k.casefold(): v for k, v in _RAW_ALIASES.items() if len(k) > 3}
+
+
 def validate_candidate(cand: dict | ExtractedScheme, existing: dict[str, Scheme] | None = None,
                        *, source_url: str | None = None) -> Validation:
     """Validate a candidate (extract-format dict or model). Never raises."""
@@ -344,6 +408,7 @@ def validate_candidate(cand: dict | ExtractedScheme, existing: dict[str, Scheme]
     r = validate_record(rec, existing, evidence_rules=[r.model_dump() for r in c.rules])
     # extra, extraction-only checks: every number a rule uses must be in the rule's own quote (blocking)
     r.errors += rule_value_problems(c)
+    r.errors += level_problems(c)
     if not c.rules and not c.unmapped_criteria:
         r.warnings.append("no eligibility criteria found at all; scheme would match everybody")
     return r

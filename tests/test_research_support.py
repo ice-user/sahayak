@@ -43,6 +43,7 @@ def good_senior() -> dict:
         "name": "Sample Senior Citizen Support Scheme",
         "name_evidence": "Sample Senior Citizen Support Scheme (SSCSS)",
         "ministry": "Department of Example Social Welfare",
+        "level": "central", "level_evidence": "Department of Example Social Welfare",
         "category": "pension",
         "summary": "Monthly pension for people aged 60 or above from BPL households.",
         "benefits": "A monthly pension of Rs 800 paid to the bank account.",
@@ -67,6 +68,7 @@ def good_youth() -> dict:
     return {
         "id": "sample_youth_apprentice", "name": "Sample Youth Apprenticeship Allowance",
         "name_evidence": "Sample Youth Apprenticeship Allowance", "ministry": "Ministry of Example Skills",
+        "level": "central", "level_evidence": "Ministry of Example Skills",
         "category": "skill", "summary": "Monthly stipend for apprentices aged 18-35 from low-income families.",
         "benefits": "Stipend of Rs 6,000 per month for 12 months.",
         "benefits_evidence": ["Stipend of Rs 6,000 per month for 12 months during apprenticeship"],
@@ -90,6 +92,7 @@ def good_girl() -> dict:
     return {
         "id": "sample_girl_savings", "name": "Sample Girl Child Savings Account Scheme",
         "name_evidence": "Sample Girl Child Savings Account Scheme", "ministry": "Department of Example Finance",
+        "level": "central", "level_evidence": "Department of Example Finance",
         "category": "finance", "summary": "Savings account for girl children up to 10 years old.",
         "benefits": "Interest of 8 percent per year on deposits.",
         "benefits_evidence": ["Interest of 8 percent per year is paid on deposits"],

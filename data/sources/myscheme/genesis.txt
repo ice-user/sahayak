@@ -1,0 +1,127 @@
+Source URL: https://www.myscheme.gov.in/schemes/genesis
+
+Back
+Details
+Benefits
+Eligibility
+Application Process
+Documents Required
+Frequently Asked Questions
+Sources And References
+Feedback
+Check Eligibility
+Ministry of Electronics and Information Technology
+GEN-NEXT Support for Innovative Startups (GENESIS)
+Capacity BuildingCentres Of ExcellenceEntrepreneursIncubationInvestmentMentorshipStartups
+Details
+The scheme "Gen-Next Support for Innovative Startups (GENESIS)" has been launched by the Ministry of Electronics and Information Technology (MeitY), Government of India. It aims to discover, support, grow and accelerate successful startups in Tier-2 and Tier-3 cities, with emphasis on collaborative engagement among startups, government, and corporates for promoting digitisation based on the principles of inclusivity, accessibility, and affordability, leading to growth in employment and economic outputs. Through this scheme, funding support (for Pilot/Proof-of-Concept, Investment, Early-stage, and Deep-tech categories), capacity-building, mentorship, ecosystem linkages, and community-building initiatives are provided to students, faculty, academic institutions, budding entrepreneurs, startup companies, incubators, Centres of Excellence (CoEs), accelerators, mentors, investors, and corporates engaged in innovation-based growth. The scheme is implemented by MeitY Startup Hub (MSH) through approximately 50 Implementing Agencies (IAs), preferably from Tier-2 and Tier-3 cities of the country. The total budget outlay for the scheme is ₹4,90,00,00,000/- (₹490 Crore) for a duration of 5 years. The programme envisages impacting and consolidating 10,000+ tech startups over the course of the next 5 years to pave the road for an inclusive startup ecosystem.
+Objectives:
+Consolidation of all the existing schemes and assets of MeitY to provide greater efficiency in asset utilisation, increased return from scheme expenditure, and overall enhanced support for startups.
+Building Tier-II and Tier-III focused funding to critically support Pilot/Investment, Early-stage and deep-tech startups. Implementation partners and the startups selection under the GENESIS Scheme will be done by experts based on a defined and structured selection process.
+Community Building initiatives, including workshops, boot camps, conferences, etc., to strengthen the ecosystem and build brand and recognition of MeitY Startups-related Initiatives. All the activities under GENESIS will be aligned to MeitY's major initiatives, including India AI, ISM, and India Stack, etc.
+ 
+
+Benefits
+The scheme provides support across 4 components:
+Investment Support:
+Private-sector matching funding at 1:1 for the investment component of the scheme.
+Average funding of ₹40,00,000/- (₹40 Lakhs), up to a maximum of ₹50,00,000/- (₹50 Lakhs) per startup.
+Matching fund requirement: Yes (1:1 private sector match).
+Pilot (Proof-of-Concept) Support:
+Pilot funding to startups with average funding of ₹40,00,000/- (₹40 Lakhs), up to ₹50,00,000/- (₹50 Lakhs).
+Matching fund requirement: None.
+Ideation Support (Entrepreneur in Residence — EiR:
+Supports early-stage startups with funding of up to ₹10,00,000/- (₹10 Lakhs).
+Matching fund requirement: None.
+Deep-tech Startup Support:
+Provision to support select Deep-tech startups with funding support of an upper ceiling of ₹1,00,00,000/- (₹1 Crore) per startup.
+Matching fund requirement: None.
+Non-Monetary Benefits:
+GENESIS Startup Platform: A single-window solution for all startup-centric schemes of MeitY, programmes, and initiatives targeted towards Tier-2 and Tier-3 cities and towns.
+Challenges Execution: Sourcing, executing, monitoring, and reporting on challenges and supporting startups.
+Corporate and Institutional Partnerships: Building linkages with global startup ecosystems and aggregating resources from global and local industries, institutions, and agencies for the benefit of startups.
+Capacity Building and Performance Optimisation: Optimising and enhancing the performance of MeitY assets, programmes, and schemes via capacity-building programmes.
+Building a self-sustaining "community of communities": Creating awareness and engagement of a larger number of startups via effective and pervasive media and marketing programmes.
+ 
+
+Eligibility
+Eligibility for Implementing Agencies (IAs):
+The applicant Implementing Agency must be a legal entity and must fall under one of the following categories:
+The applicant should be an entity registered under Section 8 of the Companies Act; OR
+The applicant should be a society registered under the Societies Registration Act, 1860; OR
+The applicant should be a trust registered under the Indian Trusts Act, 1882; OR
+The applicant should be a statutory body created through an Act of the legislature.
+The applicant may also be an Incubator, Accelerator, or Educational Institute recognised by the University Grants Commission (UGC) / All India Council for Technical Education (AICTE), or formed under a Central/State Act.
+The applicant should be an entity engaged in supporting startups as part of the startup ecosystem.
+Eligibility for Startups:
+The applicant should be a beneficiary of MeitY Schemes or should be registered with MeitY Startup Hub (MSH).
+The applicant should be a startup registered with the Department for Promotion of Industry and Internal Trade (DPIIT).
+The shareholding by Indian promoters in the applicant startup should be at least 51% at the time of application to the incubator for the scheme, as per the Companies Act, 2013.
+The applicant startup should have a full-time Chief Executive Officer (CEO).
+The applicant startup should have market-ready products and should be seeking funds for business development and commercialisation (applicable in certain categories).
+ 
+
+Application Process
+Online
+Step 1: Visit the Official Portal: Go to the official MeitY Startup Hub website at https://msh.meity.gov.in/ to access all scheme-related information, notifications, and the application portal.
+Step 2: Review eligibility criteria for either Implementing Agencies or Startups as detailed in Section 4 of this document, and confirm that all conditions are met before applying.
+Step 3: Register on the GENESIS Startup Platform (described as a single-window solution for all MeitY startup-centric schemes) or log in if already registered with MeitY Startup Hub (MSH).
+Step 4: Identify the relevant funding/support component — Ideation Support (Entrepreneur in Residence), Pilot (Proof-of-Concept) Support, Investment Support, or Deep-tech Startup Support — based on the stage and nature of the startup.
+Step 5: Fill in the application form and upload all required documents as listed in Section 5. Ensure that the DPIIT Registration Certificate, shareholding pattern, and other relevant documents are ready before submission.
+Step 6: Implementation partners and startups are selected under the GENESIS Scheme by an expert committee based on a defined and structured selection process.
+Step 7: Once selected, startups are monitored through the GENESIS platform. Progress, milestone achievement, and fund utilisation are tracked and reported.
+Contact for Queries: 
+For any queries, contact MeitY Startup Hub at meity-sthub@gov.in or call 011-24301244. Office: MeitY Startup Hub, 2044, Electronics Niketan, 6, CGO Complex, Lodhi Road, New Delhi – 110003
+ 
+
+Documents Required
+For Implementing Agencies:
+Certificate of Registration (Section 8 Company / Society Registration under Societies Registration Act, 1860 / Trust Deed under Indian Trusts Act, 1882 / Statutory Notification under relevant Act).
+Recognition Certificate from University Grants Commission (UGC) or All India Council for Technical Education (AICTE) (applicable for Educational Institutes only).
+Proof of engagement in supporting startups (such as details of incubation/acceleration programmes run by the entity).
+For Startups:
+Department for Promotion of Industry and Internal Trade (DPIIT) Registration Certificate.
+MeitY Startup Hub (MSH) Registration Certificate or proof of being a beneficiary of a MeitY Scheme.
+Certificate of Incorporation / Registration documents of the startup.
+Shareholding Pattern Document, evidencing at least 51% shareholding by Indian promoters at the time of application (as per the Companies Act, 2013).
+Appointment Letter or Proof of Full-Time Chief Executive Officer (CEO).
+Product Demonstration / Market-Readiness Document (applicable for categories requiring market-ready products and seeking funds for commercialisation).
+Proof of Matching Funds from Private Sector (applicable for Investment Support component only — 1:1 matching required).
+ 
+
+Frequently Asked Questions
+
+What does GENESIS stand for, and which ministry has launched it?
+
+What is the total budget and duration of the GENESIS scheme?
+
+Which cities or regions does the GENESIS scheme primarily target?
+
+How many startups does the GENESIS scheme aim to impact?
+
+What are the 4 funding/support components available under the GENESIS scheme?
+
+Which funding component requires a matching contribution from the private sector?
+
+Who are the eligible Implementing Agencies (IAs) under the GENESIS scheme?
+
+What are the eligibility conditions for a startup to apply under GENESIS?
+
+Who are the target beneficiaries of the GENESIS scheme?
+
+How can one apply or get more information about the GENESIS scheme?
+
+Sources And References
+
+Guidelines
+
+Brochure
+
+Official Website
+
+Was this helpful?
+News and Updates
+
+No new news and updates available
+
+Share

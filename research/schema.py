@@ -5,7 +5,7 @@ evidence so the extra bookkeeping never reaches data/schemes.json.
 """
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -44,6 +44,10 @@ class ExtractedScheme(BaseModel):
     summary: str = Field(min_length=10)
     benefits: str = Field(min_length=3)
     benefits_evidence: list[str] = Field(min_length=1)
+    level: Literal["central", "state"] | None = Field(
+        None, description="central = open to residents of any state; state = run by / limited to one or more "
+                          "states or UTs (then a state rule is mandatory)")
+    level_evidence: str = Field("", description="Verbatim quote showing who runs the scheme / which state(s) it covers")
     rules: list[EvidencedRule]
     unmapped_criteria: list[UnmappedCriterion] = []
     caveats: list[str] = []
@@ -78,6 +82,8 @@ def to_scheme_dict(c: ExtractedScheme | dict) -> dict:
 def evidence_items(c: ExtractedScheme) -> list[tuple[str, str]]:
     """Flatten every (claim label, quote) pair so evidence can be verified uniformly."""
     items: list[tuple[str, str]] = [("name", c.name_evidence)]
+    if c.level_evidence.strip():
+        items.append(("level", c.level_evidence))
     items += [(f"benefits[{i}]", q) for i, q in enumerate(c.benefits_evidence)]
     items += [(f"rules[{i}] {r.field} {r.op} {r.value!r}", r.evidence) for i, r in enumerate(c.rules)]
     items += [(f"documents[{i}] {d.item!r}", d.evidence) for i, d in enumerate(c.documents)]

@@ -16,7 +16,7 @@ from .llm_options import model_extra_body
 from .tools import TOOL_SCHEMAS
 
 # Models on NVIDIA's API that are worth trying if the default fails (check build.nvidia.com for current ones)
-NVIDIA_FALLBACKS = ["nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"]  # verify names on build.nvidia.com
+NVIDIA_FALLBACKS = ["nvidia/nemotron-3.5-super-vl-120b-a12b", "nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"]  # verify names on build.nvidia.com
 
 
 def main() -> int:

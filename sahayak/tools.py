@@ -20,7 +20,8 @@ MAX_SCHEME_IDS = 25
 _PROFILE_PROPS = {
     "age": {"type": "integer", "minimum": 0, "maximum": 120},
     "gender": {"type": "string", "enum": ["male", "female", "other"]},
-    "state": {"type": "string", "maxLength": 60},
+    "state": {"type": "string", "maxLength": 60,
+              "description": "State or union territory the user lives in (e.g. Kerala, Uttar Pradesh); state schemes need it"},
     "marital_status": {"type": "string", "enum": ["single", "married", "widowed", "divorced", "separated"]},
     "bpl": {"type": "boolean", "description": "Below Poverty Line household / BPL card"},
     "annual_income": {"type": "integer", "minimum": 0, "maximum": MAX_MONEY,

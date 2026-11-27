@@ -38,6 +38,12 @@ python -m research batch urls.txt --workers 3
 python -m research batch --from-page https://example.org/list --link-pattern "/schemes/"
 #    writes a markdown report (ready for review / needs fix / failed); re-running reuses pending reviews
 
+# 3b. myscheme.gov.in is a JavaScript app: the plain fetcher sees no text. Render it once with a headless browser
+#     (pip install playwright; python -m playwright install chromium), at most 1 action per 2 s:
+python scripts/collect_myscheme.py list                                   # -> data/sources/myscheme_urls.txt (central / state:<State> per line)
+python scripts/collect_myscheme.py snapshot --from-file data/sources/myscheme_urls.txt --group central --limit 20
+python -m research batch data/sources/myscheme_urls.txt --snapshots data/sources/myscheme --limit 20 --workers 2
+
 # 4. put approved candidates into the database (all-or-nothing, re-validates, atomic write, timestamped backup,
 #    refreshes web/src/data/schemes.json)
 python -m research merge --dry-run
@@ -108,8 +114,7 @@ fixtures in `tests/fixtures/research/` (clearly labelled, fictional) and a scrip
 
 ## Limitations
 
-- Never run against live sites or a real LLM in development (network was blocked); prompt quality and
-  the `__NEXT_DATA__` fallback for myscheme.gov.in are untested against the real thing. Expect to tune
+- Never run against live sites or a real LLM in development (network was blocked); prompt quality is tuned only on a small pilot. The `__NEXT_DATA__` fallback does not help on myscheme.gov.in (its HTML carries no scheme text); use `scripts/collect_myscheme.py` snapshots. Expect to tune
   `research/prompts.py` per model. JS-rendered pages that expose no text need a saved PDF/text file instead.
 - Scanned PDFs are not OCR'd (clear error). Pages are cut at 60,000 characters (flagged as a warning).
 - Evidence proves a quote exists and the auditor cross-checks the reading, but both are LLM-adjacent: the human review
@@ -118,8 +123,11 @@ fixtures in `tests/fixtures/research/` (clearly labelled, fictional) and a scrip
   number words such as "साठ" are not parsed; their digit forms and lakh/crore words are).
 - Fetching ignores proxy environment variables on purpose (a proxy would resolve DNS and bypass IP validation), so a
   deployment that can only reach the internet through a proxy needs an egress-filtered network instead.
-- Only central-scheme style rules over existing `Profile` fields are supported; state-specific amounts,
-  caste/occupation/land-size criteria stay as caveats. Adding a field means changing `Profile` first.
+- State schemes are gated by a rule on `state` (`eq` or `in`, canonical names from `sahayak/states.py`); the extractor must
+  declare `level` (`central` | `state`) with a quote, and validation fails a `state` scheme without a state rule (and a
+  `central` one with it). A user whose state is unknown gets `need_info`. State-specific amounts, district limits,
+  caste/occupation/land-size criteria stay as caveats.
+- Only rules over existing `Profile` fields are supported. Adding a field means changing `Profile` first.
 - Model JSON output is requested by prompt only (no provider-specific JSON mode) for portability.
 - `merge` rewrites `schemes.json` with 2-space indentation (content preserved, formatting of the hand-written file is not), keeps a timestamped backup per merge (old backups are never pruned) and mirrors the file to `web/src/data/schemes.json`.
 - No rate limiting beyond `--workers`; be polite to government servers.

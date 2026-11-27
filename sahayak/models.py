@@ -5,7 +5,9 @@ import json
 from pathlib import Path
 from typing import Annotated, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator, model_validator
+
+from .states import normalise_state
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "schemes.json"
 
@@ -48,6 +50,15 @@ class Profile(BaseModel):
     pregnant_or_lactating: Optional[StrictBool] = None
     in_regular_govt_employment: Optional[StrictBool] = None
     children: Optional[list[Child]] = Field(None, max_length=MAX_CHILDREN)
+
+    @field_validator("state")
+    @classmethod
+    def _canonical_state(cls, v):
+        """'UP', 'up' and 'Uttar Pradesh' are one place. A name we do not recognise is kept as typed
+        (the rule engine then treats the state as unknown instead of guessing)."""
+        if v is None:
+            return None
+        return normalise_state(v) or (v.strip() or None)
 
     @model_validator(mode="after")
     def _tax_facts_agree(self):

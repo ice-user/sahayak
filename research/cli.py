@@ -6,6 +6,7 @@ import getpass
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 from rich.console import Console
@@ -16,7 +17,7 @@ from . import runner
 from .batch import links_from_page, read_sources, render_report, run_batch
 from .fetch import FetchError, fetch_url_raw
 from .graph import build_graph, sqlite_checkpointer
-from .llm import LLM
+from .llm import LLM, STATS
 from .merge import merge_candidates
 from .nodes import CANDIDATES_DIR, Deps
 from .verifier import verifier_llm_from_env
@@ -116,9 +117,11 @@ def cmd_batch(args) -> int:
         sources = read_sources(args.file)
     if args.limit:
         sources = sources[: args.limit]
+    c0, t0, w0 = STATS["calls"], STATS["tokens"], time.monotonic()
     with console.status(f"researching {len(sources)} source(s) with {args.workers} worker(s)..."):
-        items = run_batch(graph, sources, workers=args.workers)
-    report = render_report(items)
+        items = run_batch(graph, sources, workers=args.workers, snapshot_dir=args.snapshots)
+    report = render_report(items, wall_seconds=time.monotonic() - w0, llm_calls=STATS["calls"] - c0,
+                           llm_tokens=STATS["tokens"] - t0)
     out_path = Path(args.report) if args.report else Path(args.candidates_dir) / "reports" / "latest-batch.md"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(report, encoding="utf-8")
@@ -181,6 +184,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--from-page", help="listing/search-results URL to harvest links from")
     p.add_argument("--link-pattern", help="regex a harvested link must match")
     p.add_argument("--workers", type=int, default=3)
+    p.add_argument("--snapshots", metavar="DIR",
+                   help="directory of pre-rendered page text named <last URL segment>.txt (for JS-only sites such "
+                        "as myscheme.gov.in; see scripts/collect_myscheme.py); the URL is recorded as the source")
     p.add_argument("--limit", type=int)
     p.add_argument("--report", help="markdown report path")
     p.add_argument("--model")

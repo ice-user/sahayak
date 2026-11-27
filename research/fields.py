@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import Annotated, Any, Literal, get_args, get_origin
 
 from sahayak.models import Child, Profile
+from sahayak.states import STATES
 
 try:  # X | None syntax
     from types import UnionType as _UnionType
@@ -65,6 +66,8 @@ def _specs(model) -> dict[str, FieldSpec]:
     out = {}
     for n, f in model.model_fields.items():
         kind, choices, c = _kind(f.annotation, f)
+        if n == "state":                      # free text on Profile, but rules may only use canonical names
+            kind, choices = "state", STATES
         out[n] = FieldSpec(n, kind, choices, c.get("lo"), c.get("hi"))
     return out
 
@@ -82,6 +85,9 @@ def describe_fields() -> str:
                             for c in CHILD_FIELDS.values())
             lines.append(f"- {s.name}: list of children; ONLY usable with op any_child whose value is a list of "
                          f"sub-conditions over: {sub}")
+        elif s.kind == "state":
+            lines.append("- state: the citizen's state/UT. ONLY ops eq (one state) or in (a list of states); values must "
+                         "be spelled EXACTLY as one of: " + "; ".join(s.choices))
         elif s.kind == "enum":
             lines.append(f"- {s.name}: one of {'|'.join(s.choices)}")
         else:
