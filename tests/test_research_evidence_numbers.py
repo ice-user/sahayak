@@ -68,9 +68,9 @@ def test_value_in_evidence_derived_values_are_restricted():
     assert not value_in_evidence(17, "children aged 18 years", op="lte")
     assert not value_in_evidence(19, "children below 18 years", op="lte")
     assert value_in_evidence(61, "persons above 60 years", op="gte")
-    # monthly figures converted to annual
-    assert value_in_evidence(96000, "income of Rs 8,000 per month", field="annual_income")
-    assert not value_in_evidence(96000, "income of Rs 8,000 per year", field="annual_income")
+    # a monthly figure is no longer converted to annual: it goes on monthly_income as stated
+    assert not value_in_evidence(96000, "income of Rs 8,000 per month", field="annual_income")
+    assert value_in_evidence(8000, "income of Rs 8,000 per month", field="monthly_income")
 
 
 def test_validate_candidate_blocks_value_missing_from_evidence():

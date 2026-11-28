@@ -19,17 +19,26 @@ from sahayak.rules import check_scheme
 
 from sahayak.states import STATES, normalise_state
 
-from .evidence import numbers_in, value_in_evidence
-from .fields import CHILD_FIELDS, OPS, PROFILE_FIELDS, FieldSpec
+from .evidence import normalize, numbers_in, value_in_evidence
+from .fields import CHILD_FIELDS, NUMERIC, OPS, PERIOD_OF, PROFILE_FIELDS, FieldSpec
 from .schema import ExtractedScheme, to_scheme_dict
 
 SNAKE = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
 BIG = 10**12
 
 
-def _bounds(spec: FieldSpec) -> tuple[int, int]:
-    """Valid range of an int field, derived from the Profile/Child model (ge/le), never hard-coded here."""
+def _bounds(spec: FieldSpec) -> tuple[float, float]:
+    """Valid range of a numeric field, derived from the Profile/Child model (ge/le), never hard-coded here."""
     return (spec.lo if spec.lo is not None else 0), (spec.hi if spec.hi is not None else BIG)
+
+
+def _step(spec: FieldSpec) -> float:
+    """Smallest meaningful change of a numeric field: 1 for integers, 0.1 for fractional ones (hectares)."""
+    return 1 if spec.kind == "int" else 0.1
+
+
+def _num(x: float, spec: FieldSpec):
+    return round(x, 6) if spec.kind == "float" else x
 
 
 @dataclass
@@ -46,9 +55,9 @@ def _value_ok(spec: FieldSpec, v: Any) -> str | None:
     """Return a problem description, or None if ``v`` is a valid single value for the field."""
     if spec.kind == "bool":
         return None if isinstance(v, bool) else f"must be true/false, got {v!r}"
-    if spec.kind == "int":
-        if isinstance(v, bool) or not isinstance(v, int):
-            return f"must be an integer, got {v!r}"
+    if spec.kind in NUMERIC:
+        if isinstance(v, bool) or not isinstance(v, int if spec.kind == "int" else (int, float)):
+            return f"must be {'an integer' if spec.kind == 'int' else 'a number'}, got {v!r}"
         lo, hi = _bounds(spec)
         if not lo <= v <= hi:
             return f"must be within {lo}..{hi} (the range Profile accepts), got {v}"
@@ -96,7 +105,7 @@ def check_condition(cond: dict, specs: dict[str, FieldSpec], where: str, *, top:
         return [f"{where}: state only supports eq or in (a scheme limited to some states); express exclusions as "
                 "an unmapped criterion"]
     if op in ("gte", "lte"):
-        if spec.kind != "int":
+        if spec.kind not in NUMERIC:
             return [f"{where}: op {op} needs a numeric field, but {f} is {spec.kind}"]
         p = _value_ok(spec, val)
         return [f"{where}: value for {f} {p}"] if p else []
@@ -129,7 +138,7 @@ def _contradictions(rules: list[dict]) -> tuple[list[str], list[str]]:
         seen.add(key)
     for f, rs in by_field.items():
         spec = PROFILE_FIELDS[f]
-        if spec.kind == "int":
+        if spec.kind in NUMERIC:
             lo = max((r["value"] for r in rs if r["op"] == "gte"), default=None)
             hi = min((r["value"] for r in rs if r["op"] == "lte"), default=None)
             eqs = {r["value"] for r in rs if r["op"] == "eq"}
@@ -153,7 +162,7 @@ def _contradictions(rules: list[dict]) -> tuple[list[str], list[str]]:
             for r in rs:
                 if r["op"] == "ne":
                     allowed.discard(r["value"])
-            if not allowed and spec.kind != "int":
+            if not allowed and spec.kind not in NUMERIC:
                 errors.append(f"contradictory rules on {f}: no value satisfies all eq/in/ne rules")
     return errors, warnings
 
@@ -169,12 +178,12 @@ def _satisfying_value(spec: FieldSpec, rs: list[dict]) -> Any:
     if ins:
         cands = [v for v in sorted(set.intersection(*ins), key=repr) if v not in ne]
         return cands[0] if cands else None
-    if spec.kind == "int":
+    if spec.kind in NUMERIC:
         lo = max((r["value"] for r in rs if r["op"] == "gte"), default=None)
         hi = min((r["value"] for r in rs if r["op"] == "lte"), default=None)
         v = lo if lo is not None else (hi if hi is not None else 30)
         while v in ne:
-            v += 1
+            v += _step(spec)
         return v
     if spec.kind == "bool":
         return (not next(iter(ne))) if ne else True
@@ -192,8 +201,18 @@ def _child_for(subs: list[dict]) -> dict:
     return out
 
 
+def _to_profile_dict(d: dict) -> dict:
+    """Computed fields are not Profile fields: per_capita_monthly_income=v becomes a household of one with that
+    monthly income (an explicit household_size / income in the same dict wins)."""
+    out = {k: v for k, v in d.items() if not PROFILE_FIELDS.get(k, FieldSpec(k, "str")).derived}
+    if "per_capita_monthly_income" in d:
+        out.setdefault("household_size", 1)
+        out.setdefault("monthly_income", int(d["per_capita_monthly_income"] * out["household_size"]))
+    return out
+
+
 def _verdict(scheme: Scheme, profile_dict: dict) -> str:
-    return check_scheme(Profile(**profile_dict), scheme).verdict
+    return check_scheme(Profile(**_to_profile_dict(profile_dict)), scheme).verdict
 
 
 def behavioural_checks(scheme: Scheme) -> tuple[list[str], int]:
@@ -203,8 +222,11 @@ def behavioural_checks(scheme: Scheme) -> tuple[list[str], int]:
     rules = scheme.rules
     plain = [r for r in rules if r["op"] != "any_child"]
     child_rules = [r for r in rules if r["op"] == "any_child"]
+    used = {r["field"] for r in plain}
+    if "per_capita_monthly_income" in used and used & {"household_size", "monthly_income", "annual_income"}:
+        return [], 0  # a computed field plus its inputs in one scheme: no safe boundary profile to generate
     base: dict[str, Any] = {}
-    for f in {r["field"] for r in plain}:
+    for f in used:
         v = _satisfying_value(PROFILE_FIELDS[f], [r for r in plain if r["field"] == f])
         if v is None:
             return [], 0  # contradiction already reported elsewhere
@@ -238,15 +260,17 @@ def behavioural_checks(scheme: Scheme) -> tuple[list[str], int]:
             return all(_cmp(val, x["op"], x["value"]) for x in others)
 
         if op == "gte":
+            below = _num(v - _step(spec), spec)
             if fits_others(v):
                 expect(f"{f} at threshold {v}", with_value(v), "eligible")
-            if v - 1 >= _bounds(spec)[0] and fits_others(v - 1):
-                expect(f"{f} just below threshold ({v - 1})", with_value(v - 1), "not_eligible")
+            if below >= _bounds(spec)[0] and fits_others(below):
+                expect(f"{f} just below threshold ({below})", with_value(below), "not_eligible")
         elif op == "lte":
+            above = _num(v + _step(spec), spec)
             if fits_others(v):
                 expect(f"{f} at limit {v}", with_value(v), "eligible")
-            if v + 1 <= _bounds(spec)[1] and fits_others(v + 1):
-                expect(f"{f} just above limit ({v + 1})", with_value(v + 1), "not_eligible")
+            if above <= _bounds(spec)[1] and fits_others(above):
+                expect(f"{f} just above limit ({above})", with_value(above), "not_eligible")
         elif op == "eq":
             alt = _other_value(spec, v)
             if alt is not None and fits_others(alt):
@@ -277,8 +301,8 @@ def _other_value(spec: FieldSpec, v):
         return not v
     if spec.kind == "enum":
         return next((c for c in spec.choices if c != v), None)
-    if spec.kind == "int":
-        alt = v + 1
+    if spec.kind in NUMERIC:
+        alt = _num(v + _step(spec), spec)
         return None if alt > _bounds(spec)[1] else alt
     if spec.kind == "state":
         return next((s for s in STATES if s != v), None)
@@ -294,8 +318,9 @@ def _cmp(actual, op, expected) -> bool:
 def _outside(spec: FieldSpec, allowed: list):
     if spec.kind == "enum":
         return next((c for c in spec.choices if c not in allowed), None)
-    if spec.kind == "int":
-        return max(allowed) + 1 if max(allowed) + 1 <= _bounds(spec)[1] else None
+    if spec.kind in NUMERIC:
+        top = _num(max(allowed) + _step(spec), spec)
+        return top if top <= _bounds(spec)[1] else None
     if spec.kind == "state":
         return next((s for s in STATES if s not in allowed), None)
     return "Zz-Not-Listed"
@@ -328,13 +353,49 @@ def _numeric_values(rule_value: Any, op: str, field: str) -> list[tuple[int, str
                 out += _numeric_values(sub.get("value"), str(sub.get("op")), str(sub.get("field")))
         return out
     vals = rule_value if isinstance(rule_value, list) else [rule_value]
-    return [(v, op, field) for v in vals if isinstance(v, int) and not isinstance(v, bool)]
+    return [(v, op, field) for v in vals if isinstance(v, (int, float)) and not isinstance(v, bool)]
+
+
+_MONTHLY_QUOTE = re.compile(r"\b(?:per month|a month|monthly|each month|every month|per mensem|p\.m\.)|/\s*month|"
+                            r"प्रति माह|प्रतिमाह|मासिक|महीने|மாதம்|மாத")
+_ANNUAL_QUOTE = re.compile(r"\b(?:per annum|per year|a year|annual|annually|yearly|each year|every year|p\.a\.)|"
+                           r"/\s*(?:year|annum)|प्रति वर्ष|वार्षिक|सालाना|ஆண்டு")
+_AREA_UNITS = re.compile(r"\b(?:acres?|bighas?|gunthas?|kanals?|cents?|sq\.? ?(?:m|ft|metres?|feet))\b")
+
+
+def quote_period(quote: str) -> str | None:
+    """'monthly' or 'annual' when the quote names exactly one period, else None (none given, or both)."""
+    low = normalize(quote)
+    m, a = bool(_MONTHLY_QUOTE.search(low)), bool(_ANNUAL_QUOTE.search(low))
+    return "monthly" if m and not a else ("annual" if a and not m else None)
+
+
+def period_problems(c: ExtractedScheme) -> list[str]:
+    """BLOCKING: an income rule must use the field of the period its own quote states. "Rs 15,000 per month"
+    on annual_income (or "per annum" on monthly_income) silently turns a limit into a different one; this is the
+    error the auditor caught on PMAY-G. Land in acres/bighas on land_holding_hectares is the same kind of error."""
+    errs: list[str] = []
+    for i, rule in enumerate(c.rules):
+        want = PERIOD_OF.get(rule.field)
+        if want:
+            got = quote_period(rule.evidence)
+            if got and got != want:
+                right = {"annual": "annual_income", "monthly": "monthly_income"}[got]
+                errs.append(f"rules[{i}]: period mismatch: {rule.field} is a {want} figure but the quote states a "
+                            f"{got} one (\"{rule.evidence[:120]}\"). Use {right} with the number as the source "
+                            "states it (do not convert), or move the criterion to unmapped_criteria")
+        if rule.field == "land_holding_hectares" and _AREA_UNITS.search(normalize(rule.evidence)) \
+                and "hectare" not in normalize(rule.evidence):
+            errs.append(f"rules[{i}]: land_holding_hectares is in hectares but the quote uses another unit "
+                        f"(\"{rule.evidence[:120]}\"). Convert only if the source gives hectares; otherwise move "
+                        "the criterion to unmapped_criteria")
+    return errs
 
 
 def rule_value_problems(c: ExtractedScheme) -> list[str]:
     """BLOCKING: a rule's number must literally appear in its own evidence quote (digit-boundary exact;
-    1,00,000 = 100000 = 1 lakh; 60 does not match 160). Only exclusive bounds and monthly x12 are derived."""
-    errs: list[str] = []
+    1,00,000 = 100000 = 1 lakh; 60 does not match 160). Only exclusive bounds are derived; the income period must match the quote (period_problems)."""
+    errs: list[str] = period_problems(c)
     for i, rule in enumerate(c.rules):
         for v, op, field in _numeric_values(rule.value, rule.op, rule.field):
             if not value_in_evidence(v, rule.evidence, op=op, field=field):

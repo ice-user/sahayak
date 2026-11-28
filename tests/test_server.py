@@ -8,6 +8,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from sahayak.agent import Agent
+from sahayak.models import load_schemes
 from sahayak.tools import Toolbox
 from server.config import Settings
 from server.main import create_app
@@ -221,7 +222,7 @@ def test_schemes_list_hides_rules(toolbox):
     with TestClient(app) as tc:
         r = tc.get("/api/schemes")
     schemes = r.json()
-    assert r.status_code == 200 and len(schemes) == len(toolbox.schemes) == 10
+    assert r.status_code == 200 and len(schemes) == len(toolbox.schemes) == len(load_schemes())
     assert all("rules" not in s for s in schemes)
     assert set(schemes[0]) == {"id", "name", "category", "summary", "benefits", "documents", "how_to_apply",
                                "source_url", "tags", "aliases", "caveats"}
@@ -246,7 +247,7 @@ def test_health_never_exposes_keys(toolbox, monkeypatch):
     app = create_app(toolbox=toolbox, settings=Settings())
     with TestClient(app) as tc:
         r = tc.get("/api/health")
-    assert r.json() == {"ok": True, "schemes": 10}  # no model name or provider status for the public
+    assert r.json() == {"ok": True, "schemes": len(load_schemes())}  # no model name or provider status for the public
     assert "secret" not in r.text and "my-model" not in r.text
 
 

@@ -227,12 +227,13 @@ _EXCL_LOWER = re.compile(r"\b(?:above|over|more than|greater than|higher than|ol
 _MONTHLY = re.compile(r"\b(?:per month|a month|monthly|each month|every month|/\s*month|p\.m\.)")
 
 
-def value_in_evidence(value: int, evidence: str, *, op: str | None = None, field: str | None = None) -> bool:
+def value_in_evidence(value: int | float, evidence: str, *, op: str | None = None, field: str | None = None) -> bool:
     """Is the rule's numeric ``value`` stated in its own evidence quote (digit-exact)?
 
     Accepted forms: the number itself in any notation (60, 6,0 no; 1,00,000 = 100000 = 1 lakh; Devanagari digits;
     English number words). Two derived readings are allowed and nothing else: an exclusive bound
-    ("below 18" -> lte 17, "above 60" -> gte 61) and a monthly amount converted to annual (x12) for annual_income.
+    ("below 18" -> lte 17, "above 60" -> gte 61). A monthly amount is NOT converted: a monthly limit goes on
+    monthly_income as stated (the engine converts between periods; research.validate checks the period matches).
     """
     nums = numbers_in(evidence)
     if _dec(value) in nums:
@@ -241,7 +242,5 @@ def value_in_evidence(value: int, evidence: str, *, op: str | None = None, field
     if op == "lte" and _EXCL_UPPER.search(ev) and _dec(value + 1) in nums:
         return True
     if op == "gte" and _EXCL_LOWER.search(ev) and _dec(value - 1) in nums:
-        return True
-    if field == "annual_income" and _MONTHLY.search(ev) and any(_dec(n * 12) == _dec(value) for n in nums):
         return True
     return False

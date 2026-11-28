@@ -1,0 +1,144 @@
+{
+  "id": "pm_kisan_maandhan_yojana",
+  "name": "Pradhan Mantri Kisan Maandhan Yojana",
+  "name_evidence": "Pradhan Mantri Kisan Maandhan Yojana",
+  "ministry": "Ministry Of Agriculture and Farmers Welfare",
+  "category": "pension",
+  "summary": "Old age protection and social security scheme for Small and Marginal Farmers providing a minimum assured pension of ₹ 3,000 per month after age 60, with government matching contribution.",
+  "benefits": "Minimum assured pension of ₹ 3,000 per month after attaining the age of 60 years; family pension of 50% to spouse; government matching contribution equal to subscriber's monthly contribution.",
+  "benefits_evidence": [
+    "The subscriber will receive a minimum assured pension of ₹ 3,000/- per month after attaining the age of 60 years.",
+    "In case of death of the subscriber, the spouse will receive 50% of the pension amount as family pension.",
+    "The Government of India will contribute an amount equal to the subscriber’s monthly contribution to the pension fund."
+  ],
+  "level": "central",
+  "level_evidence": "\"Pradhan Mantri Kisan Maandhan Yojana\" by the Department of Agriculture & Farmers Welfare, Government of India is a government scheme meant for old age protection and social security of Small and Marginal Farmers (SMF).",
+  "rules": [
+    {
+      "field": "owns_cultivable_land",
+      "op": "eq",
+      "value": true,
+      "reason": "Applicant must be a Small or Marginal Farmer with cultivable landholding",
+      "evidence": "The applicant should be a Small or Marginal Farmer."
+    },
+    {
+      "field": "land_holding_hectares",
+      "op": "lte",
+      "value": 2,
+      "reason": "Cultivable landholding must be up to 2 hectares",
+      "evidence": "The applicant should have cultivable landholding up to 2 hectares as per State or Union Territory land records."
+    },
+    {
+      "field": "age",
+      "op": "gte",
+      "value": 18,
+      "reason": "Applicant must be at least 18 years of age at the time of entry",
+      "evidence": "The applicant should be between 18 and 40 years of age at the time of entry."
+    },
+    {
+      "field": "age",
+      "op": "lte",
+      "value": 40,
+      "reason": "Applicant must be 40 years of age or younger at the time of entry",
+      "evidence": "The applicant should be between 18 and 40 years of age at the time of entry."
+    },
+    {
+      "field": "income_tax_payer_last_year",
+      "op": "eq",
+      "value": false,
+      "reason": "People who paid income tax in the last assessment year are excluded",
+      "evidence": "All Persons who paid Income Tax in the last assessment year"
+    },
+    {
+      "field": "is_govt_employee",
+      "op": "eq",
+      "value": false,
+      "reason": "Serving or retired government employees are excluded",
+      "evidence": "All serving or retired officers and employees of Central/ State Government Ministries/ Offices/Departments and their field units, Central or State PSEs and Attached offices/ Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV/Group D employees)."
+    },
+    {
+      "field": "is_epfo_esic_nps_member",
+      "op": "eq",
+      "value": false,
+      "reason": "People covered by NPS, ESIC or EPFO are excluded",
+      "evidence": "SMFs covered under any other statuary social security schemes such as National Pension Scheme (NPS), Employees’ State Insurance Corporation scheme, Employees’ Fund Organization Scheme etc."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant's name should appear in land records as on 01.08.2019",
+      "evidence": "The applicant’s name should appear in land records as on 01.08.2019."
+    },
+    {
+      "criterion": "Applicant should possess an Aadhaar card",
+      "evidence": "The applicant should possess an Aadhaar card."
+    },
+    {
+      "criterion": "Applicant should have a savings bank account or PM-KISAN account",
+      "evidence": "The applicant should have a savings bank account or PM-KISAN account."
+    },
+    {
+      "criterion": "SMFs covered under any other statutory social security schemes such as National Pension Scheme (NPS), Employees’ State Insurance Corporation scheme, Employees’ Fund Organization Scheme are not eligible",
+      "evidence": "SMFs covered under any other statuary social security schemes such as National Pension Scheme (NPS), Employees’ State Insurance Corporation scheme, Employees’ Fund Organization Scheme etc."
+    },
+    {
+      "criterion": "Farmers who have opted for Pradhan Mantri Shram Yogi Maandhan Yojana and Pradhan Mantri Vyapari Maandhan administered by the Ministry of Labour & Employment are not eligible",
+      "evidence": "Farmers who have opted for Pradhan Mantri Shram Yogi Maandhan Yojana and Pradhan Mantri Vyapari Maandhan administered by the Ministry of Labour & Employment."
+    },
+    {
+      "criterion": "All Institutional Landholders are not eligible",
+      "evidence": "All Institutional Landholders."
+    },
+    {
+      "criterion": "Former and present holders of constitutional posts are not eligible",
+      "evidence": "Former and present holders of constitutional posts."
+    },
+    {
+      "criterion": "Former and present Ministers/ State Ministers and former/present Members of Lok Sabha/ Rajya Sabha/ State Legislative Assemblies/ State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats are not eligible",
+      "evidence": "Former and present Ministers/ State Ministers and former/present Members of Lok Sabha/ Rajya Sabha/ State Legislative Assemblies/ State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats."
+    },
+    {
+      "criterion": "All serving or retired officers and employees of Central/ State Government Ministries/ Offices/Departments and their field units, Central or State PSEs and Attached offices/ Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV/Group D employees) are not eligible",
+      "evidence": "All serving or retired officers and employees of Central/ State Government Ministries/ Offices/Departments and their field units, Central or State PSEs and Attached offices/ Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV/Group D employees)."
+    },
+    {
+      "criterion": "All Persons who paid Income Tax in the last assessment year Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practice are not eligible",
+      "evidence": "All Persons who paid Income Tax in the last assessment year Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practice."
+    },
+    {
+      "criterion": "Applicant should be a Small or Marginal Farmer",
+      "evidence": "The applicant should be a Small or Marginal Farmer."
+    },
+    {
+      "criterion": "Exclusion: Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practice are not eligible",
+      "evidence": "Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practice."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Aadhaar Card",
+      "evidence": "Aadhaar Card"
+    },
+    {
+      "item": "Savings Bank Account Number along with IFSC Code ( Bank Passbook or Cheque Leaf/book or copy of bank statement as evidence of bank account)",
+      "evidence": "Savings Bank Account Number along with IFSC Code ( Bank Passbook or Cheque Leaf/book or copy of bank statement as evidence of bank account)."
+    }
+  ],
+  "how_to_apply": "Apply online via Common Service Centres (CSCs); visit the nearest CSC with Aadhaar Card and Savings Bank Account Number along with IFSC Code, pay the initial contribution amount in cash to the Village Level Entrepreneur (VLE), and complete enrolment.",
+  "how_to_apply_evidence": [
+    "Online - Via CSCs",
+    "Step 1: The Eligible SMFs desirous of joining the scheme shall visit the nearest Common Service Centre (CSC).",
+    "Step 2: Following are the prerequisites for the enrolment process: Aadhaar Card; Savings Bank Account Number along with IFSC Code ( Bank Passbook or Cheque Leave/book or copy of bank statement as evidence of bank account ).",
+    "Step 3: Initial contribution amount in cash will be made to the Village Level Entrepreneur (VLE)."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/pmkmdy",
+  "tags": [
+    "pension",
+    "small and marginal farmer",
+    "social security",
+    "old age pension",
+    "family pension"
+  ],
+  "aliases": []
+}

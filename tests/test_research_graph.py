@@ -170,7 +170,7 @@ def test_approve_writes_candidate_with_provenance(tmp_path):
                                          "reason": "Applicant must be 60 or older"}
     assert doc["evidence"]["candidate"]["rules"][0]["evidence"].startswith("The applicant must be 60")
     assert (deps.candidates_dir / "sources" / "sample_senior_support.txt").is_file()
-    assert json.loads(deps.schemes_path.read_text())["schemes"][-1]["id"] != "sample_senior_support"
+    assert json.loads(deps.schemes_path.read_text(encoding="utf-8"))["schemes"][-1]["id"] != "sample_senior_support"
 
 
 def test_reject_writes_nothing(tmp_path):
@@ -307,10 +307,10 @@ def _approved(tmp_path, cand=None, source=SENIOR, url=SENIOR_URL):
 
 def test_merge_adds_to_temp_schemes_and_engine_works(tmp_path):
     deps = _approved(tmp_path)
-    before = json.loads(deps.schemes_path.read_text())
+    before = json.loads(deps.schemes_path.read_text(encoding="utf-8"))
     res = merge_candidates(deps.candidates_dir, deps.schemes_path, cases_path=CASES)
     assert res.ok and res.merged == ["sample_senior_support"], res.errors
-    after = json.loads(deps.schemes_path.read_text())
+    after = json.loads(deps.schemes_path.read_text(encoding="utf-8"))
     assert len(after["schemes"]) == len(before["schemes"]) + 1 and after["_meta"] == before["_meta"]
     assert len(list(deps.schemes_path.parent.glob("schemes.json.*.bak"))) == 1
     assert (deps.candidates_dir / "merged" / "sample_senior_support.json").is_file()
@@ -328,9 +328,9 @@ def test_merge_adds_to_temp_schemes_and_engine_works(tmp_path):
 
 def test_merge_dry_run_and_refuses_existing_id_without_flag(tmp_path):
     deps = _approved(tmp_path)
-    snapshot = deps.schemes_path.read_text()
+    snapshot = deps.schemes_path.read_text(encoding="utf-8")
     res = merge_candidates(deps.candidates_dir, deps.schemes_path, dry_run=True, cases_path=CASES)
-    assert res.ok and res.merged and deps.schemes_path.read_text() == snapshot
+    assert res.ok and res.merged and deps.schemes_path.read_text(encoding="utf-8") == snapshot
 
     (tmp_path / "u").mkdir()
     deps2 = _approved(tmp_path / "u", variant(good_senior(), id="ignoaps"))
@@ -348,9 +348,9 @@ def test_merge_is_all_or_nothing_and_revalidates(tmp_path):
     # 1. tampered rule: unknown field
     doc["scheme"]["rules"].append({"field": "caste", "op": "eq", "value": "x", "reason": "reason here"})
     p.write_text(json.dumps(doc))
-    snapshot = deps.schemes_path.read_text()
+    snapshot = deps.schemes_path.read_text(encoding="utf-8")
     res = merge_candidates(deps.candidates_dir, deps.schemes_path, cases_path=CASES)
-    assert not res.ok and any("caste" in e for e in res.errors) and deps.schemes_path.read_text() == snapshot
+    assert not res.ok and any("caste" in e for e in res.errors) and deps.schemes_path.read_text(encoding="utf-8") == snapshot
     # 2. not approved by a human
     doc = json.loads(p.read_text())
     doc["scheme"]["rules"].pop()

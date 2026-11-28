@@ -1,0 +1,233 @@
+{
+  "id": "pmay_g",
+  "name": "Pradhan Mantri Awaas Yojana - Gramin",
+  "name_evidence": "Pradhan Mantri Awaas Yojana - Gramin",
+  "ministry": "Ministry Of Rural Development",
+  "category": "housing",
+  "summary": "PMAY-G aims at providing a pucca house, with basic amenities, to all houseless households and those households living in kutcha and dilapidated house in rural areas of India.",
+  "benefits": "Financial Assistance of ₹ 1,20,000 per unit for plain areas; and ₹ 1,30,000 per unit for hilly areas, difficult areas, and IAP districts (Himalayan states, North-Eastern states, and Union Territories of Jammu & Kashmir). A willing beneficiary can avail of institutional finance (loan) of up to ₹ 70,000 at 3% lower interest rate, to build a permanent house. The maximum principal amount for which subsidy can be sought is ₹ 2,00,000. The minimum size of the house shall be is 25 sq m including a dedicated area for hygienic cooking. In convergence with Swachh Bharat Mission-Gramin (SBM-G), the beneficiaries get financial assistance of up to ₹ 12,000 for the construction of toilets. In convergence with MGNREGA, the beneficiary is entitled to employment as unskilled labor (Rural Mason Training) at ₹ 90.95 per day for 95 days. In convergence with Pradhan Mantri Ujjwala Yojana, one LPG connection per house is provided.",
+  "benefits_evidence": [
+    "Financial Assistance of ₹ 1,20,000 per unit for plain areas; and ₹ 1,30,000 per unit for hilly areas, difficult areas, and IAP districts (Himalayan states, North-Eastern states, and Union Territories of Jammu & Kashmir).",
+    "A willing beneficiary can avail of institutional finance (loan) of up to ₹ 70,000 at 3% lower interest rate, to build a permanent house. The maximum principal amount for which subsidy can be sought is ₹ 2,00,000.",
+    "The minimum size of the house shall be is 25 sq m including a dedicated area for hygienic cooking.",
+    "In convergence with Swachh Bharat Mission-Gramin (SBM-G), the beneficiaries get financial assistance of up to ₹ 12,000 for the construction of toilets.",
+    "In convergence with MGNREGA, the beneficiary is entitled to employment as unskilled labor (Rural Mason Training) at ₹ 90.95 per day for 95 days.",
+    "In convergence with Pradhan Mantri Ujjwala Yojana, one LPG connection per house is provided."
+  ],
+  "level": "central",
+  "level_evidence": "Launch on 1st April 2016, Pradhan Mantri Awaas Yojana Gramin (PMAY-G) is centre's flagship mission by the Ministry of Rural Development (MoRD), implemented by the Ministry of Housing and Urban Affairs (MoHUA).",
+  "rules": [
+    {
+      "field": "house_type",
+      "op": "in",
+      "value": [
+        "kutcha",
+        "none_homeless"
+      ],
+      "reason": "Scheme is for houseless households and those in kutcha houses",
+      "evidence": "The universe of eligible beneficiaries under PMAY-G will include all the houseless households living in zero, one, or two-room houses with kutcha walls and kutcha roofs (as per SECC data, and subject to the exclusion process)."
+    },
+    {
+      "field": "is_govt_employee",
+      "op": "eq",
+      "value": false,
+      "reason": "A household with a government employee is excluded",
+      "evidence": "Household with any member as a Government employee"
+    },
+    {
+      "field": "is_current_income_tax_payer",
+      "op": "eq",
+      "value": false,
+      "reason": "A household paying income tax is excluded",
+      "evidence": "Paying income tax"
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Households living in houses with pucca roofs and/or pucca walls and households living in houses with more than 2 rooms are filtered out",
+      "evidence": "All households living in houses with pucca roofs and/or pucca walls and households living in houses with more than 2 rooms are filtered out."
+    },
+    {
+      "criterion": "Households without shelter",
+      "evidence": "Households without shelter"
+    },
+    {
+      "criterion": "Destitute/ living on alms",
+      "evidence": "Destitute/ living on alms"
+    },
+    {
+      "criterion": "Manual scavengers",
+      "evidence": "Manual scavengers"
+    },
+    {
+      "criterion": "Primitive Tribal Groups",
+      "evidence": "Primitive Tribal Groups"
+    },
+    {
+      "criterion": "Legally released bonded laborer",
+      "evidence": "Legally released bonded laborer"
+    },
+    {
+      "criterion": "Households with no adult member between ages 16 to 59",
+      "evidence": "Households with no adult member between ages 16 to 59"
+    },
+    {
+      "criterion": "Female-headed households with no adult male member between ages 16 to 59",
+      "evidence": "Female-headed households with no adult male member between ages 16 to 59"
+    },
+    {
+      "criterion": "Households with no literate adult above 25 years",
+      "evidence": "Households with no literate adult above 25 years"
+    },
+    {
+      "criterion": "Households with any disabled member and no able-bodied adult member",
+      "evidence": "Households with any disabled member and no able-bodied adult member"
+    },
+    {
+      "criterion": "Landless Households deriving the major part of their income from manual casual labor",
+      "evidence": "Landless Households deriving the major part of their income from manual casual labor"
+    },
+    {
+      "criterion": "Motorised two/three/four wheeler/ fishing boat",
+      "evidence": "Motorised two/three/four wheeler/ fishing boat"
+    },
+    {
+      "criterion": "Mechanised three/four-wheeler agricultural equipment",
+      "evidence": "Mechanised three/four-wheeler agricultural equipment"
+    },
+    {
+      "criterion": "Kisan Credit Card with a credit limit of Rs.50,000 or above",
+      "evidence": "Kisan Credit Card with a credit limit of Rs.50,000 or above"
+    },
+    {
+      "criterion": "Household with any member as a Government employee",
+      "evidence": "Household with any member as a Government employee"
+    },
+    {
+      "criterion": "Households with non-agricultural enterprises registered with the Government",
+      "evidence": "Households with non-agricultural enterprises registered with the Government"
+    },
+    {
+      "criterion": "Any member of the family earning more than Rs.10,000 per month",
+      "evidence": "Any member of the family earning more than Rs.10,000 per month"
+    },
+    {
+      "criterion": "Paying income tax",
+      "evidence": "Paying income tax"
+    },
+    {
+      "criterion": "Paying professional tax",
+      "evidence": "Paying professional tax"
+    },
+    {
+      "criterion": "Own a refrigerator",
+      "evidence": "Own a refrigerator"
+    },
+    {
+      "criterion": "Own a landline phone",
+      "evidence": "Own a landline phone"
+    },
+    {
+      "criterion": "Own 2.5 acres or more of irrigated land with at least one irrigation equipment",
+      "evidence": "Own 2.5 acres or more of irrigated land with at least one irrigation equipment"
+    },
+    {
+      "criterion": "5 acres or more of irrigated land for two or more crop seasons",
+      "evidence": "5 acres or more of irrigated land for two or more crop seasons"
+    },
+    {
+      "criterion": "Owning at least 7.5 acres of land or more with at least one irrigation equipment",
+      "evidence": "Owning at least 7.5 acres of land or more with at least one irrigation equipment"
+    },
+    {
+      "criterion": "Beneficiaries are identified using the Socio-Economic and Caste Census (SECC) parameters and verified by the Gram Sabhas",
+      "evidence": "The beneficiaries are identified using the Socio-Economic and Caste Census (SECC) parameters and verified by the Gram Sabhas."
+    },
+    {
+      "criterion": "60% of the target allocated to each State/ UT should be earmarked for SC/STs",
+      "evidence": "60% of the target allocated to each State/ UT should be earmarked for SC/STs, subject to the availability of eligible beneficiaries."
+    },
+    {
+      "criterion": "15% of the total fund would be earmarked for Minorities at the National Level for households",
+      "evidence": "Further, as far as possible, 15% of the total fund would be earmarked for Minorities at the National Level for households."
+    },
+    {
+      "criterion": "3% of beneficiaries at the State Level are from among persons with disabilities",
+      "evidence": "the States to the extent possible, may ensure that 3% of beneficiaries at the State Level are from among persons with disabilities."
+    },
+    {
+      "criterion": "Households with widows and next-of-kin of members of defence/paramilitary/police forces killed in action",
+      "evidence": "Households with widows and next-of-kin of members of defence/paramilitary/police forces killed in action."
+    },
+    {
+      "criterion": "Households where a member is suffering from leprosy or cancer and People living with HIV (PLHIV)",
+      "evidence": "Households where a member is suffering from leprosy or cancer and People living with HIV (PLHIV)."
+    },
+    {
+      "criterion": "Households with a single girl child",
+      "evidence": "Households with a single girl child."
+    },
+    {
+      "criterion": "Beneficiary families of the Scheduled Tribes and Other Traditional Forest Dwellers (Recognition of Forest Rights) Act, 2006, commonly known as the Forest Rights Act",
+      "evidence": "Beneficiary families of the Scheduled Tribes and Other Traditional Forest Dwellers (Recognition of Forest Rights) Act, 2006, commonly known as the Forest Rights Act."
+    },
+    {
+      "criterion": "Transgender persons",
+      "evidence": "Transgender persons."
+    },
+    {
+      "criterion": "PMAY-G has been extended for another two years, i.e. till 31st March 2024",
+      "evidence": "PMAY-G has been extended for another two years, i.e. till 31st March 2024."
+    },
+    {
+      "criterion": "Beneficiaries are identified using SECC parameters and verified by Gram Sabhas",
+      "evidence": "Beneficiaries are identified using the Socio-Economic and Caste Census (SECC) parameters and verified by the Gram Sabhas."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Aadhaar number and a self-attested copy of the Aadhaar Card",
+      "evidence": "Aadhaar number and a self-attested copy of the Aadhaar Card (If the applicant is illiterate, then in such case a consent letter has to be obtained along with the thumbprint of the applicant)"
+    },
+    {
+      "item": "Job Card (duly registered with MGNREGA)",
+      "evidence": "Job Card (duly registered with MGNREGA)"
+    },
+    {
+      "item": "Bank account details – both originals and duplicates",
+      "evidence": "Bank account details – both originals and duplicates."
+    },
+    {
+      "item": "Swachh Bharat Mission (SBM) number",
+      "evidence": "Swachh Bharat Mission (SBM) number."
+    },
+    {
+      "item": "Affidavit stating the beneficiaries, or their family members do not own a pucca house",
+      "evidence": "Affidavit stating the beneficiaries, or their family members do not own a pucca house."
+    }
+  ],
+  "how_to_apply": "Visit the official website for login PMAY-G. Fill in the details required in the personal details section (such as gender, mobile number, Aadhaar number, etc.) Upload the consent form required to use the Aadhaar number. Click on the search button to find the beneficiary name, PMAY ID, and priority. Click on ‘Select to Register’. The beneficiary details will be automatically generated and displayed. The remaining beneficiary details can now be filled in, such as ownership type, relation, Aadhaar number, etc. Upload the consent form required to use the Aadhaar number on behalf of the beneficiary. In the next section, add the beneficiary account details in the required fields, such as beneficiary name, bank account number, etc. If the beneficiary wants to avail a loan, select ‘Yes’ and enter the required loan amount. In the next section, enter the MGNREGA job card number and Swachh Bharat Mission (SBM) number of the beneficiary. The next section will be filled in by the concerned office.",
+  "how_to_apply_evidence": [
+    "Visit the official website for login PMAY-G.",
+    "Fill in the details required in the personal details section (such as gender, mobile number, Aadhaar number, etc.)",
+    "Upload the consent form required to use the Aadhaar number.",
+    "Click on the search button to find the beneficiary name, PMAY ID, and priority.",
+    "Click on ‘'Select to Register’'.",
+    "The beneficiary details will be automatically generated and displayed.",
+    "The remaining beneficiary details can now be filled in, such as ownership type, relation, Aadhaar number, etc.",
+    "Upload the consent form required to use the Aadhaar number on behalf of the beneficiary",
+    "In the next section, add the beneficiary account details in the required fields, such as beneficiary name, bank account number, etc.",
+    "If the beneficiary wants to avail a loan, select ‘'Yes’' and enter the required loan amount.",
+    "In the next section, enter the MGNREGA job card number and Swachh Bharat Mission (SBM) number of the beneficiary",
+    "The next section will be filled in by the concerned office."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/pmay-g",
+  "tags": [
+    "housing",
+    "rural",
+    "pucca house",
+    "financial assistance"
+  ],
+  "aliases": []
+}

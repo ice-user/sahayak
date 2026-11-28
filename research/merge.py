@@ -253,6 +253,8 @@ def merge_candidates(candidates_dir: Path, schemes_path: Path = DATA_PATH, *, id
                 _atomic_write(web, web_bak.read_bytes())
             else:
                 web.unlink(missing_ok=True)
+        if web_bak is not None:
+            web_bak.unlink(missing_ok=True)
         res.errors.append(msg)
         res.merged, res.updated = [], []
         return res
@@ -264,16 +266,15 @@ def merge_candidates(candidates_dir: Path, schemes_path: Path = DATA_PATH, *, id
     except OSError as e:
         return rollback(f"frontend copy / write failed ({e}); schemes.json restored from {bak.name}"
                         if web is not None else f"write failed ({e}); restored from {bak.name}")
-    finally:
-        if web_bak is not None:
-            web_bak.unlink(missing_ok=True)
     if run_tests:
         proc = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider"], cwd=ROOT,
-                              capture_output=True, text=True)
+                              capture_output=True, text=True, encoding="utf-8", errors="replace")
         if proc.returncode != 0:
             return rollback("pytest failed after merge; schemes.json (and the frontend copy) were restored from "
-                            "backup:\n" + proc.stdout[-1500:])
-    done = Path(candidates_dir) / "merged"
+                            "backup:\n" + (proc.stdout or proc.stderr or "")[-1500:])
+    if web_bak is not None:  # kept until here so a failing test run can still restore the frontend copy
+        web_bak.unlink(missing_ok=True)
+    done =Path(candidates_dir) / "merged"
     done.mkdir(exist_ok=True)
     for p, _ in accepted:
         shutil.move(str(p), done / p.name)

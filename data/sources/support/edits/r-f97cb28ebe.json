@@ -1,0 +1,101 @@
+{
+  "id": "igndps",
+  "name": "Indira Gandhi National Disability Pension Scheme",
+  "name_evidence": "Indira Gandhi National Disability Pension Scheme",
+  "ministry": "Ministry Of Rural Development",
+  "category": "pension",
+  "summary": "Monthly pension for disabled persons aged 18 years and above with 80% or more disability who belong to the Below Poverty Line.",
+  "benefits": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years. A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above.",
+  "benefits_evidence": [
+    "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years.",
+    "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above."
+  ],
+  "level": "central",
+  "level_evidence": "Indira Gandhi National Disability Scheme was launched on February 2009 by the Ministry of Rural Development headed by the Central Government to support the disabled people in our country.",
+  "rules": [
+    {
+      "field": "age",
+      "op": "gte",
+      "value": 18,
+      "reason": "Applicant must be 18 years or older",
+      "evidence": "The age of the applicant should be 18 years and above."
+    },
+    {
+      "field": "bpl",
+      "op": "eq",
+      "value": true,
+      "reason": "Applicant must belong to the Below Poverty Line",
+      "evidence": "The applicant should belong to the Below Poverty Line."
+    },
+    {
+      "field": "disability_percentage",
+      "op": "gte",
+      "value": 81,
+      "reason": "Disability must be more than 80%",
+      "evidence": "The applicant’s disability should be more than 80%."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant should be a resident of India",
+      "evidence": "The applicant should be a resident of India."
+    },
+    {
+      "criterion": "Applicant should be a physically or mentally disabled person",
+      "evidence": "The applicant should be a physically or mentally disabled person."
+    },
+    {
+      "criterion": "Dwarfs are also eligible for this scheme",
+      "evidence": "Dwarfs are also eligible for this scheme."
+    },
+    {
+      "criterion": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years",
+      "evidence": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years."
+    },
+    {
+      "criterion": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above",
+      "evidence": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "BPL Card",
+      "evidence": "BPL Card"
+    },
+    {
+      "item": "Aadhaar card",
+      "evidence": "Aadhaar card"
+    },
+    {
+      "item": "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+      "evidence": "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate."
+    },
+    {
+      "item": "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted.",
+      "evidence": "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted."
+    },
+    {
+      "item": "Passport Size Photographs.",
+      "evidence": "Passport Size Photographs."
+    }
+  ],
+  "how_to_apply": "Online or Offline. One can download UMANG App or visit website https://web.umang.gov.in/web_new/home. The citizen can login using mobile number and OTP. Once logged In, citizen can search for NSAP. Click on “Apply Online”. Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”.",
+  "how_to_apply_evidence": [
+    "Online",
+    "Offline",
+    "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+    "The citizen can login using mobile number and OTP.",
+    "Once logged In, citizen can search for NSAP.",
+    "Click on “Apply Online”",
+    "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/igndps",
+  "tags": [
+    "pension",
+    "disability",
+    "BPL",
+    "Divyangjan"
+  ],
+  "aliases": []
+}

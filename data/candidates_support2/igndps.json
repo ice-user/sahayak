@@ -1,0 +1,389 @@
+{
+  "scheme": {
+    "id": "igndps",
+    "name": "Indira Gandhi National Disability Pension Scheme",
+    "ministry": "Ministry Of Rural Development",
+    "category": "pension",
+    "tags": [
+      "pension",
+      "disability",
+      "BPL",
+      "Divyangjan"
+    ],
+    "aliases": [],
+    "summary": "Monthly pension for disabled persons aged 18 years and above with 80% or more disability who belong to the Below Poverty Line.",
+    "benefits": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years. A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above.",
+    "rules": [
+      {
+        "field": "age",
+        "op": "gte",
+        "value": 18,
+        "reason": "Applicant must be 18 years or older"
+      },
+      {
+        "field": "bpl",
+        "op": "eq",
+        "value": true,
+        "reason": "Applicant must belong to the Below Poverty Line"
+      },
+      {
+        "field": "disability_percentage",
+        "op": "gte",
+        "value": 81,
+        "reason": "Disability must be more than 80%"
+      }
+    ],
+    "caveats": [
+      "Applicant should be a resident of India",
+      "Applicant should be a physically or mentally disabled person",
+      "Dwarfs are also eligible for this scheme",
+      "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years",
+      "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above"
+    ],
+    "documents": [
+      "BPL Card",
+      "Aadhaar card",
+      "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+      "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted.",
+      "Passport Size Photographs."
+    ],
+    "how_to_apply": "Online or Offline. One can download UMANG App or visit website https://web.umang.gov.in/web_new/home. The citizen can login using mobile number and OTP. Once logged In, citizen can search for NSAP. Click on “Apply Online”. Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”.",
+    "source_url": "https://www.myscheme.gov.in/schemes/igndps"
+  },
+  "evidence": {
+    "candidate": {
+      "id": "igndps",
+      "name": "Indira Gandhi National Disability Pension Scheme",
+      "name_evidence": "Indira Gandhi National Disability Pension Scheme",
+      "ministry": "Ministry Of Rural Development",
+      "category": "pension",
+      "summary": "Monthly pension for disabled persons aged 18 years and above with 80% or more disability who belong to the Below Poverty Line.",
+      "benefits": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years. A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above.",
+      "benefits_evidence": [
+        "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years.",
+        "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above."
+      ],
+      "level": "central",
+      "level_evidence": "Indira Gandhi National Disability Scheme was launched on February 2009 by the Ministry of Rural Development headed by the Central Government to support the disabled people in our country.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be 18 years or older",
+          "evidence": "The age of the applicant should be 18 years and above."
+        },
+        {
+          "field": "bpl",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must belong to the Below Poverty Line",
+          "evidence": "The applicant should belong to the Below Poverty Line."
+        },
+        {
+          "field": "disability_percentage",
+          "op": "gte",
+          "value": 81,
+          "reason": "Disability must be more than 80%",
+          "evidence": "The applicant’s disability should be more than 80%."
+        }
+      ],
+      "unmapped_criteria": [
+        {
+          "criterion": "Applicant should be a resident of India",
+          "evidence": "The applicant should be a resident of India."
+        },
+        {
+          "criterion": "Applicant should be a physically or mentally disabled person",
+          "evidence": "The applicant should be a physically or mentally disabled person."
+        },
+        {
+          "criterion": "Dwarfs are also eligible for this scheme",
+          "evidence": "Dwarfs are also eligible for this scheme."
+        },
+        {
+          "criterion": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years",
+          "evidence": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years."
+        },
+        {
+          "criterion": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above",
+          "evidence": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above."
+        }
+      ],
+      "caveats": [],
+      "documents": [
+        {
+          "item": "BPL Card",
+          "evidence": "BPL Card"
+        },
+        {
+          "item": "Aadhaar card",
+          "evidence": "Aadhaar card"
+        },
+        {
+          "item": "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+          "evidence": "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate."
+        },
+        {
+          "item": "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted.",
+          "evidence": "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted."
+        },
+        {
+          "item": "Passport Size Photographs.",
+          "evidence": "Passport Size Photographs."
+        }
+      ],
+      "how_to_apply": "Online or Offline. One can download UMANG App or visit website https://web.umang.gov.in/web_new/home. The citizen can login using mobile number and OTP. Once logged In, citizen can search for NSAP. Click on “Apply Online”. Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”.",
+      "how_to_apply_evidence": [
+        "Online",
+        "Offline",
+        "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+        "The citizen can login using mobile number and OTP.",
+        "Once logged In, citizen can search for NSAP.",
+        "Click on “Apply Online”",
+        "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”."
+      ],
+      "source_url": "https://www.myscheme.gov.in/schemes/igndps",
+      "tags": [
+        "pension",
+        "disability",
+        "BPL",
+        "Divyangjan"
+      ],
+      "aliases": []
+    },
+    "report": [
+      {
+        "label": "name",
+        "quote": "Indira Gandhi National Disability Pension Scheme",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "level",
+        "quote": "Indira Gandhi National Disability Scheme was launched on February 2009 by the Ministry of Rural Development headed by the Central Government to support the disabled people in our country.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[0]",
+        "quote": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[1]",
+        "quote": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[0] age gte 18",
+        "quote": "The age of the applicant should be 18 years and above.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[1] bpl eq True",
+        "quote": "The applicant should belong to the Below Poverty Line.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[2] disability_percentage gte 81",
+        "quote": "The applicant’s disability should be more than 80%.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[0] 'BPL Card'",
+        "quote": "BPL Card",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[1] 'Aadhaar card'",
+        "quote": "Aadhaar card",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[2] 'Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.'",
+        "quote": "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[3] 'Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted.'",
+        "quote": "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[4] 'Passport Size Photographs.'",
+        "quote": "Passport Size Photographs.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[0]",
+        "quote": "The applicant should be a resident of India.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[1]",
+        "quote": "The applicant should be a physically or mentally disabled person.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[2]",
+        "quote": "Dwarfs are also eligible for this scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[3]",
+        "quote": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[4]",
+        "quote": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[0]",
+        "quote": "Online",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[1]",
+        "quote": "Offline",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[2]",
+        "quote": "One can download UMANG App or visit website https://web.umang.gov.in/web_new/home",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[3]",
+        "quote": "The citizen can login using mobile number and OTP.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[4]",
+        "quote": "Once logged In, citizen can search for NSAP.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[5]",
+        "quote": "Click on “Apply Online”",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[6]",
+        "quote": "Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      }
+    ]
+  },
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant should be a resident of India",
+      "evidence": "The applicant should be a resident of India."
+    },
+    {
+      "criterion": "Applicant should be a physically or mentally disabled person",
+      "evidence": "The applicant should be a physically or mentally disabled person."
+    },
+    {
+      "criterion": "Dwarfs are also eligible for this scheme",
+      "evidence": "Dwarfs are also eligible for this scheme."
+    },
+    {
+      "criterion": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years",
+      "evidence": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years."
+    },
+    {
+      "criterion": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above",
+      "evidence": "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above."
+    }
+  ],
+  "warnings": [
+    "human-edited candidate: the semantic auditor was not re-run; the edit is your responsibility"
+  ],
+  "provenance": {
+    "source": "data\\sources\\myscheme\\igndps.txt",
+    "source_url": "https://www.myscheme.gov.in/schemes/igndps",
+    "fetched_at": "2026-11-28T07:24:03+00:00",
+    "content_sha256": "c4e7f8ec92022c98bc6ae3236dd86f2ee4e61009ee0cf4f3f3c40a58e18425fd",
+    "final_url": "",
+    "source_url_explicit": true,
+    "source_snapshot": "sources/igndps.txt",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "audit": {
+      "status": "ok",
+      "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "dropped": [],
+      "blocking": 7,
+      "warnings": 3,
+      "detail": "",
+      "notes": []
+    },
+    "contact_flags": [
+      {
+        "kind": "url",
+        "value": "https://web.umang.gov.in/web_new/home",
+        "field": "how_to_apply",
+        "status": "ok",
+        "in_source": true
+      }
+    ],
+    "llm_attempts": 3,
+    "edited_by_human": true,
+    "is_update": false,
+    "review": {
+      "decision": "approve",
+      "reviewer": "Yash",
+      "note": "",
+      "decided_at": "2026-11-28T07:58:13+00:00",
+      "approved_urls": []
+    }
+  }
+}

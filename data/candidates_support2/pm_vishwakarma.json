@@ -1,0 +1,449 @@
+{
+  "scheme": {
+    "id": "pm_vishwakarma",
+    "name": "PM Vishwakarma",
+    "ministry": "Ministry Of Micro, Small and Medium Enterprises",
+    "category": "employment",
+    "tags": [
+      "artisans",
+      "craftspeople",
+      "skill upgradation",
+      "toolkit incentive",
+      "credit support",
+      "MSME"
+    ],
+    "aliases": [],
+    "summary": "Central Sector Scheme providing recognition, skill training, toolkit incentive, collateral-free credit, digital transaction incentives and marketing support to artisans and craftspeople.",
+    "benefits": "Recognition as Vishwakarma through Certificate and ID Card; Skill Verification followed by 5-7 days (40 hours) of Basic Training; 15 days (120 hours) of Advanced Training; Training Stipend: ₹ 500 per day; Toolkit Incentive: ₹ 15,000 grant; Collateral-free Enterprise Development Loans: ₹ 1,00,000 (First Tranche for 18 months repayment) & ₹ 2,00,000 (Second Tranche for 30 months repayment); Concessional Rate of Interest: 5% with Interest Subvention cap of 8% paid by MoMSME; Credit Guarantee fees borne by GoI; Incentive for Digital Transaction: ₹ 1 per transaction for a maximum of up to 100 transactions (monthly); Marketing Support through National Committee for Marketing.",
+    "rules": [
+      {
+        "field": "occupation",
+        "op": "eq",
+        "value": "artisan_craftsperson",
+        "reason": "Applicant must be an artisan or craftsperson working with hands and tools"
+      },
+      {
+        "field": "is_unorganised_worker",
+        "op": "eq",
+        "value": true,
+        "reason": "Applicant must be engaged in the unorganized sector on a self-employment basis"
+      },
+      {
+        "field": "age",
+        "op": "gte",
+        "value": 18,
+        "reason": "Applicant must be at least 18 years old on the date of registration"
+      },
+      {
+        "field": "is_govt_employee",
+        "op": "eq",
+        "value": false,
+        "reason": "A person in government service and their family members are not eligible"
+      }
+    ],
+    "caveats": [
+      "Applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme",
+      "Applicant should be engaged in the concerned trade on the date of registration",
+      "Applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years",
+      "Registration and benefits under the Scheme shall be restricted to one member of the family",
+      "Family members of a person in government service are not eligible",
+      "Verification of Eligibility at Gram Panchayat or ULB level; Vetting and Recommendation by the District Implementation Committee; Final approval by the Screening Committee"
+    ],
+    "documents": [
+      "Aadhaar",
+      "Mobile number",
+      "Bank details",
+      "Ration card"
+    ],
+    "how_to_apply": "Apply online via Common Service Centres (CSCs) by enrolling through the nearest CSC, completing biometric verification, and submitting the online application form.",
+    "source_url": "https://www.myscheme.gov.in/schemes/pmv"
+  },
+  "evidence": {
+    "candidate": {
+      "id": "pm_vishwakarma",
+      "name": "PM Vishwakarma",
+      "name_evidence": "PM Vishwakarma",
+      "ministry": "Ministry Of Micro, Small and Medium Enterprises",
+      "category": "employment",
+      "summary": "Central Sector Scheme providing recognition, skill training, toolkit incentive, collateral-free credit, digital transaction incentives and marketing support to artisans and craftspeople.",
+      "benefits": "Recognition as Vishwakarma through Certificate and ID Card; Skill Verification followed by 5-7 days (40 hours) of Basic Training; 15 days (120 hours) of Advanced Training; Training Stipend: ₹ 500 per day; Toolkit Incentive: ₹ 15,000 grant; Collateral-free Enterprise Development Loans: ₹ 1,00,000 (First Tranche for 18 months repayment) & ₹ 2,00,000 (Second Tranche for 30 months repayment); Concessional Rate of Interest: 5% with Interest Subvention cap of 8% paid by MoMSME; Credit Guarantee fees borne by GoI; Incentive for Digital Transaction: ₹ 1 per transaction for a maximum of up to 100 transactions (monthly); Marketing Support through National Committee for Marketing.",
+      "benefits_evidence": [
+        "Recognition: Recognition as Vishwakarma through Certificate and ID Card",
+        "Skilling: Skill Verification followed by 5-7 days (40 hours) of Basic Training",
+        "Interested candidates can also enrol for 15 days (120 hours) of Advanced Training",
+        "Training Stipend: ₹ 500 per day",
+        "Toolkit Incentive: ₹ 15,000 grant",
+        "Collateral-free Enterprise Development Loans: ₹ 1,00,000 (First Tranche for 18 months repayment) & ₹ 2,00,000 (Second Tranche for 30 months repayment)",
+        "Concessional Rate of Interest: 5% to be charged from the beneficiary with an Interest Subvention cap of 8% to be paid by MoMSME",
+        "Credit Guarantee fees to be borne by GoI",
+        "Incentive for Digital Transaction: ₹ 1 per transaction for a maximum of up to 100 transactions (monthly)",
+        "Marketing Support: The National Committee for Marketing (NCM) will provide services such as Quality Certification, Branding and Promotion, e-commerce Linkage, Trade Fair Advertising, Publicity and Other Marketing Activities."
+      ],
+      "level": "central",
+      "level_evidence": "PM Vishwakarma is a Central Sector Scheme launched by Ministry of Micro, Small and Medium Enterprises to provide holistic and end-to-end support to artisans and craftspeople through access to collateral free credit, skill training, modern tools, incentive for digital transactions and market linkage support.",
+      "rules": [
+        {
+          "field": "occupation",
+          "op": "eq",
+          "value": "artisan_craftsperson",
+          "reason": "Applicant must be an artisan or craftsperson working with hands and tools",
+          "evidence": "The applicant should be an artisan or craftsperson working with hands and tools."
+        },
+        {
+          "field": "is_unorganised_worker",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must be engaged in the unorganized sector on a self-employment basis",
+          "evidence": "The applicant should be engaged in an unorganized sector on a self-employment basis."
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be at least 18 years old on the date of registration",
+          "evidence": "On the date of registration for the scheme, the minimum age of the applicant should be 18 years."
+        },
+        {
+          "field": "is_govt_employee",
+          "op": "eq",
+          "value": false,
+          "reason": "A person in government service and their family members are not eligible",
+          "evidence": "A person in government service and their family members shall not be eligible."
+        }
+      ],
+      "unmapped_criteria": [
+        {
+          "criterion": "Applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme",
+          "evidence": "The applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme."
+        },
+        {
+          "criterion": "Applicant should be engaged in the concerned trade on the date of registration",
+          "evidence": "The applicant should be engaged in the concerned trade on the date of registration."
+        },
+        {
+          "criterion": "Applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years",
+          "evidence": "The applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years."
+        },
+        {
+          "criterion": "Registration and benefits under the Scheme shall be restricted to one member of the family",
+          "evidence": "The registration and benefits under the Scheme shall be restricted to one member of the family."
+        },
+        {
+          "criterion": "Family members of a person in government service are not eligible",
+          "evidence": "A person in government service and their family members shall not be eligible."
+        },
+        {
+          "criterion": "Verification of Eligibility at Gram Panchayat or ULB level; Vetting and Recommendation by the District Implementation Committee; Final approval by the Screening Committee",
+          "evidence": "Stage 1: Verification of Eligibility at Gram Panchayat or ULB level. Stage 2: Vetting and Recommendation of the Applications by the District Implementation Committee. Stage 3: The Screening Committee will accord final approval of the beneficiaries for registration after satisfying itself as to their eligibility."
+        }
+      ],
+      "caveats": [],
+      "documents": [
+        {
+          "item": "Aadhaar",
+          "evidence": "Required documents or information: Aadhaar,"
+        },
+        {
+          "item": "Mobile number",
+          "evidence": "Mobile number,"
+        },
+        {
+          "item": "Bank details",
+          "evidence": "Bank details,"
+        },
+        {
+          "item": "Ration card",
+          "evidence": "Ration card mandatory for the registration."
+        }
+      ],
+      "how_to_apply": "Apply online via Common Service Centres (CSCs) by enrolling through the nearest CSC, completing biometric verification, and submitting the online application form.",
+      "how_to_apply_evidence": [
+        "Online - Via CSCs",
+        "The eligible beneficiaries are required to get themselves enrolled through nearest CSC in their area.",
+        "Step 1: Visit your nearest CSC and complete the Biometric Verification Process.",
+        "Step 2: In the Online Application Form, fill in all the mandatory details, and click \"Submit\". In the next screen, note down the \"Application Number\" for future reference. Click \"Done\"."
+      ],
+      "source_url": "https://www.myscheme.gov.in/schemes/pmv",
+      "tags": [
+        "artisans",
+        "craftspeople",
+        "skill upgradation",
+        "toolkit incentive",
+        "credit support",
+        "MSME"
+      ],
+      "aliases": []
+    },
+    "report": [
+      {
+        "label": "name",
+        "quote": "PM Vishwakarma",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "level",
+        "quote": "PM Vishwakarma is a Central Sector Scheme launched by Ministry of Micro, Small and Medium Enterprises to provide holistic and end-to-end support to artisans and craftspeople through access to collateral free credit, skill training, modern tools, incentive for digital transactions and market linkage support.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[0]",
+        "quote": "Recognition: Recognition as Vishwakarma through Certificate and ID Card",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[1]",
+        "quote": "Skilling: Skill Verification followed by 5-7 days (40 hours) of Basic Training",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[2]",
+        "quote": "Interested candidates can also enrol for 15 days (120 hours) of Advanced Training",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[3]",
+        "quote": "Training Stipend: ₹ 500 per day",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[4]",
+        "quote": "Toolkit Incentive: ₹ 15,000 grant",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[5]",
+        "quote": "Collateral-free Enterprise Development Loans: ₹ 1,00,000 (First Tranche for 18 months repayment) & ₹ 2,00,000 (Second Tranche for 30 months repayment)",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[6]",
+        "quote": "Concessional Rate of Interest: 5% to be charged from the beneficiary with an Interest Subvention cap of 8% to be paid by MoMSME",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[7]",
+        "quote": "Credit Guarantee fees to be borne by GoI",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[8]",
+        "quote": "Incentive for Digital Transaction: ₹ 1 per transaction for a maximum of up to 100 transactions (monthly)",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[9]",
+        "quote": "Marketing Support: The National Committee for Marketing (NCM) will provide services such as Quality Certification, Branding and Promotion, e-commerce Linkage, Trade Fair Advertising, Publicity and Other Marketing Activities.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[0] occupation eq 'artisan_craftsperson'",
+        "quote": "The applicant should be an artisan or craftsperson working with hands and tools.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[1] is_unorganised_worker eq True",
+        "quote": "The applicant should be engaged in an unorganized sector on a self-employment basis.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[2] age gte 18",
+        "quote": "On the date of registration for the scheme, the minimum age of the applicant should be 18 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[3] is_govt_employee eq False",
+        "quote": "A person in government service and their family members shall not be eligible.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[0] 'Aadhaar'",
+        "quote": "Required documents or information: Aadhaar,",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[1] 'Mobile number'",
+        "quote": "Mobile number,",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[2] 'Bank details'",
+        "quote": "Bank details,",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[3] 'Ration card'",
+        "quote": "Ration card mandatory for the registration.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[0]",
+        "quote": "The applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[1]",
+        "quote": "The applicant should be engaged in the concerned trade on the date of registration.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[2]",
+        "quote": "The applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[3]",
+        "quote": "The registration and benefits under the Scheme shall be restricted to one member of the family.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[4]",
+        "quote": "A person in government service and their family members shall not be eligible.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[5]",
+        "quote": "Stage 1: Verification of Eligibility at Gram Panchayat or ULB level. Stage 2: Vetting and Recommendation of the Applications by the District Implementation Committee. Stage 3: The Screening Committee will accord final approval of the beneficiaries for registration after satisfying itself as to their eligibility.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[0]",
+        "quote": "Online - Via CSCs",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[1]",
+        "quote": "The eligible beneficiaries are required to get themselves enrolled through nearest CSC in their area.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[2]",
+        "quote": "Step 1: Visit your nearest CSC and complete the Biometric Verification Process.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[3]",
+        "quote": "Step 2: In the Online Application Form, fill in all the mandatory details, and click \"Submit\". In the next screen, note down the \"Application Number\" for future reference. Click \"Done\".",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      }
+    ]
+  },
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme",
+      "evidence": "The applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme."
+    },
+    {
+      "criterion": "Applicant should be engaged in the concerned trade on the date of registration",
+      "evidence": "The applicant should be engaged in the concerned trade on the date of registration."
+    },
+    {
+      "criterion": "Applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years",
+      "evidence": "The applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years."
+    },
+    {
+      "criterion": "Registration and benefits under the Scheme shall be restricted to one member of the family",
+      "evidence": "The registration and benefits under the Scheme shall be restricted to one member of the family."
+    },
+    {
+      "criterion": "Family members of a person in government service are not eligible",
+      "evidence": "A person in government service and their family members shall not be eligible."
+    },
+    {
+      "criterion": "Verification of Eligibility at Gram Panchayat or ULB level; Vetting and Recommendation by the District Implementation Committee; Final approval by the Screening Committee",
+      "evidence": "Stage 1: Verification of Eligibility at Gram Panchayat or ULB level. Stage 2: Vetting and Recommendation of the Applications by the District Implementation Committee. Stage 3: The Screening Committee will accord final approval of the beneficiaries for registration after satisfying itself as to their eligibility."
+    }
+  ],
+  "warnings": [
+    "human-edited candidate: the semantic auditor was not re-run; the edit is your responsibility"
+  ],
+  "provenance": {
+    "source": "data\\sources\\myscheme\\pmv.txt",
+    "source_url": "https://www.myscheme.gov.in/schemes/pmv",
+    "fetched_at": "2026-11-28T07:26:08+00:00",
+    "content_sha256": "b203022c1ec74fb8ed49322615b97e584506c4623cf4caf254afdfcc902da474",
+    "final_url": "",
+    "source_url_explicit": true,
+    "source_snapshot": "sources/pm_vishwakarma.txt",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "audit": {
+      "status": "ok",
+      "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "dropped": [],
+      "blocking": 13,
+      "warnings": 1,
+      "detail": "",
+      "notes": []
+    },
+    "contact_flags": [],
+    "llm_attempts": 3,
+    "edited_by_human": true,
+    "is_update": false,
+    "review": {
+      "decision": "approve",
+      "reviewer": "Yash",
+      "note": "",
+      "decided_at": "2026-11-28T07:58:58+00:00",
+      "approved_urls": []
+    }
+  }
+}

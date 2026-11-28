@@ -1,0 +1,491 @@
+{
+  "scheme": {
+    "id": "adip_scheme",
+    "name": "Scheme Of Assistance To Disabled Persons For Purchase/Fitting Of Aids/Appliances",
+    "ministry": "Ministry Of Social Justice and Empowerment",
+    "category": "health",
+    "tags": [
+      "disabled persons",
+      "aids",
+      "appliances",
+      "PwD",
+      "social welfare"
+    ],
+    "aliases": [
+      "ADIP Scheme"
+    ],
+    "summary": "Assists disabled persons in procuring suitable, durable, scientifically-manufactured, modern, standard aids and appliances to promote physical, social and psychological rehabilitation and enhance economic potential.",
+    "benefits": "Full financial assistance for aids/appliances costing up to Rs. 15,000; up to Rs 15,000 for items costing Rs. 15,001 to Rs. 30,000; 50% cost for expensive items above Rs. 30,001 subject to income ceiling; Cochlear Implant ceiling of Rs. 7.00 lakh for children 1 to 5 years and Rs. 6.00 lakh for children 5 to 18 years; travel costs up to Rs. 250 per person; boarding and lodging Rs. 100 per day for maximum 15 days for those with total income up to Rs. 22,500 per month.",
+    "rules": [
+      {
+        "field": "disability_percentage",
+        "op": "gte",
+        "value": 40,
+        "reason": "Applicant must hold a 40% Disability Certificate (benchmark disability)"
+      },
+      {
+        "field": "monthly_income",
+        "op": "lte",
+        "value": 30000,
+        "reason": "Monthly income from all sources must not exceed Rs. 30,000 per month"
+      }
+    ],
+    "caveats": [
+      "Applicant must be an Indian citizen",
+      "Must not have received assistance during the last 3 years for the same purpose from any source; for children below 12 years, minimum time of assistance is one year",
+      "For dependents, the income of parents/guardians not exceeding Rs. 30,000/- per month",
+      "High-end prosthesis requires 80% and above disability; subsidy extent Rs. 30,000/-",
+      "Motorized tricycles and wheelchairs require 80% and above disability, age 16 years and above, once in five years; persons with severe disabilities of 16 years and above having mental impairment are not eligible",
+      "Accessible Mobile Phone for visually impaired students aged 18 years and above, once in five years; Laptop, Braille Note Taker and Brallier for school-going students with disability (class 10th and above), once in 10 years",
+      "Full cost of aid/appliance for total income up to Rs. 22,500 per month; 50% of cost for total income Rs. 22,501 to Rs. 30,000 per month",
+      "Boarding and lodging expenses at Rs. 100 per day for maximum 15 days admissible only for patients whose total income is up to Rs. 22,500 per month",
+      "Traveling costs up to Rs. 250 per person for the PwD and one escort fare",
+      "Cochlear Implant ceiling of Rs. 7.00 lakh per unit for children with pre-lingual hearing loss between 1 to 5 years; Rs. 6.00 lakh for children with acquired hearing loss between 5 to 18 years",
+      "Scheme approved for continuation upto 31st March 2026"
+    ],
+    "documents": [
+      "Passport Size Photographs",
+      "A copy of the disability certificate",
+      "Address proof (copy of Aadhaar Card or/ Voter Id Card or/ Ration Card etc.)",
+      "A copy of the Income Certificate",
+      "An undertaking that he/she has not received the same aids & assistive devices from any source during the last three years",
+      "Aadhaar Card"
+    ],
+    "how_to_apply": "Apply offline, online via CSCs, online, through camp activity, or through headquarter activity.",
+    "source_url": "https://www.myscheme.gov.in/schemes/sadppfaa"
+  },
+  "evidence": {
+    "candidate": {
+      "id": "adip_scheme",
+      "name": "Scheme Of Assistance To Disabled Persons For Purchase/Fitting Of Aids/Appliances",
+      "name_evidence": "Scheme Of Assistance To Disabled Persons For Purchase/Fitting Of Aids/Appliances",
+      "ministry": "Ministry Of Social Justice and Empowerment",
+      "category": "health",
+      "summary": "Assists disabled persons in procuring suitable, durable, scientifically-manufactured, modern, standard aids and appliances to promote physical, social and psychological rehabilitation and enhance economic potential.",
+      "benefits": "Full financial assistance for aids/appliances costing up to Rs. 15,000; up to Rs 15,000 for items costing Rs. 15,001 to Rs. 30,000; 50% cost for expensive items above Rs. 30,001 subject to income ceiling; Cochlear Implant ceiling of Rs. 7.00 lakh for children 1 to 5 years and Rs. 6.00 lakh for children 5 to 18 years; travel costs up to Rs. 250 per person; boarding and lodging Rs. 100 per day for maximum 15 days for those with total income up to Rs. 22,500 per month.",
+      "benefits_evidence": [
+        "For aids /appliances costing up to Rs. 15,000: Full financial assistance under the scheme.",
+        "For aids /appliances costing between Rs. 15,001/- to Rs. 30000/-: Financial assistance up to Rs 15000/-",
+        "Further, all expensive items costing above Rs. 30,001/, except Cochlear Implant and Motorized Tricycle, eligible for assistance under the scheme, subject to income ceiling, would be listed out. The government of India shall bear 50% of the cost of these items thus listed by the Committee and the remainder shall be contributed by either the State Govt. or the NGO or any other agency or by the beneficiary concerned subject to prior approval of the Ministry on case to case basis; limited to 20% of the Budget under the Scheme.",
+        "Cochlear Implant and post-operative therapy and rehabilitation for children with Hearing Impairment with a ceiling of Rs. 7.00 lakh per unit (to be borne by the Government) in case of children with pre-lingual hearing loss between 1 to 5 years of age and Rs.6.00 Lakh in case of children with acquired hearing loss between 5 to 18 years.",
+        "Traveling Costs in terms of rail fare or bus fare would be admissible separately to the PwD and one escort fare, subject to a limit of Rs. 250/- per person, irrespective of the number of visits to the center and for attending the distribution camp for aids & assistive devices.",
+        "Boarding and lodging expenses at the rate of Rs.100/- per day for a maximum duration of 15 days would be admissible, only for those patients whose total income is up to Rs.22,500/- per month and the same will be allowed to attendant/escort."
+      ],
+      "level": "central",
+      "level_evidence": "Ministry Of Social Justice and Empowerment",
+      "rules": [
+        {
+          "field": "disability_percentage",
+          "op": "gte",
+          "value": 40,
+          "reason": "Applicant must hold a 40% Disability Certificate (benchmark disability)",
+          "evidence": "Holding a 40% Disability Certificate (Benchmark disability)."
+        },
+        {
+          "field": "monthly_income",
+          "op": "lte",
+          "value": 30000,
+          "reason": "Monthly income from all sources must not exceed Rs. 30,000 per month",
+          "evidence": "Having monthly income from all sources not exceeding Rs.30,000/- per month."
+        }
+      ],
+      "unmapped_criteria": [
+        {
+          "criterion": "Applicant must be an Indian citizen",
+          "evidence": "An Indian citizen of any age."
+        },
+        {
+          "criterion": "Must not have received assistance during the last 3 years for the same purpose from any source; for children below 12 years, minimum time of assistance is one year",
+          "evidence": "Not having received assistance during the last 3 years for the same purpose from any source. However, for children below 12 years of age, the minimum time of assistance is one year."
+        },
+        {
+          "criterion": "For dependents, the income of parents/guardians not exceeding Rs. 30,000/- per month",
+          "evidence": "In the case of dependents, the income of parents/guardians not exceeding Rs. 30,000/- per month."
+        },
+        {
+          "criterion": "High-end prosthesis requires 80% and above disability; subsidy extent Rs. 30,000/-",
+          "evidence": "High-end Prosthesis (Below Knee, Above Knee, Below elbow, and Above elbow) to Persons with disabilities having 80% and above disability. The extent of the subsidy would be Rs.30,000/-."
+        },
+        {
+          "criterion": "Motorized tricycles and wheelchairs require 80% and above disability, age 16 years and above, once in five years; persons with severe disabilities of 16 years and above having mental impairment are not eligible",
+          "evidence": "Persons with Disabilities 80% and above disability would be eligible for assistance with a Motorized tricycle and a Motorized wheelchair. The extent of the subsidy would be Rs.50,000/-. This will be provided to persons aged 16 years and above, once in five years. Persons with severe disabilities of 16 years and above age having mental impairment shall not be eligible for Motorized tricycles and wheelchairs since it puts them at risk of serious accident/physical harm."
+        },
+        {
+          "criterion": "Accessible Mobile Phone for visually impaired students aged 18 years and above, once in five years; Laptop, Braille Note Taker and Brallier for school-going students with disability (class 10th and above), once in 10 years",
+          "evidence": "Accessible Mobile Phone to visually impaired students aged 18 years and above, once in five years, and Laptop, Braille Note Taker and Brallier to school-going students with disability (class 10th and above), once in 10 years."
+        },
+        {
+          "criterion": "Full cost of aid/appliance for total income up to Rs. 22,500 per month; 50% of cost for total income Rs. 22,501 to Rs. 30,000 per month",
+          "evidence": "a) Total Income: Upto Rs. 22,500/- per month; Amount of Assistance: Full cost of aid/appliance b) Total Income: Rs.22,501/- to Rs. 30,000/- per month; Amount of Assistance: 50% of the cost of aid/appliance"
+        },
+        {
+          "criterion": "Boarding and lodging expenses at Rs. 100 per day for maximum 15 days admissible only for patients whose total income is up to Rs. 22,500 per month",
+          "evidence": "Boarding and lodging expenses at the rate of Rs.100/- per day for a maximum duration of 15 days would be admissible, only for those patients whose total income is up to Rs.22,500/- per month and the same will be allowed to attendant/escort."
+        },
+        {
+          "criterion": "Traveling costs up to Rs. 250 per person for the PwD and one escort fare",
+          "evidence": "Traveling Costs in terms of rail fare or bus fare would be admissible separately to the PwD and one escort fare, subject to a limit of Rs. 250/- per person, irrespective of the number of visits to the center and for attending the distribution camp for aids & assistive devices."
+        },
+        {
+          "criterion": "Cochlear Implant ceiling of Rs. 7.00 lakh per unit for children with pre-lingual hearing loss between 1 to 5 years; Rs. 6.00 lakh for children with acquired hearing loss between 5 to 18 years",
+          "evidence": "Cochlear Implant and post-operative therapy and rehabilitation for children with Hearing Impairment with a ceiling of Rs. 7.00 lakh per unit (to be borne by the Government) in case of children with pre-lingual hearing loss between 1 to 5 years of age and Rs.6.00 Lakh in case of children with acquired hearing loss between 5 to 18 years."
+        },
+        {
+          "criterion": "Scheme approved for continuation upto 31st March 2026",
+          "evidence": "The Scheme is approved for continuation upto 31st March 2026."
+        }
+      ],
+      "caveats": [],
+      "documents": [
+        {
+          "item": "Passport Size Photographs",
+          "evidence": "1. Passport Size Photographs."
+        },
+        {
+          "item": "A copy of the disability certificate",
+          "evidence": "2. A copy of the disability certificate."
+        },
+        {
+          "item": "Address proof (copy of Aadhaar Card or/ Voter Id Card or/ Ration Card etc.)",
+          "evidence": "3. Address proof (copy of Aadhaar Card or/ Voter Id Card or/ Ration Card etc.)"
+        },
+        {
+          "item": "A copy of the Income Certificate",
+          "evidence": "4. A copy of the Income Certificate."
+        },
+        {
+          "item": "An undertaking that he/she has not received the same aids & assistive devices from any source during the last three years",
+          "evidence": "5. An undertaking that he/she has not received the same aids & assistive devices from any source during the last three years."
+        },
+        {
+          "item": "Aadhaar Card",
+          "evidence": "6. Aadhaar Card"
+        }
+      ],
+      "how_to_apply": "Apply offline, online via CSCs, online, through camp activity, or through headquarter activity.",
+      "how_to_apply_evidence": [
+        "Offline",
+        "Online - Via CSCs",
+        "Online",
+        "Through Camp Activity: Implementing agencies will carry out assessments of beneficiaries in camp mode at district levels, followed by distribution camps.",
+        "Through Headquarter Activity: The National Institutes/CRCs/ALIMCO/ DDRCs and other implementing agencies will utilize the grants to extend services to eligible beneficiaries who approach their headquarters or their respective Regional Centres."
+      ],
+      "source_url": "https://www.myscheme.gov.in/schemes/sadppfaa",
+      "tags": [
+        "disabled persons",
+        "aids",
+        "appliances",
+        "PwD",
+        "social welfare"
+      ],
+      "aliases": [
+        "ADIP Scheme"
+      ]
+    },
+    "report": [
+      {
+        "label": "name",
+        "quote": "Scheme Of Assistance To Disabled Persons For Purchase/Fitting Of Aids/Appliances",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "level",
+        "quote": "Ministry Of Social Justice and Empowerment",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[0]",
+        "quote": "For aids /appliances costing up to Rs. 15,000: Full financial assistance under the scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[1]",
+        "quote": "For aids /appliances costing between Rs. 15,001/- to Rs. 30000/-: Financial assistance up to Rs 15000/-",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[2]",
+        "quote": "Further, all expensive items costing above Rs. 30,001/, except Cochlear Implant and Motorized Tricycle, eligible for assistance under the scheme, subject to income ceiling, would be listed out. The government of India shall bear 50% of the cost of these items thus listed by the Committee and the remainder shall be contributed by either the State Govt. or the NGO or any other agency or by the beneficiary concerned subject to prior approval of the Ministry on case to case basis; limited to 20% of the Budget under the Scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[3]",
+        "quote": "Cochlear Implant and post-operative therapy and rehabilitation for children with Hearing Impairment with a ceiling of Rs. 7.00 lakh per unit (to be borne by the Government) in case of children with pre-lingual hearing loss between 1 to 5 years of age and Rs.6.00 Lakh in case of children with acquired hearing loss between 5 to 18 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[4]",
+        "quote": "Traveling Costs in terms of rail fare or bus fare would be admissible separately to the PwD and one escort fare, subject to a limit of Rs. 250/- per person, irrespective of the number of visits to the center and for attending the distribution camp for aids & assistive devices.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[5]",
+        "quote": "Boarding and lodging expenses at the rate of Rs.100/- per day for a maximum duration of 15 days would be admissible, only for those patients whose total income is up to Rs.22,500/- per month and the same will be allowed to attendant/escort.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[0] disability_percentage gte 40",
+        "quote": "Holding a 40% Disability Certificate (Benchmark disability).",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[1] monthly_income lte 30000",
+        "quote": "Having monthly income from all sources not exceeding Rs.30,000/- per month.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[0] 'Passport Size Photographs'",
+        "quote": "1. Passport Size Photographs.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[1] 'A copy of the disability certificate'",
+        "quote": "2. A copy of the disability certificate.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[2] 'Address proof (copy of Aadhaar Card or/ Voter Id Card or/ Ration Card etc.)'",
+        "quote": "3. Address proof (copy of Aadhaar Card or/ Voter Id Card or/ Ration Card etc.)",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[3] 'A copy of the Income Certificate'",
+        "quote": "4. A copy of the Income Certificate.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[4] 'An undertaking that he/she has not received the same aids & assistive devices from any source during the last three years'",
+        "quote": "5. An undertaking that he/she has not received the same aids & assistive devices from any source during the last three years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[5] 'Aadhaar Card'",
+        "quote": "6. Aadhaar Card",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[0]",
+        "quote": "An Indian citizen of any age.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[1]",
+        "quote": "Not having received assistance during the last 3 years for the same purpose from any source. However, for children below 12 years of age, the minimum time of assistance is one year.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[2]",
+        "quote": "In the case of dependents, the income of parents/guardians not exceeding Rs. 30,000/- per month.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[3]",
+        "quote": "High-end Prosthesis (Below Knee, Above Knee, Below elbow, and Above elbow) to Persons with disabilities having 80% and above disability. The extent of the subsidy would be Rs.30,000/-.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[4]",
+        "quote": "Persons with Disabilities 80% and above disability would be eligible for assistance with a Motorized tricycle and a Motorized wheelchair. The extent of the subsidy would be Rs.50,000/-. This will be provided to persons aged 16 years and above, once in five years. Persons with severe disabilities of 16 years and above age having mental impairment shall not be eligible for Motorized tricycles and wheelchairs since it puts them at risk of serious accident/physical harm.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[5]",
+        "quote": "Accessible Mobile Phone to visually impaired students aged 18 years and above, once in five years, and Laptop, Braille Note Taker and Brallier to school-going students with disability (class 10th and above), once in 10 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[6]",
+        "quote": "a) Total Income: Upto Rs. 22,500/- per month; Amount of Assistance: Full cost of aid/appliance b) Total Income: Rs.22,501/- to Rs. 30,000/- per month; Amount of Assistance: 50% of the cost of aid/appliance",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[7]",
+        "quote": "Boarding and lodging expenses at the rate of Rs.100/- per day for a maximum duration of 15 days would be admissible, only for those patients whose total income is up to Rs.22,500/- per month and the same will be allowed to attendant/escort.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[8]",
+        "quote": "Traveling Costs in terms of rail fare or bus fare would be admissible separately to the PwD and one escort fare, subject to a limit of Rs. 250/- per person, irrespective of the number of visits to the center and for attending the distribution camp for aids & assistive devices.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[9]",
+        "quote": "Cochlear Implant and post-operative therapy and rehabilitation for children with Hearing Impairment with a ceiling of Rs. 7.00 lakh per unit (to be borne by the Government) in case of children with pre-lingual hearing loss between 1 to 5 years of age and Rs.6.00 Lakh in case of children with acquired hearing loss between 5 to 18 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[10]",
+        "quote": "The Scheme is approved for continuation upto 31st March 2026.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[0]",
+        "quote": "Offline",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[1]",
+        "quote": "Online - Via CSCs",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[2]",
+        "quote": "Online",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[3]",
+        "quote": "Through Camp Activity: Implementing agencies will carry out assessments of beneficiaries in camp mode at district levels, followed by distribution camps.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[4]",
+        "quote": "Through Headquarter Activity: The National Institutes/CRCs/ALIMCO/ DDRCs and other implementing agencies will utilize the grants to extend services to eligible beneficiaries who approach their headquarters or their respective Regional Centres.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      }
+    ]
+  },
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant must be an Indian citizen",
+      "evidence": "An Indian citizen of any age."
+    },
+    {
+      "criterion": "Must not have received assistance during the last 3 years for the same purpose from any source; for children below 12 years, minimum time of assistance is one year",
+      "evidence": "Not having received assistance during the last 3 years for the same purpose from any source. However, for children below 12 years of age, the minimum time of assistance is one year."
+    },
+    {
+      "criterion": "For dependents, the income of parents/guardians not exceeding Rs. 30,000/- per month",
+      "evidence": "In the case of dependents, the income of parents/guardians not exceeding Rs. 30,000/- per month."
+    },
+    {
+      "criterion": "High-end prosthesis requires 80% and above disability; subsidy extent Rs. 30,000/-",
+      "evidence": "High-end Prosthesis (Below Knee, Above Knee, Below elbow, and Above elbow) to Persons with disabilities having 80% and above disability. The extent of the subsidy would be Rs.30,000/-."
+    },
+    {
+      "criterion": "Motorized tricycles and wheelchairs require 80% and above disability, age 16 years and above, once in five years; persons with severe disabilities of 16 years and above having mental impairment are not eligible",
+      "evidence": "Persons with Disabilities 80% and above disability would be eligible for assistance with a Motorized tricycle and a Motorized wheelchair. The extent of the subsidy would be Rs.50,000/-. This will be provided to persons aged 16 years and above, once in five years. Persons with severe disabilities of 16 years and above age having mental impairment shall not be eligible for Motorized tricycles and wheelchairs since it puts them at risk of serious accident/physical harm."
+    },
+    {
+      "criterion": "Accessible Mobile Phone for visually impaired students aged 18 years and above, once in five years; Laptop, Braille Note Taker and Brallier for school-going students with disability (class 10th and above), once in 10 years",
+      "evidence": "Accessible Mobile Phone to visually impaired students aged 18 years and above, once in five years, and Laptop, Braille Note Taker and Brallier to school-going students with disability (class 10th and above), once in 10 years."
+    },
+    {
+      "criterion": "Full cost of aid/appliance for total income up to Rs. 22,500 per month; 50% of cost for total income Rs. 22,501 to Rs. 30,000 per month",
+      "evidence": "a) Total Income: Upto Rs. 22,500/- per month; Amount of Assistance: Full cost of aid/appliance b) Total Income: Rs.22,501/- to Rs. 30,000/- per month; Amount of Assistance: 50% of the cost of aid/appliance"
+    },
+    {
+      "criterion": "Boarding and lodging expenses at Rs. 100 per day for maximum 15 days admissible only for patients whose total income is up to Rs. 22,500 per month",
+      "evidence": "Boarding and lodging expenses at the rate of Rs.100/- per day for a maximum duration of 15 days would be admissible, only for those patients whose total income is up to Rs.22,500/- per month and the same will be allowed to attendant/escort."
+    },
+    {
+      "criterion": "Traveling costs up to Rs. 250 per person for the PwD and one escort fare",
+      "evidence": "Traveling Costs in terms of rail fare or bus fare would be admissible separately to the PwD and one escort fare, subject to a limit of Rs. 250/- per person, irrespective of the number of visits to the center and for attending the distribution camp for aids & assistive devices."
+    },
+    {
+      "criterion": "Cochlear Implant ceiling of Rs. 7.00 lakh per unit for children with pre-lingual hearing loss between 1 to 5 years; Rs. 6.00 lakh for children with acquired hearing loss between 5 to 18 years",
+      "evidence": "Cochlear Implant and post-operative therapy and rehabilitation for children with Hearing Impairment with a ceiling of Rs. 7.00 lakh per unit (to be borne by the Government) in case of children with pre-lingual hearing loss between 1 to 5 years of age and Rs.6.00 Lakh in case of children with acquired hearing loss between 5 to 18 years."
+    },
+    {
+      "criterion": "Scheme approved for continuation upto 31st March 2026",
+      "evidence": "The Scheme is approved for continuation upto 31st March 2026."
+    }
+  ],
+  "warnings": [
+    "human-edited candidate: the semantic auditor was not re-run; the edit is your responsibility"
+  ],
+  "provenance": {
+    "source": "data\\sources\\myscheme\\sadppfaa.txt",
+    "source_url": "https://www.myscheme.gov.in/schemes/sadppfaa",
+    "fetched_at": "2026-11-28T07:27:59+00:00",
+    "content_sha256": "c1f0145535cbc3caeeb3592f15c760e052942b4176d659e0ae99286317cc49a2",
+    "final_url": "",
+    "source_url_explicit": true,
+    "source_snapshot": "sources/adip_scheme.txt",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "audit": {
+      "status": "ok",
+      "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "dropped": [],
+      "blocking": 24,
+      "warnings": 1,
+      "detail": "",
+      "notes": []
+    },
+    "contact_flags": [],
+    "llm_attempts": 3,
+    "edited_by_human": true,
+    "is_update": false,
+    "review": {
+      "decision": "approve",
+      "reviewer": "Yash",
+      "note": "",
+      "decided_at": "2026-11-28T07:58:38+00:00",
+      "approved_urls": []
+    }
+  }
+}

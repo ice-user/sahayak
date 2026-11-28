@@ -482,6 +482,498 @@
       ],
       "how_to_apply": "Register at an Anganwadi centre, an approved health facility, or pmmvy.wcd.gov.in.",
       "source_url": "https://www.myscheme.gov.in/schemes/pmmvy"
+    },
+    {
+      "id": "igndps",
+      "name": "Indira Gandhi National Disability Pension Scheme",
+      "ministry": "Ministry Of Rural Development",
+      "category": "pension",
+      "tags": [
+        "pension",
+        "disability",
+        "BPL",
+        "Divyangjan"
+      ],
+      "aliases": [],
+      "summary": "Monthly pension for disabled persons aged 18 years and above with 80% or more disability who belong to the Below Poverty Line.",
+      "benefits": "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years. A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be 18 years or older"
+        },
+        {
+          "field": "bpl",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must belong to the Below Poverty Line"
+        },
+        {
+          "field": "disability_percentage",
+          "op": "gte",
+          "value": 81,
+          "reason": "Disability must be 81% or more (more than 80%)"
+        }
+      ],
+      "caveats": [
+        "Applicant should be a resident of India",
+        "Applicant should be a physically or mentally disabled person",
+        "Dwarfs are also eligible for this scheme",
+        "A pension of Rs.300/- per month is provided to Divyangjan between 18-79 years",
+        "A pension of Rs.500/- per month will be provided to Divyangjan aged 80 years and above"
+      ],
+      "documents": [
+        "BPL Card",
+        "Aadhaar card",
+        "Age Proof - For age, the birth certificate or school certificate may be relied on. In their absence ration card and EPIC may be considered. If there is no valid document, any Medical Officer of any government hospital may be authorized to issue the age certificate.",
+        "Disability certificate:- Disability certificate (80% and More) issued from Chief Medical Officer, Community Health Centre or Primary Health Centre will be accepted.",
+        "Passport Size Photographs."
+      ],
+      "how_to_apply": "Online or Offline. One can download UMANG App or visit website https://web.umang.gov.in/web_new/home. The citizen can login using mobile number and OTP. Once logged In, citizen can search for NSAP. Click on “Apply Online”. Fill the basic details, choose the mode of payment of pension, upload photo and click on “Submit”.",
+      "source_url": "https://www.myscheme.gov.in/schemes/igndps"
+    },
+    {
+      "id": "national_family_benefit_scheme",
+      "name": "National Family Benefit Scheme",
+      "ministry": "Ministry Of Rural Development",
+      "category": "finance",
+      "tags": [
+        "family welfare",
+        "breadwinner death",
+        "lump sum assistance",
+        "NSAP",
+        "BPL"
+      ],
+      "aliases": [],
+      "summary": "A family welfare scheme under the umbrella scheme ‘National Social Assistance Programme’ (NSAP) by MoRD. In this scheme, financial assistance is provided to the bereaved households in case of the death of the primary breadwinner irrespective of the cause of death.",
+      "benefits": "₹ 20000/ - will be given as a lump sum assistance to such surviving member of the household of the deceased poor, who after local inquiry, is found to be the head of the household.",
+      "rules": [
+        {
+          "field": "bpl",
+          "op": "eq",
+          "value": true,
+          "reason": "The family of the applicant must be living Below Poverty Line (BPL)"
+        },
+        {
+          "field": "breadwinner_deceased",
+          "op": "eq",
+          "value": true,
+          "reason": "The primary breadwinner of the applicant's family must have been deceased"
+        },
+        {
+          "field": "breadwinner_age_at_death",
+          "op": "gte",
+          "value": 19,
+          "reason": "The earning member must have been 19 or older (older than 18) when they died"
+        },
+        {
+          "field": "breadwinner_age_at_death",
+          "op": "lte",
+          "value": 59,
+          "reason": "The earning member must have been younger than 60 when they died"
+        }
+      ],
+      "caveats": [
+        "The applicant must be a citizen of India",
+        "The applicant must be the succeeding primary breadwinner of the family",
+        "The family benefit will be paid to such surviving member of the household of the deceased poor , who after local inquiry, is found to be the head of the household",
+        "The assistance would be given to every case of death of breadwinner in a family"
+      ],
+      "documents": [
+        "Death Certificate",
+        "Proof of Identity",
+        "Proof of Address",
+        "BPL Card / Ration Card of the Family",
+        "Family ID / Member ID",
+        "Details of the AADHAAR Seeded Bank Account / Post Office Account",
+        "Passport Size Photo"
+      ],
+      "how_to_apply": "Offline or Online. Take a print of the application form given in Annexure-III (page no. 47) of the scheme guidelines - https://nsap.nic.in/Guidelines/nsap_guidelines_oct2014.pdf. The duly filled-in Application forms along with the required documents are to be submitted to the designated officer appointed by the respective state governments.",
+      "source_url": "https://www.myscheme.gov.in/schemes/nfbs"
+    },
+    {
+      "id": "nps_tsep",
+      "name": "National Pension Scheme for Traders And Self Employed Persons",
+      "ministry": "Ministry Of Labour and Employment",
+      "category": "pension",
+      "tags": [
+        "pension",
+        "traders",
+        "self-employed",
+        "social security"
+      ],
+      "aliases": [],
+      "summary": "A voluntary and contributory pension scheme providing a minimum assured monthly pension of ₹3,000 after attaining the age of sixty years to small-scale traders, retailers, and self-employed individuals.",
+      "benefits": "Each eligible subscriber under this scheme shall receive an assured minimum monthly pension of ₹3,000/- after attaining the age of sixty years. The Government of India make a matching contribution into the subscriber's pension account every month.",
+      "rules": [
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be at least 18 years old"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 40,
+          "reason": "Applicant must be 40 years old or younger"
+        },
+        {
+          "field": "has_bank_account",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must possess a savings bank account in their name"
+        },
+        {
+          "field": "is_epfo_esic_nps_member",
+          "op": "eq",
+          "value": false,
+          "reason": "Applicant must not be a member of EPFO, ESIC or NPS"
+        },
+        {
+          "field": "is_current_income_tax_payer",
+          "op": "eq",
+          "value": false,
+          "reason": "Income-tax payers are not eligible"
+        },
+        {
+          "field": "occupation",
+          "op": "in",
+          "value": [
+            "small_trader_shopkeeper",
+            "self_employed"
+          ],
+          "reason": "Scheme is for traders and self-employed persons"
+        }
+      ],
+      "caveats": [
+        "Applicant must be a Laghu Vyapari, self-employed person, shop owner, retail trader, rice mill owner, oil mill owner, workshop owner, commission agent, real estate broker, small hotel owner, or restaurant owner.",
+        "The applicant must have an annual turnover that does not exceed ₹1,50,00,000/-.",
+        "The applicant must not be an income-tax payer or income-tax assessee.",
+        "Applicant must possess an Aadhaar Card or Aadhaar Number.",
+        "The applicant must not be enrolled under the Pradhan Mantri Shram Yogi Maandhan Yojana administered by the Ministry of Labour & Employment.",
+        "Goods and Services Tax Identification Number (GSTIN) (only required for those with an Annual Turnover above ₹40,00,000/-).",
+        "Self-Declaration Document for Annual Turnover Income."
+      ],
+      "documents": [
+        "Aadhaar Card",
+        "Savings Bank Account or Jan Dhan Bank Account Details",
+        "Indian Financial System Code (IFSC)",
+        "Bank Passbook, Cheque Leave/Book, or Copy of Bank Statement (as Evidence of Bank Account)",
+        "Goods and Services Tax Identification Number (GSTIN) (only required for those with an Annual Turnover above ₹40,00,000/-)",
+        "Self-Declaration Document for Annual Turnover Income"
+      ],
+      "how_to_apply": "Online - Via CSCs. The interested eligible person must visit their nearest Common Service Centre (CSC) to initiate the registration process offline. The applicant must carry prerequisites such as their Aadhaar Card and evidence of their bank account.",
+      "source_url": "https://www.myscheme.gov.in/schemes/nps-tsep"
+    },
+    {
+      "id": "pm_gkay",
+      "name": "Pradhan Mantri Garib Kalyan Anna Yojana",
+      "ministry": "Ministry Of Finance",
+      "category": "food",
+      "tags": [
+        "food grains",
+        "ration",
+        "PDS",
+        "AAY",
+        "PHH"
+      ],
+      "aliases": [],
+      "summary": "PM-GKAY is a scheme as part of Atmanirbhar Bharat to supply free food grains to migrants and poor, providing 5kg of free food grains per month to the poor in addition to subsidized ration under NFSA.",
+      "benefits": "Under this scheme, the center provides 5kg of free food grains per month to the poor. This is in addition to the subsidized (Rs 2-3 per kg) ration provided under the National Food Security Act (NFSA) to families covered under the Public Distribution System (PDS).",
+      "rules": [
+        {
+          "field": "ration_card_type",
+          "op": "in",
+          "value": [
+            "aay",
+            "phh"
+          ],
+          "reason": "Only Antyodaya (AAY) and Priority Household (PHH) ration card families are covered"
+        }
+      ],
+      "caveats": [
+        "Families belonging to Antyodaya Anna Yojana (AAY) and Priority Households (PHH) categories will be eligible for the scheme",
+        "PHH are to be identified by State Governments/Union Territory Administrations as per criteria evolved by them",
+        "AAY families are to be identified by States/UTs as per the criteria prescribed by the Central Government",
+        "Households headed by widows or terminally ill persons or disabled persons or persons aged 60 years or more with no assured means of subsistence or societal support",
+        "Widows or terminally ill persons or disabled persons or persons aged 60 years or more or single women or single men with no family or societal support or assured means of subsistence",
+        "All primitive tribal households",
+        "Landless agriculture labourers, marginal farmers, rural artisans/craftsmen such as potters, tanners, weavers, blacksmiths, carpenters, slum dwellers, and persons earning their livelihood on daily basis in the informal sector like porters, coolies, rickshaw pullers, hand cart pullers, fruit and flower sellers, snake charmers, rag pickers, cobblers, destitutes and other similar categories in both rural and urban areas",
+        "All eligible Below Poverty Line families of HIV positive persons",
+        "Wheat has been allocated to 6 States/UTs, - Punjab, Haryana, Rajasthan, Chandigarh, Delhi, and Gujarat, and rice has been provided to the remaining States/UTs"
+      ],
+      "documents": [
+        "Ration Card",
+        "Aadhar Card (if seeded with Ration Card)"
+      ],
+      "how_to_apply": "Interested persons shall visit the nearest Fair Price Shop with the Ration Card. Beneficiaries can quote either their ration card number or the Aadhaar number to any Fair Price Shop dealer across the country. Beneficiaries can undergo Aadhaar authentication by using their fingerprints or iris-based identification.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pm-gkay"
+    },
+    {
+      "id": "pm_kisan_maandhan_yojana",
+      "name": "Pradhan Mantri Kisan Maandhan Yojana",
+      "ministry": "Ministry Of Agriculture and Farmers Welfare",
+      "category": "pension",
+      "tags": [
+        "pension",
+        "small and marginal farmer",
+        "social security",
+        "old age pension",
+        "family pension"
+      ],
+      "aliases": [],
+      "summary": "Old age protection and social security scheme for Small and Marginal Farmers providing a minimum assured pension of ₹ 3,000 per month after age 60, with government matching contribution.",
+      "benefits": "Minimum assured pension of ₹ 3,000 per month after attaining the age of 60 years; family pension of 50% to spouse; government matching contribution equal to subscriber's monthly contribution.",
+      "rules": [
+        {
+          "field": "owns_cultivable_land",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must be a Small or Marginal Farmer with cultivable landholding"
+        },
+        {
+          "field": "land_holding_hectares",
+          "op": "lte",
+          "value": 2,
+          "reason": "Cultivable landholding must be up to 2 hectares"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be at least 18 years of age at the time of entry"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 40,
+          "reason": "Applicant must be 40 years of age or younger at the time of entry"
+        },
+        {
+          "field": "income_tax_payer_last_year",
+          "op": "eq",
+          "value": false,
+          "reason": "People who paid income tax in the last assessment year are excluded"
+        },
+        {
+          "field": "is_govt_employee",
+          "op": "eq",
+          "value": false,
+          "reason": "Serving or retired government employees are excluded"
+        },
+        {
+          "field": "is_epfo_esic_nps_member",
+          "op": "eq",
+          "value": false,
+          "reason": "People covered by NPS, ESIC or EPFO are excluded"
+        }
+      ],
+      "caveats": [
+        "Applicant's name should appear in land records as on 01.08.2019",
+        "Applicant should possess an Aadhaar card",
+        "Applicant should have a savings bank account or PM-KISAN account",
+        "SMFs covered under any other statutory social security schemes such as National Pension Scheme (NPS), Employees’ State Insurance Corporation scheme, Employees’ Fund Organization Scheme are not eligible",
+        "Farmers who have opted for Pradhan Mantri Shram Yogi Maandhan Yojana and Pradhan Mantri Vyapari Maandhan administered by the Ministry of Labour & Employment are not eligible",
+        "All Institutional Landholders are not eligible",
+        "Former and present holders of constitutional posts are not eligible",
+        "Former and present Ministers/ State Ministers and former/present Members of Lok Sabha/ Rajya Sabha/ State Legislative Assemblies/ State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats are not eligible",
+        "All serving or retired officers and employees of Central/ State Government Ministries/ Offices/Departments and their field units, Central or State PSEs and Attached offices/ Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV/Group D employees) are not eligible",
+        "All Persons who paid Income Tax in the last assessment year Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practice are not eligible",
+        "Applicant should be a Small or Marginal Farmer",
+        "Exclusion: Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practice are not eligible"
+      ],
+      "documents": [
+        "Aadhaar Card",
+        "Savings Bank Account Number along with IFSC Code ( Bank Passbook or Cheque Leaf/book or copy of bank statement as evidence of bank account)"
+      ],
+      "how_to_apply": "Apply online via Common Service Centres (CSCs); visit the nearest CSC with Aadhaar Card and Savings Bank Account Number along with IFSC Code, pay the initial contribution amount in cash to the Village Level Entrepreneur (VLE), and complete enrolment.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pmkmdy"
+    },
+    {
+      "id": "pm_shram_yogi_maan_dhan",
+      "name": "Pradhan Mantri Shram Yogi Maan-dhan",
+      "ministry": "Ministry Of Labour and Employment",
+      "category": "pension",
+      "tags": [
+        "unorganised worker",
+        "pension",
+        "old age",
+        "labour"
+      ],
+      "aliases": [],
+      "summary": "A minimum assured pension of ₹3,000 per month after attaining the age of 60 years for unorganised workers aged 18 to 40 with monthly income of ₹15,000 or less, with matching Central Government contribution.",
+      "benefits": "A minimum assured pension of ₹3,000/- per month after attaining the age of 60 years; family pension equal to 50% of the pension for the spouse; matching contribution by the Central Government on a 50:50 basis where an equal amount to the subscriber's age-specific contribution (ranging from ₹55/- to ₹200/-) is credited to the pension account.",
+      "rules": [
+        {
+          "field": "is_unorganised_worker",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must be an unorganised worker"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Entry age must be at least 18 years"
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 40,
+          "reason": "Entry age must be 40 years or less"
+        },
+        {
+          "field": "monthly_income",
+          "op": "lte",
+          "value": 15000,
+          "reason": "Monthly income must be ₹15,000 or less"
+        },
+        {
+          "field": "has_bank_account",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code"
+        },
+        {
+          "field": "is_current_income_tax_payer",
+          "op": "eq",
+          "value": false,
+          "reason": "Applicant must not be an income tax payer"
+        },
+        {
+          "field": "is_epfo_esic_nps_member",
+          "op": "eq",
+          "value": false,
+          "reason": "Applicant must not hold membership in EPFO, NPS or ESIC schemes"
+        }
+      ],
+      "caveats": [
+        "Applicant must not be engaged in the organized sector",
+        "Applicant must not be a member of NPS-Traders scheme",
+        "Applicant must make regular age-specific monthly contributions",
+        "Savings Bank Account or Jan Dhan account number must have an Indian Financial System Code",
+        "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme"
+      ],
+      "documents": [
+        "Aadhaar Card",
+        "Savings Bank Account Passbook / Jan-Dhan Account Passbook",
+        "Mobile Number",
+        "Self-Certification (At the time of enrollment)",
+        "Any other documents as required"
+      ],
+      "how_to_apply": "Visit the nearest Common Services Centre (CSC) to initiate registration and enrollment; the Village Level Entrepreneur (VLE) keys in Aadhaar details, captures further details including bank account, mobile number, email-id, spouse and nominee details, self-certification is completed, the system calculates the monthly contribution, the subscriber pays the first subscription in cash, an Enrolment Form cum Auto Debit mandate is signed and uploaded, and a Shram Yogi Pension Account Number and Shram Yogi Card are generated.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pm-sym"
+    },
+    {
+      "id": "pm_svanidhi",
+      "name": "PM Street Vendor’s AtmaNirbhar Nidhi (PM SVANidhi)",
+      "ministry": "Ministry Of Housing & Urban Affairs",
+      "category": "finance",
+      "tags": [
+        "street vendor",
+        "working capital loan",
+        "collateral-free loan",
+        "interest subsidy",
+        "digital transactions",
+        "cashback"
+      ],
+      "aliases": [],
+      "summary": "PM SVANidhi is a central-sector micro-credit scheme to provide handholding support to street vendors, facilitating a working capital collateral-free loan of ₹10,000, with subsequent loans of ₹20,000 and ₹50,000 with a 7% interest subsidy.",
+      "benefits": "The scheme facilitates a working capital collateral-free loan of ₹10,000, with subsequent loans of ₹20,000 and ₹50,000 with a 7% interest subsidy. To incentivize the adoption of digital transactions, a cashback of up to ₹100 per month is given to Street Vendors.",
+      "rules": [
+        {
+          "field": "occupation",
+          "op": "eq",
+          "value": "street_vendor",
+          "reason": "Scheme is for street vendors"
+        }
+      ],
+      "caveats": [
+        "Applicant must be a street vendor in possession of Certificate of Vending / Identity Card issued by ULBs, OR identified in the survey but not issued the card, OR left out of the ULB-led identification survey / started vending after survey completion with an LoR from ULB/TVC, OR a vendor of surrounding development/peri-urban/rural areas vending in ULB geographical limits with an LoR from ULB/TVC",
+        "Survey Reference Number (SRN) is mandatory for online application",
+        "Applicant must be a vendor identified in the survey but not issued Certificate of Vending / Identity Card",
+        "Applicant must be a street vendor left out of the ULB-led identification survey or who started vending after completion of the survey and issued a Letter of Recommendation (LoR) by ULB/TVC",
+        "Applicant must be a vendor of surrounding development/peri-urban/rural areas vending in the geographical limits of the ULBs, issued a Letter of Recommendation (LoR) by ULB/TVC"
+      ],
+      "documents": [
+        "Certificate of Vending",
+        "Identity Card",
+        "Letter of Recommendation",
+        "Aadhaar Card",
+        "Voter Identity Card",
+        "Driving License",
+        "MNREGA Card",
+        "PAN Card",
+        "Copy of Account Statement/Passbook",
+        "Copy of Membership Card/any other proof of membership",
+        "Any other document to substantiate the claim as a vendor",
+        "Request letter to ULB",
+        "Loan Closure Document"
+      ],
+      "how_to_apply": "Visit https://pmsvanidhi.mohua.gov.in/ and click on the \"Log In\" button on the homepage. Enter Mobile number and captcha. Click request OTP. After successful login, select valid \"vendor category\" among the available options. Enter \"Survey Reference Number\" (SRN) which is mandatory. On entering these basic details, fill the application form online, upload the relevant documents and submit.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pm-svanidhi"
+    },
+    {
+      "id": "pm_vishwakarma",
+      "name": "PM Vishwakarma",
+      "ministry": "Ministry Of Micro, Small and Medium Enterprises",
+      "category": "employment",
+      "tags": [
+        "artisans",
+        "craftspeople",
+        "skill upgradation",
+        "toolkit incentive",
+        "credit support",
+        "MSME"
+      ],
+      "aliases": [],
+      "summary": "Central Sector Scheme providing recognition, skill training, toolkit incentive, collateral-free credit, digital transaction incentives and marketing support to artisans and craftspeople.",
+      "benefits": "Recognition as Vishwakarma through Certificate and ID Card; Skill Verification followed by 5-7 days (40 hours) of Basic Training; 15 days (120 hours) of Advanced Training; Training Stipend: ₹ 500 per day; Toolkit Incentive: ₹ 15,000 grant; Collateral-free Enterprise Development Loans: ₹ 1,00,000 (First Tranche for 18 months repayment) & ₹ 2,00,000 (Second Tranche for 30 months repayment); Concessional Rate of Interest: 5% with Interest Subvention cap of 8% paid by MoMSME; Credit Guarantee fees borne by GoI; Incentive for Digital Transaction: ₹ 1 per transaction for a maximum of up to 100 transactions (monthly); Marketing Support through National Committee for Marketing.",
+      "rules": [
+        {
+          "field": "occupation",
+          "op": "eq",
+          "value": "artisan_craftsperson",
+          "reason": "Applicant must be an artisan or craftsperson working with hands and tools"
+        },
+        {
+          "field": "is_unorganised_worker",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must be engaged in the unorganized sector on a self-employment basis"
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Applicant must be at least 18 years old on the date of registration"
+        },
+        {
+          "field": "is_govt_employee",
+          "op": "eq",
+          "value": false,
+          "reason": "A person in government service and their family members are not eligible"
+        }
+      ],
+      "caveats": [
+        "Applicant should be engaged in one of the 18 family-based traditional trades mentioned in the scheme",
+        "Applicant should be engaged in the concerned trade on the date of registration",
+        "Applicant should not have availed loans under similar credit-based schemes of the Central Government or State Government for self-employment/ business development, e.g. PMEGP, PM SVANidhi, Mudra, in the past 5 years",
+        "Registration and benefits under the Scheme shall be restricted to one member of the family",
+        "Family members of a person in government service are not eligible",
+        "Verification of Eligibility at Gram Panchayat or ULB level; Vetting and Recommendation by the District Implementation Committee; Final approval by the Screening Committee"
+      ],
+      "documents": [
+        "Aadhaar",
+        "Mobile number",
+        "Bank details",
+        "Ration card"
+      ],
+      "how_to_apply": "Apply online via Common Service Centres (CSCs) by enrolling through the nearest CSC, completing biometric verification, and submitting the online application form.",
+      "source_url": "https://www.myscheme.gov.in/schemes/pmv"
     }
   ]
 }

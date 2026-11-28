@@ -1,0 +1,108 @@
+{
+  "id": "pmfby",
+  "name": "Pradhan Mantri Fasal Bima Yojna (PMFBY)",
+  "name_evidence": "Pradhan Mantri Fasal Bima Yojna (PMFBY)",
+  "ministry": "Ministry Of Agriculture and Farmers Welfare",
+  "category": "agriculture",
+  "summary": "Crop insurance scheme providing financial protection to farmers against crop loss due to natural disasters, pests, and diseases at an affordable premium.",
+  "benefits": "Maximum premium payable by the farmer will be 2% for Kharif food and oilseed crops, 1.5% for rabi food and oilseeds crops, and 5% for yearly commercial or horticultural crops; remaining premium subsidized by the government. For farmers in North-Eastern States, Jammu, Kashmir, and Himachal Pradesh, the government pays the entire premium. Coverage includes yield losses, prevented sowing up to 25% of sum insured, post-harvest losses up to 14 days, and localised calamities.",
+  "benefits_evidence": [
+    "The maximum premium payable by the farmer will be 2% for the Kharif food and oilseed crops. For rabi food and oilseeds crop, it is 1.5% and for yearly commercial or horticultural crops it will be 5%. The remaining premium is subsidized by the government.",
+    "For the farmers in North-Eastern States, Jammu, Kashmir, and Himachal Pradesh, the government also pays the entire premium.",
+    "Cases may arise where most of the farmers (insured )of notified areas may want to plant or sow. In such cases, they have to bear the expenditure for that cause and are restricted from planting or sowing insured crops because of unfavourable weather conditions. These farmers will then become eligible for the indemnity claims of up to a maximum of 25% of the sum insured.",
+    "The Government offers coverage of up to 14 days (maximum) from harvesting for crops that are stored in “cut and spread” condition."
+  ],
+  "level": "central",
+  "level_evidence": "Ministry Of Agriculture and Farmers Welfare",
+  "rules": [
+    {
+      "field": "occupation",
+      "op": "eq",
+      "value": "farmer",
+      "reason": "Scheme is for farmers, including tenant farmers and sharecroppers",
+      "evidence": "All farmers, including tenant farmers and sharecroppers growing notified crops in notified areas."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "All farmers, including tenant farmers and sharecroppers growing notified crops in notified areas",
+      "evidence": "All farmers, including tenant farmers and sharecroppers growing notified crops in notified areas."
+    },
+    {
+      "criterion": "Farmers must have an insurable interest in the insured crops",
+      "evidence": "Farmers must have an insurable interest in the insured crops."
+    },
+    {
+      "criterion": "Farmers must possess a valid and authenticated land ownership certificate or a valid land tenure agreement",
+      "evidence": "Farmers must possess a valid and authenticated land ownership certificate or a valid land tenure agreement."
+    },
+    {
+      "criterion": "The farmer must be a cultivator or sharecropper on the insured land",
+      "evidence": "The farmer must be a cultivator or sharecropper on the insured land."
+    },
+    {
+      "criterion": "The farmer must apply for insurance coverage within the prescribed time frame, usually within 2 weeks of the start of the sowing season",
+      "evidence": "The farmer must apply for insurance coverage within the prescribed time frame, usually within 2 weeks of the start of the sowing season."
+    },
+    {
+      "criterion": "Farmers must not have received compensation for the same crop loss from any other medium or source",
+      "evidence": "Farmers must not have received compensation for the same crop loss from any other medium or source."
+    },
+    {
+      "criterion": "PMFBY applies to notified areas, and crop losses in non-notified areas are generally not covered. Farmers in areas not designated under the scheme may not receive compensation.",
+      "evidence": "PMFBY applies to notified areas, and crop losses in non-notified areas are generally not covered. Farmers in areas not designated under the scheme may not receive compensation."
+    },
+    {
+      "criterion": "Losses resulting from farmer negligence, non-compliance with recommended agricultural practices, or failure to protect the crop adequately may be excluded",
+      "evidence": "Losses resulting from farmer negligence, non-compliance with recommended agricultural practices, or failure to protect the crop adequately may be excluded."
+    },
+    {
+      "criterion": "Farmers who fail to pay their premium contributions as required may not be eligible for coverage. Non-payment of premiums can result in the cancellation of insurance.",
+      "evidence": "Farmers who fail to pay their premium contributions as required may not be eligible for coverage. Non-payment of premiums can result in the cancellation of insurance."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Passport–sized Photograph",
+      "evidence": "Passport–sized Photograph"
+    },
+    {
+      "item": "Passbook",
+      "evidence": "Passbook"
+    },
+    {
+      "item": "Identity Proof (Aadhaar Card/PAN Card/Voter ID/Bank Passbook with Photo, Kisan Photo Book/NREGA Job Card)",
+      "evidence": "Identity Proof (Aadhaar Card/PAN Card/Voter ID/Bank Passbook with Photo, Kisan Photo Book/NREGA Job Card)"
+    },
+    {
+      "item": "Address Proof (Aadhaar Card/PAN Card/Voter ID/Electricity Bill/Bank Passbook with Photo)",
+      "evidence": "Address Proof (Aadhaar Card/PAN Card/Voter ID/Electricity Bill/Bank Passbook with Photo)."
+    },
+    {
+      "item": "Evidence of Land records, as per the State Records of Right (RoR), Land Possession Certificate (LPC), and other applicable agreements, contracts notified or permitted by the state",
+      "evidence": "Evidence of Land records, as per the State Records of Right (RoR), Land Possession Certificate (LPC), and other applicable agreements, contracts notified or permitted by the state."
+    },
+    {
+      "item": "Declaration about the crop sown/intended to be sown",
+      "evidence": "Declaration about the crop sown/intended to be sown."
+    }
+  ],
+  "how_to_apply": "Apply online via the PMFBY website through Farmer Corner or offline via CSCs; register, fill the Farmer Application Form, upload documents, and pay the premium.",
+  "how_to_apply_evidence": [
+    "Online - Via CSCs",
+    "Step 1: Visit the Official Website of \"Pradhan Mantri Fasal Bima Yojana\".",
+    "Step 2: At the top right corner of the homepage, click \"Farmer Corner\".",
+    "Step 4: Upon successful registration, click \"Farmer Corner (Apply for Crop Insurance Yourself)\".",
+    "Step 6: Fill in all the mandatory fields of the Application Form and upload all the mandatory documents in the specified format and size.",
+    "Step 7: In the popup window, the following options will be displayed: \"Pay Later\" and \"Make Payment\"."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/pmfby",
+  "tags": [
+    "crop insurance",
+    "farmer",
+    "agriculture",
+    "premium subsidy"
+  ],
+  "aliases": []
+}

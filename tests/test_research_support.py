@@ -116,12 +116,16 @@ def variant(base: dict, **changes) -> dict:
 NO_ISSUES = {"issues": [], "missing_criteria": []}
 
 
+# fixed 10-scheme snapshot so merge/pipeline tests stay stable as the real database grows
+SCHEMES_10 = Path(__file__).parent / "fixtures" / "research" / "schemes_10.json"
+
+
 def make_deps(tmp_path: Path, script, *, model="fake-model", max_attempts=3, auditor=None,
               auditor_model="fake-auditor"):
     """Deps wired to a fake extractor LLM, a separate fake auditor LLM (default: finds nothing) and temp copies
     of the database; returns (deps, extractor_client). The auditor client is ``deps.verifier_llm.client``."""
     schemes = tmp_path / "schemes.json"
-    shutil.copy(DATA_PATH, schemes)
+    shutil.copy(SCHEMES_10, schemes)
     client = FakeClient(script)
     aud = FakeClient([NO_ISSUES] if auditor is None else auditor)
     deps = Deps(llm=LLM(client=client, model=model), verifier_llm=LLM(client=aud, model=auditor_model),

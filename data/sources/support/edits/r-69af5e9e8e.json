@@ -1,0 +1,118 @@
+{
+  "id": "pm_svanidhi",
+  "name": "PM Street Vendor’s AtmaNirbhar Nidhi (PM SVANidhi)",
+  "name_evidence": "PM Street Vendor’s AtmaNirbhar Nidhi (PM SVANidhi)",
+  "ministry": "Ministry Of Housing & Urban Affairs",
+  "category": "finance",
+  "summary": "PM SVANidhi is a central-sector micro-credit scheme to provide handholding support to street vendors, facilitating a working capital collateral-free loan of ₹10,000, with subsequent loans of ₹20,000 and ₹50,000 with a 7% interest subsidy.",
+  "benefits": "The scheme facilitates a working capital collateral-free loan of ₹10,000, with subsequent loans of ₹20,000 and ₹50,000 with a 7% interest subsidy. To incentivize the adoption of digital transactions, a cashback of up to ₹100 per month is given to Street Vendors.",
+  "benefits_evidence": [
+    "The scheme facilitates a working capital collateral-free loan of ₹10,000, with subsequent loans of ₹20,000 and ₹50,000 with a 7% interest subsidy.",
+    "To incentivize the adoption of digital transactions, a cashback of up to ₹100 per month is given to Street Vendors."
+  ],
+  "level": "central",
+  "level_evidence": "PM SVANidhi is a central-sector micro-credit scheme launched on 1st June 2020 by the Ministry of Housing and Urban Affairs (MoHUA) to provide handholding support to street vendors.",
+  "rules": [
+    {
+      "field": "occupation",
+      "op": "eq",
+      "value": "street_vendor",
+      "reason": "Scheme is for street vendors",
+      "evidence": "Street vendors in possession of Certificate of Vending / Identity Card issued by Urban Local Bodies (ULBs)."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant must be a street vendor in possession of Certificate of Vending / Identity Card issued by ULBs, OR identified in the survey but not issued the card, OR left out of the ULB-led identification survey / started vending after survey completion with an LoR from ULB/TVC, OR a vendor of surrounding development/peri-urban/rural areas vending in ULB geographical limits with an LoR from ULB/TVC",
+      "evidence": "Street vendors in possession of Certificate of Vending / Identity Card issued by Urban Local Bodies (ULBs). The vendors, who have been identified in the survey but have not been issued Certificate of Vending / Identity Card. Street Vendors left out of the ULB-led identification survey or who have started vending after completion of the survey and have been issued a Letter of Recommendation (LoR) to that effect by the ULB / Town Vending Committee (TVC). The vendors of surrounding development/ peri-urban/rural areas vending in the geographical limits of the ULBs, who have been issued a Letter of Recommendation (LoR) to that effect by the ULB / TVC."
+    },
+    {
+      "criterion": "Survey Reference Number (SRN) is mandatory for online application",
+      "evidence": "Enter \"Survey Reference Number\" (SRN) which is mandatory."
+    },
+    {
+      "criterion": "Applicant must be a vendor identified in the survey but not issued Certificate of Vending / Identity Card",
+      "evidence": "The vendors, who have been identified in the survey but have not been issued Certificate of Vending / Identity Card."
+    },
+    {
+      "criterion": "Applicant must be a street vendor left out of the ULB-led identification survey or who started vending after completion of the survey and issued a Letter of Recommendation (LoR) by ULB/TVC",
+      "evidence": "Street Vendors left out of the ULB-led identification survey or who have started vending after completion of the survey and have been issued a Letter of Recommendation (LoR) to that effect by the ULB / Town Vending Committee (TVC)."
+    },
+    {
+      "criterion": "Applicant must be a vendor of surrounding development/peri-urban/rural areas vending in the geographical limits of the ULBs, issued a Letter of Recommendation (LoR) by ULB/TVC",
+      "evidence": "The vendors of surrounding development/ peri-urban/rural areas vending in the geographical limits of the ULBs, who have been issued a Letter of Recommendation (LoR) to that effect by the ULB / TVC."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Certificate of Vending",
+      "evidence": "Certificate of Vending"
+    },
+    {
+      "item": "Identity Card",
+      "evidence": "Identity Card"
+    },
+    {
+      "item": "Letter of Recommendation",
+      "evidence": "Letter of Recommendation"
+    },
+    {
+      "item": "Aadhaar Card",
+      "evidence": "Aadhaar Card"
+    },
+    {
+      "item": "Voter Identity Card",
+      "evidence": "Voter Identity Card"
+    },
+    {
+      "item": "Driving License",
+      "evidence": "Driving License"
+    },
+    {
+      "item": "MNREGA Card",
+      "evidence": "MNREGA Card"
+    },
+    {
+      "item": "PAN Card",
+      "evidence": "PAN Card"
+    },
+    {
+      "item": "Copy of Account Statement/Passbook",
+      "evidence": "Copy of Account Statement/Passbook"
+    },
+    {
+      "item": "Copy of Membership Card/any other proof of membership",
+      "evidence": "Copy of Membership Card/any other proof of membership"
+    },
+    {
+      "item": "Any other document to substantiate the claim as a vendor",
+      "evidence": "Any other document to substantiate the claim as a vendor"
+    },
+    {
+      "item": "Request letter to ULB",
+      "evidence": "Request letter to ULB"
+    },
+    {
+      "item": "Loan Closure Document",
+      "evidence": "Loan Closure Document"
+    }
+  ],
+  "how_to_apply": "Visit https://pmsvanidhi.mohua.gov.in/ and click on the \"Log In\" button on the homepage. Enter Mobile number and captcha. Click request OTP. After successful login, select valid \"vendor category\" among the available options. Enter \"Survey Reference Number\" (SRN) which is mandatory. On entering these basic details, fill the application form online, upload the relevant documents and submit.",
+  "how_to_apply_evidence": [
+    "Step 1: Visit https://pmsvanidhi.mohua.gov.in/ and click on the \"Log In\" button on the homepage.",
+    "Step 2: Enter Mobile number and captcha. Click request OTP.",
+    "Step 3: After successful login, select valid \"vendor category\" among the available options. Enter \"Survey Reference Number\" (SRN) which is mandatory.",
+    "Step 4: On entering these basic details, fill the application form online, upload the relevant documents and submit."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/pm-svanidhi",
+  "tags": [
+    "street vendor",
+    "working capital loan",
+    "collateral-free loan",
+    "interest subsidy",
+    "digital transactions",
+    "cashback"
+  ],
+  "aliases": []
+}

@@ -5,7 +5,8 @@ import typing
 from dataclasses import dataclass
 from typing import Annotated, Any, Literal, get_args, get_origin
 
-from sahayak.models import Child, Profile
+from sahayak.models import MAX_MONEY, Child, Profile
+from sahayak.rules import DERIVED_FIELDS
 from sahayak.states import STATES
 
 try:  # X | None syntax
@@ -19,10 +20,15 @@ OPS = ("eq", "ne", "gte", "lte", "in", "any_child")
 @dataclass(frozen=True)
 class FieldSpec:
     name: str
-    kind: str                      # bool | int | str | enum | children
+    kind: str                      # bool | int | float | str | enum | state | children
     choices: tuple = ()            # for enum
-    lo: int | None = None          # inclusive bounds declared on the model (ge/le), for int fields
-    hi: int | None = None
+    lo: float | None = None        # inclusive bounds declared on the model (ge/le), for int/float fields
+    hi: float | None = None
+    description: str = ""
+    derived: bool = False          # computed by the engine from other facts, not stored on Profile
+
+
+NUMERIC = ("int", "float")
 
 
 def _constraints(obj: Any, acc: dict) -> None:
@@ -31,7 +37,7 @@ def _constraints(obj: Any, acc: dict) -> None:
         _constraints(m, acc)
     for key, name in (("ge", "lo"), ("le", "hi")):
         v = getattr(obj, key, None)
-        if isinstance(v, int) and not isinstance(v, bool):
+        if isinstance(v, (int, float)) and not isinstance(v, bool):
             acc[name] = v
 
 
@@ -59,6 +65,8 @@ def _kind(ann: Any, info: Any = None) -> tuple[str, tuple, dict]:
         return "bool", (), acc
     if ann is int:
         return "int", (), acc
+    if ann is float:
+        return "float", (), acc
     return "str", (), acc
 
 
@@ -68,12 +76,23 @@ def _specs(model) -> dict[str, FieldSpec]:
         kind, choices, c = _kind(f.annotation, f)
         if n == "state":                      # free text on Profile, but rules may only use canonical names
             kind, choices = "state", STATES
-        out[n] = FieldSpec(n, kind, choices, c.get("lo"), c.get("hi"))
+        out[n] = FieldSpec(n, kind, choices, c.get("lo"), c.get("hi"), f.description or "")
     return out
 
 
 PROFILE_FIELDS: dict[str, FieldSpec] = _specs(Profile)
 CHILD_FIELDS: dict[str, FieldSpec] = _specs(Child)
+
+# Computed fields: usable in rules, never stored on Profile (the engine derives them; see sahayak.rules.derive_facts).
+_DERIVED_DESCRIPTIONS = {
+    "per_capita_monthly_income": "household monthly income divided by household_size, rupees per month per person; "
+                                 "use ONLY for a limit stated 'per capita' / 'per member' / 'per person' per month",
+}
+for _n in DERIVED_FIELDS:
+    PROFILE_FIELDS[_n] = FieldSpec(_n, "int", (), 0, MAX_MONEY, _DERIVED_DESCRIPTIONS.get(_n, ""), True)
+
+# Income fields have a period. A rule's quote must name the same period (research.validate checks this).
+PERIOD_OF = {"annual_income": "annual", "monthly_income": "monthly", "per_capita_monthly_income": "monthly"}
 
 
 def describe_fields() -> str:
@@ -89,7 +108,9 @@ def describe_fields() -> str:
             lines.append("- state: the citizen's state/UT. ONLY ops eq (one state) or in (a list of states); values must "
                          "be spelled EXACTLY as one of: " + "; ".join(s.choices))
         elif s.kind == "enum":
-            lines.append(f"- {s.name}: one of {'|'.join(s.choices)}")
+            lines.append(f"- {s.name}: one of {'|'.join(s.choices)}" + (f". {s.description}" if s.description and
+                         not s.description.startswith("Main work") else ""))
         else:
-            lines.append(f"- {s.name}: {s.kind}" + (" (ops gte/lte allowed)" if s.kind == "int" else ""))
+            lines.append(f"- {s.name}: {s.kind}" + (" (ops gte/lte allowed)" if s.kind in NUMERIC else "")
+                         + (f". {s.description}" if s.description else ""))
     return "\n".join(lines)

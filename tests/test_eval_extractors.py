@@ -99,8 +99,15 @@ def test_summarise_no_gold_rules():
 def test_short_prompt_covers_every_field_and_state():
     from research.fields import PROFILE_FIELDS
     from sahayak.states import STATES
+    # The LoRA extractor was trained on this prompt; fields added afterwards are deliberately absent until it is
+    # retrained (the research pipeline's own prompt, research.prompts, lists every field).
+    after_finetune = {
+        "monthly_income", "household_size", "is_current_income_tax_payer", "land_holding_hectares", "occupation",
+        "is_unorganised_worker", "is_epfo_esic_nps_member", "disability_percentage", "social_category",
+        "ration_card_type", "breadwinner_deceased", "breadwinner_age_at_death", "house_type", "has_pucca_house",
+        "per_capita_monthly_income"}
     for name in PROFILE_FIELDS:
-        assert name in ft.INSTRUCTION, name
+        assert name in ft.INSTRUCTION or name in after_finetune, name
     for st in STATES:
         assert st in ft.INSTRUCTION, st
 

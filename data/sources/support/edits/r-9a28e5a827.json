@@ -1,0 +1,132 @@
+{
+  "id": "nps_tsep",
+  "name": "National Pension Scheme for Traders And Self Employed Persons",
+  "name_evidence": "National Pension Scheme for Traders And Self Employed Persons",
+  "ministry": "Ministry Of Labour and Employment",
+  "category": "pension",
+  "summary": "A voluntary and contributory pension scheme providing a minimum assured monthly pension of ₹3,000 after attaining the age of sixty years to small-scale traders, retailers, and self-employed individuals.",
+  "benefits": "Each eligible subscriber under this scheme shall receive an assured minimum monthly pension of ₹3,000/- after attaining the age of sixty years. The Government of India make a matching contribution into the subscriber's pension account every month.",
+  "benefits_evidence": [
+    "Each eligible subscriber under this scheme shall receive an assured minimum monthly pension of ₹3,000/- after attaining the age of sixty years.",
+    "The Government of India make a matching contribution into the subscriber's pension account every month."
+  ],
+  "level": "central",
+  "level_evidence": "The scheme \"National Pension Scheme for Traders And Self-Employed Persons\" was launched by the Ministry of Labour and Employment, Government of India in September 2019.",
+  "rules": [
+    {
+      "field": "age",
+      "op": "gte",
+      "value": 18,
+      "reason": "Applicant must be at least 18 years old",
+      "evidence": "The applicant must be between 18 and 40 years of age."
+    },
+    {
+      "field": "age",
+      "op": "lte",
+      "value": 40,
+      "reason": "Applicant must be 40 years old or younger",
+      "evidence": "The applicant must be between 18 and 40 years of age."
+    },
+    {
+      "field": "has_bank_account",
+      "op": "eq",
+      "value": true,
+      "reason": "Applicant must possess a savings bank account in their name",
+      "evidence": "The applicant must possess a savings bank account in their name."
+    },
+    {
+      "field": "is_epfo_esic_nps_member",
+      "op": "eq",
+      "value": false,
+      "reason": "Applicant must not be a member of EPFO, ESIC or NPS",
+      "evidence": "The applicant must not be covered under any National Pension Scheme contributed by the Central Government. The applicant must not be a member of the Employees’ Provident Fund Organisation (EPFO) under the Employees’ Provident Fund and Miscellaneous Provisions Act, 1952. The applicant must not be covered under the Employees’ State Insurance Corporation (ESIC) Scheme under the Employees’ State Insurance Act, 1948."
+    },
+    {
+      "field": "is_current_income_tax_payer",
+      "op": "eq",
+      "value": false,
+      "reason": "Income-tax payers are not eligible",
+      "evidence": "The applicant must not be an income-tax payer or income-tax assessee."
+    },
+    {
+      "field": "occupation",
+      "op": "in",
+      "value": [
+        "small_trader_shopkeeper",
+        "self_employed"
+      ],
+      "reason": "Scheme is for traders and self-employed persons",
+      "evidence": "The applicant must be a Laghu Vyapari, self-employed person, shop owner, retail trader, rice mill owner, oil mill owner, workshop owner, commission agent, real estate broker, small hotel owner, or restaurant owner."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant must be a Laghu Vyapari, self-employed person, shop owner, retail trader, rice mill owner, oil mill owner, workshop owner, commission agent, real estate broker, small hotel owner, or restaurant owner.",
+      "evidence": "The applicant must be a Laghu Vyapari, self-employed person, shop owner, retail trader, rice mill owner, oil mill owner, workshop owner, commission agent, real estate broker, small hotel owner, or restaurant owner."
+    },
+    {
+      "criterion": "The applicant must have an annual turnover that does not exceed ₹1,50,00,000/-.",
+      "evidence": "The applicant must have an annual turnover that does not exceed ₹1,50,00,000/-."
+    },
+    {
+      "criterion": "The applicant must not be an income-tax payer or income-tax assessee.",
+      "evidence": "The applicant must not be an income-tax payer or income-tax assessee."
+    },
+    {
+      "criterion": "Applicant must possess an Aadhaar Card or Aadhaar Number.",
+      "evidence": "The applicant must possess an Aadhaar Card or Aadhaar Number."
+    },
+    {
+      "criterion": "The applicant must not be enrolled under the Pradhan Mantri Shram Yogi Maandhan Yojana administered by the Ministry of Labour & Employment.",
+      "evidence": "The applicant must not be enrolled under the Pradhan Mantri Shram Yogi Maandhan Yojana administered by the Ministry of Labour & Employment."
+    },
+    {
+      "criterion": "Goods and Services Tax Identification Number (GSTIN) (only required for those with an Annual Turnover above ₹40,00,000/-).",
+      "evidence": "Goods and Services Tax Identification Number (GSTIN) (only required for those with an Annual Turnover above ₹40,00,000/-)."
+    },
+    {
+      "criterion": "Self-Declaration Document for Annual Turnover Income.",
+      "evidence": "Self-Declaration Document for Annual Turnover Income."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Aadhaar Card",
+      "evidence": "Aadhaar Card."
+    },
+    {
+      "item": "Savings Bank Account or Jan Dhan Bank Account Details",
+      "evidence": "Savings Bank Account or Jan Dhan Bank Account Details."
+    },
+    {
+      "item": "Indian Financial System Code (IFSC)",
+      "evidence": "Indian Financial System Code (IFSC)."
+    },
+    {
+      "item": "Bank Passbook, Cheque Leave/Book, or Copy of Bank Statement (as Evidence of Bank Account)",
+      "evidence": "Bank Passbook, Cheque Leave/Book, or Copy of Bank Statement (as Evidence of Bank Account)."
+    },
+    {
+      "item": "Goods and Services Tax Identification Number (GSTIN) (only required for those with an Annual Turnover above ₹40,00,000/-)",
+      "evidence": "Goods and Services Tax Identification Number (GSTIN) (only required for those with an Annual Turnover above ₹40,00,000/-)."
+    },
+    {
+      "item": "Self-Declaration Document for Annual Turnover Income",
+      "evidence": "Self-Declaration Document for Annual Turnover Income."
+    }
+  ],
+  "how_to_apply": "Online - Via CSCs. The interested eligible person must visit their nearest Common Service Centre (CSC) to initiate the registration process offline. The applicant must carry prerequisites such as their Aadhaar Card and evidence of their bank account.",
+  "how_to_apply_evidence": [
+    "Online - Via CSCs",
+    "Step 1: The interested eligible person must visit their nearest Common Service Centre (CSC) to initiate the registration process offline. The applicant must carry prerequisites such as their Aadhaar Card and evidence of their bank account."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/nps-tsep",
+  "tags": [
+    "pension",
+    "traders",
+    "self-employed",
+    "social security"
+  ],
+  "aliases": []
+}

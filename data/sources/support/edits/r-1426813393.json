@@ -1,0 +1,90 @@
+{
+  "id": "pm_gkay",
+  "name": "Pradhan Mantri Garib Kalyan Anna Yojana",
+  "name_evidence": "Pradhan Mantri Garib Kalyan Anna Yojana",
+  "ministry": "Ministry Of Finance",
+  "category": "food",
+  "summary": "PM-GKAY is a scheme as part of Atmanirbhar Bharat to supply free food grains to migrants and poor, providing 5kg of free food grains per month to the poor in addition to subsidized ration under NFSA.",
+  "benefits": "Under this scheme, the center provides 5kg of free food grains per month to the poor. This is in addition to the subsidized (Rs 2-3 per kg) ration provided under the National Food Security Act (NFSA) to families covered under the Public Distribution System (PDS).",
+  "benefits_evidence": [
+    "Under this scheme, the center provides 5kg of free food grains per month to the poor. This is in addition to the subsidized (Rs 2-3 per kg) ration provided under the National Food Security Act (NFSA) to families covered under the Public Distribution System (PDS)."
+  ],
+  "level": "central",
+  "level_evidence": "Ministry Of Finance",
+  "rules": [
+    {
+      "field": "ration_card_type",
+      "op": "in",
+      "value": [
+        "aay",
+        "phh"
+      ],
+      "reason": "Only Antyodaya (AAY) and Priority Household (PHH) ration card families are covered",
+      "evidence": "Families belonging to Antyodaya Anna Yojana (AAY) and Priority Households (PHH) categories will be eligible for the scheme."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Families belonging to Antyodaya Anna Yojana (AAY) and Priority Households (PHH) categories will be eligible for the scheme",
+      "evidence": "Families belonging to Antyodaya Anna Yojana (AAY) and Priority Households (PHH) categories will be eligible for the scheme."
+    },
+    {
+      "criterion": "PHH are to be identified by State Governments/Union Territory Administrations as per criteria evolved by them",
+      "evidence": "PHH are to be identified by State Governments/Union Territory Administrations as per criteria evolved by them."
+    },
+    {
+      "criterion": "AAY families are to be identified by States/UTs as per the criteria prescribed by the Central Government",
+      "evidence": "AAY families are to be identified by States/UTs as per the criteria prescribed by the Central Government:"
+    },
+    {
+      "criterion": "Households headed by widows or terminally ill persons or disabled persons or persons aged 60 years or more with no assured means of subsistence or societal support",
+      "evidence": "Households headed by widows or terminally ill persons or disabled persons or persons aged 60 years or more with no assured means of subsistence or societal support."
+    },
+    {
+      "criterion": "Widows or terminally ill persons or disabled persons or persons aged 60 years or more or single women or single men with no family or societal support or assured means of subsistence",
+      "evidence": "Widows or terminally ill persons or disabled persons or persons aged 60 years or more or single women or single men with no family or societal support or assured means of subsistence."
+    },
+    {
+      "criterion": "All primitive tribal households",
+      "evidence": "All primitive tribal households."
+    },
+    {
+      "criterion": "Landless agriculture labourers, marginal farmers, rural artisans/craftsmen such as potters, tanners, weavers, blacksmiths, carpenters, slum dwellers, and persons earning their livelihood on daily basis in the informal sector like porters, coolies, rickshaw pullers, hand cart pullers, fruit and flower sellers, snake charmers, rag pickers, cobblers, destitutes and other similar categories in both rural and urban areas",
+      "evidence": "Landless agriculture labourers, marginal farmers, rural artisans/craftsmen such as potters, tanners, weavers, blacksmiths, carpenters, slum dwellers, and persons earning their livelihood on daily basis in the informal sector like porters, coolies, rickshaw pullers, hand cart pullers, fruit and flower sellers, snake charmers, rag pickers, cobblers, destitutes and other similar categories in both rural and urban areas."
+    },
+    {
+      "criterion": "All eligible Below Poverty Line families of HIV positive persons",
+      "evidence": "All eligible Below Poverty Line families of HIV positive persons"
+    },
+    {
+      "criterion": "Wheat has been allocated to 6 States/UTs, - Punjab, Haryana, Rajasthan, Chandigarh, Delhi, and Gujarat, and rice has been provided to the remaining States/UTs",
+      "evidence": "Wheat has been allocated to 6 States/UTs, - Punjab, Haryana, Rajasthan, Chandigarh, Delhi, and Gujarat, and rice has been provided to the remaining States/UTs."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Ration Card",
+      "evidence": "Ration Card"
+    },
+    {
+      "item": "Aadhar Card (if seeded with Ration Card)",
+      "evidence": "Aadhar Card (if seeded with Ration Card)"
+    }
+  ],
+  "how_to_apply": "Interested persons shall visit the nearest Fair Price Shop with the Ration Card. Beneficiaries can quote either their ration card number or the Aadhaar number to any Fair Price Shop dealer across the country. Beneficiaries can undergo Aadhaar authentication by using their fingerprints or iris-based identification.",
+  "how_to_apply_evidence": [
+    "Interested persons shall visit the nearest Fair Price Shop with the Ration Card:",
+    "Beneficiaries can quote either their ration card number or the Aadhaar number to any Fair Price Shop dealer across the country.",
+    "Beneficiaries can undergo Aadhaar authentication by using their fingerprints or iris-based identification."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/pm-gkay",
+  "tags": [
+    "food grains",
+    "ration",
+    "PDS",
+    "AAY",
+    "PHH"
+  ],
+  "aliases": []
+}

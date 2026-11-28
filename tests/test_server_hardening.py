@@ -11,6 +11,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from sahayak.agent import Agent
+from sahayak.models import load_schemes
 from sahayak.tools import Toolbox
 from server.config import Settings
 from server.main import create_app, make_agent
@@ -287,7 +288,7 @@ def test_docs_disabled_by_default_and_enabled_by_flag(toolbox, path):
 def test_health_exposes_only_ok_and_scheme_count(toolbox):
     app, _ = make_app(toolbox, [])
     with TestClient(app) as tc:
-        assert tc.get("/api/health").json() == {"ok": True, "schemes": 10}
+        assert tc.get("/api/health").json() == {"ok": True, "schemes": len(load_schemes())}
 
 
 def test_security_headers(toolbox):

@@ -8,8 +8,10 @@ from typing import Any, Callable
 
 from pydantic import ValidationError
 
+from .answers import hint_text, normalise_enums
 from .hybrid import build_index
-from .models import MAX_CHILDREN, MAX_MONEY, Profile, Scheme, load_schemes
+from .models import (HOUSE_TYPES, MAX_CHILDREN, MAX_HECTARES, MAX_MONEY, OCCUPATIONS, RATION_CARD_TYPES,
+                     SOCIAL_CATEGORIES, Profile, Scheme, load_schemes)
 from .rules import check_all
 
 log = logging.getLogger("sahayak.tools")
@@ -19,12 +21,32 @@ MAX_SCHEME_IDS = 25
 MAX_ASK = 2  # follow-up questions per turn
 
 # Tie-break for rank_missing_fields: facts that are easy to answer and open the most schemes come first.
-FIELD_PRIORITY = ("age", "gender", "state", "marital_status", "bpl", "annual_income", "has_bank_account", "monthly_pension",
-                  "ever_income_tax_payer", "income_tax_payer_last_year", "owns_cultivable_land", "children",
-                  "pregnant_or_lactating", "is_govt_employee", "in_regular_govt_employment", "household_has_lpg")
+FIELD_PRIORITY = ("age", "gender", "state", "marital_status", "bpl", "annual_income", "monthly_income", "occupation",
+                  "social_category", "has_bank_account", "ration_card_type", "disability_percentage", "house_type",
+                  "monthly_pension", "ever_income_tax_payer", "is_current_income_tax_payer",
+                  "income_tax_payer_last_year", "owns_cultivable_land", "land_holding_hectares", "children",
+                  "household_size", "is_unorganised_worker", "is_epfo_esic_nps_member", "breadwinner_deceased",
+                  "breadwinner_age_at_death", "has_pucca_house", "pregnant_or_lactating", "is_govt_employee",
+                  "in_regular_govt_employment", "household_has_lpg")
+
+# Questions that make no sense once something else is known (the profile itself, not the chat text; the chat-text
+# signals live in vulnerability.irrelevant_fields). Never ask what the person cannot answer or what is moot.
+HOMELESS_SKIP = frozenset({"household_has_lpg", "household_size", "has_pucca_house"})
 
 
-def rank_missing_fields(need_info: list[dict], exclude=(), limit: int = MAX_ASK) -> list[str]:
+def profile_skip_fields(p: Profile) -> frozenset[str]:
+    """Facts not worth asking given what the profile already says."""
+    out: set[str] = set()
+    if p.house_type == "none_homeless":
+        out |= HOMELESS_SKIP
+    if p.breadwinner_deceased is False:
+        out.add("breadwinner_age_at_death")
+    if p.owns_cultivable_land is False:
+        out.add("land_holding_hectares")
+    return frozenset(out)
+
+
+def rank_missing_fields(need_info: list[dict], exclude=(), limit: int = MAX_ASK, prefer=()) -> list[str]:
     """The facts to ask for first, chosen in code so the model need not guess.
 
     `need_info` is check_eligibility's need_info list (items with "missing_fields"). A fact is ranked by how many
@@ -33,7 +55,8 @@ def rank_missing_fields(need_info: list[dict], exclude=(), limit: int = MAX_ASK)
       2. then schemes that list it as missing at all,
       3. then FIELD_PRIORITY, then the name (so the order is fully deterministic).
     Facts in `exclude` (questions that make no sense for this person, e.g. an LPG connection for a homeless user) are
-    ignored, as if they were not missing."""
+    ignored, as if they were not missing. Facts in `prefer` (e.g. basic needs for a homeless person) that are missing
+    come first, in the given order."""
     skip = set(exclude)
     total: dict[str, int] = {}
     sole: dict[str, int] = {}
@@ -44,20 +67,23 @@ def rank_missing_fields(need_info: list[dict], exclude=(), limit: int = MAX_ASK)
         if len(fields) == 1:
             sole[fields[0]] = sole.get(fields[0], 0) + 1
     order = {f: i for i, f in enumerate(FIELD_PRIORITY)}
-    ranked = sorted(total, key=lambda f: (-sole.get(f, 0), -total[f], order.get(f, len(order)), f))
+    pref = {f: i for i, f in enumerate(prefer)}
+    ranked = sorted(total, key=lambda f: (pref.get(f, len(pref)), -sole.get(f, 0), -total[f], order.get(f, len(order)), f))
     return ranked[:limit]
 
 
-def annotate_questions(result: dict, exclude=()) -> dict:
+def annotate_questions(result: dict, exclude=(), prefer=()) -> dict:
     """Add "ask_first" (at most MAX_ASK facts, see rank_missing_fields) and, when facts were excluded, "do_not_ask"
     to a check_eligibility result that has need_info. Returns a new dict; schemes and verdicts are untouched."""
     need = result.get("need_info") if isinstance(result, dict) else None
     if not need:
         return result
+    # keep what an earlier pass excluded (check_eligibility's profile-based skips) when the agent adds its own
+    exclude = set(exclude) | set(result.get("do_not_ask") or [])
     out = {k: v for k, v in result.items() if k not in ("ask_first", "do_not_ask")}
-    out["ask_first"] = rank_missing_fields(need, exclude)
+    out["ask_first"] = rank_missing_fields(need, exclude, prefer=prefer)
     if exclude:
-        out["do_not_ask"] = sorted(set(exclude))
+        out["do_not_ask"] = sorted(exclude)
     return out
 
 _PROFILE_PROPS = {
@@ -68,19 +94,42 @@ _PROFILE_PROPS = {
     "marital_status": {"type": "string", "enum": ["single", "married", "widowed", "divorced", "separated"]},
     "bpl": {"type": "boolean", "description": "Below Poverty Line household / BPL card"},
     "annual_income": {"type": "integer", "minimum": 0, "maximum": MAX_MONEY,
-                      "description": "Household income, rupees per year"},
+                      "description": "Household income, rupees per YEAR (give this when the user states a yearly figure)"},
+    "monthly_income": {"type": "integer", "minimum": 0, "maximum": MAX_MONEY,
+                       "description": ("Income, rupees per MONTH (give this when the user states a monthly figure; "
+                                       "never multiply it yourself, the rules convert between the two)")},
+    "household_size": {"type": "integer", "minimum": 1, "maximum": 50, "description": "People living in the household"},
     "ever_income_tax_payer": {"type": "boolean",
                               "description": "Is or has EVER been an income tax payer (matters for Atal Pension Yojana)"},
     "income_tax_payer_last_year": {"type": "boolean",
                                    "description": "Paid income tax in the last assessment year (matters for PM-KISAN)"},
+    "is_current_income_tax_payer": {
+        "type": "boolean",
+        "description": ("Pays income tax NOW ('are you an income tax payer', 'do you pay income tax'). Not the same as "
+                        "ever_income_tax_payer (ever in life) or income_tax_payer_last_year (last assessment year)")},
     "has_bank_account": {"type": "boolean"},
     "owns_cultivable_land": {"type": "boolean"},
+    "land_holding_hectares": {"type": "number", "minimum": 0, "maximum": MAX_HECTARES,
+                              "description": "Farm land held in HECTARES (1 hectare = 2.47 acres); 0 if none"},
     "is_govt_employee": {"type": "boolean", "description": "Serving/retired govt employee (not MTS/Class IV/Group D)"},
     "monthly_pension": {"type": "integer", "minimum": 0, "maximum": MAX_MONEY,
                         "description": "Rupees per month; 0 if none"},
     "household_has_lpg": {"type": "boolean"},
     "pregnant_or_lactating": {"type": "boolean"},
     "in_regular_govt_employment": {"type": "boolean"},
+    "occupation": {"type": "string", "enum": list(OCCUPATIONS),
+                   "description": "Main work. " + hint_text()},
+    "is_unorganised_worker": {"type": "boolean", "description": "Works without a regular employer or social security"},
+    "is_epfo_esic_nps_member": {"type": "boolean", "description": "Member of EPFO (PF), ESIC or NPS"},
+    "disability_percentage": {"type": "integer", "minimum": 0, "maximum": 100,
+                              "description": "Percentage on the disability certificate; 0 if no disability"},
+    "social_category": {"type": "string", "enum": list(SOCIAL_CATEGORIES)},
+    "ration_card_type": {"type": "string", "enum": list(RATION_CARD_TYPES),
+                         "description": "aay = Antyodaya, phh = priority household (BPL), apl, none"},
+    "breadwinner_deceased": {"type": "boolean", "description": "The main earning member of the family has died"},
+    "breadwinner_age_at_death": {"type": "integer", "minimum": 0, "maximum": 120},
+    "house_type": {"type": "string", "enum": list(HOUSE_TYPES), "description": "pucca, kutcha, or none_homeless"},
+    "has_pucca_house": {"type": "boolean"},
     "children": {
         "type": "array", "maxItems": MAX_CHILDREN,
         "items": {"type": "object", "additionalProperties": False, "properties": {
@@ -159,7 +208,7 @@ class Toolbox:
                 return {"error": f"Unknown scheme_id(s): {', '.join(unknown)}", "valid_ids": list(self.schemes)}
             scheme_ids = list(dict.fromkeys(scheme_ids))
         try:
-            p = Profile(**profile)
+            p = Profile(**normalise_enums(profile))
         except ValidationError as e:
             return {"error": "Invalid profile. Fix the listed fields and call again.",
                     "details": [{"field": ".".join(str(x) for x in d["loc"]), "problem": d["msg"]} for d in e.errors()],
@@ -178,7 +227,7 @@ class Toolbox:
             "not_eligible": [{"scheme_id": r["scheme_id"], "scheme_name": r["scheme_name"],
                               "reasons": r["failed_reasons"], "caveats": r["caveats"]}
                              for r in results if r["verdict"] == "not_eligible"],
-        })
+        }, profile_skip_fields(p))
 
     def call(self, name: str, arguments: str | dict) -> str:
         """Run a tool by name. Always returns a JSON string, never raises.

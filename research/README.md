@@ -131,3 +131,22 @@ fixtures in `tests/fixtures/research/` (clearly labelled, fictional) and a scrip
 - Model JSON output is requested by prompt only (no provider-specific JSON mode) for portability.
 - `merge` rewrites `schemes.json` with 2-space indentation (content preserved, formatting of the hand-written file is not), keeps a timestamped backup per merge (old backups are never pruned) and mirrors the file to `web/src/data/schemes.json`.
 - No rate limiting beyond `--workers`; be polite to government servers.
+
+## Profile fields, income periods and conditional rules
+
+Rules may use every field of `sahayak.models.Profile` (the extractor prompt is generated from it) plus the computed
+`per_capita_monthly_income` (monthly income / household_size; engine-derived, never stored on Profile).
+
+- **Income period.** `annual_income` and `monthly_income` are separate fields. A quote that says "per month" must use
+  `monthly_income` (or `per_capita_monthly_income` for "per member / per capita"), "per annum / per year" must use
+  `annual_income`, and the number is copied as written, never multiplied. The validator rejects a mismatch
+  (`period mismatch`, blocking). At run time the engine converts only when the other period is unknown
+  (monthly x 12, annual / 12); a stated value is never overwritten.
+- **Income tax** has three fields: `ever_income_tax_payer` ("has ever paid"), `income_tax_payer_last_year`
+  ("in the last assessment year") and `is_current_income_tax_payer` ("is / is paying / not an income tax payer").
+- **Land** is in hectares; a quote in acres, bighas or guntas is rejected rather than converted.
+- **No conditional rules.** Rules are all ANDed and have no "applies only if" and no OR. A condition that applies to
+  some applicants only (Stand-Up India's age rule for men; "women, or SC/ST") must go to `unmapped_criteria`;
+  faking it as a rule would apply it to everyone.
+- **Facts a person cannot know** (listed in SECC 2011, selected by a committee, number of rooms) are never Profile
+  fields and the agent never asks for them; they stay unmapped.

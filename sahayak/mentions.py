@@ -29,10 +29,18 @@ MENTIONS = {
     "pmjjby": [r"PMJJBY", r"Jeevan Jyoti"],
     "pmsby": [r"PMSBY", r"Suraksha Bima"],
     "pmjay_senior": [r"PM-?JAY", r"Ayushman", r"Vay Vandana"],
-    "pm_kisan": [r"PM-?KISAN", r"Kisan Samman"],
+    "pm_kisan": [r"PM-?KISAN(?![\s-]*(?:Maandhan|Mandhan|MDY))", r"Kisan Samman"],
     "pmuy": [r"PMUY", r"Ujjwala", r"उज्ज्वला"],
     "ssy": [r"\bSSY\b", r"Sukanya"],
     "pmmvy": [r"PMMVY", r"Matru Vandana"],
+    "igndps": [r"IGNDPS", r"Disability Pension", r"विकलांगता पेंशन", r"divyang pension"],
+    "national_family_benefit_scheme": [r"\bNFBS\b", r"Family Benefit"],
+    "nps_tsep": [r"NPS[\s-]*TSEP", r"Traders\s+(?:and|&)\s+Self[\s-]*Employed", r"\bNPS[\s-]*Traders"],
+    "pm_gkay": [r"PM-?GKAY", r"Garib Kalyan", r"गरीब कल्याण"],
+    "pm_kisan_maandhan_yojana": [r"Kisan\s+Ma+n?dhan", r"PM-?KMY", r"किसान मानधन"],
+    "pm_shram_yogi_maan_dhan": [r"PM-?SYM", r"Shram\s+Yogi", r"श्रम योगी"],
+    "pm_svanidhi": [r"SVANidhi", r"Street\s+Vendor", r"स्वनिधि"],
+    "pm_vishwakarma": [r"Vishwakarma", r"विश्वकर्मा"],
 }
 
 _I = re.I
@@ -47,7 +55,7 @@ POS = re.compile(
     r"\benrol\w*|\bregister\b|\bavail\b|\bcovered\b|\brecommend\w*|\bsign\s*up\b|"
     r"पात्र|योग्य|मिल\s*सक|मिलेगा|मिलेगी|मिलेंगे|मिलता\s+है|ले\s+सक|आवेदन\s+कर|खाता\s+खोल|लाभ\s+(?:ले|उठा|मिल)|हकदार|जुड़\s+सक|पा\s+सक|"
     r"\bpa(?:a)?tr\b|\byogya\b|\bmil\s+sak\w*|\bmilega\b|\bmilegi\b|\bmilenge\b|\bmilta\s+hai\b|\ble\s+sak\w*|\bapply\s+kar\w*|"
-    r"\bavail\s+kar\w*|\bhak(?:h)?daar\b|\bjud\s+sak\w*|"
+    r"\bavail\s+kar\w*|\bhak(?:h)?daar\b|\bjud\s+sak\w*|\bpaa?\s+sak\w*|\bprapt\s+kar\s+sak\w*|\blaabh?\s+(?:le|utha|mil)\w*|\bfaayda\s+(?:le|utha|mil)\w*|"
     r"தகுதி|கிடைக்கும்|கிடைக்கலாம்|பெறலாம்|பெற\s*முடியும்|விண்ணப்பிக்க|சேரலாம்|பயன்பெற|உரிமை", _I)
 HEDGE = re.compile(r"\b(?:may|might|could|perhaps|possibly|maybe|shayad|sambhav)\b|शायद|हो\s+सकता|संभव|ஒருவேளை|கூடும்", _I)
 VERIFY = re.compile(

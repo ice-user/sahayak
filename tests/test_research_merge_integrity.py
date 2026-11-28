@@ -142,7 +142,7 @@ def test_frontend_copy_is_byte_identical_when_directory_exists(tmp_path):
     (web / "schemes.json").write_text("{}")
     assert merge(deps, web_copy=web / "schemes.json").ok
     assert (web / "schemes.json").read_bytes() == deps.schemes_path.read_bytes()
-    assert "sample_senior_support" in (web / "schemes.json").read_text()
+    assert "sample_senior_support" in (web / "schemes.json").read_text(encoding="utf-8")
 
 
 def test_frontend_copy_skipped_when_directory_missing_and_not_written_on_dry_run(tmp_path):
@@ -298,3 +298,31 @@ def test_merge_requires_provenance_source_url_to_match_the_record(tmp_path):
     d["scheme"]["source_url"] = "https://attacker.example/phish"
     p.write_text(json.dumps(d))
     assert not merge(deps).ok
+
+
+@pytest.mark.parametrize("stdout,stderr,shown", [(None, "boom from stderr", "boom from stderr"),
+                                                 ("failing test output", "ignored", "failing test output"),
+                                                 (None, None, "")])
+def test_pytest_failure_after_merge_rolls_back_everything(tmp_path, monkeypatch, stdout, stderr, shown):
+    import subprocess
+    import research.merge as merge_mod
+    deps, _ = approved(tmp_path)
+    web = tmp_path / "web" / "src" / "data"
+    web.mkdir(parents=True)
+    (web / "schemes.json").write_text('{"web": "before"}', encoding="utf-8")
+    before = deps.schemes_path.read_bytes()
+    seen = {}
+
+    def fake_run(cmd, **kw):
+        seen.update(kw)
+        assert "sample_senior_support" in deps.schemes_path.read_text(encoding="utf-8")  # merged when pytest ran
+        return subprocess.CompletedProcess(cmd, 1, stdout=stdout, stderr=stderr)
+
+    monkeypatch.setattr(merge_mod.subprocess, "run", fake_run)
+    res = merge(deps, run_tests=True, web_copy=web / "schemes.json")
+    assert not res.ok and res.merged == [] and res.updated == []
+    assert any("pytest failed after merge" in e and e.endswith(shown) for e in res.errors)
+    assert seen["encoding"] == "utf-8" and seen["errors"] == "replace"
+    assert deps.schemes_path.read_bytes() == before                                   # database restored
+    assert (web / "schemes.json").read_text(encoding="utf-8") == '{"web": "before"}'  # frontend copy restored
+    assert cand_path(deps).exists()                                                   # candidate not moved to merged/

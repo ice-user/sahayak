@@ -1,0 +1,461 @@
+{
+  "scheme": {
+    "id": "pm_shram_yogi_maan_dhan",
+    "name": "Pradhan Mantri Shram Yogi Maan-dhan",
+    "ministry": "Ministry Of Labour and Employment",
+    "category": "pension",
+    "tags": [
+      "unorganised worker",
+      "pension",
+      "old age",
+      "labour"
+    ],
+    "aliases": [],
+    "summary": "A minimum assured pension of ₹3,000 per month after attaining the age of 60 years for unorganised workers aged 18 to 40 with monthly income of ₹15,000 or less, with matching Central Government contribution.",
+    "benefits": "A minimum assured pension of ₹3,000/- per month after attaining the age of 60 years; family pension equal to 50% of the pension for the spouse; matching contribution by the Central Government on a 50:50 basis where an equal amount to the subscriber's age-specific contribution (ranging from ₹55/- to ₹200/-) is credited to the pension account.",
+    "rules": [
+      {
+        "field": "is_unorganised_worker",
+        "op": "eq",
+        "value": true,
+        "reason": "Applicant must be an unorganised worker"
+      },
+      {
+        "field": "age",
+        "op": "gte",
+        "value": 18,
+        "reason": "Entry age must be at least 18 years"
+      },
+      {
+        "field": "age",
+        "op": "lte",
+        "value": 40,
+        "reason": "Entry age must be 40 years or less"
+      },
+      {
+        "field": "monthly_income",
+        "op": "lte",
+        "value": 15000,
+        "reason": "Monthly income must be ₹15,000 or less"
+      },
+      {
+        "field": "has_bank_account",
+        "op": "eq",
+        "value": true,
+        "reason": "Applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code"
+      },
+      {
+        "field": "is_current_income_tax_payer",
+        "op": "eq",
+        "value": false,
+        "reason": "Applicant must not be an income tax payer"
+      },
+      {
+        "field": "is_epfo_esic_nps_member",
+        "op": "eq",
+        "value": false,
+        "reason": "Applicant must not hold membership in EPFO, NPS or ESIC schemes"
+      }
+    ],
+    "caveats": [
+      "Applicant must not be engaged in the organized sector",
+      "Applicant must not be a member of NPS-Traders scheme",
+      "Applicant must make regular age-specific monthly contributions",
+      "Savings Bank Account or Jan Dhan account number must have an Indian Financial System Code",
+      "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Savings Bank Account Passbook / Jan-Dhan Account Passbook",
+      "Mobile Number",
+      "Self-Certification (At the time of enrollment)",
+      "Any other documents as required"
+    ],
+    "how_to_apply": "Visit the nearest Common Services Centre (CSC) to initiate registration and enrollment; the Village Level Entrepreneur (VLE) keys in Aadhaar details, captures further details including bank account, mobile number, email-id, spouse and nominee details, self-certification is completed, the system calculates the monthly contribution, the subscriber pays the first subscription in cash, an Enrolment Form cum Auto Debit mandate is signed and uploaded, and a Shram Yogi Pension Account Number and Shram Yogi Card are generated.",
+    "source_url": "https://www.myscheme.gov.in/schemes/pm-sym"
+  },
+  "evidence": {
+    "candidate": {
+      "id": "pm_shram_yogi_maan_dhan",
+      "name": "Pradhan Mantri Shram Yogi Maan-dhan",
+      "name_evidence": "Pradhan Mantri Shram Yogi Maan-dhan",
+      "ministry": "Ministry Of Labour and Employment",
+      "category": "pension",
+      "summary": "A minimum assured pension of ₹3,000 per month after attaining the age of 60 years for unorganised workers aged 18 to 40 with monthly income of ₹15,000 or less, with matching Central Government contribution.",
+      "benefits": "A minimum assured pension of ₹3,000/- per month after attaining the age of 60 years; family pension equal to 50% of the pension for the spouse; matching contribution by the Central Government on a 50:50 basis where an equal amount to the subscriber's age-specific contribution (ranging from ₹55/- to ₹200/-) is credited to the pension account.",
+      "benefits_evidence": [
+        "A minimum assured pension of ₹3,000/- per month is provided to the subscriber after attaining the age of 60 years.",
+        "A matching contribution is provided by the Central Government on a 50:50 basis, where an equal amount to the subscriber's age-specific contribution (ranging from ₹55/- to ₹200/-) is credited to the pension account.",
+        "During the receipt of the pension, if the subscriber dies: The spouse of the beneficiary shall be entitled to receive a family pension equal to 50% of the pension received by the beneficiary."
+      ],
+      "level": "central",
+      "level_evidence": "The scheme \"Pradhan Mantri Shram Yogi Maan-dhan\" was launched by the Ministry of Labour and Employment, Government of India, and the scheme aims to ensure old age protection for unorganised workers.",
+      "rules": [
+        {
+          "field": "is_unorganised_worker",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must be an unorganised worker",
+          "evidence": "The applicant must be an unorganized worker, construction workers, domestic workers, cobbler etc."
+        },
+        {
+          "field": "age",
+          "op": "gte",
+          "value": 18,
+          "reason": "Entry age must be at least 18 years",
+          "evidence": "The applicant must have an entry age between 18 and 40 years."
+        },
+        {
+          "field": "age",
+          "op": "lte",
+          "value": 40,
+          "reason": "Entry age must be 40 years or less",
+          "evidence": "The applicant must have an entry age between 18 and 40 years."
+        },
+        {
+          "field": "monthly_income",
+          "op": "lte",
+          "value": 15000,
+          "reason": "Monthly income must be ₹15,000 or less",
+          "evidence": "The applicant must have a monthly income of ₹15,000/- or less."
+        },
+        {
+          "field": "has_bank_account",
+          "op": "eq",
+          "value": true,
+          "reason": "Applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code",
+          "evidence": "The applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code."
+        },
+        {
+          "field": "is_current_income_tax_payer",
+          "op": "eq",
+          "value": false,
+          "reason": "Applicant must not be an income tax payer",
+          "evidence": "An income tax payer."
+        },
+        {
+          "field": "is_epfo_esic_nps_member",
+          "op": "eq",
+          "value": false,
+          "reason": "Applicant must not hold membership in EPFO, NPS or ESIC schemes",
+          "evidence": "Holding membership in the Employees' Provident Fund Organization scheme. Holding membership in the National Pension Scheme. Holding membership in the Employees' State Insurance Corporation scheme."
+        }
+      ],
+      "unmapped_criteria": [
+        {
+          "criterion": "Applicant must not be engaged in the organized sector",
+          "evidence": "Engaged in the organized sector."
+        },
+        {
+          "criterion": "Applicant must not be a member of NPS-Traders scheme",
+          "evidence": "Not a member of NPS-Traders scheme."
+        },
+        {
+          "criterion": "Applicant must make regular age-specific monthly contributions",
+          "evidence": "and must make regular age-specific monthly contributions."
+        },
+        {
+          "criterion": "Savings Bank Account or Jan Dhan account number must have an Indian Financial System Code",
+          "evidence": "The applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code."
+        },
+        {
+          "criterion": "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme",
+          "evidence": "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme."
+        }
+      ],
+      "caveats": [],
+      "documents": [
+        {
+          "item": "Aadhaar Card",
+          "evidence": "Aadhaar Card"
+        },
+        {
+          "item": "Savings Bank Account Passbook / Jan-Dhan Account Passbook",
+          "evidence": "Savings Bank Account Passbook / Jan-Dhan Account Passbook"
+        },
+        {
+          "item": "Mobile Number",
+          "evidence": "Mobile Number"
+        },
+        {
+          "item": "Self-Certification (At the time of enrollment)",
+          "evidence": "Self-Certification (At the time of enrollment)"
+        },
+        {
+          "item": "Any other documents as required",
+          "evidence": "Any other documents as required"
+        }
+      ],
+      "how_to_apply": "Visit the nearest Common Services Centre (CSC) to initiate registration and enrollment; the Village Level Entrepreneur (VLE) keys in Aadhaar details, captures further details including bank account, mobile number, email-id, spouse and nominee details, self-certification is completed, the system calculates the monthly contribution, the subscriber pays the first subscription in cash, an Enrolment Form cum Auto Debit mandate is signed and uploaded, and a Shram Yogi Pension Account Number and Shram Yogi Card are generated.",
+      "how_to_apply_evidence": [
+        "Step 1: The interested eligible person must visit the nearest Common Services Centre (CSC) to initiate the registration and enrollment process.",
+        "Step 2: The Village Level Entrepreneur (VLE) present at the CSC will key in the Aadhaar number, the exact name of the subscriber as printed on the Aadhaar card, and the date of birth into the system. These details will subsequently be instantly verified with the UIDAI database.",
+        "Step 3: The VLE will capture further details of the applicant, including Bank Account details, Mobile Number, Email-id, spouse, and nominee details into the registration portal. A self-certification verifying the required eligibility conditions will also be successfully completed in the system during this step.",
+        "Step 4: The system will automatically calculate the exact monthly contribution payable according to the entry age of the subscriber. The subscriber must then pay the full amount of the first subscription in cash to the VLE, who will generate a receipt and hand it over to the subscriber.",
+        "Step 5: An Enrolment Form cum Auto Debit mandate will be printed and must be physically signed by the subscriber. The VLE must then scan the signed enrolment cum auto debit mandate and safely upload it into the system.",
+        "Step 6: A unique Shram Yogi Pension Account Number will be instantly generated, and a Shram Yogi Card will be printed directly at the CSC. The subscriber will leave the center with the printed Shram Yogi Card and a signed copy of the enrolment form for their personal records."
+      ],
+      "source_url": "https://www.myscheme.gov.in/schemes/pm-sym",
+      "tags": [
+        "unorganised worker",
+        "pension",
+        "old age",
+        "labour"
+      ],
+      "aliases": []
+    },
+    "report": [
+      {
+        "label": "name",
+        "quote": "Pradhan Mantri Shram Yogi Maan-dhan",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "level",
+        "quote": "The scheme \"Pradhan Mantri Shram Yogi Maan-dhan\" was launched by the Ministry of Labour and Employment, Government of India, and the scheme aims to ensure old age protection for unorganised workers.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[0]",
+        "quote": "A minimum assured pension of ₹3,000/- per month is provided to the subscriber after attaining the age of 60 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[1]",
+        "quote": "A matching contribution is provided by the Central Government on a 50:50 basis, where an equal amount to the subscriber's age-specific contribution (ranging from ₹55/- to ₹200/-) is credited to the pension account.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "benefits[2]",
+        "quote": "During the receipt of the pension, if the subscriber dies: The spouse of the beneficiary shall be entitled to receive a family pension equal to 50% of the pension received by the beneficiary.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[0] is_unorganised_worker eq True",
+        "quote": "The applicant must be an unorganized worker, construction workers, domestic workers, cobbler etc.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[1] age gte 18",
+        "quote": "The applicant must have an entry age between 18 and 40 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[2] age lte 40",
+        "quote": "The applicant must have an entry age between 18 and 40 years.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[3] monthly_income lte 15000",
+        "quote": "The applicant must have a monthly income of ₹15,000/- or less.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[4] has_bank_account eq True",
+        "quote": "The applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[5] is_current_income_tax_payer eq False",
+        "quote": "An income tax payer.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "rules[6] is_epfo_esic_nps_member eq False",
+        "quote": "Holding membership in the Employees' Provident Fund Organization scheme. Holding membership in the National Pension Scheme. Holding membership in the Employees' State Insurance Corporation scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[0] 'Aadhaar Card'",
+        "quote": "Aadhaar Card",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[1] 'Savings Bank Account Passbook / Jan-Dhan Account Passbook'",
+        "quote": "Savings Bank Account Passbook / Jan-Dhan Account Passbook",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[2] 'Mobile Number'",
+        "quote": "Mobile Number",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[3] 'Self-Certification (At the time of enrollment)'",
+        "quote": "Self-Certification (At the time of enrollment)",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "documents[4] 'Any other documents as required'",
+        "quote": "Any other documents as required",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[0]",
+        "quote": "Engaged in the organized sector.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[1]",
+        "quote": "Not a member of NPS-Traders scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[2]",
+        "quote": "and must make regular age-specific monthly contributions.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[3]",
+        "quote": "The applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "unmapped_criteria[4]",
+        "quote": "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[0]",
+        "quote": "Step 1: The interested eligible person must visit the nearest Common Services Centre (CSC) to initiate the registration and enrollment process.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[1]",
+        "quote": "Step 2: The Village Level Entrepreneur (VLE) present at the CSC will key in the Aadhaar number, the exact name of the subscriber as printed on the Aadhaar card, and the date of birth into the system. These details will subsequently be instantly verified with the UIDAI database.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[2]",
+        "quote": "Step 3: The VLE will capture further details of the applicant, including Bank Account details, Mobile Number, Email-id, spouse, and nominee details into the registration portal. A self-certification verifying the required eligibility conditions will also be successfully completed in the system during this step.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[3]",
+        "quote": "Step 4: The system will automatically calculate the exact monthly contribution payable according to the entry age of the subscriber. The subscriber must then pay the full amount of the first subscription in cash to the VLE, who will generate a receipt and hand it over to the subscriber.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[4]",
+        "quote": "Step 5: An Enrolment Form cum Auto Debit mandate will be printed and must be physically signed by the subscriber. The VLE must then scan the signed enrolment cum auto debit mandate and safely upload it into the system.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      },
+      {
+        "label": "how_to_apply[5]",
+        "quote": "Step 6: A unique Shram Yogi Pension Account Number will be instantly generated, and a Shram Yogi Card will be printed directly at the CSC. The subscriber will leave the center with the printed Shram Yogi Card and a signed copy of the enrolment form for their personal records.",
+        "found": true,
+        "score": 100.0,
+        "method": "exact"
+      }
+    ]
+  },
+  "unmapped_criteria": [
+    {
+      "criterion": "Applicant must not be engaged in the organized sector",
+      "evidence": "Engaged in the organized sector."
+    },
+    {
+      "criterion": "Applicant must not be a member of NPS-Traders scheme",
+      "evidence": "Not a member of NPS-Traders scheme."
+    },
+    {
+      "criterion": "Applicant must make regular age-specific monthly contributions",
+      "evidence": "and must make regular age-specific monthly contributions."
+    },
+    {
+      "criterion": "Savings Bank Account or Jan Dhan account number must have an Indian Financial System Code",
+      "evidence": "The applicant must possess a Savings Bank Account or Jan Dhan account number with an Indian Financial System Code."
+    },
+    {
+      "criterion": "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme",
+      "evidence": "Both voluntary and involuntary exits from the scheme are permitted only after completion of three years from the date of enrolment in the scheme."
+    }
+  ],
+  "warnings": [
+    "human-edited candidate: the semantic auditor was not re-run; the edit is your responsibility"
+  ],
+  "provenance": {
+    "source": "data\\sources\\myscheme\\pm-sym.txt",
+    "source_url": "https://www.myscheme.gov.in/schemes/pm-sym",
+    "fetched_at": "2026-11-28T07:24:22+00:00",
+    "content_sha256": "3979f13f63ea2e574bbe6864f3f8537b669db94df63cbbb5498a0882971d3f95",
+    "final_url": "",
+    "source_url_explicit": true,
+    "source_snapshot": "sources/pm_shram_yogi_maan_dhan.txt",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "audit": {
+      "status": "ok",
+      "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "dropped": [],
+      "blocking": 8,
+      "warnings": 1,
+      "detail": "",
+      "notes": []
+    },
+    "contact_flags": [],
+    "llm_attempts": 3,
+    "edited_by_human": true,
+    "is_update": false,
+    "review": {
+      "decision": "approve",
+      "reviewer": "Yash",
+      "note": "",
+      "decided_at": "2026-11-28T07:58:20+00:00",
+      "approved_urls": []
+    }
+  }
+}

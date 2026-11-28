@@ -28,7 +28,7 @@ from .topic_guard import (MODES, TopicBlocked, TopicGate, classify, env_topic_mo
 from .topics import reply_text, scope_prompt_section
 from .llm_options import env_extra_body, model_extra_body  # noqa: F401 (env_extra_body re-exported)
 from .tools import MAX_ASK, TOOL_SCHEMAS, Toolbox, annotate_questions, rank_missing_fields
-from .vulnerability import (SELF_HARM, crisis_reply, detect, detect_all, irrelevant_fields, select_resources,
+from .vulnerability import (SELF_HARM, crisis_reply, detect, detect_all, irrelevant_fields, priority_fields, select_resources,
                             mentions_resource, situation_note, fallback_prefix)
 
 log = logging.getLogger("sahayak.agent")
@@ -269,6 +269,7 @@ class Agent:
         self._resources: list[dict] = []
         self._help_hint = ""  # per-turn "[Situation note]" from sahayak/vulnerability.py
         self._skip_fields: frozenset[str] = frozenset()  # questions irrelevant for this user (e.g. LPG when homeless)
+        self._prefer_fields: tuple[str, ...] = ()  # facts to ask first for this user (basic needs when homeless)
         self._cancelled: Callable[[], bool] | None = None
         self._before_answer: Callable[[], None] | None = None
 
@@ -402,14 +403,16 @@ class Agent:
         """(result JSON, from_cache). Identical tool name + arguments return the cached result; errors are not cached."""
         parsed = _parse_json(arguments, None)
         skip = self._skip_fields if name == "check_eligibility" else frozenset()
-        key = f"{name}:{json.dumps(parsed, sort_keys=True, ensure_ascii=False)}|{sorted(skip)}" if isinstance(parsed, dict) else None
+        prefer = self._prefer_fields if name == "check_eligibility" else ()
+        key = (f"{name}:{json.dumps(parsed, sort_keys=True, ensure_ascii=False)}|{sorted(skip)}|{list(prefer)}"
+               if isinstance(parsed, dict) else None)
         if key is not None and key in self._tool_cache:
             return self._tool_cache[key], True
         result = self.tools.call(name, arguments)
-        if skip and result.startswith("{"):  # re-rank the questions without the ones that make no sense for this user
+        if (skip or prefer) and result.startswith("{"):  # re-rank the questions without the ones that make no sense for this user
             data = _parse_json(result, None)
             if isinstance(data, dict) and "error" not in data:
-                result = json.dumps(annotate_questions(data, skip), ensure_ascii=False)
+                result = json.dumps(annotate_questions(data, skip, prefer), ensure_ascii=False)
         if key is not None and "error" not in (_parse_json(result, {}) if result.startswith("{") else {}):
             self._tool_cache[key] = result
         return result, False
@@ -488,6 +491,7 @@ class Agent:
                              if m.get("role") == "user" and isinstance(m.get("content"), str))
         resources = select_resources(signals)
         self._skip_fields = irrelevant_fields(signals)
+        self._prefer_fields = priority_fields(signals)
         self._help_hint = situation_note(signals, resources, self._skip_fields)
         self._signals, self._resources = signals, resources
         if signals:
@@ -577,7 +581,7 @@ class Agent:
         settles; facts irrelevant for this user are skipped); "" if none."""
         need = [{"scheme_id": sid, "missing_fields": self.missing.get(sid, [])}
                 for sid, verdict in self.verdicts.items() if verdict == "need_info"]
-        top = rank_missing_fields(need, self._skip_fields, MAX_ASK)
+        top = rank_missing_fields(need, self._skip_fields, MAX_ASK, self._prefer_fields)
         if not top:
             return ""
         labels = [FIELD_LABELS.get(f, {}).get(lang) or FIELD_LABELS.get(f, {}).get("en") or f.replace("_", " ") for f in top]

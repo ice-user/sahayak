@@ -178,3 +178,12 @@ def test_append_record_is_atomic_per_line_across_threads(tmp_path):
     [t.join() for t in threads]
     lines = p.read_text(encoding="utf-8").splitlines()
     assert len(lines) == 200 and all(json.loads(ln)["blob"] == big for ln in lines)
+
+
+def test_hinglish_pa_sakte_and_laabh_count_as_offers():
+    """Found live: 'free anaj pa sakte hain' slipped past the guard, so an unverified PM-GKAY claim reached a user."""
+    from sahayak.mentions import offered_schemes
+    assert offered_schemes("AAP ke paas AAY ration card hai, toh aap PM Garib Kalyan Anna Yojana (PMGKAY) ke tahat free anaj pa sakte hain.") == ["pm_gkay"]
+    assert offered_schemes("Aap PMGKAY ka laabh le sakti hain.") == ["pm_gkay"]
+    assert offered_schemes("Aap PMGKAY nahi pa sakte kyunki aapke paas ration card nahi hai.") == []
+    assert offered_schemes("Agar aapke paas AAY card hai to aap PMGKAY pa sakte hain.") == []

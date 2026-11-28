@@ -1,0 +1,184 @@
+{
+  "id": "national_scheme_of_welfare_of_fishermen",
+  "name": "National Scheme Of Welfare Of Fishermen",
+  "name_evidence": "National Scheme Of Welfare Of Fishermen",
+  "ministry": "Ministry of Fisheries,Animal Husbandry and Dairying",
+  "category": "other",
+  "summary": "A centrally sponsored scheme that provides financial assistance to fishermen for constructing houses and community halls, installing tube wells, insurance, and savings cum relief.",
+  "benefits": "Housing facility with base area within 35 sq. mt. and cost not exceeding ₹75,000; community hall with base area measuring 200 sq. mt. and within ₹2 lakh; tube well for every 20 houses; group accident insurance of ₹50,000 for death or permanent total disability and ₹25,000 for partial permanent disability; savings cum relief scheme collecting ₹75 from marine fishermen for 8 months matched by ₹600 from State and Central Government.",
+  "benefits_evidence": [
+    "Also, this government-backed scheme dictates the house construction with a base area within 35 sq. mt. Also, the cost must not exceed ₹75,000.",
+    "This scheme will build a community hall (with two toilets and a tube well) with a base area measuring 200 sq. mt. and within ₹2 lakh.",
+    "This scheme offers a tube well for every 20 houses.",
+    "This scheme provides fisherfolk or licensed or identified or registered with the States or Union Territory ₹50,000 in case of death or permanent total disability. Also, this scheme provides ₹25,000 for partial permanent disability.",
+    "This scheme component collects ₹75 from marine fishermen for 8 months in a year. Total ₹600 needs to be collected to match an equal amount worth ₹600 provided by the State and Central Government to segregate on a 50:50 basis."
+  ],
+  "level": "central",
+  "level_evidence": "Ministry of Fisheries,Animal Husbandry and Dairying",
+  "rules": [
+    {
+      "field": "occupation",
+      "op": "eq",
+      "value": "fisherman",
+      "reason": "Scheme is for fishermen",
+      "evidence": "Fishermen living in coastal areas and with whom the respective States and Union Territories have officially licensed are eligible for this scheme."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Fishermen living in coastal areas and officially licensed by respective States and Union Territories",
+      "evidence": "Fishermen living in coastal areas and with whom the respective States and Union Territories have officially licensed are eligible for this scheme."
+    },
+    {
+      "criterion": "Age of inland fishermen must be below 60 years",
+      "evidence": "The age of fishermen must be below 60 years old."
+    },
+    {
+      "criterion": "Applicant inland fishermen must belong to the BPL category",
+      "evidence": "Applicant fishermen must belong to the BPL (Below Poverty Line) category."
+    },
+    {
+      "criterion": "Inland fishermen must be engaged in full-time activities inland",
+      "evidence": "They must be engaged in full-time activities inland."
+    },
+    {
+      "criterion": "Marine fishermen must be officially licensed by respective States and Union Territories",
+      "evidence": "Their respective States and Union Territories must officially license marine fishermen."
+    },
+    {
+      "criterion": "Marine fishermen must operate under State, Union Territories, and FISHCOPFED",
+      "evidence": "All marine fishermen who operate under State, Union Territories, and FISHCOPFED are eligible for this government scheme for fishermen."
+    },
+    {
+      "criterion": "Marine fishermen must involve themselves in full-time activities at sea",
+      "evidence": "They must involve themselves in full-time activities at sea."
+    },
+    {
+      "criterion": "Marine fishermen must be a member of the Welfare Society or Federation or Cooperative Society",
+      "evidence": "They must be a member of the Welfare Society or Federation or Cooperative Society."
+    },
+    {
+      "criterion": "Fishermen under FISHCOPFED can avail funds under the insurance component only",
+      "evidence": "Please note that the fishermen under FISHCOPFED can avail of funds available under the insurance component only."
+    },
+    {
+      "criterion": "House construction base area within 35 sq. mt.",
+      "evidence": "Also, this government-backed scheme dictates the house construction with a base area within 35 sq. mt."
+    },
+    {
+      "criterion": "House construction cost must not exceed ₹75,000",
+      "evidence": "Also, the cost must not exceed ₹75,000."
+    },
+    {
+      "criterion": "Community hall built if there are more than 75 houses in a village",
+      "evidence": "This government-backed scheme ensures building a community hall in some instances if there are more than 75 houses in a village."
+    },
+    {
+      "criterion": "Community hall base area measuring 200 sq. mt. and within ₹2 lakh",
+      "evidence": "This scheme will build a community hall (with two toilets and a tube well) with a base area measuring 200 sq. mt. and within ₹2 lakh."
+    },
+    {
+      "criterion": "Tube well for every 20 houses; number increased depending on requirement",
+      "evidence": "This scheme offers a tube well for every 20 houses. Also, depending on the requirement, the number of tube wells is increased."
+    },
+    {
+      "criterion": "Insurance cover continues for 12 months",
+      "evidence": "Here, the insurance cover will continue for 12 months, and FISHCOPFED would take out a policy."
+    },
+    {
+      "criterion": "Affected fishermen pay an annual premium worth ₹15 per head; Central Government pays 50% and State Government pays remaining 50% subsidy as grants-in-aid",
+      "evidence": "Also, under this scheme, the affected fishermen will have to pay an annual premium worth ₹15 (per head). Here, the Central Government will pay 50%, and the State Government will pay the remaining 50% subsidy as grants-in-aid."
+    },
+    {
+      "criterion": "In Union Territories, Central Government bears 100% premium",
+      "evidence": "In the case of Union Territories, the Central Government will bear a 100% premium."
+    },
+    {
+      "criterion": "If any fishermen fail to make payment, authorities refund the paid amount with interest at the end of the 4th month",
+      "evidence": "If any fishermen fail to make payment, the authorities will refund the paid amount with interest at the end of the 4th month."
+    },
+    {
+      "criterion": "Lean months provisions vary from coastal area or marine area, decided entirely by FISHCOPFED",
+      "evidence": "Also, the ‘lean months’ provisions vary from a coastal area or marine area, which FISHCOPFED decides entirely."
+    },
+    {
+      "criterion": "Vessel registration certificate duly issued by Directorate of Fisheries",
+      "evidence": "Vessel registration certificate (duly issued by Directorate of Fisheries)"
+    },
+    {
+      "criterion": "Current net license payment receipt",
+      "evidence": "Current net license payment receipt"
+    },
+    {
+      "criterion": "Professional cum residential certificate",
+      "evidence": "Professional cum residential certificate"
+    },
+    {
+      "criterion": "Ration card copy",
+      "evidence": "Ration card copy"
+    },
+    {
+      "criterion": "Income certificate",
+      "evidence": "Income certificate"
+    },
+    {
+      "criterion": "Photograph of the applicant with spouse (if married)",
+      "evidence": "Photograph of the applicant with spouse (if married)"
+    },
+    {
+      "criterion": "Photograph",
+      "evidence": "Photograph"
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Application in the specific format",
+      "evidence": "Application in the specific format"
+    },
+    {
+      "item": "Photograph of the applicant with spouse (if married)",
+      "evidence": "Photograph of the applicant with spouse (if married)"
+    },
+    {
+      "item": "Vessel registration certificate (duly issued by Directorate of Fisheries)",
+      "evidence": "Vessel registration certificate (duly issued by Directorate of Fisheries)"
+    },
+    {
+      "item": "Current net license payment receipt",
+      "evidence": "Current net license payment receipt"
+    },
+    {
+      "item": "Professional cum residential certificate",
+      "evidence": "Professional cum residential certificate"
+    },
+    {
+      "item": "Ration card copy",
+      "evidence": "Ration card copy"
+    },
+    {
+      "item": "Income certificate",
+      "evidence": "Income certificate"
+    },
+    {
+      "item": "Photograph",
+      "evidence": "Photograph"
+    }
+  ],
+  "how_to_apply": "Eligible fishermen have to visit their nearest FISHCOPFED office to apply. The President or Secretary of the Association collects the contribution and forwards it to the Nationalised bank accounts selected by the Director of Fisheries. The State and Central Government match the fishermen’s contributions. Once the scheme reaches maturity, authorities return funds with total accrued interest.",
+  "how_to_apply_evidence": [
+    "Eligible fishermen have to visit their nearest FISHCOPFED office to apply for this Government scheme for fisheries.",
+    "Next, the President or Secretary of the Association will collect the contribution and forward it to the Nationalised bank accounts selected by the Director of Fisheries.",
+    "Then, the State and Central Government match the fishermen’s contributions as allotted for them.",
+    "Once this scheme reaches maturity, the authorities will return funds with the total accrued interest."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/nswf",
+  "tags": [
+    "fishermen",
+    "housing",
+    "insurance",
+    "savings",
+    "welfare"
+  ],
+  "aliases": []
+}

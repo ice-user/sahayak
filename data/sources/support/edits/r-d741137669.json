@@ -1,0 +1,130 @@
+{
+  "id": "stand_up_india",
+  "name": "Stand-Up India",
+  "name_evidence": "Stand-Up India",
+  "ministry": "Ministry Of Finance",
+  "category": "finance",
+  "summary": "Facilitates bank loans between Rs 10 lakh and Rs 1 Crore to at least one Scheduled Caste (SC) or Scheduled Tribe (ST) borrower and at least one woman borrower per bank branch for setting up a greenfield enterprise.",
+  "benefits": "Facilitation of composite loan (inclusive of term loan and working capital) between ₹10 Lakhs and ₹100 Lakhs. Rupay debit card to be issued for convenience of the borrower.",
+  "benefits_evidence": [
+    "Facilitation of composite loan (inclusive of term loan and working capital) between ₹10 Lakhs and ₹100 Lakhs. Rupay debit card to be issued for convenience of the borrower."
+  ],
+  "level": "central",
+  "level_evidence": "A scheme by Ministry of Finance for financing SC/ST and/or Women Entrepreneurs by facilitating bank loans for setting up a greenfield project enterprise in manufacturing, services, trading sector and activities allied to agriculture.",
+  "rules": [
+    {
+      "field": "age",
+      "op": "gte",
+      "value": 18,
+      "reason": "Applicant must be at least 18 years old",
+      "evidence": "The age of the applicant must be at least 18 years."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "Finance is provided for Greenfield Enterprises",
+      "evidence": "Finance is provided for Greenfield Enterprises."
+    },
+    {
+      "criterion": "In case of non-individual enterprises, at least 51% of the shareholding and controlling stake should be held by either an SC/ST or Woman entrepreneur",
+      "evidence": "In case of non-individual enterprises, at least 51% of the shareholding and controlling stake should be held by either an SC/ST or Woman entrepreneur."
+    },
+    {
+      "criterion": "The scheme is closed",
+      "evidence": "This scheme is closed"
+    },
+    {
+      "criterion": "Apply through portal",
+      "evidence": "Or Apply Through Portal: www.standupmitra.in"
+    },
+    {
+      "criterion": "If the applicant is a man he must be from SC or ST (a condition only for men: not expressible, rules have no per-person conditions)",
+      "evidence": "If the applicant is a male, he must be from SC / ST category."
+    },
+    {
+      "criterion": "The applicant must not be in default to any bank or financial institution",
+      "evidence": "The applicant must not be in default to any bank/financial institution."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Voter’s ID Card / Passport / Driving License / PAN Card / Signature identification from present bankers of proprietor, partner of director ( if a company)",
+      "evidence": "Proof of Identity: Voter’s ID Card / Passport / Driving License / PAN Card / Signature identification from present bankers of proprietor, partner of director ( if a company)"
+    },
+    {
+      "item": "Recent telephone bills, electricity bill, property tax receipt /Passport / voter’s ID Card of Proprietor, partner of Director (if a company)",
+      "evidence": "Proof of Residence: Recent telephone bills, electricity bill, property tax receipt /Passport / voter’s ID Card of Proprietor, partner of Director (if a company)"
+    },
+    {
+      "item": "Proof of Business Address",
+      "evidence": "Proof of Business Address"
+    },
+    {
+      "item": "Proof that the applicant is not a defaulter in any Bank / Financial Institution",
+      "evidence": "Proof that the applicant is not a defaulter in any Bank / Financial Institution"
+    },
+    {
+      "item": "Memorandum and articles of association of the Company / Partnership Deed of partners etc.",
+      "evidence": "Memorandum and articles of association of the Company / Partnership Deed of partners etc."
+    },
+    {
+      "item": "Assets and liabilities statement of promoters and guarantors along with latest income tax returns",
+      "evidence": "Assets and liabilities statement of promoters and guarantors along with latest income tax returns."
+    },
+    {
+      "item": "Rent Agreement (if business premises on rent) and clearance from pollution control board if applicable",
+      "evidence": "Rent Agreement (if business premises on rent) and clearance from pollution control board if applicable."
+    },
+    {
+      "item": "SSI / MSME registration (if applicable)",
+      "evidence": "SSI / MSME registration (if applicable)"
+    },
+    {
+      "item": "Projected balance sheets for the next two years in case of working capital limits and for the period of the loan in case of term loan",
+      "evidence": "Projected balance sheets for the next two years in case of working capital limits and for the period of the loan in case of term loan."
+    },
+    {
+      "item": "Photocopies of lease deeds/ title deeds of all the properties being offered as primary and collateral securities",
+      "evidence": "Photocopies of lease deeds/ title deeds of all the properties being offered as primary and collateral securities."
+    },
+    {
+      "item": "Documents to establish whether the applicant belongs to SC/ST Category, wherever applicable",
+      "evidence": "Documents to establish whether the applicant belongs to SC/ST Category, wherever applicable."
+    },
+    {
+      "item": "Certificate of incorporation from ROC to establish whether majority stake holding in the company is in the hands of a person who belongs to SC/ST/Woman category",
+      "evidence": "Certificate of incorporation from ROC to establish whether majority stake holding in the company is in the hands of a person who belongs to SC/ST/Woman category."
+    },
+    {
+      "item": "Profile of the unit (includes names of promoters, other directors in the company, the activity being undertaken addresses of all offices and plants, shareholding pattern etc.)",
+      "evidence": "Profile of the unit (includes names of promoters, other directors in the company, the activity being undertaken addresses of all offices and plants, shareholding pattern etc."
+    },
+    {
+      "item": "Last three years balance sheets of the Associate / Group Companies (if any)",
+      "evidence": "Last three years balance sheets of the Associate / Group Companies (if any)."
+    },
+    {
+      "item": "Project report (for the proposed project if term funding is required) containing details of the machinery to be acquired, from whom to be acquired, price, names of suppliers, financial details like capacity of machines, capacity of utilization assumed, production, sales, projected profit and loss and balance sheets for the tenor of the loan, the details of labour, staff to be hired, basis of assumption of such financial details etc.",
+      "evidence": "Project report (for the proposed project if term funding is required) containing details of the machinery to be acquired, from whom to be acquired, price, names of suppliers, financial details like capacity of machines, capacity of utilization assumed, production, sales, projected profit and loss and balance sheets for the tenor of the loan, the details of labour, staff to be hired, basis of assumption of such financial details etc."
+    },
+    {
+      "item": "Manufacturing process if applicable, major profile of executives in the company, any tie-ups, details about raw material used and their suppliers, details about the buyers, details about major-competitors and the company’s strength and weaknesses as compared to their competitors etc.",
+      "evidence": "Manufacturing process if applicable, major profile of executives in the company, any tie-ups, details about raw material used and their suppliers, details about the buyers, details about major-competitors and the company’s strength and weaknesses as compared to their competitors etc."
+    }
+  ],
+  "how_to_apply": "Online. Either approach your nearest bank branch to apply or through the Lead District Manager (LDM).",
+  "how_to_apply_evidence": [
+    "Online",
+    "Either approach your nearest bank branch to apply (locate your nearest bank here - https://www.rbi.org.in/Scripts/query.aspx )Or Through the Lead District Manager (LDM) (find the address and the email of the LDM of your district here - https://www.standupmitra.in/LDMS#NoBack)"
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/sui",
+  "tags": [
+    "SC/ST",
+    "women entrepreneurs",
+    "greenfield enterprise",
+    "bank loan",
+    "finance"
+  ],
+  "aliases": []
+}

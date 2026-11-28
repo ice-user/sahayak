@@ -8,7 +8,7 @@ from .fields import describe_fields
 RULES_TEXT = """You convert ONE eligibility bullet of an Indian government scheme into JSON. Output JSON only:
 {"rules":[{"field":..,"op":..,"value":..,"quote":..}],"unmapped":[{"quote":..,"reason":..}]}
 - rules: only conditions a field below can express. op is one of eq, ne, gte, lte, in, any_child.
-  Integers for numbers (rupees as plain integers: 2.5 lakh = 250000; age in years). "below 18" = lte 17, "above 60" = gte 61, "60 and above" = gte 60. A monthly income limit becomes annual (x12) on annual_income.
+  Integers for numbers (rupees as plain integers: 2.5 lakh = 250000; age in years). "below 18" = lte 17, "above 60" = gte 61, "60 and above" = gte 60. A limit per month goes on monthly_income as written (no x12); a limit per year on annual_income.
 - quote: copy-paste a contiguous span of the bullet, character for character. Every number in a rule must be inside its quote.
 - unmapped: every other condition the bullet carries (caste, occupation, disability, education, documents, institutions, ...), with a short reason (max 8 words). Quote verbatim too.
 - Every condition in the bullet goes to rules or unmapped. A bullet with no condition gives both lists empty. Never invent a field.

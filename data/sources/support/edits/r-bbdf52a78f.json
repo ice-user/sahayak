@@ -1,0 +1,72 @@
+{
+  "id": "pmjdy",
+  "name": "Pradhan Mantri Jan Dhan Yojana",
+  "name_evidence": "Pradhan Mantri Jan Dhan Yojana",
+  "ministry": "Ministry Of Finance",
+  "category": "finance",
+  "summary": "A National Mission for Financial Inclusion providing universal banking services for every unbanked household, including basic savings bank account, need based credit, remittances facility, insurance and pension.",
+  "benefits": "Basic Savings Bank Deposit Account with no minimum balance, free RuPay debit card with accident insurance cover of Rs.2 lakhs (Rs 1 lakh for accounts opened before 28.08.2018), overdraft facility upto Rs. 10,000/-.",
+  "benefits_evidence": [
+    "Any Indian citizen eligible to open a regular bank account can open a BSBDA. Such an account does not require any minimum balance maintenance.",
+    "Under PMJDY, a free Rupay debit card, with inbuilt accident insurance cover of Rs.2 lakhs (Rs 1 lakh for accounts opened before 28.08.2018), is issued to all beneficiaries.",
+    "Under PMJDY, beneficiaries can avail OD facility upto Rs. 10,000/-."
+  ],
+  "level": "central",
+  "level_evidence": "Ministry Of Finance",
+  "rules": [],
+  "unmapped_criteria": [
+    {
+      "criterion": "The applicant should be an Indian National",
+      "evidence": "The applicant should be an Indian National."
+    },
+    {
+      "criterion": "Minors above ten years require support from their legal guardians for administering their PMJDY account",
+      "evidence": "If minors above ten years apply, they will require support from their legal guardians for administering their PMJDY account."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "AADHAAR",
+      "evidence": "1. AADHAAR"
+    },
+    {
+      "item": "Government ID proofs (Voter Card/PAN Card/Ration card)",
+      "evidence": "2. Government ID proofs (Voter Card/PAN Card/Ration card)"
+    },
+    {
+      "item": "Permanent Address proof (Passport/Driving License/Electricity Bill/Telephone Bill/Water Bill)",
+      "evidence": "3. Permanent Address proof (Passport/Driving License/Electricity Bill/Telephone Bill/Water Bill)"
+    },
+    {
+      "item": "Passport size photograph",
+      "evidence": "4. Passport size photograph"
+    },
+    {
+      "item": "Filled and Signed PMJDY Account opening form",
+      "evidence": "5. Filled and Signed PMJDY Account opening form"
+    },
+    {
+      "item": "Any other document as notified by the Central Government in consultation with the Regulator",
+      "evidence": "6. Any other document as notified by the Central Government in consultation with the Regulator."
+    }
+  ],
+  "how_to_apply": "Go to the official portal of PMJDY, download and print the Account Opening Form from the e-documents section, fill it manually with bank and personal data, and submit it at the nearest bank branch along with documents and Mobile number or email Id.",
+  "how_to_apply_evidence": [
+    "Step 1- Go to the official portal of PMJDY.",
+    "Step 2- Under the \"e-documents\" section, you will find live links for \"Account Opening Form\". Applicants can access this in both English and Hindi languages. Click on the appropriate language option.",
+    "Step 3- This will open the form in PDF format. Download it and get a printout.",
+    "Step 4- Fill the form manually with all your bank and personal data, including bank branch, name of town/village, block/district, Aadhaar number, profession, annual income, details of Kisan credit card, and others.",
+    "Step 5- Once you fill it out, visit your nearest bank branch and submit it.",
+    "While submitting the form, you will need to produce certain documents along with your Mobile number or email Id to qualify for the Jan Dhan Yojana."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/pmjdy",
+  "tags": [
+    "financial inclusion",
+    "bank account",
+    "RuPay debit card",
+    "accident insurance",
+    "overdraft facility"
+  ],
+  "aliases": []
+}

@@ -1,0 +1,109 @@
+{
+  "id": "national_family_benefit_scheme",
+  "name": "National Family Benefit Scheme",
+  "name_evidence": "National Family Benefit Scheme",
+  "ministry": "Ministry Of Rural Development",
+  "category": "finance",
+  "summary": "A family welfare scheme under the umbrella scheme ‘National Social Assistance Programme’ (NSAP) by MoRD. In this scheme, financial assistance is provided to the bereaved households in case of the death of the primary breadwinner irrespective of the cause of death.",
+  "benefits": "₹ 20000/ - will be given as a lump sum assistance to such surviving member of the household of the deceased poor, who after local inquiry, is found to be the head of the household.",
+  "benefits_evidence": [
+    "₹ 20000/ - will be given as a lump sum assistance to such surviving member of the household of the deceased poor, who after local inquiry, is found to be the head of the household."
+  ],
+  "level": "central",
+  "level_evidence": "Ministry Of Rural Development",
+  "rules": [
+    {
+      "field": "bpl",
+      "op": "eq",
+      "value": true,
+      "reason": "The family of the applicant must be living Below Poverty Line (BPL)",
+      "evidence": "The family of the applicant must be living Below Poverty Line (BPL)."
+    },
+    {
+      "field": "breadwinner_deceased",
+      "op": "eq",
+      "value": true,
+      "reason": "The primary breadwinner of the applicant's family must have been deceased",
+      "evidence": "The primary breadwinner of the applicant's family must have been deceased."
+    },
+    {
+      "field": "breadwinner_age_at_death",
+      "op": "gte",
+      "value": 19,
+      "reason": "The earning member must have been older than 18 when they died",
+      "evidence": "The age of the deceased breadwinner must have been more than 18 years and less than 60 years."
+    },
+    {
+      "field": "breadwinner_age_at_death",
+      "op": "lte",
+      "value": 59,
+      "reason": "The earning member must have been younger than 60 when they died",
+      "evidence": "The age of the deceased breadwinner must have been more than 18 years and less than 60 years."
+    }
+  ],
+  "unmapped_criteria": [
+    {
+      "criterion": "The applicant must be a citizen of India",
+      "evidence": "The applicant must be a citizen of India."
+    },
+    {
+      "criterion": "The applicant must be the succeeding primary breadwinner of the family",
+      "evidence": "The applicant must be the succeeding primary breadwinner of the family."
+    },
+    {
+      "criterion": "The family benefit will be paid to such surviving member of the household of the deceased poor , who after local inquiry, is found to be the head of the household",
+      "evidence": "The family benefit will be paid to such surviving member of the household of the deceased poor , who after local inquiry, is found to be the head of the household."
+    },
+    {
+      "criterion": "The assistance would be given to every case of death of breadwinner in a family",
+      "evidence": "The assistance would be given to every case of death of breadwinner in a family."
+    }
+  ],
+  "caveats": [],
+  "documents": [
+    {
+      "item": "Death Certificate",
+      "evidence": "Death Certificate."
+    },
+    {
+      "item": "Proof of Identity",
+      "evidence": "Proof of Identity."
+    },
+    {
+      "item": "Proof of Address",
+      "evidence": "Proof of Address."
+    },
+    {
+      "item": "BPL Card / Ration Card of the Family",
+      "evidence": "BPL Card / Ration Card of the Family."
+    },
+    {
+      "item": "Family ID / Member ID",
+      "evidence": "Family ID / Member ID."
+    },
+    {
+      "item": "Details of the AADHAAR Seeded Bank Account / Post Office Account",
+      "evidence": "Details of the AADHAAR Seeded Bank Account / Post Office Account."
+    },
+    {
+      "item": "Passport Size Photo",
+      "evidence": "Passport Size Photo"
+    }
+  ],
+  "how_to_apply": "Offline or Online. Take a print of the application form given in Annexure-III (page no. 47) of the scheme guidelines - https://nsap.nic.in/Guidelines/nsap_guidelines_oct2014.pdf. The duly filled-in Application forms along with the required documents are to be submitted to the designated officer appointed by the respective state governments.",
+  "how_to_apply_evidence": [
+    "Offline",
+    "Online",
+    "Step 1: Take a print of the application form given in Annexure-III (page no. 47) of the scheme guidelines - https://nsap.nic.in/Guidelines/nsap_guidelines_oct2014.pdf",
+    "Step 2: The duly filled-in Application forms along with the required documents are to be submitted to the designated officer appointed by the respective state governments."
+  ],
+  "source_url": "https://www.myscheme.gov.in/schemes/nfbs",
+  "tags": [
+    "family welfare",
+    "breadwinner death",
+    "lump sum assistance",
+    "NSAP",
+    "BPL"
+  ],
+  "aliases": []
+}
